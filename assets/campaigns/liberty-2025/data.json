@@ -1,0 +1,26 @@
+{
+  "id": "liberty-2025",
+  "client": "Liberty",
+  "title": "150th Anniversary 2025",
+  "category": "Campaigns",
+  "layout": "info-left",
+  "border": true,
+  "credits": [
+    {
+      "label": "Photographer",
+      "value": ["Dusan Reljin"]
+    },
+    {
+      "label": "Models",
+      "value": ["Yasmin Le Bon"]
+    }
+  ],
+  "media": [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4"
+  ]
+}

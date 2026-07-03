@@ -1,30 +1,17 @@
-const campaignsPage = document.getElementById("campaignsPage");
+const filmsPage = document.getElementById("filmsPage");
 
-function createMediaElement(campaign, file) {
-  const source = campaign.path + file;
-  const isVideo = file.toLowerCase().endsWith(".mp4");
-
-  if (isVideo) {
-    return `
-      <video
-        class="campaign-media-item ${campaign.border ? "has-border" : ""}"
-        autoplay
-        muted
-        loop
-        playsinline
-        controls
-      >
-        <source src="${source}" type="video/mp4">
-      </video>
-    `;
-  }
-
+function createFilmElement(campaign, file) {
   return `
-    <img
+    <video
       class="campaign-media-item ${campaign.border ? "has-border" : ""}"
-      src="${source}"
-      alt="${campaign.client} ${campaign.title}"
+      autoplay
+      muted
+      loop
+      playsinline
+      controls
     >
+      <source src="${campaign.path}${file}" type="video/mp4">
+    </video>
   `;
 }
 
@@ -40,7 +27,15 @@ function createCreditValue(value) {
   return createSearchLink(value);
 }
 
-function createCampaign(campaign) {
+function createFilmCampaign(campaign, index) {
+  const videoFiles = campaign.media.filter(file =>
+    file.toLowerCase().endsWith(".mp4")
+  );
+
+  if (videoFiles.length === 0) return "";
+
+  const layout = index % 2 === 0 ? "info-left" : "info-right";
+
   const credits = campaign.credits
     .map(credit => `
       <div class="credit-group">
@@ -50,12 +45,12 @@ function createCampaign(campaign) {
     `)
     .join("");
 
-  const media = campaign.media
-    .map(file => createMediaElement(campaign, file))
+  const videos = videoFiles
+    .map(file => createFilmElement(campaign, file))
     .join("");
 
   return `
-    <section class="campaign ${campaign.layout}">
+    <section class="campaign ${layout}">
       <aside class="campaign-info">
         <div class="campaign-info-inner">
           <div class="campaign-title">
@@ -70,10 +65,10 @@ function createCampaign(campaign) {
       </aside>
 
       <div class="campaign-media">
-        ${media}
+        ${videos}
       </div>
     </section>
   `;
 }
 
-campaignsPage.innerHTML = campaigns.map(createCampaign).join("");
+filmsPage.innerHTML = campaigns.map(createFilmCampaign).join("");
