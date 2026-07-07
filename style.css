@@ -250,6 +250,21 @@ body.entered .custom-cursor {
   display: block;
 }
 
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+
+.footer a:hover {
+  color: var(--light-grey);
+}
+
 /* ==========================================================
    CAMPAIGNS PAGE
 ========================================================== */
