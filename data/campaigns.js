@@ -11,7 +11,7 @@ const campaigns = [
 
   path: "assets/campaigns/feudi-di-san-gregorio-2026/",
 
-  layout: "info-left",
+  layout: "info-right",
 
   border: true,
 
