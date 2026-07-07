@@ -33,6 +33,18 @@ function campaignSearchText(campaign) {
   `);
 }
 
+function createSearchLink(value) {
+  return `<a class="credit-link" href="search.html?q=${encodeURIComponent(value)}">${value}</a>`;
+}
+
+function createCreditValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(item => createSearchLink(item)).join("<br>");
+  }
+
+  return createSearchLink(value);
+}
+
 function createMediaElement(campaign, file) {
   const source = campaign.path + file;
   const isVideo = file.toLowerCase().endsWith(".mp4");
@@ -65,18 +77,12 @@ function createCampaign(campaign, index) {
   const layout = index % 2 === 0 ? "info-left" : "info-right";
 
   const credits = campaign.credits
-    .map(credit => {
-      const values = Array.isArray(credit.value)
-        ? credit.value.join("<br>")
-        : credit.value;
-
-      return `
-        <div class="credit-group">
-          <div class="credit-label">${credit.label}:</div>
-          <div class="credit-value">${values}</div>
-        </div>
-      `;
-    })
+    .map(credit => `
+      <div class="credit-group">
+        <div class="credit-label">${credit.label}:</div>
+        <div class="credit-value">${createCreditValue(credit.value)}</div>
+      </div>
+    `)
     .join("");
 
   const media = campaign.media
@@ -88,8 +94,8 @@ function createCampaign(campaign, index) {
       <aside class="campaign-info">
         <div class="campaign-info-inner">
           <div class="campaign-title">
-            ${campaign.client}<br>
-            ${campaign.title}
+            <a href="search.html?q=${encodeURIComponent(campaign.client)}">${campaign.client}</a><br>
+            <a href="search.html?q=${encodeURIComponent(campaign.title)}">${campaign.title}</a>
           </div>
 
           <div class="campaign-credits">

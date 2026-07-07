@@ -1,5 +1,47 @@
 const campaigns = [
   {
+
+  id: "feudi-di-san-gregorio-2026",
+
+  client: "Feudi di San Gregorio",
+
+  title: "40th Anniversary 2026",
+
+  category: "Campaigns",
+
+  path: "assets/campaigns/feudi-di-san-gregorio-2026/",
+
+  layout: "info-left",
+
+  border: true,
+
+  credits: [
+
+    {
+
+      label: "Illustrator",
+
+      value: "Gaia Alari"
+
+    }
+
+  ],
+
+  media: [
+
+    "01.jpg",
+
+    "02.jpg",
+
+    "03.jpg",
+
+    "video-01.mp4"
+
+  ]
+
+},
+
+  {
     id: "marina-rinaldi-ss26",
     client: "Marina Rinaldi",
     title: "SS 2026",
@@ -217,5 +259,319 @@ const campaigns = [
     "10.jpg",
     "video-01.mp4"
   ]
-}
+},
+
+{
+  id: "intimissimi-fw2023",
+  client: "Intimissimi",
+  title: "FW 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/intimissimi-fw2023/",
+  layout: "info-left",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Norman Jean Roy"
+    },
+    {
+      label: "Director",
+      value: "Francesco Carrozzini"
+    },
+    {
+      label: "Talent",
+      value: "Jennifer Lopez"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4",
+    "video-02.mp4"
+  ]
+},
+
+{
+  id: "pinko-fw2023",
+  client: "Pinko",
+  title: "FW 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-fw2023/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Brianna Capozzi"
+    },
+    {
+      label: "Models",
+      value: [
+        "Georgia May Jagger"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "intimissimi-fall2023",
+  client: "Intimissimi",
+  title: "Fall 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/intimissimi-fall2023/",
+  layout: "info-left",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Chris Colls"
+    },
+    {
+      label: "Director",
+      value: "Gia Coppola"
+    },
+    {
+      label: "Talent",
+      value: "Jennifer Lopez"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "pinko-ss23",
+  client: "Pinko",
+  title: "SS 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-ss23/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Brianna Capozzi"
+    },
+    {
+      label: "Model",
+      value: "Irina Shayk"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "intimissimi-ss23",
+  client: "Intimissimi",
+  title: "SS 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/intimissimi-ss23/",
+  layout: "info-left",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Chris Colls"
+    },
+    {
+      label: "Director",
+      value: "Gia Coppola"
+    },
+    {
+      label: "Talent",
+      value: "Jennifer Lopez"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "pinko-ss23-2",
+  client: "Pinko",
+  title: "SS 2023",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-ss23-2/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Brianna Capozzi"
+    },
+    {
+      label: "Model",
+      value: "Irina Shayk"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "la-perla-ss22",
+  client: "La Perla",
+  title: "SS 2022",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-ss22/",
+  layout: "info-left",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Federico De Angelis"
+    },
+    {
+      label: "Models",
+      value: [
+        "Greta Varese",
+        "Amber Hall"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "pinko-ss22",
+  client: "Pinko",
+  title: "SS 2022",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-ss22/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Brianna Capozzi"
+    },
+    {
+      label: "Model",
+      value: "Irina Shayk"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "video-01.mp4",
+    "video-02.mp4"
+  ]
+},
+
+{
+  id: "paciotti-fw21",
+  client: "Paciotti",
+  title: "FW 2021",
+  category: "Campaigns",
+  path: "assets/campaigns/paciotti-fw21/",
+  layout: "info-left",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Paolo Cenciarelli"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "12.jpg",
+    "13.jpg"
+  ]
+},
 ];

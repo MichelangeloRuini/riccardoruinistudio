@@ -2,7 +2,7 @@ const clients = [
   "10 Magazine", "Allora Fest", "Blazé Milano", "Bulgari", "Bulgari Hotel & Residences",
   "Cerruti", "Chantecler", "Diesel Watches", "Dirk Bikkembergs", "Dondup",
   "Elie Saab", "Elisabetta Franchi", "Emilio Pucci", "Ermanno Scervino",
-  "Falconeri", "Fendi", "Ferragamo", "Francesco Scognamiglio", "GQ Style UK",
+  "Falconeri", "Feudi di San Gregorio", "Fendi", "Ferragamo", "Francesco Scognamiglio", "GQ Style UK",
   "Gucci", "Hogan", "ICON Magazine", "Iceberg", "Intimissimi", "La Perla",
   "Liberty London", "Liu Jo", "Loewe", "M Missoni", "Marella", "Marina Rinaldi",
   "Mytheresa", "Paciotti", "Park Hyatt Milano", "Patrizia Pepe", "Peuterey",
@@ -14,6 +14,13 @@ const landing = document.getElementById("landing");
 const cursor = document.querySelector(".custom-cursor");
 const clientsWall = document.getElementById("clientsWall");
 const searchInput = document.getElementById("searchInput");
+
+function normalize(text) {
+  return String(text)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
 function enterSite() {
   if (!landing) return;
@@ -45,6 +52,30 @@ if (cursor) {
   });
 }
 
+function getSearchTerms() {
+  const terms = new Set();
+
+  clients.forEach(client => terms.add(client));
+
+  if (typeof campaigns !== "undefined") {
+    campaigns.forEach(campaign => {
+      terms.add(campaign.client);
+      terms.add(campaign.title);
+      terms.add(campaign.category);
+
+      campaign.credits.forEach(credit => {
+        if (Array.isArray(credit.value)) {
+          credit.value.forEach(value => terms.add(value));
+        } else {
+          terms.add(credit.value);
+        }
+      });
+    });
+  }
+
+  return Array.from(terms).filter(Boolean);
+}
+
 function renderClients(list) {
   if (!clientsWall) return;
 
@@ -55,15 +86,15 @@ function renderClients(list) {
     return;
   }
 
-  const repeatedList = [...list, ...list];
+  const repeatedList = list.length > 8 ? [...list, ...list] : list;
 
-  repeatedList.forEach((client, index) => {
+  repeatedList.forEach((item, index) => {
     const span = document.createElement("span");
     span.className = "client-name";
-    span.textContent = client;
+    span.textContent = item;
 
     span.addEventListener("click", () => {
-      window.location.href = `search.html?q=${encodeURIComponent(client)}`;
+      window.location.href = `search.html?q=${encodeURIComponent(item)}`;
     });
 
     clientsWall.appendChild(span);
@@ -76,7 +107,7 @@ function renderClients(list) {
 
 if (searchInput && clientsWall) {
   searchInput.addEventListener("input", () => {
-    const value = searchInput.value.trim().toLowerCase();
+    const value = normalize(searchInput.value.trim());
 
     if (value === "") {
       clientsWall.classList.remove("is-filtered");
@@ -86,8 +117,10 @@ if (searchInput && clientsWall) {
 
     clientsWall.classList.add("is-filtered");
 
-    const filtered = clients.filter(client =>
-      client.toLowerCase().includes(value)
+    const terms = getSearchTerms();
+
+    const filtered = terms.filter(term =>
+      normalize(term).includes(value)
     );
 
     renderClients(filtered);

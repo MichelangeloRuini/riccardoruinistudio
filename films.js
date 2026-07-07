@@ -27,10 +27,18 @@ function createCreditValue(value) {
   return createSearchLink(value);
 }
 
-function createFilmCampaign(campaign, index) {
-  const videoFiles = campaign.media.filter(file =>
+function getCampaignFilms(campaign) {
+  if (campaign.films && campaign.films.length > 0) {
+    return campaign.films;
+  }
+
+  return campaign.media.filter(file =>
     file.toLowerCase().endsWith(".mp4")
   );
+}
+
+function createFilmCampaign(campaign, index) {
+  const videoFiles = getCampaignFilms(campaign);
 
   if (videoFiles.length === 0) return "";
 
