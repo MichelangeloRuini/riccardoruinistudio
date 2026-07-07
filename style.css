@@ -368,3 +368,57 @@ body.entered .custom-cursor {
 .credit-link:hover {
   color: var(--light-grey);
 }
+
+/* ==========================================================
+   SEARCH SUGGESTIONS
+========================================================== */
+
+.site-header-left {
+  position: relative;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 36px;
+  left: calc(var(--site-logo-width) + 70px);
+  width: 230px;
+  display: none;
+  z-index: 1000;
+  padding: 10px 0 8px;
+  background: white;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.search-suggestions.is-visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.search-suggestion {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.15;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  color: var(--light-grey);
+
+  transition:
+    color .18s ease,
+    transform .18s ease;
+}
+
+.search-suggestion:hover,
+.search-suggestion.is-active {
+  color: black;
+  transform: translateX(4px);
+}

@@ -574,4 +574,186 @@ const campaigns = [
     "13.jpg"
   ]
 },
+
+{
+  id: "pinko-fw21",
+  client: "Pinko",
+  title: "FW 2021",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-fw21/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Federico De Angelis"
+    },
+    {
+      label: "Model",
+      value: "Lexi Boiling"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "11.jpg",
+    "12.jpg",
+    "13.jpg",
+    "14.jpg"
+  ]
+},
+
+{
+  id: "blaze-fw21",
+  client: "Blazé",
+  title: "FW 2021",
+  category: "Campaigns",
+  path: "assets/campaigns/blaze-fw21/",
+  layout: "info-left",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Cedric Buchet"
+    },
+    {
+      label: "Model",
+      value: "Dree Louise Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "11.jpg",
+    "12.jpg",
+    "13.jpg"
+  ]
+},
+
+{
+  id: "blaze-prefall21",
+  client: "Blazé",
+  title: "Prefall 2021",
+  category: "Campaigns",
+  path: "assets/campaigns/blaze-prefall21/",
+  layout: "info-right",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Cedric Buchet"
+    },
+    {
+      label: "Model",
+      value: "Dree Louise Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "pinko-ss21",
+  client: "Pinko",
+  title: "SS 2021",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-ss21/",
+  layout: "info-left",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Federico De Angelis"
+    },
+    {
+      label: "Model",
+      value: "Elisabeth Erm"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ]
+},
+
+{
+  id: "walk-for-giants-2020",
+  client: "Walk For Giants",
+  title: "2020",
+  category: "Campaigns",
+  path: "assets/campaigns/walk-for-giants-2020/",
+  layout: "info-right",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Francesco Carrozzini"
+    },
+    {
+      label: "Models",
+      value: [
+        "Arizona Muse",
+        "Selena Forrest"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "11.jpg",
+    "12.jpg"
+  ]
+}
 ];
