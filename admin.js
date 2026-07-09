@@ -57,7 +57,6 @@ document.getElementById("generate").addEventListener("click", () => {
   const client = document.getElementById("client").value.trim();
   const title = document.getElementById("title").value.trim();
   const folder = document.getElementById("folder").value.trim() || slugify(`${client}-${title}`);
-  const layout = document.getElementById("layout").value;
   const border = document.getElementById("border").value;
   const credits = document.getElementById("credits").value;
   const images = Number(document.getElementById("images").value || 0);
@@ -69,7 +68,6 @@ document.getElementById("generate").addEventListener("click", () => {
   title: "${title}",
   category: "Campaigns",
   path: "assets/campaigns/${folder}/",
-  layout: "${layout}",
 
   border: ${border},
 
