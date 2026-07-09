@@ -1,7 +1,7 @@
 const campaigns = [
   {
     id: "feudi-di-san-gregorio-2026",
-    client: "Feudi di San Gregorio",
+    client: "Feudi di San Gregoriofffa",
     title: "40th Anniversary 2026",
     category: "Campaigns",
     path: "assets/campaigns/feudi-di-san-gregorio-2026/",
