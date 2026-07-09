@@ -11,7 +11,6 @@ const campaigns = [
 
   path: "assets/campaigns/feudi-di-san-gregorio-2026/",
 
-  layout: "info-right",
 
   border: true,
 
@@ -47,7 +46,6 @@ const campaigns = [
     title: "SS 2026",
     category: "Campaigns",
     path: "assets/campaigns/marina-rinaldi-ss26/",
-    layout: "info-left",
 
     border: true,
 
@@ -85,7 +83,6 @@ const campaigns = [
     title: "FW 2025",
     category: "Campaigns",
     path: "assets/campaigns/marina-rinaldi-fw25/",
-    layout: "info-right",
 
     border: true,
 
@@ -120,7 +117,6 @@ const campaigns = [
   title: "150th Anniversary 2025",
   category: "Campaigns",
   path: "assets/campaigns/liberty-2025/",
-  layout: "info-left",
 
   border: true,
 
@@ -153,7 +149,6 @@ const campaigns = [
   title: "SS 2025",
   category: "Campaigns",
   path: "assets/campaigns/marina-rinaldi-ss25/",
-  layout: "info-right",
 
   border: true,
 
@@ -187,7 +182,6 @@ const campaigns = [
   title: "2024",
   category: "Campaigns",
   path: "assets/campaigns/chantecler-2024/",
-  layout: "info-left",
 
   border: false,
 
@@ -227,7 +221,6 @@ const campaigns = [
   title: "SS 2024",
   category: "Campaigns",
   path: "assets/campaigns/intimissimi-ss24/",
-  layout: "info-right",
 
   border: false,
 
@@ -267,7 +260,6 @@ const campaigns = [
   title: "FW 2023",
   category: "Campaigns",
   path: "assets/campaigns/intimissimi-fw2023/",
-  layout: "info-left",
 
   border: false,
 
@@ -303,7 +295,6 @@ const campaigns = [
   title: "FW 2023",
   category: "Campaigns",
   path: "assets/campaigns/pinko-fw2023/",
-  layout: "info-right",
 
   border: false,
 
@@ -340,7 +331,6 @@ const campaigns = [
   title: "Fall 2023",
   category: "Campaigns",
   path: "assets/campaigns/intimissimi-fall2023/",
-  layout: "info-left",
 
   border: false,
 
@@ -373,7 +363,6 @@ const campaigns = [
   title: "SS 2023",
   category: "Campaigns",
   path: "assets/campaigns/pinko-ss23/",
-  layout: "info-right",
 
   border: false,
 
@@ -404,7 +393,6 @@ const campaigns = [
   title: "SS 2023",
   category: "Campaigns",
   path: "assets/campaigns/intimissimi-ss23/",
-  layout: "info-left",
 
   border: false,
 
@@ -443,7 +431,6 @@ const campaigns = [
   title: "SS 2023",
   category: "Campaigns",
   path: "assets/campaigns/pinko-ss23-2/",
-  layout: "info-right",
 
   border: false,
 
@@ -473,7 +460,6 @@ const campaigns = [
   title: "SS 2022",
   category: "Campaigns",
   path: "assets/campaigns/la-perla-ss22/",
-  layout: "info-left",
 
   border: true,
 
@@ -512,7 +498,6 @@ const campaigns = [
   title: "SS 2022",
   category: "Campaigns",
   path: "assets/campaigns/pinko-ss22/",
-  layout: "info-right",
 
   border: false,
 
@@ -548,7 +533,6 @@ const campaigns = [
   title: "FW 2021",
   category: "Campaigns",
   path: "assets/campaigns/paciotti-fw21/",
-  layout: "info-left",
 
   border: true,
 
@@ -581,7 +565,6 @@ const campaigns = [
   title: "FW 2021",
   category: "Campaigns",
   path: "assets/campaigns/pinko-fw21/",
-  layout: "info-right",
 
   border: false,
 
@@ -620,7 +603,6 @@ const campaigns = [
   title: "FW 2021",
   category: "Campaigns",
   path: "assets/campaigns/blaze-fw21/",
-  layout: "info-left",
 
   border: true,
 
@@ -658,7 +640,6 @@ const campaigns = [
   title: "Prefall 2021",
   category: "Campaigns",
   path: "assets/campaigns/blaze-prefall21/",
-  layout: "info-right",
 
   border: true,
 
@@ -692,7 +673,6 @@ const campaigns = [
   title: "SS 2021",
   category: "Campaigns",
   path: "assets/campaigns/pinko-ss21/",
-  layout: "info-left",
 
   border: false,
 
@@ -723,7 +703,6 @@ const campaigns = [
   title: "2020",
   category: "Campaigns",
   path: "assets/campaigns/walk-for-giants-2020/",
-  layout: "info-right",
 
   border: false,
 

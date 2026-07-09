@@ -40,7 +40,13 @@ function createCreditValue(value) {
   return createSearchLink(value);
 }
 
-function createCampaign(campaign) {
+function createCampaign(campaign, index) {
+
+  const layout =
+    index % 2 === 0
+      ? "info-left"
+      : "info-right";
+
   const credits = campaign.credits
     .map(credit => `
       <div class="credit-group">
@@ -55,7 +61,7 @@ function createCampaign(campaign) {
     .join("");
 
   return `
-    <section class="campaign ${campaign.layout}">
+    <section class="campaign ${layout}">
       <aside class="campaign-info">
         <div class="campaign-info-inner">
           <div class="campaign-title">

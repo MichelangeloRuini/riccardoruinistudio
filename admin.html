@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>RRS Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="admin-page">
+    <h1>RRS CAMPAIGN GENERATOR</h1>
+
+    <label>CLIENTE</label>
+    <input id="client" type="text">
+
+    <label>STAGIONE / TITOLO</label>
+    <input id="title" type="text">
+
+    <label>NOME CARTELLA</label>
+    <input id="folder" type="text" placeholder="es. pinko-fw21">
+
+    <label>LAYOUT</label>
+    <select id="layout">
+      <option value="info-left">info-left</option>
+      <option value="info-right">info-right</option>
+    </select>
+
+    <label>FRAME NERO</label>
+    <select id="border">
+      <option value="false">No</option>
+      <option value="true">Sì</option>
+    </select>
+
+    <label>CREDITS</label>
+    <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary"></textarea>
+
+    <label>NUMERO IMMAGINI</label>
+    <input id="images" type="number" min="0">
+
+    <label>NUMERO VIDEO</label>
+    <input id="videos" type="number" min="0">
+
+    <button id="generate">GENERATE CODE</button>
+
+    <label>CODICE GENERATO</label>
+    <textarea id="output" readonly></textarea>
+
+    <button id="copy">COPY CODE</button>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
