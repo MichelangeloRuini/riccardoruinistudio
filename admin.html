@@ -6,6 +6,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <section class="cms-dashboard">
+  <div class="cms-dashboard-header">
+    <h2>Campaigns Dashboard</h2>
+  <div class="dashboard-buttons">
+  <button id="saveCampaignOrder" type="button">Save Order</button>
+  <button id="refreshCampaigns" type="button">Refresh</button>
+</div>
+  </div>
+
+  <div id="campaignsList" class="campaigns-list">
+    Loading campaigns...
+  </div>
+</section>
 
   <main class="admin-page">
     <h1>RRS CAMPAIGN ADMIN</h1>
@@ -26,14 +39,24 @@
     </select>
 
     <label>CREDITS</label>
-    <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary"></textarea>
+    <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary&#10;Director: Gia Coppola"></textarea>
 
     <label>IMMAGINI / VIDEO</label>
-    <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4">
+
+    <div id="dropzone" class="admin-dropzone">
+      Trascina qui immagini e video<br>
+      <span>oppure clicca per selezionarli</span>
+    </div>
+
+    <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+
+    <div id="preview" class="admin-preview"></div>
 
     <button id="generate">CREATE CAMPAIGN</button>
+    <button id="saveEdit" type="button" hidden>Save Edit</button>
+    <button id="cancelEdit" type="button" hidden>Cancel Edit</button>
 
-    <label>CODICE GENERATO</label>
+    <label>RISULTATO</label>
     <textarea id="output" readonly></textarea>
 
     <button id="copy">COPY CODE</button>

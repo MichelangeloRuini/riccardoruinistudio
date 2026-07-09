@@ -529,3 +529,183 @@ body.entered .custom-cursor {
   font: inherit;
   cursor: pointer;
 }
+
+.admin-dropzone {
+  width: 100%;
+  min-height: 160px;
+  border: 1px dashed #777;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  margin: 12px 0 24px;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.admin-dropzone:hover,
+.admin-dropzone.is-dragover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-dropzone span {
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+.admin-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.preview-item {
+  position: relative;
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  overflow: hidden;
+    cursor: grab;
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.preview-item:active {
+  cursor: grabbing;
+}
+
+.preview-item.is-dragging {
+  opacity: 0.35;
+  transform: scale(0.96);
+  border-color: #fff;
+}
+
+.preview-item img,
+.preview-item video {
+  width: 100%;
+  height: 140px;
+  display: block;
+  object-fit: cover;
+}
+
+.preview-item p {
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 8px;
+  margin: 0;
+  opacity: 0.7;
+  word-break: break-all;
+}
+
+.preview-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+
+}
+
+.preview-remove:hover {
+  background: #fff;
+  color: #000;
+}
+
+.cms-dashboard {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #333;
+}
+
+.cms-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cms-dashboard-header h2 {
+  margin: 0;
+}
+
+.campaigns-list {
+  max-height: 420px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  padding-right: 6px;
+}
+
+.campaign-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 110px;
+  padding: 12px;
+  border: 1px solid #333;
+  background: #111;
+  overflow: hidden;
+  padding: 0;
+}
+
+.campaign-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding:14px;
+  color: #fff;
+}
+
+.campaign-row-info strong,
+.campaign-row-info span,
+.campaign-row-info small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campaign-row-info small {
+  opacity: 0.55;
+  font-size: 11px;
+  color: #fff;
+  opacity: 0.65;
+}
+
+.campaign-row-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding:0 14px 14px;
+}
+
+.campaign-row-actions button {
+  min-height: 28px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.campaign-thumb{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    display:block;
+    background:#1a1a1a;
+}

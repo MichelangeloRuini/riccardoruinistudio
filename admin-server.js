@@ -12,6 +12,8 @@ app.use(express.static(__dirname));
 
 const upload = multer({ dest: "temp-upload/" });
 
+const campaignsFile = path.join(__dirname, "data", "campaigns.js");
+
 function slugify(text) {
   return text
     .toLowerCase()
@@ -74,23 +76,45 @@ function createMedia(imagesCount, videosCount) {
   const media = [];
 
   for (let i = 1; i <= imagesCount; i++) {
-    media.push(`"01".replace("01", "${pad(i)}") + ".jpg"`);
+    media.push(`"${pad(i)}.jpg"`);
   }
 
   for (let i = 1; i <= videosCount; i++) {
     media.push(`"video-${pad(i)}.mp4"`);
   }
 
-  return media
-    .map(item => {
-      if (item.includes("replace")) {
-        const number = item.match(/"(\d+)"/)?.[1];
-        return `"${number}.jpg"`;
-      }
+  return media.join(",\n    ");
+}
 
-      return item;
-    })
-    .join(",\n    ");
+function insertCampaignInDataFile(campaignCode, position) {
+  const file = fs.readFileSync(campaignsFile, "utf8");
+
+  if (!file.includes("const campaigns = [")) {
+    throw new Error("data/campaigns.js non ha la struttura prevista.");
+  }
+
+  const start = file.indexOf("[") + 1;
+  const end = file.lastIndexOf("];");
+
+  if (end === -1) {
+    throw new Error("Non trovo la chiusura ]; in data/campaigns.js");
+  }
+
+  const before = file.slice(0, start);
+  const content = file.slice(start, end).trim();
+  const after = file.slice(end);
+
+  let newContent;
+
+  if (!content) {
+    newContent = `\n${campaignCode}\n`;
+  } else if (position === "top") {
+    newContent = `\n${campaignCode},\n\n${content}\n`;
+  } else {
+    newContent = `\n${content.replace(/,\s*$/, "")},\n\n${campaignCode}\n`;
+  }
+
+  fs.writeFileSync(campaignsFile, before + newContent + after, "utf8");
 }
 
 app.post("/api/create-campaign", upload.array("files"), async (req, res) => {
@@ -100,20 +124,23 @@ app.post("/api/create-campaign", upload.array("files"), async (req, res) => {
     const folder = req.body.folder.trim() || slugify(`${client}-${title}`);
     const border = req.body.border === "true";
     const credits = req.body.credits || "";
+    const position = req.body.position || "top";
 
     const campaignDir = path.join(__dirname, "assets", "campaigns", folder);
 
-    if (!fs.existsSync(campaignDir)) {
-      fs.mkdirSync(campaignDir, { recursive: true });
+    if (fs.existsSync(campaignDir)) {
+      throw new Error(`La cartella "${folder}" esiste già.`);
     }
 
-    const imageFiles = req.files.filter(file =>
-      [".jpg", ".jpeg", ".png"].includes(path.extname(file.originalname).toLowerCase())
-    );
+    fs.mkdirSync(campaignDir, { recursive: true });
 
-    const videoFiles = req.files.filter(file =>
-      [".mp4"].includes(path.extname(file.originalname).toLowerCase())
-    );
+    const imageFiles = req.files
+      .filter(file => [".jpg", ".jpeg", ".png"].includes(path.extname(file.originalname).toLowerCase()))
+      .sort((a, b) => a.originalname.localeCompare(b.originalname));
+
+    const videoFiles = req.files
+      .filter(file => [".mp4"].includes(path.extname(file.originalname).toLowerCase()))
+      .sort((a, b) => a.originalname.localeCompare(b.originalname));
 
     for (let i = 0; i < imageFiles.length; i++) {
       const file = imageFiles[i];
@@ -137,7 +164,7 @@ app.post("/api/create-campaign", upload.array("files"), async (req, res) => {
       fs.renameSync(file.path, videoPath);
     }
 
-    const code = `{
+    const campaignCode = `{
   id: "${folder}",
   client: "${client}",
   title: "${title}",
@@ -153,21 +180,105 @@ ${createCredits(credits)}
   media: [
     ${createMedia(imageFiles.length, videoFiles.length)}
   ]
-},`;
+}`;
+
+    insertCampaignInDataFile(campaignCode, position);
 
     res.json({
       success: true,
       folder,
       images: imageFiles.length,
       videos: videoFiles.length,
-      code
+      code: campaignCode
     });
   } catch (error) {
     console.error(error);
+
+    if (req.files) {
+      req.files.forEach(file => {
+        if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
+      });
+    }
+
     res.status(500).json({
       success: false,
       error: error.message
     });
+  }
+});
+
+app.get("/api/campaigns", (req, res) => {
+  try {
+    const file = fs.readFileSync(campaignsFile, "utf8");
+
+    const match = file.match(/const campaigns = \[([\s\S]*?)\];/);
+
+    if (!match) {
+      throw new Error("Non trovo const campaigns = [...] dentro data/campaigns.js");
+    }
+
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+
+    res.json({
+      success: true,
+      campaigns
+    });
+
+  } catch (err) {
+
+    res.json({
+      success: false,
+      error: err.message
+    });
+
+  }
+});
+app.post("/api/reorder-campaigns", (req, res) => {
+  try {
+    const orderedIds = req.body.orderedIds;
+
+    if (!Array.isArray(orderedIds)) {
+      throw new Error("orderedIds non è un array.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+
+    const reorderedCampaigns = orderedIds.map(id => {
+      const campaign = campaigns.find(item => item.id === id);
+
+      if (!campaign) {
+        throw new Error(`Campagna non trovata: ${id}`);
+      }
+
+      return campaign;
+    });
+
+    const formattedCampaigns = JSON.stringify(reorderedCampaigns, null, 2)
+      .replace(/"([^"]+)":/g, "$1:");
+
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+
+    fs.writeFileSync(campaignsFile, newFile, "utf8");
+
+    res.json({
+      success: true
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
   }
 });
 
