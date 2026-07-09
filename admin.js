@@ -8,6 +8,7 @@ const campaignsList = document.getElementById("campaignsList");
 const refreshCampaignsButton = document.getElementById("refreshCampaigns");
 const saveCampaignOrderButton = document.getElementById("saveCampaignOrder");
 const publishButton = document.getElementById("publishSite");
+const publishButton = document.getElementById("publishSite");
 
 const clientInput = document.getElementById("client");
 const titleInput = document.getElementById("title");
