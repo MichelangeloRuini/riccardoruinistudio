@@ -734,5 +734,191 @@ const campaigns = [
     "11.jpg",
     "12.jpg"
   ]
-}
+},
+
+{
+  id: "pinko-fw20",
+  client: "Pinko",
+  title: "Fw 2020",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-fw20/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Federico De Angelis"
+    },
+    {
+      label: "Model",
+      value: "Nadja Bender"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+},
+
+{
+  id: "la-perla-ode-to-summer-2020",
+  client: "La Perla",
+  title: "Ode To Summer 2020",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-ode-to-summer-2020/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Henrik Purienne"
+    },
+    {
+      label: "Model",
+      value: "Natasja Madsen"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+},
+
+{
+  id: "pinko-ss20",
+  client: "Pinko",
+  title: "SS 2020",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-ss20/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Lily Aldridge"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "la-perla-petit-macramè-2019",
+  client: "La Perla",
+  title: "Petit Macramé 2019",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-petit-macramè-2019/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Catherine Servel"
+    },
+    {
+      label: "Models",
+      value: [
+        "Ayesha Dwala",
+        "Alice Sofia Navarin",
+        "Penelope Haro"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4",
+    "video-02.mp4"
+  ]
+},
+
+{
+  id: "la-perla-maison-2019",
+  client: "La Perla",
+  title: "Maison 2019",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-maison-2019/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Catherine Servel"
+    },
+    {
+      label: "Models",
+      value: [
+        "Ayesha Dwala",
+        "Alice Sofia Navarin",
+        "Penelope Haro"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+},
+
+{
+  id: "pinko-fw2019",
+  client: "Pinko",
+  title: "FW 2019",
+  category: "Campaigns",
+  path: "assets/campaigns/pinko-fw2019/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Madison Headrick"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4"
+  ]
+},
+
 ];
