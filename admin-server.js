@@ -373,7 +373,58 @@ app.post("/api/reorder-campaigns", (req, res) => {
 
   }
 });
+app.post("/api/delete-campaign", (req, res) => {
+  try {
+    const id = req.body.id;
 
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+
+    const campaignExists = campaigns.some(campaign => campaign.id === id);
+
+    if (!campaignExists) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    const updatedCampaigns = campaigns.filter(campaign => campaign.id !== id);
+
+    const formattedCampaigns = JSON.stringify(updatedCampaigns, null, 2)
+      .replace(/"([^"]+)":/g, "$1:");
+
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+
+    fs.writeFileSync(campaignsFile, newFile, "utf8");
+
+    const campaignDir = path.join(__dirname, "assets", "campaigns", id);
+
+    if (fs.existsSync(campaignDir)) {
+      fs.rmSync(campaignDir, {
+        recursive: true,
+        force: true
+      });
+    }
+
+    res.json({
+      success: true
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+});
 app.post("/api/publish", (req, res) => {
   const message = req.body.message || "CMS publish update";
 

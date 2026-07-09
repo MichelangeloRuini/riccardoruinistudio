@@ -8,7 +8,6 @@ const campaignsList = document.getElementById("campaignsList");
 const refreshCampaignsButton = document.getElementById("refreshCampaigns");
 const saveCampaignOrderButton = document.getElementById("saveCampaignOrder");
 const publishButton = document.getElementById("publishSite");
-const publishButton = document.getElementById("publishSite");
 
 const clientInput = document.getElementById("client");
 const titleInput = document.getElementById("title");
@@ -305,11 +304,12 @@ saveCampaignOrderButton.addEventListener("click", async () => {
 
 generateButton.addEventListener("click", async () => {
   const formData = new FormData();
+  const positionInput = document.getElementById("position");
 
   formData.append("client", clientInput.value);
   formData.append("title", titleInput.value);
   formData.append("folder", folderInput.value);
-  formData.append("position", document.getElementById("position").value);
+  formData.append("position", positionInput ? positionInput.value : "top");
   formData.append("border", document.getElementById("border").value);
   formData.append("credits", document.getElementById("credits").value);
 
