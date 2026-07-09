@@ -72,6 +72,35 @@ function createCredits(text) {
     .join(",\n");
 }
 
+function parseCredits(text) {
+  return text
+    .split("\n")
+    .filter(line => line.trim() !== "")
+    .map(line => {
+      const [label, values] = line.split(":");
+
+      if (!label || !values) return null;
+
+      const cleanValues = values
+        .split(",")
+        .map(value => value.trim())
+        .filter(Boolean);
+
+      if (cleanValues.length === 1) {
+        return {
+          label: label.trim(),
+          value: cleanValues[0]
+        };
+      }
+
+      return {
+        label: label.trim(),
+        value: cleanValues
+      };
+    })
+    .filter(Boolean);
+}
+
 function createMedia(imagesCount, videosCount) {
   const media = [];
 
@@ -236,6 +265,68 @@ app.get("/api/campaigns", (req, res) => {
 
   }
 });
+app.post("/api/edit-campaign", (req, res) => {
+  try {
+    const id = req.body.id;
+    const client = req.body.client.trim();
+    const title = req.body.title.trim();
+    const border = req.body.border === "true";
+    const credits = req.body.credits || "";
+
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    if (!client) {
+      throw new Error("Client mancante.");
+    }
+
+    if (!title) {
+      throw new Error("Title mancante.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+
+    const campaignIndex = campaigns.findIndex(campaign => campaign.id === id);
+
+    if (campaignIndex === -1) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    campaigns[campaignIndex] = {
+      ...campaigns[campaignIndex],
+      client,
+      title,
+      border,
+      credits: parseCredits(credits)
+    };
+
+    const formattedCampaigns = JSON.stringify(campaigns, null, 2)
+      .replace(/"([^"\\]+)":/g, "$1:");
+
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+
+    fs.writeFileSync(campaignsFile, newFile, "utf8");
+
+    res.json({
+      success: true
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+});
+
 app.post("/api/reorder-campaigns", (req, res) => {
   try {
     const orderedIds = req.body.orderedIds;
