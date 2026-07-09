@@ -7,6 +7,7 @@ const cancelEditButton = document.getElementById("cancelEdit");
 const campaignsList = document.getElementById("campaignsList");
 const refreshCampaignsButton = document.getElementById("refreshCampaigns");
 const saveCampaignOrderButton = document.getElementById("saveCampaignOrder");
+const publishButton = document.getElementById("publishSite");
 
 const clientInput = document.getElementById("client");
 const titleInput = document.getElementById("title");
@@ -418,5 +419,43 @@ copyButton.addEventListener("click", () => {
   output.select();
   document.execCommand("copy");
 });
+publishButton.addEventListener("click", async () => {
 
+  const message = prompt(
+    "Commit message:",
+    "Portfolio update"
+  );
+
+  if (message === null) return;
+
+  output.value = "Publishing...";
+
+  const response = await fetch("/api/publish", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message
+    })
+  });
+
+  const result = await response.json();
+  
+if (result.nothingToPublish) {
+  output.value = "Nothing to publish.";
+  return;
+}
+  if (!result.success) {
+    output.value =
+      "PUBLISH ERROR\n\n" +
+      result.error;
+    return;
+  }
+
+  output.value =
+    "✅ Published successfully.\n\n" +
+    result.output;
+
+});
 loadCampaigns();

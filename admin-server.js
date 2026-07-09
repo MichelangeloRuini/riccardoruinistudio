@@ -3,6 +3,7 @@ const multer = require("multer");
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
+const { exec } = require("child_process");
 
 const app = express();
 const PORT = 3000;
@@ -373,6 +374,41 @@ app.post("/api/reorder-campaigns", (req, res) => {
   }
 });
 
+app.post("/api/publish", (req, res) => {
+  const message = req.body.message || "CMS publish update";
+
+  const safeMessage = message.replace(/"/g, "'");
+
+const command = `
+git diff --quiet &&
+echo "__NOTHING_TO_PUBLISH__" ||
+(git add . && git commit -m "${safeMessage}" && git push)
+`;
+
+  exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
+    if (error) {
+      res.status(500).json({
+        success: false,
+        error: stderr || error.message,
+        output: stdout
+      });
+      return;
+    }
+
+    if (stdout.includes("__NOTHING_TO_PUBLISH__")) {
+  res.json({
+    success: true,
+    nothingToPublish: true
+  });
+  return;
+}
+
+res.json({
+  success: true,
+  output: stdout
+});
+  });
+});
 app.listen(PORT, () => {
   console.log(`RRS Admin running at http://localhost:${PORT}/admin.html`);
 });
