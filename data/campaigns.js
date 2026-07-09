@@ -921,4 +921,187 @@ const campaigns = [
   ]
 },
 
+{
+  id: "marella-women-ss19",
+  client: "Marella",
+  title: "Women SS 2019",
+  category: "Campaigns",
+  path: "assets/campaigns/marella-women-ss19/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Emma Tempest"
+    },
+    {
+      label: "Model",
+      value: "Vanessa Moody"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+},
+
+{
+  id: "diesel-watches-2018",
+  client: "Diesel",
+  title: "Watches 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/diesel-watches-2018/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Philippe Jarrigeon"
+    },
+    {
+      label: "Director",
+      value: "T J O'Grady Peyton"
+    },
+    {
+      label: "Talent",
+      value: "Steve Aoki"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "valentino-women-fw18",
+  client: "Valentino",
+  title: "Women FW 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw18/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Juergen Teller"
+    },
+    {
+      label: "Models",
+      value: [
+        "Vittoria Ceretti",
+        "Adut Akech",
+        "Fran Summers"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "valentino-men-fw18",
+  client: "Valentino",
+  title: "Men FW 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-fw18/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Juergen Teller"
+    },
+    {
+      label: "Models",
+      value: [
+        "Jonas GlÖer",
+        "Reuben Chapman",
+        "Benno Bulang"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
+},
+
+{
+  id: "marella-fw18",
+  client: "Marella",
+  title: "FW 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/marella-fw18/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Dan Martensen"
+    },
+    {
+      label: "Model",
+      value: "Grace Hartzel"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
+},
+
+{
+  id: "ermanno-scervino-fw18",
+  client: "Ermanno Scervino",
+  title: "FW 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/ermanno-scervino-fw18/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mikael Jansson"
+    },
+    {
+      label: "Models",
+      value: [
+        "Myrthe Bolt",
+        "Kirin Dejonckheere",
+        "Sara Van Der Hoek",
+        "Chunjie Liu",
+        "Barry Lomeka"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
+},
+
 ];
