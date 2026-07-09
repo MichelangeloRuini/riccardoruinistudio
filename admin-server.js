@@ -271,6 +271,124 @@ app.get("/api/campaigns", (req, res) => {
 
   }
 });
+app.get("/api/git-status", (req, res) => {
+  exec("git status --porcelain=v1 --branch", { cwd: __dirname }, (error, stdout, stderr) => {
+    if (error) {
+      res.status(500).json({
+        success: false,
+        error: stderr || error.message
+      });
+      return;
+    }
+
+    const lines = stdout.split(/\r?\n/).filter(Boolean);
+    const branchLine = lines.find(line => line.startsWith("## ")) || "";
+    const changeLines = lines.filter(line => !line.startsWith("## "));
+    const aheadMatch = branchLine.match(/\bahead (\d+)/);
+    const ahead = aheadMatch ? Number(aheadMatch[1]) : 0;
+    const changedFiles = changeLines.length;
+    const hasUnpublishedChanges = changedFiles > 0 || ahead > 0;
+
+    res.json({
+      success: true,
+      clean: !hasUnpublishedChanges,
+      hasUnpublishedChanges,
+      changedFiles,
+      ahead
+    });
+  });
+});
+app.post("/api/duplicate-campaign", (req, res) => {
+  try {
+    const id = String(req.body.id || "").trim();
+
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+
+    const campaignIndex = campaigns.findIndex(campaign => campaign.id === id);
+
+    if (campaignIndex === -1) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    const sourceDir = path.join(__dirname, "assets", "campaigns", id);
+
+    if (!fs.existsSync(sourceDir)) {
+      throw new Error(`Cartella asset non trovata: assets/campaigns/${id}`);
+    }
+
+    const existingIds = new Set(campaigns.map(campaign => campaign.id));
+    let copyId = `${id}-copy`;
+    let copyNumber = 2;
+
+    while (
+      existingIds.has(copyId) ||
+      fs.existsSync(path.join(__dirname, "assets", "campaigns", copyId))
+    ) {
+      copyId = `${id}-copy-${copyNumber}`;
+      copyNumber++;
+    }
+
+    const originalCampaign = campaigns[campaignIndex];
+    const duplicateCampaign = {
+      ...originalCampaign,
+      id: copyId,
+      title: `${originalCampaign.title} Copy`,
+      path: `assets/campaigns/${copyId}/`,
+      credits: JSON.parse(JSON.stringify(originalCampaign.credits || [])),
+      media: JSON.parse(JSON.stringify(originalCampaign.media || []))
+    };
+
+    const updatedCampaigns = [...campaigns];
+    updatedCampaigns.splice(campaignIndex + 1, 0, duplicateCampaign);
+
+    const formattedCampaigns = JSON.stringify(updatedCampaigns, null, 2)
+      .replace(/"([^"]+)":/g, "$1:");
+
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+    const copyDir = path.join(__dirname, "assets", "campaigns", copyId);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const tempCampaignsFile = `${campaignsFile}.duplicate-${timestamp}.tmp`;
+
+    fs.writeFileSync(tempCampaignsFile, newFile, "utf8");
+
+    try {
+      fs.cpSync(sourceDir, copyDir, { recursive: true });
+      fs.renameSync(tempCampaignsFile, campaignsFile);
+    } catch (duplicateErr) {
+      if (fs.existsSync(copyDir)) {
+        fs.rmSync(copyDir, { recursive: true, force: true });
+      }
+
+      if (fs.existsSync(tempCampaignsFile)) {
+        fs.unlinkSync(tempCampaignsFile);
+      }
+
+      throw duplicateErr;
+    }
+
+    res.json({
+      success: true,
+      campaign: duplicateCampaign
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+});
 app.post("/api/edit-campaign", (req, res) => {
   try {
     const id = String(req.body.id || "").trim();

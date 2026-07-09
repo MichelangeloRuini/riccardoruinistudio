@@ -108,14 +108,15 @@ async function loadCampaigns() {
           <button type="button" title="Move up">⬆</button>
           <button type="button" title="Move down">⬇</button>
           <button type="button" class="edit-campaign" data-id="${campaign.id}" title="Edit">✏️</button>
-          <button type="button" class="delete-campaign" data-id="${campaign.id}" title="Delete">🗑️</button>
+          <button type="button" class="duplicate-campaign" data-id="${campaign.id}" title="Duplicate">⧉</button>
+          <button type="button" title="Delete">🗑️</button>
         </div>
       `;
 
       campaignsList.appendChild(item);
 
       const editButton = item.querySelector(".edit-campaign");
-      const deleteButton = item.querySelector(".delete-campaign");
+      const duplicateButton = item.querySelector(".duplicate-campaign");
 
       editButton.addEventListener("click", () => {
         clientInput.value = campaign.client;
@@ -123,8 +124,6 @@ async function loadCampaigns() {
         folderInput.value = campaign.id;
         folderInput.disabled = true;
         document.getElementById("credits").value = formatCreditsForEdit(campaign.credits);
-        selectedFiles = [];
-        renderPreview();
 
         if (document.getElementById("border")) {
           document.getElementById("border").value = campaign.border ? "true" : "false";
@@ -139,18 +138,17 @@ async function loadCampaigns() {
         output.value = `Editing campaign: ${campaign.client} — ${campaign.title}`;
       });
 
-      deleteButton.addEventListener("click", async () => {
+      duplicateButton.addEventListener("click", async () => {
         const confirmed = window.confirm(
-          `Delete campaign "${campaign.client} - ${campaign.title}"?\n\n` +
-          "Its folder will be moved to trash/campaigns, not permanently deleted."
+          `Duplicate campaign "${campaign.client} - ${campaign.title}"?`
         );
 
         if (!confirmed) return;
 
         try {
-          output.value = `Deleting campaign: ${campaign.client} - ${campaign.title}`;
+          output.value = `Duplicating campaign: ${campaign.client} - ${campaign.title}`;
 
-          const response = await fetch("/api/delete-campaign", {
+          const response = await fetch("/api/duplicate-campaign", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -167,9 +165,10 @@ async function loadCampaigns() {
             return;
           }
 
-          output.value = result.backupPath
-            ? `Campaign deleted. Folder moved to ${result.backupPath}.`
-            : "Campaign deleted. No campaign folder was found to back up.";
+          output.value =
+            `Campaign duplicated.\n\n` +
+            `New ID: ${result.campaign.id}\n` +
+            `Title: ${result.campaign.title}`;
 
           await loadCampaigns();
         } catch (error) {
@@ -346,12 +345,11 @@ saveCampaignOrderButton.addEventListener("click", async () => {
 
 generateButton.addEventListener("click", async () => {
   const formData = new FormData();
-  const positionInput = document.getElementById("position");
 
   formData.append("client", clientInput.value);
   formData.append("title", titleInput.value);
   formData.append("folder", folderInput.value);
-  formData.append("position", positionInput ? positionInput.value : "top");
+  formData.append("position", document.getElementById("position").value);
   formData.append("border", document.getElementById("border").value);
   formData.append("credits", document.getElementById("credits").value);
 
@@ -408,35 +406,24 @@ cancelEditButton.addEventListener("click", () => {
 
 saveEditButton.addEventListener("click", async () => {
   try {
+    output.value = "Save Edit clicked...";
+
     if (!editingCampaignId) {
       output.value = "ERROR: No campaign selected for editing.";
       return;
     }
 
     const borderInput = document.getElementById("border");
-    const creditsInput = document.getElementById("credits");
-    const client = clientInput.value.trim();
-    const title = titleInput.value.trim();
-
-    if (!client) {
-      output.value = "ERROR: Client is required.";
-      return;
-    }
-
-    if (!title) {
-      output.value = "ERROR: Title is required.";
-      return;
-    }
 
     const updatedCampaign = {
       id: editingCampaignId,
-      client,
-      title,
+      client: clientInput.value,
+      title: titleInput.value,
       border: borderInput ? borderInput.value : "false",
-      credits: creditsInput ? creditsInput.value : ""
+      credits: document.getElementById("credits").value
     };
 
-    output.value = `Saving text changes for ${editingCampaignId}...`;
+    output.value = "Sending edit to server...";
 
     const response = await fetch("/api/edit-campaign", {
       method: "POST",
@@ -453,8 +440,6 @@ saveEditButton.addEventListener("click", async () => {
       return;
     }
 
-    const savedCampaignId = editingCampaignId;
-
     editingCampaignId = null;
 
     generateButton.hidden = false;
@@ -462,7 +447,7 @@ saveEditButton.addEventListener("click", async () => {
     cancelEditButton.hidden = true;
     folderInput.disabled = false;
 
-    output.value = `Campaign text fields saved. Folder/id unchanged: ${savedCampaignId}`;
+    output.value = "Campaign edit saved.";
 
     await loadCampaigns();
   } catch (error) {

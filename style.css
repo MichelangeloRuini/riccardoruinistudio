@@ -643,6 +643,47 @@ body.entered .custom-cursor {
   margin: 0;
 }
 
+.dashboard-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.git-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border: 1px solid #000;
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.git-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #777;
+}
+
+.git-status--clean::before {
+  background: #1f7a3d;
+}
+
+.git-status--dirty::before {
+  background: #b56a00;
+}
+
+.git-status--error::before {
+  background: #b00020;
+}
+
 .campaigns-list {
   max-height: 420px;
   overflow-y: auto;
@@ -691,7 +732,7 @@ body.entered .custom-cursor {
 
 .campaign-row-actions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 6px;
   padding:0 14px 14px;
 }
