@@ -401,19 +401,38 @@ app.post("/api/delete-campaign", (req, res) => {
 
     const newFile = `const campaigns = ${formattedCampaigns};`;
 
-    fs.writeFileSync(campaignsFile, newFile, "utf8");
-
     const campaignDir = path.join(__dirname, "assets", "campaigns", id);
+    const trashDir = path.join(__dirname, "trash", "campaigns");
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const backupDir = path.join(trashDir, `${id}-${timestamp}`);
+    const tempCampaignsFile = `${campaignsFile}.delete-${timestamp}.tmp`;
+    let backupPath = null;
 
-    if (fs.existsSync(campaignDir)) {
-      fs.rmSync(campaignDir, {
-        recursive: true,
-        force: true
-      });
+    fs.writeFileSync(tempCampaignsFile, newFile, "utf8");
+
+    try {
+      if (fs.existsSync(campaignDir)) {
+        fs.mkdirSync(trashDir, { recursive: true });
+        fs.renameSync(campaignDir, backupDir);
+        backupPath = path.relative(__dirname, backupDir);
+      }
+
+      fs.renameSync(tempCampaignsFile, campaignsFile);
+    } catch (moveErr) {
+      if (backupPath && fs.existsSync(backupDir) && !fs.existsSync(campaignDir)) {
+        fs.renameSync(backupDir, campaignDir);
+      }
+
+      if (fs.existsSync(tempCampaignsFile)) {
+        fs.unlinkSync(tempCampaignsFile);
+      }
+
+      throw moveErr;
     }
 
     res.json({
-      success: true
+      success: true,
+      backupPath
     });
 
   } catch (err) {

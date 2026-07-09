@@ -108,13 +108,14 @@ async function loadCampaigns() {
           <button type="button" title="Move up">⬆</button>
           <button type="button" title="Move down">⬇</button>
           <button type="button" class="edit-campaign" data-id="${campaign.id}" title="Edit">✏️</button>
-          <button type="button" title="Delete">🗑️</button>
+          <button type="button" class="delete-campaign" data-id="${campaign.id}" title="Delete">🗑️</button>
         </div>
       `;
 
       campaignsList.appendChild(item);
 
       const editButton = item.querySelector(".edit-campaign");
+      const deleteButton = item.querySelector(".delete-campaign");
 
       editButton.addEventListener("click", () => {
         clientInput.value = campaign.client;
@@ -134,6 +135,45 @@ async function loadCampaigns() {
         cancelEditButton.hidden = false;
 
         output.value = `Editing campaign: ${campaign.client} — ${campaign.title}`;
+      });
+
+      deleteButton.addEventListener("click", async () => {
+        const confirmed = window.confirm(
+          `Delete campaign "${campaign.client} - ${campaign.title}"?\n\n` +
+          "Its folder will be moved to trash/campaigns, not permanently deleted."
+        );
+
+        if (!confirmed) return;
+
+        try {
+          output.value = `Deleting campaign: ${campaign.client} - ${campaign.title}`;
+
+          const response = await fetch("/api/delete-campaign", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              id: campaign.id
+            })
+          });
+
+          const result = await response.json();
+
+          if (!result.success) {
+            output.value = "ERROR: " + result.error;
+            return;
+          }
+
+          output.value = result.backupPath
+            ? `Campaign deleted. Folder moved to ${result.backupPath}.`
+            : "Campaign deleted. No campaign folder was found to back up.";
+
+          await loadCampaigns();
+        } catch (error) {
+          output.value = "JS ERROR: " + error.message;
+          console.error(error);
+        }
       });
     });
   } catch (error) {

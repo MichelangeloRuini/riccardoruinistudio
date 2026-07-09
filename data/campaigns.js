@@ -929,34 +929,5 @@ const campaigns = [
       "02.jpg",
       "03.jpg"
     ]
-  },
-  {
-    id: "ermanno-scervino-fw18",
-    client: "Ermanno Scervino",
-    title: "FW 2018",
-    category: "Campaigns",
-    path: "assets/campaigns/ermanno-scervino-fw18/",
-    border: true,
-    credits: [
-      {
-        label: "Photographer",
-        value: "Mikael Jansson"
-      },
-      {
-        label: "Models",
-        value: [
-          "Myrthe Bolt",
-          "Kirin Dejonckheere",
-          "Sara Van Der Hoek",
-          "Chunjie Liu",
-          "Barry Lomeka"
-        ]
-      }
-    ],
-    media: [
-      "01.jpg",
-      "02.jpg",
-      "03.jpg"
-    ]
   }
 ];
