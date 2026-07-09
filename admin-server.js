@@ -78,9 +78,14 @@ function parseCredits(text) {
     .split("\n")
     .filter(line => line.trim() !== "")
     .map(line => {
-      const [label, values] = line.split(":");
+      const separatorIndex = line.indexOf(":");
 
-      if (!label || !values) return null;
+      if (separatorIndex === -1) return null;
+
+      const label = line.slice(0, separatorIndex).trim();
+      const values = line.slice(separatorIndex + 1);
+
+      if (!label || !values.trim()) return null;
 
       const cleanValues = values
         .split(",")
@@ -268,11 +273,11 @@ app.get("/api/campaigns", (req, res) => {
 });
 app.post("/api/edit-campaign", (req, res) => {
   try {
-    const id = req.body.id;
-    const client = req.body.client.trim();
-    const title = req.body.title.trim();
-    const border = req.body.border === "true";
-    const credits = req.body.credits || "";
+    const id = String(req.body.id || "").trim();
+    const client = String(req.body.client || "").trim();
+    const title = String(req.body.title || "").trim();
+    const border = req.body.border === true || req.body.border === "true";
+    const credits = typeof req.body.credits === "string" ? req.body.credits : "";
 
     if (!id) {
       throw new Error("ID campagna mancante.");
@@ -315,7 +320,13 @@ app.post("/api/edit-campaign", (req, res) => {
     fs.writeFileSync(campaignsFile, newFile, "utf8");
 
     res.json({
-      success: true
+      success: true,
+      campaign: {
+        id,
+        client,
+        title,
+        border
+      }
     });
 
   } catch (err) {

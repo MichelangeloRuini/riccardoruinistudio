@@ -123,6 +123,8 @@ async function loadCampaigns() {
         folderInput.value = campaign.id;
         folderInput.disabled = true;
         document.getElementById("credits").value = formatCreditsForEdit(campaign.credits);
+        selectedFiles = [];
+        renderPreview();
 
         if (document.getElementById("border")) {
           document.getElementById("border").value = campaign.border ? "true" : "false";
@@ -406,24 +408,35 @@ cancelEditButton.addEventListener("click", () => {
 
 saveEditButton.addEventListener("click", async () => {
   try {
-    output.value = "Save Edit clicked...";
-
     if (!editingCampaignId) {
       output.value = "ERROR: No campaign selected for editing.";
       return;
     }
 
     const borderInput = document.getElementById("border");
+    const creditsInput = document.getElementById("credits");
+    const client = clientInput.value.trim();
+    const title = titleInput.value.trim();
+
+    if (!client) {
+      output.value = "ERROR: Client is required.";
+      return;
+    }
+
+    if (!title) {
+      output.value = "ERROR: Title is required.";
+      return;
+    }
 
     const updatedCampaign = {
       id: editingCampaignId,
-      client: clientInput.value,
-      title: titleInput.value,
+      client,
+      title,
       border: borderInput ? borderInput.value : "false",
-      credits: document.getElementById("credits").value
+      credits: creditsInput ? creditsInput.value : ""
     };
 
-    output.value = "Sending edit to server...";
+    output.value = `Saving text changes for ${editingCampaignId}...`;
 
     const response = await fetch("/api/edit-campaign", {
       method: "POST",
@@ -440,6 +453,8 @@ saveEditButton.addEventListener("click", async () => {
       return;
     }
 
+    const savedCampaignId = editingCampaignId;
+
     editingCampaignId = null;
 
     generateButton.hidden = false;
@@ -447,7 +462,7 @@ saveEditButton.addEventListener("click", async () => {
     cancelEditButton.hidden = true;
     folderInput.disabled = false;
 
-    output.value = "Campaign edit saved.";
+    output.value = `Campaign text fields saved. Folder/id unchanged: ${savedCampaignId}`;
 
     await loadCampaigns();
   } catch (error) {
