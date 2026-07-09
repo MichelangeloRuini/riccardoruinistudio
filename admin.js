@@ -421,10 +421,7 @@ copyButton.addEventListener("click", () => {
 });
 publishButton.addEventListener("click", async () => {
 
-  const message = prompt(
-    "Commit message:",
-    "Portfolio update"
-  );
+let message = "Portfolio update";
 
   if (message === null) return;
 
@@ -441,7 +438,7 @@ publishButton.addEventListener("click", async () => {
   });
 
   const result = await response.json();
-  
+
 if (result.nothingToPublish) {
   output.value = "Nothing to publish.";
   return;
