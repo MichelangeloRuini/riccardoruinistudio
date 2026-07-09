@@ -1,25 +1,5 @@
 const campaigns = [
   {
-    id: "feudi-di-san-gregorio-2026",
-    client: "Feudi di San Gregorio",
-    title: "40th Anniversary 2026",
-    category: "Campaigns",
-    path: "assets/campaigns/feudi-di-san-gregorio-2026/",
-    border: true,
-    credits: [
-      {
-        label: "Illustrator",
-        value: "Gaia Alari"
-      }
-    ],
-    media: [
-      "01.jpg",
-      "02.jpg",
-      "03.jpg",
-      "video-01.mp4"
-    ]
-  },
-  {
     id: "feudi-di-san-gregorio-2026-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026 Copy",
