@@ -22,7 +22,6 @@ function createCredits(campaign) {
 }
 
 function createMediaElement(campaign, file) {
-  const source = campaign.path + file;
   const isVideo = file.toLowerCase().endsWith(".mp4");
 
   if (isVideo) {
@@ -34,18 +33,28 @@ function createMediaElement(campaign, file) {
         loop
         playsinline
         controls
+        preload="metadata"
       >
-        <source src="${source}" type="video/mp4">
+        <source src="${campaign.path}${file}" type="video/mp4">
       </video>
     `;
   }
 
+  const webp = file.replace(/\.(jpg|jpeg)$/i, ".webp");
+
   return `
-    <img
-      class="campaign-media-item ${campaign.border ? "has-border" : ""}"
-      src="${source}"
-      alt="${campaign.client} ${campaign.title}"
-    >
+    <picture>
+      <source
+        srcset="${campaign.path}${webp}"
+        type="image/webp">
+
+      <img
+        class="campaign-media-item ${campaign.border ? "has-border" : ""}"
+        src="${campaign.path}${file}"
+        alt="${campaign.client} ${campaign.title}"
+        loading="lazy"
+        decoding="async">
+    </picture>
   `;
 }
 
