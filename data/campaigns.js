@@ -940,11 +940,11 @@ const campaigns = [
     credits: [
       {
         label: "Photographer",
-        value: []
+        value: "Mikael Jansson"
       },
       {
         label: "Models",
-        value: []
+        value: "Myrthe Bolt"
       }
     ],
     media: [
