@@ -279,6 +279,11 @@ function insertCampaignInDataFile(campaignCode, position) {
 }
 
 app.post("/api/create-campaign", upload.array("files"), async (req, res) => {
+  console.log("[create-campaign] endpoint reached", {
+    fileCount: Array.isArray(req.files) ? req.files.length : 0,
+    fieldNames: [...new Set((req.files || []).map(file => file.fieldname))]
+  });
+
   try {
     const client = req.body.client.trim();
     const title = req.body.title.trim();
@@ -353,7 +358,10 @@ ${createCredits(credits)}
       code: campaignCode
     });
   } catch (error) {
-    console.error(error);
+    console.error("[create-campaign] operation failed", {
+      message: error.message,
+      stack: error.stack
+    });
 
     if (req.files) {
       req.files.forEach(file => {

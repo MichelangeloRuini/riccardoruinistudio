@@ -929,5 +929,28 @@ const campaigns = [
       "02.jpg",
       "03.jpg"
     ]
+  },
+  {
+    id: "ermanno-scervino-fw-2018",
+    client: "Ermanno Scervino",
+    title: "FW 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/ermanno-scervino-fw-2018/",
+    border: true,
+    credits: [
+      {
+        label: "Photographer",
+        value: []
+      },
+      {
+        label: "Models",
+        value: []
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
   }
 ];

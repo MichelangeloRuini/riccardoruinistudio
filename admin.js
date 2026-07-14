@@ -783,41 +783,84 @@ saveCampaignOrderButton.addEventListener("click", async () => {
 });
 
 generateButton.addEventListener("click", async () => {
-  const formData = new FormData();
+  const createMessages = ["Create click detected..."];
+  const showCreateMessage = message => {
+    createMessages.push(message);
+    output.value = createMessages.join("\n");
+  };
 
-  formData.append("client", clientInput.value);
-  formData.append("title", titleInput.value);
-  formData.append("folder", folderInput.value);
-  formData.append("position", document.getElementById("position").value);
-  formData.append("border", document.getElementById("border").value);
-  formData.append("credits", document.getElementById("credits").value);
+  output.value = createMessages.join("\n");
 
-  for (const file of selectedFiles) {
-    formData.append("files", file);
+  try {
+    showCreateMessage("Validating form...");
+
+    const client = clientInput.value.trim();
+    const title = titleInput.value.trim();
+    const positionInput = document.getElementById("position");
+    const borderInput = document.getElementById("border");
+    const creditsInput = document.getElementById("credits");
+
+    if (!client || !title) {
+      showCreateMessage("Validation error: client and title are required.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("client", client);
+    formData.append("title", title);
+    formData.append("folder", folderInput.value);
+    formData.append("position", positionInput ? positionInput.value : "top");
+    formData.append("border", borderInput ? borderInput.value : "false");
+    formData.append("credits", creditsInput ? creditsInput.value : "");
+
+    for (const file of selectedFiles) {
+      formData.append("files", file);
+    }
+
+    showCreateMessage(
+      `Uploading campaign... files=${selectedFiles.length}, field=files, position=` +
+      `${positionInput ? positionInput.value : "top (fallback)"}`
+    );
+    generateButton.disabled = true;
+
+    const response = await fetch("/api/create-campaign", {
+      method: "POST",
+      body: formData
+    });
+
+    showCreateMessage(`HTTP status: ${response.status} ${response.statusText || ""}`.trim());
+
+    const responseText = await response.text();
+    let result;
+
+    try {
+      result = JSON.parse(responseText);
+    } catch (parseError) {
+      showCreateMessage(
+        `Invalid JSON response: ${responseText.slice(0, 200) || "empty response"}`
+      );
+      return;
+    }
+
+    if (!result.success) {
+      showCreateMessage(`Server JSON error: ${result.error || "Unknown server error"}`);
+      return;
+    }
+
+    showCreateMessage(
+      `Success: campaign created at assets/campaigns/${result.folder}/ ` +
+      `(${result.images} images, ${result.videos} videos).`
+    );
+    output.value += `\n\n${result.code}`;
+
+    await loadCampaigns();
+  } catch (error) {
+    showCreateMessage(`Create request failed: ${error.message}`);
+    console.error(error);
+  } finally {
+    generateButton.disabled = false;
   }
-
-  output.value = "Creating campaign...";
-
-  const response = await fetch("/api/create-campaign", {
-    method: "POST",
-    body: formData
-  });
-
-  const result = await response.json();
-
-  if (!result.success) {
-    output.value = "ERROR: " + result.error;
-    return;
-  }
-
-  output.value =
-    `CAMPAIGN CREATED\n\n` +
-    `Folder: assets/campaigns/${result.folder}/\n` +
-    `Images: ${result.images}\n` +
-    `Videos: ${result.videos}\n\n` +
-    result.code;
-
-  await loadCampaigns();
 });
 
 saveMediaOrderButton.addEventListener("click", async () => {
