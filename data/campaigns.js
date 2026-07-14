@@ -1088,5 +1088,34 @@ const campaigns = [
     "05.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "elisabetta-franchi-ss-2018",
+  client: "Elisabetta Franchi",
+  title: "SS 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/elisabetta-franchi-ss-2018/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Ellen Von Unwerth"
+    },
+    {
+      label: "Model",
+      value: "Devon Windsor"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg"
+  ]
 }
 ];
