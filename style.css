@@ -6,6 +6,7 @@
 
 :root {
   --side-margin: 55px;
+  --site-background: #f8f6f2;
 
   --landing-logo-width: 185px;
   --site-logo-width: 185px;
@@ -16,7 +17,7 @@
 
   --nav-font-size: 12px;
   --search-font-size: 12px;
-  --footer-font-size: 12px;
+  --footer-font-size: 10px;
   --wall-font-size: 47px;
 
   --wall-top-gap: 95px;
@@ -32,6 +33,11 @@ body {
   background: white;
   color: black;
   overflow-x: hidden;
+}
+
+body.entered,
+body.landing-active {
+  background: var(--site-background);
 }
 
 body.landing-active {
@@ -102,6 +108,7 @@ body.landing-active .custom-cursor {
 .site {
   display: none;
   min-height: 100vh;
+  background: var(--site-background);
 }
 
 body.entered .site {
@@ -123,7 +130,7 @@ body.entered .custom-cursor {
   align-items: center;
   justify-content: space-between;
   padding: var(--header-top-padding) var(--side-margin) var(--header-bottom-padding);
-  background: white;
+  background: var(--site-background);
   text-transform: uppercase;
 }
 
@@ -143,6 +150,7 @@ body.entered .custom-cursor {
   padding-bottom: 7px;
   border: none;
   border-bottom: 2px solid black;
+  background: transparent;
   outline: none;
   font: inherit;
   font-size: var(--search-font-size);
@@ -233,6 +241,7 @@ body.entered .custom-cursor {
   padding-bottom: 7px;
   border: none;
   border-bottom: 2px solid black;
+  background: transparent;
   outline: none;
   font: inherit;
   font-size: var(--footer-font-size);
@@ -421,7 +430,7 @@ body.entered .custom-cursor {
   display: none;
   z-index: 1000;
   padding: 10px 0 8px;
-  background: white;
+  background: #fbfaf7;
   opacity: 0;
   transform: translateY(-5px);
   transition: opacity 0.18s ease, transform 0.18s ease;
