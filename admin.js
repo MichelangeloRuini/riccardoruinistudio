@@ -3,6 +3,7 @@ const copyButton = document.getElementById("copy");
 const output = document.getElementById("output");
 const saveEditButton = document.getElementById("saveEdit");
 const cancelEditButton = document.getElementById("cancelEdit");
+const saveMediaOrderButton = document.getElementById("saveMediaOrder");
 
 const campaignsList = document.getElementById("campaignsList");
 const refreshCampaignsButton = document.getElementById("refreshCampaigns");
@@ -16,8 +17,15 @@ const folderInput = document.getElementById("folder");
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("files");
 const preview = document.getElementById("preview");
+const newCampaignMediaSection = document.getElementById("newCampaignMediaSection");
+const existingMediaSection = document.getElementById("existingMediaSection");
+const existingMediaGallery = document.getElementById("existingMediaGallery");
 
 let editingCampaignId = null;
+let editingCampaign = null;
+let originalExistingMediaOrder = [];
+let existingMediaOrder = [];
+let draggedExistingMediaIndex = null;
 let folderEditedManually = false;
 let selectedFiles = [];
 
@@ -31,6 +39,157 @@ function formatCreditsForEdit(credits) {
 
     return `${credit.label}: ${credit.value}`;
   }).join("\n");
+}
+
+function clearExistingMediaGallery() {
+  existingMediaGallery.innerHTML = "";
+  existingMediaSection.hidden = true;
+  saveMediaOrderButton.hidden = true;
+  saveMediaOrderButton.disabled = true;
+  editingCampaign = null;
+  originalExistingMediaOrder = [];
+  existingMediaOrder = [];
+  draggedExistingMediaIndex = null;
+}
+
+function mediaOrdersMatch(firstOrder, secondOrder) {
+  return firstOrder.length === secondOrder.length &&
+    firstOrder.every((filename, index) => filename === secondOrder[index]);
+}
+
+function updateSaveMediaOrderButton() {
+  saveMediaOrderButton.disabled = !editingCampaignId ||
+    mediaOrdersMatch(existingMediaOrder, originalExistingMediaOrder);
+}
+
+function clearExistingMediaDragState() {
+  existingMediaGallery.querySelectorAll(".is-dragging, .is-drag-target")
+    .forEach(item => item.classList.remove("is-dragging", "is-drag-target"));
+}
+
+function showExistingMediaFallback(previewElement, mediaElement) {
+  mediaElement.remove();
+  previewElement.querySelector(".existing-media-fallback").hidden = false;
+}
+
+function renderExistingMediaGallery(campaign, mediaItems = campaign.media) {
+  existingMediaGallery.innerHTML = "";
+
+  const orderedMedia = Array.isArray(mediaItems) ? mediaItems : [];
+
+  if (!orderedMedia.length) {
+    const emptyState = document.createElement("p");
+    emptyState.className = "existing-media-empty";
+    emptyState.textContent = "No existing media found for this campaign.";
+    existingMediaGallery.appendChild(emptyState);
+    existingMediaSection.hidden = false;
+    return;
+  }
+
+  orderedMedia.forEach((filename, index) => {
+    const normalizedFilename = String(filename);
+    const isImage = /\.(jpe?g|png|webp)$/i.test(normalizedFilename);
+    const isVideo = /\.mp4$/i.test(normalizedFilename);
+    const mediaType = isImage ? "Image" : isVideo ? "Video" : "Unknown";
+    const item = document.createElement("article");
+    const previewElement = document.createElement("div");
+    const fallback = document.createElement("div");
+    const details = document.createElement("div");
+    const position = document.createElement("span");
+    const type = document.createElement("span");
+    const storedFilename = document.createElement("code");
+
+    item.className = "existing-media-item";
+    item.draggable = true;
+    item.dataset.mediaIndex = index;
+
+    item.addEventListener("dragstart", event => {
+      draggedExistingMediaIndex = index;
+      item.classList.add("is-dragging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", normalizedFilename);
+    });
+
+    item.addEventListener("dragover", event => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      clearExistingMediaDragState();
+      item.classList.add("is-drag-target");
+
+      const draggingItem = existingMediaGallery.querySelector(
+        `[data-media-index="${draggedExistingMediaIndex}"]`
+      );
+
+      if (draggingItem) draggingItem.classList.add("is-dragging");
+    });
+
+    item.addEventListener("drop", event => {
+      event.preventDefault();
+
+      if (draggedExistingMediaIndex === null || draggedExistingMediaIndex === index) {
+        clearExistingMediaDragState();
+        return;
+      }
+
+      const movedFilename = existingMediaOrder.splice(draggedExistingMediaIndex, 1)[0];
+      existingMediaOrder.splice(index, 0, movedFilename);
+      draggedExistingMediaIndex = null;
+
+      renderExistingMediaGallery(campaign, existingMediaOrder);
+      updateSaveMediaOrderButton();
+    });
+
+    item.addEventListener("dragend", () => {
+      draggedExistingMediaIndex = null;
+      clearExistingMediaDragState();
+    });
+
+    previewElement.className = "existing-media-preview";
+    fallback.className = "existing-media-fallback";
+    fallback.textContent = "Preview unavailable";
+    fallback.hidden = true;
+
+    if (isImage) {
+      const image = document.createElement("img");
+      const previewFilename = normalizedFilename.replace(/\.[^.]+$/, ".webp");
+
+      image.src = `${campaign.path}${previewFilename}`;
+      image.alt = `Preview of ${normalizedFilename}`;
+      image.addEventListener("error", () => {
+        showExistingMediaFallback(previewElement, image);
+      }, { once: true });
+      previewElement.appendChild(image);
+    } else if (isVideo) {
+      const video = document.createElement("video");
+
+      video.src = `${campaign.path}${normalizedFilename}`;
+      video.controls = true;
+      video.preload = "metadata";
+      video.addEventListener("error", () => {
+        showExistingMediaFallback(previewElement, video);
+      }, { once: true });
+      previewElement.appendChild(video);
+    } else {
+      fallback.textContent = "Unsupported media type";
+      fallback.hidden = false;
+    }
+
+    previewElement.appendChild(fallback);
+
+    details.className = "existing-media-details";
+    position.textContent = `Position ${index + 1}`;
+    type.textContent = mediaType;
+    storedFilename.textContent = normalizedFilename;
+
+    details.appendChild(position);
+    details.appendChild(type);
+    details.appendChild(storedFilename);
+    item.appendChild(previewElement);
+    item.appendChild(details);
+    existingMediaGallery.appendChild(item);
+  });
+
+  existingMediaSection.hidden = false;
 }
 
 async function loadCampaigns() {
@@ -131,10 +290,17 @@ async function loadCampaigns() {
         }
 
         editingCampaignId = campaign.id;
+        editingCampaign = campaign;
+        originalExistingMediaOrder = [...campaign.media];
+        existingMediaOrder = [...campaign.media];
+        newCampaignMediaSection.hidden = true;
+        renderExistingMediaGallery(campaign, existingMediaOrder);
 
         generateButton.hidden = true;
         saveEditButton.hidden = false;
         cancelEditButton.hidden = false;
+        saveMediaOrderButton.hidden = false;
+        updateSaveMediaOrderButton();
 
         output.value = `Editing campaign: ${campaign.client} — ${campaign.title}`;
       });
@@ -421,8 +587,55 @@ generateButton.addEventListener("click", async () => {
   await loadCampaigns();
 });
 
+saveMediaOrderButton.addEventListener("click", async () => {
+  if (!editingCampaignId || !editingCampaign || saveMediaOrderButton.disabled) return;
+
+  try {
+    saveMediaOrderButton.disabled = true;
+    output.value = "Saving media order...";
+
+    const response = await fetch("/api/reorder-campaign-media", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: editingCampaignId,
+        media: existingMediaOrder
+      })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      output.value = "ERROR: " + result.error;
+      updateSaveMediaOrderButton();
+      return;
+    }
+
+    originalExistingMediaOrder = [...result.media];
+    existingMediaOrder = [...result.media];
+    editingCampaign = {
+      ...editingCampaign,
+      media: [...result.media]
+    };
+
+    renderExistingMediaGallery(editingCampaign, existingMediaOrder);
+    updateSaveMediaOrderButton();
+    await loadCampaigns();
+
+    output.value = "Media order saved successfully.";
+  } catch (error) {
+    output.value = "JS ERROR: " + error.message;
+    updateSaveMediaOrderButton();
+    console.error(error);
+  }
+});
+
 cancelEditButton.addEventListener("click", () => {
   editingCampaignId = null;
+  clearExistingMediaGallery();
+  newCampaignMediaSection.hidden = false;
 
   generateButton.hidden = false;
   saveEditButton.hidden = true;
@@ -481,6 +694,8 @@ saveEditButton.addEventListener("click", async () => {
     }
 
     editingCampaignId = null;
+    clearExistingMediaGallery();
+    newCampaignMediaSection.hidden = false;
 
     generateButton.hidden = false;
     saveEditButton.hidden = true;

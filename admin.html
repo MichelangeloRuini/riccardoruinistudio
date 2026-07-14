@@ -43,16 +43,25 @@
     <label>CREDITS</label>
     <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary&#10;Director: Gia Coppola"></textarea>
 
-    <label>IMMAGINI / VIDEO</label>
+    <section id="existingMediaSection" class="existing-media-section" hidden>
+      <h2>MEDIA ESISTENTI</h2>
+      <p class="existing-media-note">Trascina le anteprime per cambiare solo l'ordine dei media.</p>
+      <div id="existingMediaGallery" class="existing-media-gallery"></div>
+      <button id="saveMediaOrder" type="button" hidden disabled>Save Media Order</button>
+    </section>
 
-    <div id="dropzone" class="admin-dropzone">
-      Trascina qui immagini e video<br>
-      <span>oppure clicca per selezionarli</span>
-    </div>
+    <section id="newCampaignMediaSection">
+      <label>IMMAGINI / VIDEO</label>
 
-    <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+      <div id="dropzone" class="admin-dropzone">
+        Trascina qui immagini e video<br>
+        <span>oppure clicca per selezionarli</span>
+      </div>
 
-    <div id="preview" class="admin-preview"></div>
+      <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+
+      <div id="preview" class="admin-preview"></div>
+    </section>
 
     <button id="generate">CREATE CAMPAIGN</button>
     <button id="saveEdit" type="button" hidden>Save Edit</button>

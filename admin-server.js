@@ -457,6 +457,133 @@ app.post("/api/edit-campaign", (req, res) => {
   }
 });
 
+app.post("/api/reorder-campaign-media", (req, res) => {
+  let tempCampaignsFile = null;
+
+  try {
+    const body = req.body || {};
+    const id = String(body.id || "").trim();
+    const submittedMedia = body.media;
+
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    if (!Array.isArray(submittedMedia)) {
+      throw new Error("media non è un array.");
+    }
+
+    if (submittedMedia.some(filename => typeof filename !== "string" || !filename)) {
+      throw new Error("media contiene un nome file non valido.");
+    }
+
+    if (new Set(submittedMedia).size !== submittedMedia.length) {
+      throw new Error("media contiene file duplicati.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+    const campaignIndex = campaigns.findIndex(campaign => campaign.id === id);
+
+    if (campaignIndex === -1) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    const campaign = campaigns[campaignIndex];
+    const currentMedia = Array.isArray(campaign.media) ? campaign.media : [];
+    const currentMediaSet = new Set(currentMedia);
+
+    if (currentMediaSet.size !== currentMedia.length) {
+      throw new Error(`La campagna ${id} contiene media duplicati.`);
+    }
+
+    if (submittedMedia.length !== currentMedia.length) {
+      throw new Error("Il numero di media inviati non corrisponde alla campagna.");
+    }
+
+    const unknownMedia = submittedMedia.filter(filename => !currentMediaSet.has(filename));
+
+    if (unknownMedia.length) {
+      throw new Error(`Media non appartenente alla campagna: ${unknownMedia[0]}`);
+    }
+
+    const submittedMediaSet = new Set(submittedMedia);
+    const missingMedia = currentMedia.filter(filename => !submittedMediaSet.has(filename));
+
+    if (missingMedia.length) {
+      throw new Error(`Media mancante: ${missingMedia[0]}`);
+    }
+
+    const updatedCampaigns = [...campaigns];
+    updatedCampaigns[campaignIndex] = {
+      ...campaign,
+      media: [...submittedMedia]
+    };
+
+    const formattedCampaigns = JSON.stringify(updatedCampaigns, null, 2)
+      .replace(/"([^"\\]+)":/g, "$1:");
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
+    tempCampaignsFile = `${campaignsFile}.media-order-${process.pid}-${timestamp}.tmp`;
+    fs.writeFileSync(tempCampaignsFile, newFile, "utf8");
+
+    const stagedFile = fs.readFileSync(tempCampaignsFile, "utf8");
+    const stagedCampaigns = new Function(`
+      ${stagedFile}
+      return campaigns;
+    `)();
+    const stagedCampaign = stagedCampaigns[campaignIndex];
+
+    if (stagedCampaigns.length !== campaigns.length) {
+      throw new Error("La verifica del file temporaneo non è riuscita.");
+    }
+
+    for (let index = 0; index < campaigns.length; index++) {
+      if (index === campaignIndex) continue;
+
+      if (JSON.stringify(stagedCampaigns[index]) !== JSON.stringify(campaigns[index])) {
+        throw new Error("Il file temporaneo modificherebbe un'altra campagna.");
+      }
+    }
+
+    const { media: originalMedia, ...originalCampaignFields } = campaign;
+    const { media: stagedMedia, ...stagedCampaignFields } = stagedCampaign;
+
+    if (JSON.stringify(stagedCampaignFields) !== JSON.stringify(originalCampaignFields)) {
+      throw new Error("Il file temporaneo modificherebbe altri dati della campagna.");
+    }
+
+    if (
+      !Array.isArray(stagedMedia) ||
+      stagedMedia.length !== submittedMedia.length ||
+      !stagedMedia.every((filename, index) => filename === submittedMedia[index])
+    ) {
+      throw new Error("L'ordine media nel file temporaneo non è valido.");
+    }
+
+    fs.renameSync(tempCampaignsFile, campaignsFile);
+    tempCampaignsFile = null;
+
+    res.json({
+      success: true,
+      media: [...submittedMedia]
+    });
+  } catch (err) {
+    if (tempCampaignsFile && fs.existsSync(tempCampaignsFile)) {
+      fs.unlinkSync(tempCampaignsFile);
+    }
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
+
 app.post("/api/reorder-campaigns", (req, res) => {
   try {
     const orderedIds = req.body.orderedIds;

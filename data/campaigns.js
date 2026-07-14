@@ -13,8 +13,8 @@ const campaigns = [
       }
     ],
     media: [
-      "01.jpg",
       "02.jpg",
+      "01.jpg",
       "03.jpg",
       "video-01.mp4"
     ]
