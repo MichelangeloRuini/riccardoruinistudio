@@ -25,13 +25,11 @@ const campaigns = [
     title: "SS 2026",
     category: "Campaigns",
     path: "assets/campaigns/marina-rinaldi-ss26/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
-        value: [
-          "Julia Noni"
-        ]
+        value: "Julia Noni"
       },
       {
         label: "Models",
