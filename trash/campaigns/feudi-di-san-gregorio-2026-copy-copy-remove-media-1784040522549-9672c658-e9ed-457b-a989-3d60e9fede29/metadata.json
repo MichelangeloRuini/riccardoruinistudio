@@ -1,0 +1,19 @@
+{
+  "operation": "remove-campaign-media",
+  "campaignId": "feudi-di-san-gregorio-2026-copy-copy",
+  "createdAt": "2026-07-14T14:48:42.565Z",
+  "removedMedia": [
+    "02.jpg"
+  ],
+  "mediaBefore": [
+    "02.jpg",
+    "01.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ],
+  "mediaAfter": [
+    "01.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
+}

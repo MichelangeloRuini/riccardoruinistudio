@@ -1068,6 +1068,337 @@ app.post("/api/add-campaign-media", (req, res) => {
   });
 });
 
+app.post("/api/remove-campaign-media", (req, res) => {
+  let campaignId = null;
+  let lockAcquired = false;
+  let stagingDir = null;
+  let backupContainer = null;
+  let backupDir = null;
+  let tempCampaignsFile = null;
+  let originalMoved = false;
+  let stagingInstalled = false;
+  let committed = false;
+
+  try {
+    const body = req.body || {};
+    const id = String(body.id || "").trim();
+    const removalMedia = body.media;
+    const confirmEmpty = body.confirmEmpty === true;
+
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    if (!Array.isArray(removalMedia) || !removalMedia.length) {
+      throw new Error("La lista dei media da rimuovere non è valida.");
+    }
+
+    if (removalMedia.some(filename => typeof filename !== "string" || !filename)) {
+      throw new Error("La lista contiene un nome file non valido.");
+    }
+
+    if (new Set(removalMedia).size !== removalMedia.length) {
+      throw new Error("La lista contiene media duplicati.");
+    }
+
+    const file = fs.readFileSync(campaignsFile, "utf8");
+    const campaigns = new Function(`
+      ${file}
+      return campaigns;
+    `)();
+    const campaignIndex = campaigns.findIndex(campaign => campaign.id === id);
+
+    if (campaignIndex === -1) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    const campaign = campaigns[campaignIndex];
+    const currentMedia = Array.isArray(campaign.media) ? campaign.media : [];
+    const currentMediaSet = new Set(currentMedia);
+
+    if (currentMediaSet.size !== currentMedia.length) {
+      throw new Error(`La campagna ${id} contiene media duplicati.`);
+    }
+
+    for (const filename of removalMedia) {
+      if (!currentMediaSet.has(filename)) {
+        throw new Error(`Media non appartenente alla campagna: ${filename}`);
+      }
+
+      if (!/^\d+\.jpg$/i.test(filename) && !/^video-\d+\.mp4$/i.test(filename)) {
+        throw new Error(`Il file non è un media rimovibile: ${filename}`);
+      }
+    }
+
+    const removalSet = new Set(removalMedia);
+    const updatedMedia = currentMedia.filter(filename => !removalSet.has(filename));
+
+    if (!updatedMedia.length && !confirmEmpty) {
+      throw new Error("La rimozione lascerebbe la campagna senza media. Conferma richiesta.");
+    }
+
+    campaignId = campaign.id;
+
+    if (campaignMediaLocks.has(campaignId)) {
+      throw new Error(`È già in corso un'operazione media per ${campaignId}.`);
+    }
+
+    campaignMediaLocks.add(campaignId);
+    lockAcquired = true;
+
+    const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+    if (!fs.existsSync(campaignDir)) {
+      throw new Error(`Cartella asset non trovata: assets/campaigns/${campaignId}`);
+    }
+
+    const campaignStats = fs.lstatSync(campaignDir);
+
+    if (!campaignStats.isDirectory() || campaignStats.isSymbolicLink()) {
+      throw new Error("La cartella asset della campagna non è valida.");
+    }
+
+    const initialDirectorySignature = getCampaignDirectorySignature(campaignDir);
+    const initialDirectoryInventory = getCampaignDirectorySignature(campaignDir, false);
+    const transactionId = `${Date.now()}-${crypto.randomUUID()}`;
+
+    stagingDir = path.join(campaignsRoot, `.media-remove-staging-${transactionId}`);
+
+    if (path.dirname(stagingDir) !== campaignsRoot || fs.existsSync(stagingDir)) {
+      throw new Error("Impossibile creare una cartella di staging sicura.");
+    }
+
+    fs.cpSync(campaignDir, stagingDir, {
+      recursive: true,
+      errorOnExist: true,
+      preserveTimestamps: true
+    });
+
+    if (getCampaignDirectorySignature(stagingDir, false) !== initialDirectoryInventory) {
+      throw new Error("La copia di staging non corrisponde alla campagna originale.");
+    }
+
+    for (const filename of removalMedia) {
+      const primaryPath = path.join(stagingDir, filename);
+
+      if (!fs.existsSync(primaryPath) || !fs.lstatSync(primaryPath).isFile()) {
+        throw new Error(`File media non trovato: ${filename}`);
+      }
+
+      const filesToRemove = /\.jpg$/i.test(filename)
+        ? [
+          filename,
+          filename.replace(/\.jpg$/i, ".webp"),
+          filename.replace(/\.jpg$/i, "-thumb.webp")
+        ]
+        : [filename];
+
+      filesToRemove.forEach(fileToRemove => {
+        const targetPath = path.join(stagingDir, fileToRemove);
+
+        if (fs.existsSync(targetPath)) fs.unlinkSync(targetPath);
+      });
+
+      if (filesToRemove.some(fileToRemove => fs.existsSync(path.join(stagingDir, fileToRemove)))) {
+        throw new Error(`Impossibile rimuovere il media dallo staging: ${filename}`);
+      }
+    }
+
+    if (
+      !fs.existsSync(campaignDir) ||
+      getCampaignDirectorySignature(campaignDir) !== initialDirectorySignature
+    ) {
+      throw new Error("La cartella della campagna è cambiata durante l'operazione. Riprova.");
+    }
+
+    const latestFile = fs.readFileSync(campaignsFile, "utf8");
+
+    if (latestFile !== file) {
+      throw new Error("I dati delle campagne sono cambiati durante l'operazione. Riprova.");
+    }
+
+    const updatedCampaigns = [...campaigns];
+
+    updatedCampaigns[campaignIndex] = {
+      ...campaign,
+      media: updatedMedia
+    };
+
+    const formattedCampaigns = JSON.stringify(updatedCampaigns, null, 2)
+      .replace(/"([^"\\]+)":/g, "$1:");
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+
+    tempCampaignsFile = `${campaignsFile}.remove-media-${transactionId}.tmp`;
+    fs.writeFileSync(tempCampaignsFile, newFile, "utf8");
+
+    const stagedDataFile = fs.readFileSync(tempCampaignsFile, "utf8");
+    const stagedCampaigns = new Function(`
+      ${stagedDataFile}
+      return campaigns;
+    `)();
+    const stagedCampaign = stagedCampaigns[campaignIndex];
+
+    if (stagedCampaigns.length !== campaigns.length) {
+      throw new Error("La verifica del file temporaneo non è riuscita.");
+    }
+
+    for (let index = 0; index < campaigns.length; index++) {
+      if (index === campaignIndex) continue;
+
+      if (JSON.stringify(stagedCampaigns[index]) !== JSON.stringify(campaigns[index])) {
+        throw new Error("Il file temporaneo modificherebbe un'altra campagna.");
+      }
+    }
+
+    const { media: campaignMedia, ...campaignFields } = campaign;
+    const { media: stagedCampaignMedia, ...stagedCampaignFields } = stagedCampaign;
+
+    if (JSON.stringify(stagedCampaignFields) !== JSON.stringify(campaignFields)) {
+      throw new Error("Il file temporaneo modificherebbe altri dati della campagna.");
+    }
+
+    if (
+      !Array.isArray(stagedCampaignMedia) ||
+      stagedCampaignMedia.length !== updatedMedia.length ||
+      !stagedCampaignMedia.every((filename, index) => filename === updatedMedia[index])
+    ) {
+      throw new Error("Il file temporaneo contiene un ordine media non valido.");
+    }
+
+    fs.mkdirSync(campaignTrashRoot, { recursive: true });
+    backupContainer = path.resolve(
+      campaignTrashRoot,
+      `${campaignId}-remove-media-${transactionId}`
+    );
+
+    if (path.dirname(backupContainer) !== campaignTrashRoot || fs.existsSync(backupContainer)) {
+      throw new Error("Impossibile creare uno snapshot sicuro della campagna.");
+    }
+
+    fs.mkdirSync(backupContainer);
+    backupDir = path.join(backupContainer, "campaign");
+
+    const snapshotMetadata = {
+      operation: "remove-campaign-media",
+      campaignId,
+      createdAt: new Date().toISOString(),
+      removedMedia: removalMedia,
+      mediaBefore: currentMedia,
+      mediaAfter: updatedMedia
+    };
+
+    fs.writeFileSync(
+      path.join(backupContainer, "metadata.json"),
+      JSON.stringify(snapshotMetadata, null, 2),
+      "utf8"
+    );
+
+    fs.renameSync(campaignDir, backupDir);
+    originalMoved = true;
+
+    fs.renameSync(stagingDir, campaignDir);
+    stagingInstalled = true;
+
+    fs.renameSync(tempCampaignsFile, campaignsFile);
+    tempCampaignsFile = null;
+    committed = true;
+
+    console.log("[remove-campaign-media] operation committed", {
+      campaignId,
+      removedMedia: removalMedia,
+      backupPath: path.relative(__dirname, backupContainer)
+    });
+
+    res.json({
+      success: true,
+      media: updatedMedia,
+      removedMedia: removalMedia,
+      backupPath: path.relative(__dirname, backupContainer)
+    });
+  } catch (error) {
+    console.error("[remove-campaign-media] operation failed", {
+      campaignId,
+      message: error.message,
+      stack: error.stack
+    });
+
+    if (!committed && campaignId && backupDir) {
+      try {
+        const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+        if (stagingInstalled && fs.existsSync(campaignDir)) {
+          if (stagingDir && fs.existsSync(stagingDir)) {
+            throw new Error("La cartella di staging per il rollback esiste già.");
+          }
+
+          fs.renameSync(campaignDir, stagingDir);
+          stagingInstalled = false;
+        }
+
+        if (originalMoved && fs.existsSync(backupDir) && !fs.existsSync(campaignDir)) {
+          fs.renameSync(backupDir, campaignDir);
+          originalMoved = false;
+        }
+      } catch (rollbackError) {
+        console.error("Campaign media removal rollback failed:", rollbackError);
+
+        try {
+          const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+          if (!fs.existsSync(campaignDir) && fs.existsSync(backupDir)) {
+            fs.cpSync(backupDir, campaignDir, {
+              recursive: true,
+              errorOnExist: true,
+              preserveTimestamps: true
+            });
+          }
+        } catch (recoveryError) {
+          console.error("Campaign media removal emergency recovery failed:", recoveryError);
+          rollbackError.message += ` Recovery error: ${recoveryError.message}`;
+        }
+
+        error.message += ` Rollback error: ${rollbackError.message}`;
+      }
+    }
+
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  } finally {
+    if (tempCampaignsFile && fs.existsSync(tempCampaignsFile)) {
+      try {
+        fs.unlinkSync(tempCampaignsFile);
+      } catch (cleanupError) {
+        console.error("Unable to clean temporary campaigns file:", cleanupError);
+      }
+    }
+
+    if (stagingDir && fs.existsSync(stagingDir)) {
+      try {
+        fs.rmSync(stagingDir, { recursive: true, force: true });
+      } catch (cleanupError) {
+        console.error("Unable to clean media removal staging directory:", cleanupError);
+      }
+    }
+
+    if (
+      !committed &&
+      !originalMoved &&
+      backupContainer &&
+      fs.existsSync(backupContainer)
+    ) {
+      try {
+        fs.rmSync(backupContainer, { recursive: true, force: true });
+      } catch (cleanupError) {
+        console.error("Unable to clean failed removal snapshot metadata:", cleanupError);
+      }
+    }
+
+    if (lockAcquired) campaignMediaLocks.delete(campaignId);
+  }
+});
+
 app.post("/api/reorder-campaigns", (req, res) => {
   try {
     const orderedIds = req.body.orderedIds;

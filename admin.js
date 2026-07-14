@@ -24,6 +24,8 @@ const editMediaDropzone = document.getElementById("editMediaDropzone");
 const editMediaFileInput = document.getElementById("editMediaFiles");
 const editMediaPreview = document.getElementById("editMediaPreview");
 const saveAddedMediaButton = document.getElementById("saveAddedMedia");
+const removeMediaSummary = document.getElementById("removeMediaSummary");
+const saveRemovedMediaButton = document.getElementById("saveRemovedMedia");
 
 let editingCampaignId = null;
 let editingCampaign = null;
@@ -33,6 +35,8 @@ let draggedExistingMediaIndex = null;
 let stagedEditMediaFiles = [];
 let stagedEditMediaUrls = [];
 let isAddingCampaignMedia = false;
+let pendingRemovedMedia = new Set();
+let isRemovingCampaignMedia = false;
 let folderEditedManually = false;
 let selectedFiles = [];
 
@@ -50,6 +54,7 @@ function formatCreditsForEdit(credits) {
 
 function clearExistingMediaGallery() {
   clearStagedEditMediaFiles();
+  clearPendingMediaRemovals();
   existingMediaGallery.innerHTML = "";
   existingMediaSection.hidden = true;
   saveMediaOrderButton.hidden = true;
@@ -66,7 +71,9 @@ function mediaOrdersMatch(firstOrder, secondOrder) {
 }
 
 function updateSaveMediaOrderButton() {
-  saveMediaOrderButton.disabled = !editingCampaignId ||
+  saveMediaOrderButton.disabled = isAddingCampaignMedia ||
+    isRemovingCampaignMedia ||
+    !editingCampaignId ||
     mediaOrdersMatch(existingMediaOrder, originalExistingMediaOrder);
 }
 
@@ -106,8 +113,11 @@ function renderExistingMediaGallery(campaign, mediaItems = campaign.media) {
     const position = document.createElement("span");
     const type = document.createElement("span");
     const storedFilename = document.createElement("code");
+    const removeButton = document.createElement("button");
+    const isPendingRemoval = pendingRemovedMedia.has(normalizedFilename);
 
     item.className = "existing-media-item";
+    item.classList.toggle("is-pending-removal", isPendingRemoval);
     item.draggable = true;
     item.dataset.mediaIndex = index;
 
@@ -189,11 +199,36 @@ function renderExistingMediaGallery(campaign, mediaItems = campaign.media) {
     type.textContent = mediaType;
     storedFilename.textContent = normalizedFilename;
 
+    removeButton.type = "button";
+    removeButton.draggable = false;
+    removeButton.className = "existing-media-remove";
+    removeButton.classList.toggle("is-undo", isPendingRemoval);
+    removeButton.textContent = isPendingRemoval ? "Undo" : "Remove";
+    removeButton.title = isPendingRemoval
+      ? `Undo removal of ${normalizedFilename}`
+      : `Mark ${normalizedFilename} for removal`;
+    removeButton.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (isAddingCampaignMedia || isRemovingCampaignMedia) return;
+
+      if (pendingRemovedMedia.has(normalizedFilename)) {
+        pendingRemovedMedia.delete(normalizedFilename);
+      } else {
+        pendingRemovedMedia.add(normalizedFilename);
+      }
+
+      renderExistingMediaGallery(campaign, existingMediaOrder);
+      updatePendingRemovalControls();
+    });
+
     details.appendChild(position);
     details.appendChild(type);
     details.appendChild(storedFilename);
     item.appendChild(previewElement);
     item.appendChild(details);
+    item.appendChild(removeButton);
     existingMediaGallery.appendChild(item);
   });
 
@@ -207,8 +242,34 @@ function clearStagedEditMediaUrls() {
 
 function updateSaveAddedMediaButton() {
   saveAddedMediaButton.disabled = isAddingCampaignMedia ||
+    isRemovingCampaignMedia ||
     !editingCampaignId ||
     stagedEditMediaFiles.length === 0;
+}
+
+function updatePendingRemovalControls() {
+  let imageCount = 0;
+  let videoCount = 0;
+
+  pendingRemovedMedia.forEach(filename => {
+    if (/\.mp4$/i.test(filename)) {
+      videoCount++;
+    } else {
+      imageCount++;
+    }
+  });
+
+  removeMediaSummary.textContent =
+    `Pending removal: ${imageCount} images · ${videoCount} videos`;
+  saveRemovedMediaButton.disabled = isAddingCampaignMedia ||
+    isRemovingCampaignMedia ||
+    !editingCampaignId ||
+    pendingRemovedMedia.size === 0;
+}
+
+function clearPendingMediaRemovals() {
+  pendingRemovedMedia = new Set();
+  updatePendingRemovalControls();
 }
 
 function setAddMediaBusy(isBusy) {
@@ -226,6 +287,25 @@ function setAddMediaBusy(isBusy) {
   }
 
   updateSaveAddedMediaButton();
+  updatePendingRemovalControls();
+}
+
+function setRemoveMediaBusy(isBusy) {
+  isRemovingCampaignMedia = isBusy;
+  existingMediaGallery.classList.toggle("is-disabled", isBusy);
+  editMediaDropzone.classList.toggle("is-disabled", isBusy);
+  editMediaPreview.classList.toggle("is-disabled", isBusy);
+  cancelEditButton.disabled = isBusy;
+  saveEditButton.disabled = isBusy;
+
+  if (isBusy) {
+    saveMediaOrderButton.disabled = true;
+  } else {
+    updateSaveMediaOrderButton();
+  }
+
+  updateSaveAddedMediaButton();
+  updatePendingRemovalControls();
 }
 
 function clearStagedEditMediaFiles() {
@@ -420,6 +500,7 @@ async function loadCampaigns() {
         originalExistingMediaOrder = [...campaign.media];
         existingMediaOrder = [...campaign.media];
         clearStagedEditMediaFiles();
+        clearPendingMediaRemovals();
         newCampaignMediaSection.hidden = true;
         renderExistingMediaGallery(campaign, existingMediaOrder);
 
@@ -866,6 +947,111 @@ saveAddedMediaButton.addEventListener("click", async () => {
   } catch (error) {
     showRequestMessage(`Request failed: ${error.message}`);
     setAddMediaBusy(false);
+    console.error(error);
+  }
+});
+
+saveRemovedMediaButton.addEventListener("click", async () => {
+  if (
+    !editingCampaignId ||
+    !editingCampaign ||
+    !pendingRemovedMedia.size ||
+    isAddingCampaignMedia ||
+    isRemovingCampaignMedia
+  ) {
+    return;
+  }
+
+  const removalList = existingMediaOrder.filter(filename => pendingRemovedMedia.has(filename));
+  const remainingCount = existingMediaOrder.length - removalList.length;
+  const firstConfirmation = window.confirm(
+    `Remove ${removalList.length} media item(s) from this campaign?\n\n` +
+    "The original files will remain recoverable in trash/campaigns."
+  );
+
+  if (!firstConfirmation) {
+    output.value = "Media removal cancelled.";
+    return;
+  }
+
+  let confirmEmpty = false;
+
+  if (remainingCount === 0) {
+    confirmEmpty = window.confirm(
+      "WARNING: this will leave the campaign with zero media.\n\n" +
+      "Confirm again to remove every media item."
+    );
+
+    if (!confirmEmpty) {
+      output.value = "Media removal cancelled: empty campaign was not confirmed.";
+      return;
+    }
+  }
+
+  const pendingOrder = [...existingMediaOrder];
+
+  try {
+    setRemoveMediaBusy(true);
+    output.value = `Removing ${removalList.length} media item(s)...`;
+
+    const response = await fetch("/api/remove-campaign-media", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: editingCampaignId,
+        media: removalList,
+        confirmEmpty
+      })
+    });
+    const responseText = await response.text();
+    let result;
+
+    try {
+      result = JSON.parse(responseText);
+    } catch (parseError) {
+      output.value =
+        `REMOVE MEDIA ERROR (${response.status})\n\n` +
+        `Server response was not valid JSON: ${responseText.slice(0, 200) || "empty response"}`;
+      setRemoveMediaBusy(false);
+      return;
+    }
+
+    if (!result.success) {
+      output.value = `REMOVE MEDIA ERROR (${response.status})\n\n${result.error}`;
+      setRemoveMediaBusy(false);
+      return;
+    }
+
+    const savedMediaSet = new Set(result.media);
+    const pendingRemainingOrder = pendingOrder.filter(
+      filename => !pendingRemovedMedia.has(filename)
+    );
+    const pendingOrderStillValid = pendingRemainingOrder.length === result.media.length &&
+      pendingRemainingOrder.every(filename => savedMediaSet.has(filename));
+
+    originalExistingMediaOrder = [...result.media];
+    existingMediaOrder = pendingOrderStillValid
+      ? pendingRemainingOrder
+      : [...result.media];
+    editingCampaign = {
+      ...editingCampaign,
+      media: [...result.media]
+    };
+
+    clearPendingMediaRemovals();
+    setRemoveMediaBusy(false);
+    renderExistingMediaGallery(editingCampaign, existingMediaOrder);
+    updateSaveMediaOrderButton();
+    await loadCampaigns();
+
+    output.value =
+      `${result.removedMedia.length} media item(s) removed successfully.\n` +
+      `Original snapshot: ${result.backupPath}`;
+  } catch (error) {
+    output.value = "REMOVE MEDIA JS ERROR: " + error.message;
+    setRemoveMediaBusy(false);
     console.error(error);
   }
 });
