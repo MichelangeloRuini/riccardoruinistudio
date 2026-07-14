@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1027,170 +1027,150 @@ const campaigns = [
       "video-01.mp4"
     ]
   },
-
-{
-  id: "valentino-men-ss-2018",
-  client: "Valentino",
-  title: "Men SS 2018",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-ss-2018/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "Troye Sivan"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "marella-ss-2018",
-  client: "Marella",
-  title: "SS 2018",
-  category: "Campaigns",
-  path: "assets/campaigns/marella-ss-2018/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Matteo Montanari"
-    },
-    {
-      label: "Model",
-      value: "Grace Hertzel"
-    },
-    {
-      label: "Director",
-      value: "Terence Connors"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "elisabetta-franchi-ss-2018",
-  client: "Elisabetta Franchi",
-  title: "SS 2018",
-  category: "Campaigns",
-  path: "assets/campaigns/elisabetta-franchi-ss-2018/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Ellen Von Unwerth"
-    },
-    {
-      label: "Model",
-      value: "Devon Windsor"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg"
-  ]
-},
-
-{
-  id: "ermanno-scervino-ss-2018",
-  client: "Ermanno Scervino",
-  title: "SS 2018",
-  category: "Campaigns",
-  path: "assets/campaigns/ermanno-scervino-ss-2018/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photograoher",
-      value: "Mikael Jansson"
-    },
-    {
-      label: "Models",
-      value: [
-        "He Cong",
-        "Myrthe Bolt",
-        "Mckenna Hellam",
-        "Barry Lomeka"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "valentino-cruise-2017",
-  client: "Valentino",
-  title: "Cruise 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-cruise-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer and Director",
-      value: "Terry Richardson"
-    },
-    {
-      label: "Talent",
-      value: "Carmelo Anthony"
-    },
-    {
-      label: "Models",
-      value: [
-        "Faretta",
-        "Selena Forrest",
-        "Ratner",
-        "Imari Karanja",
-        "Jolie Alien",
-        "Mag Cysewska",
-        "Torie Bowie"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "video-01.mp4"
-  ]
-}
+  {
+    id: "valentino-men-ss-2018",
+    client: "Valentino",
+    title: "Men SS 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-ss-2018/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "Troye Sivan"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "marella-ss-2018",
+    client: "Marella",
+    title: "SS 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/marella-ss-2018/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Matteo Montanari"
+      },
+      {
+        label: "Model",
+        value: "Grace Hertzel"
+      },
+      {
+        label: "Director",
+        value: "Terence Connors"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "elisabetta-franchi-ss-2018",
+    client: "Elisabetta Franchi",
+    title: "SS 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/elisabetta-franchi-ss-2018/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Ellen Von Unwerth"
+      },
+      {
+        label: "Model",
+        value: "Devon Windsor"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg"
+    ]
+  },
+  {
+    id: "ermanno-scervino-ss-2018",
+    client: "Ermanno Scervino",
+    title: "SS 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/ermanno-scervino-ss-2018/",
+    border: false,
+    credits: [
+      {
+        label: "Photograoher",
+        value: "Mikael Jansson"
+      },
+      {
+        label: "Models",
+        value: [
+          "He Cong",
+          "Myrthe Bolt",
+          "Mckenna Hellam",
+          "Barry Lomeka"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "valentino-cruise-2017",
+    client: "Valentino",
+    title: "Cruise 2018",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-cruise-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer and Director",
+        value: "Terry Richardson"
+      },
+      {
+        label: "Talent",
+        value: "Carmelo Anthony"
+      },
+      {
+        label: "Models",
+        value: [
+          "Faretta",
+          "Selena Forrest",
+          "Ratner",
+          "Imari Karanja",
+          "Jolie Alien",
+          "Mag Cysewska",
+          "Torie Bowie"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "video-01.mp4"
+    ]
+  }
 ];
