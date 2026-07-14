@@ -1150,5 +1150,47 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "valentino-cruise-2017",
+  client: "Valentino",
+  title: "Cruise 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-cruise-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer and Director",
+      value: "Terry Richardson"
+    },
+    {
+      label: "Talent",
+      value: "Carmelo Anthony"
+    },
+    {
+      label: "Models",
+      value: [
+        "Faretta",
+        "Selena Forrest",
+        "Ratner",
+        "Imari Karanja",
+        "Jolie Alien",
+        "Mag Cysewska",
+        "Torie Bowie"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
