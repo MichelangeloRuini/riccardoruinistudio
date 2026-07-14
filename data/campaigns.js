@@ -994,5 +994,47 @@ const campaigns = [
     "08.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-women-ss-2018",
+  client: "Valentino",
+  title: "Women SS 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2018/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez & Vinoodh"
+    },
+    {
+      label: "Models",
+      value: [
+        "Gigi Hadid",
+        "Rianne Van Rampaey",
+        "Adut Akech",
+        "Felice Noordhoff",
+        "Oumie Jammeh",
+        "Aurora Talarico"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg",
+    "10.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
