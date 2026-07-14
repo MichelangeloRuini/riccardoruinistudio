@@ -799,6 +799,9 @@ generateButton.addEventListener("click", async () => {
     const positionInput = document.getElementById("position");
     const borderInput = document.getElementById("border");
     const creditsInput = document.getElementById("credits");
+    const position = positionInput && ["top", "bottom"].includes(positionInput.value)
+      ? positionInput.value
+      : "bottom";
 
     if (!client || !title) {
       showCreateMessage("Validation error: client and title are required.");
@@ -810,7 +813,7 @@ generateButton.addEventListener("click", async () => {
     formData.append("client", client);
     formData.append("title", title);
     formData.append("folder", folderInput.value);
-    formData.append("position", positionInput ? positionInput.value : "top");
+    formData.append("position", position);
     formData.append("border", borderInput ? borderInput.value : "false");
     formData.append("credits", creditsInput ? creditsInput.value : "");
 
@@ -820,7 +823,7 @@ generateButton.addEventListener("click", async () => {
 
     showCreateMessage(
       `Uploading campaign... files=${selectedFiles.length}, field=files, position=` +
-      `${positionInput ? positionInput.value : "top (fallback)"}`
+      `${positionInput && positionInput.value === position ? position : "bottom (fallback)"}`
     );
     generateButton.disabled = true;
 

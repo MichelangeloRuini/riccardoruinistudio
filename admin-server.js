@@ -290,7 +290,9 @@ app.post("/api/create-campaign", upload.array("files"), async (req, res) => {
     const folder = req.body.folder.trim() || slugify(`${client}-${title}`);
     const border = req.body.border === "true";
     const credits = req.body.credits || "";
-    const position = req.body.position || "top";
+    const position = ["top", "bottom"].includes(req.body.position)
+      ? req.body.position
+      : "bottom";
 
     const campaignDir = path.join(__dirname, "assets", "campaigns", folder);
 

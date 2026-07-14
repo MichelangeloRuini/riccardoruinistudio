@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -958,5 +958,41 @@ const campaigns = [
       "02.jpg",
       "03.jpg"
     ]
-  }
+  },
+
+{
+  id: "valentino-prefall-2018",
+  client: "Valentino",
+  title: "Prefall 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-prefall-2018/",
+
+  border: true,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Juergen Teller"
+    },
+    {
+      label: "Models",
+      value: [
+        "Kaia Gerber",
+        "Fran Summers"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "video-01.mp4"
+  ]
+}
 ];
