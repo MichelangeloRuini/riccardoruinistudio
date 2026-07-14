@@ -1117,5 +1117,38 @@ const campaigns = [
     "04.jpg",
     "05.jpg"
   ]
+},
+
+{
+  id: "ermanno-scervino-ss-2018",
+  client: "Ermanno Scervino",
+  title: "SS 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/ermanno-scervino-ss-2018/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photograoher",
+      value: "Mikael Jansson"
+    },
+    {
+      label: "Models",
+      value: [
+        "He Cong",
+        "Myrthe Bolt",
+        "Mckenna Hellam",
+        "Barry Lomeka"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
