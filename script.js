@@ -3,7 +3,7 @@ const clients = [
   "Cerruti", "Chantecler", "Diesel Watches", "Dirk Bikkembergs", "Dondup",
   "Elie Saab", "Elisabetta Franchi", "Ermanno Scervino", "Falconeri", "Fendi", "Feudi di San Gregorio",
   "Ferragamo", "Francesco Scognamiglio", "GQ Style UK", "Gucci", "Hogan",
-  "ICON Magazine", "Iceberg", "Intimissimi", "La Perla", "Liberty London",
+  "ICON Magazine", "Iceberg", "Intimissimi", "La Perla", "Liberty",
   "Liu Jo", "Loewe", "M Missoni", "Marella", "Marina Rinaldi", "Mytheresa",
   "Paciotti", "Park Hyatt Milano", "Patrizia Pepe", "Peuterey", "Pinko",
   "Recarlo", "RED Valentino", "Trussardi", "Valentino", "Vilebrequin",

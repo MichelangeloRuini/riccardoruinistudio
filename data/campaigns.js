@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1026,5 +1026,33 @@ const campaigns = [
       "10.jpg",
       "video-01.mp4"
     ]
-  }
+  },
+
+{
+  id: "valentino-men-ss-2018",
+  client: "Valentino",
+  title: "Men SS 2018",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-ss-2018/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "Troye Sivan"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
+}
 ];
