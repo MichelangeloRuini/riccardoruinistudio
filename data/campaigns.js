@@ -944,7 +944,13 @@ const campaigns = [
       },
       {
         label: "Models",
-        value: "Myrthe Bolt"
+        value: [
+          "Myrthe Bolt",
+          "Kirin Dejonckheere",
+          "Sara van der Hoek",
+          "Chunjie Liu",
+          "Barry Lomeka"
+        ]
       }
     ],
     media: [
