@@ -3,6 +3,7 @@ const multer = require("multer");
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { exec } = require("child_process");
 
 const app = express();
@@ -14,6 +15,131 @@ app.use(express.static(__dirname));
 const upload = multer({ dest: "temp-upload/" });
 
 const campaignsFile = path.join(__dirname, "data", "campaigns.js");
+const campaignsRoot = path.resolve(__dirname, "assets", "campaigns");
+const campaignTrashRoot = path.resolve(__dirname, "trash", "campaigns");
+const addMediaTempDir = path.resolve(__dirname, "temp-upload", "campaign-media");
+const MAX_ADD_MEDIA_FILES = 50;
+const MAX_ADD_MEDIA_FILE_SIZE = 250 * 1024 * 1024;
+const campaignMediaLocks = new Set();
+
+fs.mkdirSync(addMediaTempDir, { recursive: true });
+
+function getUploadedMediaType(file) {
+  const extension = path.extname(file.originalname).toLowerCase();
+
+  if (
+    [".jpg", ".jpeg"].includes(extension) &&
+    file.mimetype === "image/jpeg"
+  ) {
+    return "image";
+  }
+
+  if (extension === ".png" && file.mimetype === "image/png") {
+    return "image";
+  }
+
+  if (extension === ".mp4" && file.mimetype === "video/mp4") {
+    return "video";
+  }
+
+  return null;
+}
+
+const addCampaignMediaUpload = multer({
+  dest: addMediaTempDir,
+  limits: {
+    files: MAX_ADD_MEDIA_FILES,
+    fileSize: MAX_ADD_MEDIA_FILE_SIZE,
+    fields: 1,
+    fieldSize: 256,
+    parts: MAX_ADD_MEDIA_FILES + 1
+  },
+  fileFilter: (req, file, callback) => {
+    if (!getUploadedMediaType(file)) {
+      callback(new Error(`Tipo file non valido: ${file.originalname}`));
+      return;
+    }
+
+    callback(null, true);
+  }
+});
+
+function cleanupTemporaryFiles(files) {
+  (files || []).forEach(file => {
+    try {
+      if (file.path && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+    } catch (cleanupError) {
+      console.error(`Unable to clean temporary upload ${file.path}:`, cleanupError);
+    }
+  });
+}
+
+function validateCampaignDirectoryPath(campaignId) {
+  const campaignDir = path.resolve(campaignsRoot, campaignId);
+
+  if (path.dirname(campaignDir) !== campaignsRoot) {
+    throw new Error("Percorso campagna non valido.");
+  }
+
+  return campaignDir;
+}
+
+function getCampaignDirectorySignature(directory, includeModifiedTime = true) {
+  const entries = [];
+
+  function visit(currentDirectory, relativeDirectory = "") {
+    const directoryEntries = fs.readdirSync(currentDirectory, { withFileTypes: true })
+      .sort((first, second) => first.name.localeCompare(second.name));
+
+    directoryEntries.forEach(entry => {
+      const absolutePath = path.join(currentDirectory, entry.name);
+      const relativePath = path.join(relativeDirectory, entry.name);
+      const stats = fs.lstatSync(absolutePath);
+
+      if (entry.isDirectory()) {
+        entries.push([relativePath, "directory"]);
+        visit(absolutePath, relativePath);
+      } else if (entry.isSymbolicLink()) {
+        entries.push([relativePath, "symlink", fs.readlinkSync(absolutePath)]);
+      } else {
+        const fileSignature = [relativePath, "file", stats.size];
+
+        if (includeModifiedTime) fileSignature.push(stats.mtimeMs);
+        entries.push(fileSignature);
+      }
+    });
+  }
+
+  visit(directory);
+  return JSON.stringify(entries);
+}
+
+function validateMp4File(filePath) {
+  const descriptor = fs.openSync(filePath, "r");
+  const header = Buffer.alloc(12);
+
+  try {
+    const bytesRead = fs.readSync(descriptor, header, 0, header.length, 0);
+
+    if (bytesRead < header.length || header.toString("ascii", 4, 8) !== "ftyp") {
+      throw new Error("Il video MP4 non ha una firma valida.");
+    }
+  } finally {
+    fs.closeSync(descriptor);
+  }
+}
+
+function getNextMediaNumber(filenames, type) {
+  const pattern = type === "image"
+    ? /^(\d+)(?:-thumb)?\.(?:jpe?g|webp)$/i
+    : /^video-(\d+)\.mp4$/i;
+  const numbers = filenames
+    .map(filename => filename.match(pattern))
+    .filter(Boolean)
+    .map(match => Number(match[1]));
+
+  return numbers.length ? Math.max(...numbers) + 1 : 1;
+}
 
 function slugify(text) {
   return text
@@ -582,6 +708,364 @@ app.post("/api/reorder-campaign-media", (req, res) => {
       error: err.message
     });
   }
+});
+
+async function addCampaignMedia(req, res) {
+  let campaignId = null;
+  let stagingDir = null;
+  let backupDir = null;
+  let tempCampaignsFile = null;
+  let originalMoved = false;
+  let stagingInstalled = false;
+  let committed = false;
+  let lockAcquired = false;
+
+  try {
+    const id = String((req.body && req.body.id) || "").trim();
+    const uploadedFiles = Array.isArray(req.files) ? req.files : [];
+
+    if (!id) {
+      throw new Error("ID campagna mancante.");
+    }
+
+    if (!uploadedFiles.length) {
+      throw new Error("Nessun file da aggiungere.");
+    }
+
+    if (uploadedFiles.length > MAX_ADD_MEDIA_FILES) {
+      throw new Error(`Puoi aggiungere al massimo ${MAX_ADD_MEDIA_FILES} file alla volta.`);
+    }
+
+    for (const file of uploadedFiles) {
+      if (!getUploadedMediaType(file)) {
+        throw new Error(`Tipo file non valido: ${file.originalname}`);
+      }
+
+      if (!file.size || file.size > MAX_ADD_MEDIA_FILE_SIZE) {
+        throw new Error(`Dimensione file non valida: ${file.originalname}`);
+      }
+    }
+
+    const initialFile = fs.readFileSync(campaignsFile, "utf8");
+    const initialCampaigns = new Function(`
+      ${initialFile}
+      return campaigns;
+    `)();
+    const initialCampaign = initialCampaigns.find(campaign => campaign.id === id);
+
+    if (!initialCampaign) {
+      throw new Error(`Campagna non trovata: ${id}`);
+    }
+
+    campaignId = initialCampaign.id;
+
+    if (campaignMediaLocks.has(campaignId)) {
+      throw new Error(`È già in corso un'operazione media per ${campaignId}.`);
+    }
+
+    campaignMediaLocks.add(campaignId);
+    lockAcquired = true;
+
+    const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+    if (!fs.existsSync(campaignDir)) {
+      throw new Error(`Cartella asset non trovata: assets/campaigns/${campaignId}`);
+    }
+
+    const campaignStats = fs.lstatSync(campaignDir);
+
+    if (!campaignStats.isDirectory() || campaignStats.isSymbolicLink()) {
+      throw new Error("La cartella asset della campagna non è valida.");
+    }
+
+    const initialDirectorySignature = getCampaignDirectorySignature(campaignDir);
+    const initialDirectoryInventory = getCampaignDirectorySignature(campaignDir, false);
+    const transactionId = `${Date.now()}-${crypto.randomUUID()}`;
+
+    stagingDir = path.join(campaignsRoot, `.media-staging-${transactionId}`);
+
+    if (path.dirname(stagingDir) !== campaignsRoot || fs.existsSync(stagingDir)) {
+      throw new Error("Impossibile creare una cartella di staging sicura.");
+    }
+
+    fs.cpSync(campaignDir, stagingDir, {
+      recursive: true,
+      errorOnExist: true,
+      preserveTimestamps: true
+    });
+
+    if (getCampaignDirectorySignature(stagingDir, false) !== initialDirectoryInventory) {
+      throw new Error("La copia di staging non corrisponde alla campagna originale.");
+    }
+
+    const stagedFilenames = [
+      ...fs.readdirSync(stagingDir),
+      ...(Array.isArray(initialCampaign.media) ? initialCampaign.media : [])
+    ];
+    let nextImageNumber = getNextMediaNumber(stagedFilenames, "image");
+    let nextVideoNumber = getNextMediaNumber(stagedFilenames, "video");
+    const addedMedia = [];
+
+    for (const file of uploadedFiles) {
+      const mediaType = getUploadedMediaType(file);
+
+      if (mediaType === "image") {
+        let baseName = pad(nextImageNumber);
+
+        while (
+          fs.existsSync(path.join(stagingDir, `${baseName}.jpg`)) ||
+          fs.existsSync(path.join(stagingDir, `${baseName}.webp`)) ||
+          fs.existsSync(path.join(stagingDir, `${baseName}-thumb.webp`))
+        ) {
+          nextImageNumber++;
+          baseName = pad(nextImageNumber);
+        }
+
+        const jpgPath = path.join(stagingDir, `${baseName}.jpg`);
+
+        await sharp(file.path)
+          .jpeg({ quality: 92 })
+          .toFile(jpgPath);
+        await optimizeImage(jpgPath, stagingDir, baseName);
+
+        addedMedia.push(`${baseName}.jpg`);
+        nextImageNumber++;
+      } else {
+        validateMp4File(file.path);
+
+        let baseName = `video-${pad(nextVideoNumber)}`;
+
+        while (fs.existsSync(path.join(stagingDir, `${baseName}.mp4`))) {
+          nextVideoNumber++;
+          baseName = `video-${pad(nextVideoNumber)}`;
+        }
+
+        fs.copyFileSync(file.path, path.join(stagingDir, `${baseName}.mp4`));
+        addedMedia.push(`${baseName}.mp4`);
+        nextVideoNumber++;
+      }
+    }
+
+    const latestFile = fs.readFileSync(campaignsFile, "utf8");
+    const latestCampaigns = new Function(`
+      ${latestFile}
+      return campaigns;
+    `)();
+    const latestCampaignIndex = latestCampaigns.findIndex(campaign => campaign.id === campaignId);
+
+    if (latestCampaignIndex === -1) {
+      throw new Error(`La campagna ${campaignId} è stata rimossa durante l'operazione.`);
+    }
+
+    const latestCampaign = latestCampaigns[latestCampaignIndex];
+    const initialMedia = Array.isArray(initialCampaign.media) ? initialCampaign.media : [];
+    const latestMedia = Array.isArray(latestCampaign.media) ? latestCampaign.media : [];
+    const initialMediaSet = new Set(initialMedia);
+    const latestMediaSet = new Set(latestMedia);
+
+    if (
+      initialMediaSet.size !== initialMedia.length ||
+      latestMediaSet.size !== latestMedia.length ||
+      initialMedia.length !== latestMedia.length ||
+      initialMedia.some(filename => !latestMediaSet.has(filename))
+    ) {
+      throw new Error("I media della campagna sono cambiati durante l'operazione. Riprova.");
+    }
+
+    if (
+      !fs.existsSync(campaignDir) ||
+      getCampaignDirectorySignature(campaignDir) !== initialDirectorySignature
+    ) {
+      throw new Error("La cartella della campagna è cambiata durante l'operazione. Riprova.");
+    }
+
+    const updatedMedia = [...latestMedia, ...addedMedia];
+    const updatedCampaigns = [...latestCampaigns];
+
+    updatedCampaigns[latestCampaignIndex] = {
+      ...latestCampaign,
+      media: updatedMedia
+    };
+
+    const formattedCampaigns = JSON.stringify(updatedCampaigns, null, 2)
+      .replace(/"([^"\\]+)":/g, "$1:");
+    const newFile = `const campaigns = ${formattedCampaigns};`;
+
+    tempCampaignsFile = `${campaignsFile}.add-media-${transactionId}.tmp`;
+    fs.writeFileSync(tempCampaignsFile, newFile, "utf8");
+
+    const stagedDataFile = fs.readFileSync(tempCampaignsFile, "utf8");
+    const stagedCampaigns = new Function(`
+      ${stagedDataFile}
+      return campaigns;
+    `)();
+    const stagedCampaign = stagedCampaigns[latestCampaignIndex];
+
+    if (stagedCampaigns.length !== latestCampaigns.length) {
+      throw new Error("La verifica del file temporaneo non è riuscita.");
+    }
+
+    for (let index = 0; index < latestCampaigns.length; index++) {
+      if (index === latestCampaignIndex) continue;
+
+      if (JSON.stringify(stagedCampaigns[index]) !== JSON.stringify(latestCampaigns[index])) {
+        throw new Error("Il file temporaneo modificherebbe un'altra campagna.");
+      }
+    }
+
+    const { media: latestCampaignMedia, ...latestCampaignFields } = latestCampaign;
+    const { media: stagedCampaignMedia, ...stagedCampaignFields } = stagedCampaign;
+
+    if (JSON.stringify(stagedCampaignFields) !== JSON.stringify(latestCampaignFields)) {
+      throw new Error("Il file temporaneo modificherebbe altri dati della campagna.");
+    }
+
+    if (
+      !Array.isArray(stagedCampaignMedia) ||
+      stagedCampaignMedia.length !== updatedMedia.length ||
+      !stagedCampaignMedia.every((filename, index) => filename === updatedMedia[index])
+    ) {
+      throw new Error("Il file temporaneo contiene un ordine media non valido.");
+    }
+
+    fs.mkdirSync(campaignTrashRoot, { recursive: true });
+    backupDir = path.resolve(
+      campaignTrashRoot,
+      `${campaignId}-add-media-${transactionId}`
+    );
+
+    if (path.dirname(backupDir) !== campaignTrashRoot || fs.existsSync(backupDir)) {
+      throw new Error("Impossibile creare uno snapshot sicuro della campagna.");
+    }
+
+    fs.renameSync(campaignDir, backupDir);
+    originalMoved = true;
+
+    fs.renameSync(stagingDir, campaignDir);
+    stagingInstalled = true;
+
+    fs.renameSync(tempCampaignsFile, campaignsFile);
+    tempCampaignsFile = null;
+    committed = true;
+
+    console.log("[add-campaign-media] operation committed", {
+      campaignId,
+      addedMedia,
+      backupPath: path.relative(__dirname, backupDir)
+    });
+
+    res.json({
+      success: true,
+      media: updatedMedia,
+      addedMedia,
+      backupPath: path.relative(__dirname, backupDir)
+    });
+  } catch (error) {
+    console.error("[add-campaign-media] operation failed", {
+      campaignId,
+      message: error.message,
+      stack: error.stack
+    });
+
+    if (!committed && campaignId && backupDir) {
+      try {
+        const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+        if (stagingInstalled && fs.existsSync(campaignDir)) {
+          if (stagingDir && fs.existsSync(stagingDir)) {
+            throw new Error("La cartella di staging per il rollback esiste già.");
+          }
+
+          fs.renameSync(campaignDir, stagingDir);
+          stagingInstalled = false;
+        }
+
+        if (originalMoved && fs.existsSync(backupDir) && !fs.existsSync(campaignDir)) {
+          fs.renameSync(backupDir, campaignDir);
+          originalMoved = false;
+        }
+      } catch (rollbackError) {
+        console.error("Campaign media rollback failed:", rollbackError);
+
+        try {
+          const campaignDir = validateCampaignDirectoryPath(campaignId);
+
+          if (!fs.existsSync(campaignDir) && fs.existsSync(backupDir)) {
+            fs.cpSync(backupDir, campaignDir, {
+              recursive: true,
+              errorOnExist: true,
+              preserveTimestamps: true
+            });
+          }
+        } catch (recoveryError) {
+          console.error("Campaign media emergency recovery failed:", recoveryError);
+          rollbackError.message += ` Recovery error: ${recoveryError.message}`;
+        }
+
+        error.message += ` Rollback error: ${rollbackError.message}`;
+      }
+    }
+
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  } finally {
+    if (tempCampaignsFile && fs.existsSync(tempCampaignsFile)) {
+      try {
+        fs.unlinkSync(tempCampaignsFile);
+      } catch (cleanupError) {
+        console.error("Unable to clean temporary campaigns file:", cleanupError);
+      }
+    }
+
+    if (stagingDir && fs.existsSync(stagingDir)) {
+      try {
+        fs.rmSync(stagingDir, { recursive: true, force: true });
+      } catch (cleanupError) {
+        console.error("Unable to clean campaign staging directory:", cleanupError);
+      }
+    }
+
+    cleanupTemporaryFiles(req.files);
+
+    if (lockAcquired) campaignMediaLocks.delete(campaignId);
+  }
+}
+
+app.post("/api/add-campaign-media", (req, res) => {
+  console.log("[add-campaign-media] endpoint reached", {
+    contentType: req.headers["content-type"] || "missing"
+  });
+
+  addCampaignMediaUpload.array("files", MAX_ADD_MEDIA_FILES)(req, res, uploadError => {
+    if (uploadError) {
+      cleanupTemporaryFiles(req.files);
+
+      const errorMessage = uploadError.code === "LIMIT_FILE_SIZE"
+        ? `Ogni file deve essere inferiore a ${MAX_ADD_MEDIA_FILE_SIZE / (1024 * 1024)} MB.`
+        : uploadError.message;
+
+      console.error("[add-campaign-media] upload rejected", {
+        code: uploadError.code || "UPLOAD_ERROR",
+        message: errorMessage
+      });
+
+      res.status(400).json({
+        success: false,
+        error: errorMessage
+      });
+      return;
+    }
+
+    console.log("[add-campaign-media] upload accepted", {
+      campaignId: (req.body && req.body.id) || "missing",
+      fileCount: Array.isArray(req.files) ? req.files.length : 0,
+      fieldNames: [...new Set((req.files || []).map(file => file.fieldname))]
+    });
+
+    addCampaignMedia(req, res);
+  });
 });
 
 app.post("/api/reorder-campaigns", (req, res) => {
