@@ -1037,23 +1037,30 @@ body.entered .custom-cursor {
 .brand-identity-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(70px, 9vw, 150px);
+  width: calc(100% + 6.4vw);
+  margin-inline: -3.2vw;
+  column-gap: clamp(24px, 2vw, 36px);
   align-items: start;
 }
 
 .brand-identity-column {
   display: flex;
   flex-direction: column;
-  gap: clamp(105px, 12vw, 190px);
+  gap: clamp(54px, 5.4vw, 87px);
   min-width: 0;
 }
 
+.brand-identity-column-left .brand-identity-introduction + .portfolio-card {
+  margin-top: clamp(36px, 3.6vw, 58px);
+}
+
 .brand-identity-column-right {
-  padding-top: clamp(45px, 7vw, 105px);
+  padding-top: clamp(28px, 4vw, 64px);
 }
 
 .brand-identity-introduction {
   max-width: 520px;
+  margin-left: clamp(45px, 4vw, 70px);
   font-size: 14px;
   line-height: 1.25;
   text-transform: uppercase;
@@ -1267,10 +1274,16 @@ body.entered .custom-cursor {
 
   .brand-identity-columns {
     display: block;
+    width: auto;
+    margin-inline: 0;
   }
 
   .brand-identity-column {
     gap: 80px;
+  }
+
+  .brand-identity-column-left .brand-identity-introduction + .portfolio-card {
+    margin-top: 0;
   }
 
   .brand-identity-column-right {
@@ -1279,6 +1292,7 @@ body.entered .custom-cursor {
 
   .brand-identity-introduction {
     max-width: none;
+    margin-left: 0;
     font-size: 12px;
   }
 

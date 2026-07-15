@@ -3,7 +3,7 @@ const portfolioProjects = [
     "id": "fendi-2001",
     "section": "brand-identity",
     "client": "Fendi",
-    "title": "2001",
+    "title": "",
     "path": "assets/identities/fendi-2001/",
     "cover": "01.webp",
     "media": [
