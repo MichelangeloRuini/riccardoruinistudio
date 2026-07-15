@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { exec } = require("child_process");
+const { registerPortfolioProjectRoutes } = require("./cms/portfolio-projects");
 
 const app = express();
 const PORT = 3000;
@@ -1560,6 +1561,7 @@ res.json({
 });
   });
 });
+registerPortfolioProjectRoutes(app);
 app.listen(PORT, () => {
   console.log(`RRS Admin running at http://localhost:${PORT}/admin.html`);
 });

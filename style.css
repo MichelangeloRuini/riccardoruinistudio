@@ -1307,3 +1307,135 @@ body.entered .custom-cursor {
     justify-self: start;
   }
 }
+
+/* ==========================================================
+   MULTI-SECTION CMS — PORTFOLIO PANEL
+========================================================== */
+
+.cms-section-switcher {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 28px 40px;
+  border-bottom: 1px solid #000;
+  text-transform: uppercase;
+}
+
+.cms-section-switcher label {
+  font-size: 12px;
+}
+
+.cms-section-switcher select {
+  min-width: 230px;
+  padding: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.cms-section-panel[hidden],
+#portfolioCreateFields[hidden],
+#portfolioEditCoverFields[hidden] {
+  display: none;
+}
+
+.portfolio-admin-page {
+  border-top: 1px solid #333;
+}
+
+.portfolio-cover-note {
+  margin: 8px 0 14px;
+  color: var(--text-grey);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.portfolio-preview-item {
+  color: #fff;
+}
+
+.portfolio-preview-visual img,
+.portfolio-preview-visual video {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.portfolio-preview-details {
+  padding: 10px;
+}
+
+.portfolio-preview-details p {
+  padding: 0 0 9px;
+}
+
+.portfolio-cover-choice {
+  display: flex !important;
+  align-items: center;
+  gap: 7px;
+  margin: 0 !important;
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.portfolio-cover-choice input {
+  width: auto;
+}
+
+.portfolio-dashboard-preview {
+  min-height: 170px;
+  background: #1a1a1a;
+}
+
+.portfolio-dashboard-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #aaa;
+  font-size: 11px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.portfolio-row-actions {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.portfolio-row-actions button,
+.portfolio-view-link {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.portfolio-row-actions button:hover,
+.portfolio-row-actions button:focus-visible,
+.portfolio-view-link:hover,
+.portfolio-view-link:focus-visible {
+  background: #fff;
+  color: #000;
+}
+
+@media (max-width: 760px) {
+  .cms-section-switcher {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 22px 20px;
+  }
+
+  .cms-section-switcher select {
+    width: 100%;
+  }
+}

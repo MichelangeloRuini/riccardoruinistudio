@@ -1,5 +1,8 @@
 function getPortfolioProjectLabel(project) {
-  return [project.client, project.title].filter(Boolean).join(" — ");
+  return [project.client, project.title]
+    .map(value => typeof value === "string" ? value.trim() : "")
+    .filter(Boolean)
+    .join(" — ");
 }
 
 function getPortfolioProjectUrl(project) {

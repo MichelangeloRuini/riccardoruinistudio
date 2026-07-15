@@ -1,0 +1,17 @@
+{
+  "operation": "delete-portfolio-project",
+  "section": "brand-identity",
+  "projectId": "placeholder-example",
+  "createdAt": "2026-07-15T15:53:24.692Z",
+  "originalRecord": {
+    "id": "placeholder-example",
+    "section": "brand-identity",
+    "client": "Placeholder Client",
+    "title": "Example Project",
+    "path": "assets/identities/placeholder-example/",
+    "cover": "cover-placeholder.jpg",
+    "media": [
+      "cover-placeholder.jpg"
+    ]
+  }
+}

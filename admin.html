@@ -2,99 +2,169 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RRS Admin</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <section class="cms-section-switcher" aria-labelledby="cmsSectionLabel">
+    <label id="cmsSectionLabel" for="cmsSectionSelect">Section</label>
+    <select id="cmsSectionSelect">
+      <option value="campaigns">Campaigns</option>
+      <option value="brand-identity">Brand Identity</option>
+    </select>
+  </section>
+
+  <div class="cms-section-panel" data-cms-section-panel="campaigns">
     <section class="cms-dashboard">
-  <div class="cms-dashboard-header">
-    <h2>Campaigns Dashboard</h2>
-<div class="dashboard-buttons">
-  <span id="gitStatus" class="git-status git-status--loading" role="status" aria-live="polite">Checking Git...</span>
-  <button id="saveCampaignOrder" type="button">Save Order</button>
-  <button id="publishSite" type="button">Publish</button>
-  <button id="refreshCampaigns" type="button">Refresh</button>
-</div>
-  </div>
-
-  <div id="campaignsList" class="campaigns-list">
-    Loading campaigns...
-  </div>
-</section>
-
-  <main class="admin-page">
-    <h1>RRS CAMPAIGN ADMIN</h1>
-
-    <label>CLIENTE</label>
-    <input id="client" type="text">
-
-    <label>STAGIONE / TITOLO</label>
-    <input id="title" type="text">
-
-    <label>NOME CARTELLA</label>
-    <input id="folder" type="text" placeholder="es. pinko-fw21">
-
-    <label>POSIZIONE</label>
-    <select id="position">
-      <option value="top">Top / In alto</option>
-      <option value="bottom" selected>Bottom / In basso</option>
-    </select>
-
-    <label>FRAME NERO</label>
-    <select id="border">
-      <option value="false">No</option>
-      <option value="true">Sì</option>
-    </select>
-
-    <label>CREDITS</label>
-    <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary&#10;Director: Gia Coppola"></textarea>
-
-    <section id="existingMediaSection" class="existing-media-section" hidden>
-      <h2>MEDIA ESISTENTI</h2>
-      <p class="existing-media-note">Trascina le anteprime per cambiare solo l'ordine dei media.</p>
-      <div id="existingMediaGallery" class="existing-media-gallery"></div>
-      <button id="saveMediaOrder" type="button" hidden disabled>Save Media Order</button>
-
-      <div class="remove-media-actions">
-        <p id="removeMediaSummary">Pending removal: 0 images · 0 videos</p>
-        <button id="saveRemovedMedia" type="button" disabled>Save Removed Media</button>
+      <div class="cms-dashboard-header">
+        <h2>Campaigns Dashboard</h2>
+        <div class="dashboard-buttons">
+          <span id="gitStatus" class="git-status git-status--loading" role="status" aria-live="polite">Checking Git...</span>
+          <button id="saveCampaignOrder" type="button">Save Order</button>
+          <button id="publishSite" type="button">Publish</button>
+          <button id="refreshCampaigns" type="button">Refresh</button>
+        </div>
       </div>
 
-      <div class="edit-add-media-section">
-        <h3>ADD MEDIA</h3>
-        <div id="editMediaDropzone" class="edit-media-dropzone">
-          Trascina qui nuove immagini o video MP4<br>
+      <div id="campaignsList" class="campaigns-list">
+        Loading campaigns...
+      </div>
+    </section>
+
+    <main class="admin-page">
+      <h1>RRS CAMPAIGN ADMIN</h1>
+
+      <label>CLIENTE</label>
+      <input id="client" type="text">
+
+      <label>STAGIONE / TITOLO</label>
+      <input id="title" type="text">
+
+      <label>NOME CARTELLA</label>
+      <input id="folder" type="text" placeholder="es. pinko-fw21">
+
+      <label>POSIZIONE</label>
+      <select id="position">
+        <option value="top">Top / In alto</option>
+        <option value="bottom" selected>Bottom / In basso</option>
+      </select>
+
+      <label>FRAME NERO</label>
+      <select id="border">
+        <option value="false">No</option>
+        <option value="true">Sì</option>
+      </select>
+
+      <label>CREDITS</label>
+      <textarea id="credits" placeholder="Photographer: Julia Noni&#10;Models: Sofia Klimkowski, Molly Boundary&#10;Director: Gia Coppola"></textarea>
+
+      <section id="existingMediaSection" class="existing-media-section" hidden>
+        <h2>MEDIA ESISTENTI</h2>
+        <p class="existing-media-note">Trascina le anteprime per cambiare solo l'ordine dei media.</p>
+        <div id="existingMediaGallery" class="existing-media-gallery"></div>
+        <button id="saveMediaOrder" type="button" hidden disabled>Save Media Order</button>
+
+        <div class="remove-media-actions">
+          <p id="removeMediaSummary">Pending removal: 0 images · 0 videos</p>
+          <button id="saveRemovedMedia" type="button" disabled>Save Removed Media</button>
+        </div>
+
+        <div class="edit-add-media-section">
+          <h3>ADD MEDIA</h3>
+          <div id="editMediaDropzone" class="edit-media-dropzone">
+            Trascina qui nuove immagini o video MP4<br>
+            <span>oppure clicca per selezionarli</span>
+          </div>
+          <input id="editMediaFiles" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+          <div id="editMediaPreview" class="edit-media-preview"></div>
+          <button id="saveAddedMedia" type="button" disabled>Save Added Media</button>
+        </div>
+      </section>
+
+      <section id="newCampaignMediaSection">
+        <label>IMMAGINI / VIDEO</label>
+
+        <div id="dropzone" class="admin-dropzone">
+          Trascina qui immagini e video<br>
           <span>oppure clicca per selezionarli</span>
         </div>
-        <input id="editMediaFiles" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
-        <div id="editMediaPreview" class="edit-media-preview"></div>
-        <button id="saveAddedMedia" type="button" disabled>Save Added Media</button>
+
+        <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+
+        <div id="preview" class="admin-preview"></div>
+      </section>
+
+      <button id="generate" type="button">CREATE CAMPAIGN</button>
+      <button id="saveEdit" type="button" hidden>Save Edit</button>
+      <button id="cancelEdit" type="button" hidden>Cancel Edit</button>
+
+      <label>RISULTATO</label>
+      <textarea id="output" readonly></textarea>
+
+      <button id="copy">COPY CODE</button>
+    </main>
+  </div>
+
+  <div class="cms-section-panel" data-cms-section-panel="brand-identity" hidden>
+    <section class="cms-dashboard portfolio-dashboard">
+      <div class="cms-dashboard-header">
+        <h2>Brand Identity Dashboard</h2>
+        <div class="dashboard-buttons">
+          <button id="refreshPortfolioProjects" type="button">Refresh</button>
+        </div>
+      </div>
+
+      <div id="portfolioProjectsList" class="campaigns-list portfolio-projects-list">
+        Loading Brand Identity projects...
       </div>
     </section>
 
-    <section id="newCampaignMediaSection">
-      <label>IMMAGINI / VIDEO</label>
+    <main class="admin-page portfolio-admin-page">
+      <h1 id="portfolioFormTitle">RRS BRAND IDENTITY ADMIN</h1>
 
-      <div id="dropzone" class="admin-dropzone">
-        Trascina qui immagini e video<br>
-        <span>oppure clicca per selezionarli</span>
+      <label for="portfolioClient">CLIENT</label>
+      <input id="portfolioClient" type="text" autocomplete="off">
+
+      <label for="portfolioTitle">TITLE / OPTIONAL</label>
+      <input id="portfolioTitle" type="text" placeholder="Optional" autocomplete="off">
+
+      <label for="portfolioFolder">FOLDER / ID</label>
+      <input id="portfolioFolder" type="text" placeholder="es. client-project" autocomplete="off">
+
+      <div id="portfolioCreateFields">
+        <label for="portfolioPosition">POSITION</label>
+        <select id="portfolioPosition">
+          <option value="top">Top / In alto</option>
+          <option value="bottom" selected>Bottom / In basso</option>
+        </select>
+
+        <label>IMAGES / MP4 VIDEO</label>
+        <div id="portfolioDropzone" class="admin-dropzone portfolio-dropzone" tabindex="0" role="button" aria-controls="portfolioFiles">
+          Trascina qui immagini o video MP4<br>
+          <span>oppure clicca per selezionarli</span>
+        </div>
+        <input id="portfolioFiles" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.mp4" hidden>
+        <p class="portfolio-cover-note">Select “Use as cover” on one uploaded image.</p>
+        <div id="portfolioPreview" class="admin-preview portfolio-preview"></div>
       </div>
 
-      <input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.mp4" hidden>
+      <div id="portfolioEditCoverFields" hidden>
+        <label for="portfolioExistingCover">COVER IMAGE</label>
+        <select id="portfolioExistingCover"></select>
+        <p class="portfolio-cover-note">Media cannot be added, removed, or reordered in this stage.</p>
+      </div>
 
-      <div id="preview" class="admin-preview"></div>
-    </section>
+      <button id="createPortfolioProject" type="button">CREATE BRAND IDENTITY PROJECT</button>
+      <button id="savePortfolioEdit" type="button" hidden>SAVE METADATA</button>
+      <button id="cancelPortfolioEdit" type="button" hidden>CANCEL EDIT</button>
 
-    <button id="generate" type="button">CREATE CAMPAIGN</button>
-    <button id="saveEdit" type="button" hidden>Save Edit</button>
-    <button id="cancelEdit" type="button" hidden>Cancel Edit</button>
-
-    <label>RISULTATO</label>
-    <textarea id="output" readonly></textarea>
-
-    <button id="copy">COPY CODE</button>
-  </main>
+      <label for="portfolioOutput">RESULT</label>
+      <textarea id="portfolioOutput" readonly></textarea>
+    </main>
+  </div>
 
   <script src="admin.js?v=2"></script>
+  <script src="admin-portfolio.js?v=1"></script>
 </body>
 </html>
