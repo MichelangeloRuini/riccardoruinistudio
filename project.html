@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Riccardo Ruini Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="entered portfolio-public-page">
+  <main class="site">
+    <header class="site-header">
+      <div class="site-header-left">
+        <a href="index.html?skipLanding=true">
+          <img src="assets/logo-main.svg" alt="Riccardo Ruini Studio" class="site-logo" />
+        </a>
+        <input class="search" type="text" placeholder="SEARCH" aria-label="Search" />
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html?skipLanding=true">Clients</a>
+        <a href="campaigns.html">Campaigns</a>
+        <a href="films.html">Films</a>
+        <a href="#">Magazine and Books</a>
+        <a href="brand-identity.html" data-section-link="brand-identity">Brand Identity</a>
+        <a href="#">Branding</a>
+        <a href="#">About</a>
+      </nav>
+    </header>
+
+    <article class="portfolio-project-page" id="portfolioProjectPage">
+      <header class="portfolio-project-header">
+        <h1 id="portfolioProjectHeading"></h1>
+        <a href="brand-identity.html">Back to Brand Identity</a>
+      </header>
+      <div class="portfolio-project-media" id="portfolioProjectMedia"></div>
+    </article>
+
+    <section class="portfolio-not-found" id="portfolioProjectNotFound" hidden>
+      <h1>PROJECT NOT FOUND</h1>
+      <p>The requested project does not exist or is not available.</p>
+      <a href="brand-identity.html">Back to Brand Identity</a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-address">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Via%20di%20Monserrato%2034%2000186%20Roma%20Italia" target="_blank" rel="noopener noreferrer">
+          VIA DI MONSERRATO 34<br>
+          00186 ROMA<br>
+          ITALIA
+        </a>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.instagram.com/riccardoruini?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><br>
+        <a href="https://www.linkedin.com/company/riccardo-ruini-studio/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LINKEDIN</a><br>
+        <a href="mailto:info@riccardoruinistudio.com">INFO@RICCARDORUINISTUDIO.COM</a>
+      </div>
+
+      <div class="footer-legal">
+        PRIVACY POLICY<br>
+        TERMS AND CONDITIONS<br>
+        CAREER
+      </div>
+
+      <div class="footer-newsletter">
+        <input type="email" placeholder="JOIN OUR NEWSLETTER" aria-label="Newsletter email" />
+      </div>
+
+      <div class="footer-logo">
+        <img src="assets/ui/logo-footer-01.png" class="footer-logo-frame frame-1" alt="" />
+        <img src="assets/ui/logo-footer-02.png" class="footer-logo-frame frame-2" alt="" />
+      </div>
+    </footer>
+  </main>
+
+  <script src="data/campaigns.js"></script>
+  <script src="data/portfolio-projects.js"></script>
+  <script src="utils/renderPortfolio.js"></script>
+  <script src="project.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

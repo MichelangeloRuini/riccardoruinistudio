@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Identity — Riccardo Ruini Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="entered portfolio-public-page">
+  <main class="site">
+    <header class="site-header">
+      <div class="site-header-left">
+        <a href="index.html?skipLanding=true">
+          <img src="assets/logo-main.svg" alt="Riccardo Ruini Studio" class="site-logo" />
+        </a>
+        <input class="search" type="text" placeholder="SEARCH" aria-label="Search" />
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html?skipLanding=true">Clients</a>
+        <a href="campaigns.html">Campaigns</a>
+        <a href="films.html">Films</a>
+        <a href="#">Magazine and Books</a>
+        <a href="brand-identity.html" class="active" aria-current="page">Brand Identity</a>
+        <a href="#">Branding</a>
+        <a href="#">About</a>
+      </nav>
+    </header>
+
+    <section class="brand-identity-page" aria-label="Brand Identity projects">
+      <div class="brand-identity-columns">
+        <div class="brand-identity-column brand-identity-column-left" id="brandIdentityLeftColumn">
+          <div class="brand-identity-introduction">
+            <p>VISUAL IDENTITY IS THE RECOGNIZABLE GRAPHICS OF A BRAND, INCLUDING THE LOGO, COLOR PALETTE, TYPOGRAPHY (FONTS), AND IMAGERY STYLES (PHOTOGRAPHY, ICONOGRAPHY, AND ILLUSTRATION).</p>
+            <p>PACKAGING IS ONE OF THE MOST VITAL COMPONENTS OF A VISUAL IDENTITY.</p>
+            <p>FAR MORE THAN A PROTECTIVE LAYER, IT ACTS AS A BRAND AMBASSADOR, TRANSLATING A COMPANY’S CORE VALUES, COLORS, TYPOGRAPHY, AND LOGO INTO A TANGIBLE, MEMORABLE EXPERIENCE FOR THE CONSUMER.</p>
+          </div>
+        </div>
+
+        <div class="brand-identity-column brand-identity-column-right" id="brandIdentityRightColumn"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-address">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Via%20di%20Monserrato%2034%2000186%20Roma%20Italia" target="_blank" rel="noopener noreferrer">
+          VIA DI MONSERRATO 34<br>
+          00186 ROMA<br>
+          ITALIA
+        </a>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.instagram.com/riccardoruini?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><br>
+        <a href="https://www.linkedin.com/company/riccardo-ruini-studio/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LINKEDIN</a><br>
+        <a href="mailto:info@riccardoruinistudio.com">INFO@RICCARDORUINISTUDIO.COM</a>
+      </div>
+
+      <div class="footer-legal">
+        PRIVACY POLICY<br>
+        TERMS AND CONDITIONS<br>
+        CAREER
+      </div>
+
+      <div class="footer-newsletter">
+        <input type="email" placeholder="JOIN OUR NEWSLETTER" aria-label="Newsletter email" />
+      </div>
+
+      <div class="footer-logo">
+        <img src="assets/ui/logo-footer-01.png" class="footer-logo-frame frame-1" alt="" />
+        <img src="assets/ui/logo-footer-02.png" class="footer-logo-frame frame-2" alt="" />
+      </div>
+    </footer>
+  </main>
+
+  <script src="data/campaigns.js"></script>
+  <script src="data/portfolio-projects.js"></script>
+  <script src="utils/renderPortfolio.js"></script>
+  <script src="brand-identity.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
