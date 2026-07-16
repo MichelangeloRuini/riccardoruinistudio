@@ -1817,5 +1817,33 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-eyewear-ss-2016",
+  client: "Valentino",
+  title: "Eyewear SS 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-eyewear-ss-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Terry Richardson"
+    },
+    {
+      label: "Director",
+      value: "Terry Richardson"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
