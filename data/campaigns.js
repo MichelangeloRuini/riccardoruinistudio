@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1872,5 +1872,39 @@ const campaigns = [
       "03.jpg",
       "04.jpg"
     ]
-  }
+  },
+
+{
+  id: "valentino-women-fw-2015",
+  client: "Valentino",
+  title: "Women FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Michal Pudelka"
+    },
+    {
+      label: "Models",
+      value: [
+        "Grace Hartzel",
+        "Harleth Kuusik",
+        "Ine Neefs",
+        "Maartje Verhoef"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
+}
 ];
