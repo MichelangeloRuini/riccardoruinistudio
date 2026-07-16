@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1428,498 +1428,449 @@ const campaigns = [
       "video-02.mp4"
     ]
   },
-
-{
-  id: "valentino-ss-women-2017",
-  client: "Valentino",
-  title: "SS Women 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-ss-women-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    },
-    {
-      label: "Models",
-      value: [
-        "Blesnya Minher",
-        "Christy Turlington",
-        "Fei Fei Sun",
-        "Liya Kebede",
-        "Lorena Maraschi",
-        "Mali Koopman",
-        "Ratner"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "dondup-ss-2017",
-  client: "Dondup",
-  title: "SS 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/dondup-ss-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mark Borthwick"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "ermanno-scervino-ss-2017",
-  client: "Ermanno Scervino",
-  title: "SS 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/ermanno-scervino-ss-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Models",
-      value: [
-        "Kenya Kinski",
-        "Will Peltz"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2016",
-  client: "Valentino",
-  title: "Women FW 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Steven Meisel"
-    },
-    {
-      label: "Director",
-      value: "Steven Meisel"
-    },
-    {
-      label: "Models",
-      value: [
-        "Julia Nobis",
-        "Karen Elson",
-        "Jamie Bochert",
-        "Katlin Aas"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-men-fw-2016",
-  client: "Valentino",
-  title: "Men FW 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-fw-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Bailey"
-    },
-    {
-      label: "Director",
-      value: "David Bailey"
-    },
-    {
-      label: "Models",
-      value: [
-        "Bradley Phillips",
-        "Djavan Mandoula",
-        "Harold Vente",
-        "Jackson Hale",
-        "Thibaud Charon"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "red-valentino-fw-2016",
-  client: "RED Valentino",
-  title: "FW 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/red-valentino-fw-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Olivia Bee"
-    },
-    {
-      label: "Director",
-      value: "Olivia Bee"
-    },
-    {
-      label: "Talent",
-      value: "Birdy"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "ermanno-scervino-fw-2016",
-  client: "Ermanno Scervino",
-  title: "FW 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/ermanno-scervino-fw-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Models",
-      value: [
-        "Hana Jirckova",
-        "Jordan Barett"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2016",
-  client: "Valentino",
-  title: "Women SS 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Steve Mccurry"
-    },
-    {
-      label: "Director",
-      value: "Gavin Thurston"
-    },
-    {
-      label: "Models",
-      value: [
-        "Alice Metza",
-        "Cameron Traiber",
-        "Greta Varlese",
-        "Kirin Dejonckheere",
-        "Tami Williams"
-      ]
-    },
-    {
-      label: "Awards",
-      value: [
-        "Clio Fashion & Beauty Award Gold 2016",
-        "World Luxury Award Monaco 2016 Fashion and Style",
-        "Press and Outdoor Key Awards 2016 Beauty Fashion and Luxury",
-        "Epica Awards 2016 Bronze"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "red-valentino-ss-2016",
-  client: "RED Valentino",
-  title: "SS 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/red-valentino-ss-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Olivia Bee"
-    },
-    {
-      label: "Director",
-      value: "Olivia Bee"
-    },
-    {
-      label: "Talent",
-      value: "Birdy"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "francesco-scognamiglio-ss-2016",
-  client: "Francesco Scognamiglio",
-  title: "SS 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/francesco-scognamiglio-ss-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "marina-rinaldi-ss-2016",
-  client: "Marina Rinaldi",
-  title: "SS 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/marina-rinaldi-ss-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Bruce Weber"
-    },
-    {
-      label: "Director",
-      value: "Bruce Weber"
-    },
-    {
-      label: "Talent",
-      value: "Patricia Arquette"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "ferragamo-uomo-2016",
-  client: "Ferragamo",
-  title: "Uomo 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/ferragamo-uomo-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Francesco Carrozzini"
-    },
-    {
-      label: "Director",
-      value: "Francesco Carrozzini"
-    },
-    {
-      label: "Talent",
-      value: "Ben Barnes"
-    },
-    {
-      label: "Award",
-      value: "World Luxury Award Monaco 2017 Parfum and Cosmetics"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-eyewear-ss-2016",
-  client: "Valentino",
-  title: "Eyewear SS 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-eyewear-ss-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    },
-    {
-      label: "Director",
-      value: "Terry Richardson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-accessories-fw-2016",
-  client: "Valentino",
-  title: "Accessories FW 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-accessories-fw-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    },
-    {
-      label: "Director",
-      value: "Terry Richardson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-accessories-2016",
-  client: "Valentino",
-  title: "Accessories 2016",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-accessories-2016/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    },
-    {
-      label: "Award",
-      value: "Luxury Award Monaco 2016 Design and Accessories"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2015",
-  client: "Gucci",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2015/",
-
-  border: false,
-
-  credits: [
-
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-}
+  {
+    id: "valentino-ss-women-2017",
+    client: "Valentino",
+    title: "SS Women 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-ss-women-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      },
+      {
+        label: "Models",
+        value: [
+          "Blesnya Minher",
+          "Christy Turlington",
+          "Fei Fei Sun",
+          "Liya Kebede",
+          "Lorena Maraschi",
+          "Mali Koopman",
+          "Ratner"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "dondup-ss-2017",
+    client: "Dondup",
+    title: "SS 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/dondup-ss-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mark Borthwick"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "ermanno-scervino-ss-2017",
+    client: "Ermanno Scervino",
+    title: "SS 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/ermanno-scervino-ss-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Models",
+        value: [
+          "Kenya Kinski",
+          "Will Peltz"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2016",
+    client: "Valentino",
+    title: "Women FW 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Steven Meisel"
+      },
+      {
+        label: "Director",
+        value: "Steven Meisel"
+      },
+      {
+        label: "Models",
+        value: [
+          "Julia Nobis",
+          "Karen Elson",
+          "Jamie Bochert",
+          "Katlin Aas"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-men-fw-2016",
+    client: "Valentino",
+    title: "Men FW 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-fw-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Bailey"
+      },
+      {
+        label: "Director",
+        value: "David Bailey"
+      },
+      {
+        label: "Models",
+        value: [
+          "Bradley Phillips",
+          "Djavan Mandoula",
+          "Harold Vente",
+          "Jackson Hale",
+          "Thibaud Charon"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "red-valentino-fw-2016",
+    client: "RED Valentino",
+    title: "FW 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/red-valentino-fw-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Olivia Bee"
+      },
+      {
+        label: "Director",
+        value: "Olivia Bee"
+      },
+      {
+        label: "Talent",
+        value: "Birdy"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "ermanno-scervino-fw-2016",
+    client: "Ermanno Scervino",
+    title: "FW 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/ermanno-scervino-fw-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Models",
+        value: [
+          "Hana Jirckova",
+          "Jordan Barett"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2016",
+    client: "Valentino",
+    title: "Women SS 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Steve Mccurry"
+      },
+      {
+        label: "Director",
+        value: "Gavin Thurston"
+      },
+      {
+        label: "Models",
+        value: [
+          "Alice Metza",
+          "Cameron Traiber",
+          "Greta Varlese",
+          "Kirin Dejonckheere",
+          "Tami Williams"
+        ]
+      },
+      {
+        label: "Awards",
+        value: [
+          "Clio Fashion & Beauty Award Gold 2016",
+          "World Luxury Award Monaco 2016 Fashion and Style",
+          "Press and Outdoor Key Awards 2016 Beauty Fashion and Luxury",
+          "Epica Awards 2016 Bronze"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "red-valentino-ss-2016",
+    client: "RED Valentino",
+    title: "SS 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/red-valentino-ss-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Olivia Bee"
+      },
+      {
+        label: "Director",
+        value: "Olivia Bee"
+      },
+      {
+        label: "Talent",
+        value: "Birdy"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "francesco-scognamiglio-ss-2016",
+    client: "Francesco Scognamiglio",
+    title: "SS 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/francesco-scognamiglio-ss-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "marina-rinaldi-ss-2016",
+    client: "Marina Rinaldi",
+    title: "SS 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/marina-rinaldi-ss-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Bruce Weber"
+      },
+      {
+        label: "Director",
+        value: "Bruce Weber"
+      },
+      {
+        label: "Talent",
+        value: "Patricia Arquette"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "ferragamo-uomo-2016",
+    client: "Ferragamo",
+    title: "Uomo 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/ferragamo-uomo-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Francesco Carrozzini"
+      },
+      {
+        label: "Director",
+        value: "Francesco Carrozzini"
+      },
+      {
+        label: "Talent",
+        value: "Ben Barnes"
+      },
+      {
+        label: "Award",
+        value: "World Luxury Award Monaco 2017 Parfum and Cosmetics"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-eyewear-ss-2016",
+    client: "Valentino",
+    title: "Eyewear SS 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-eyewear-ss-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      },
+      {
+        label: "Director",
+        value: "Terry Richardson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-accessories-fw-2016",
+    client: "Valentino",
+    title: "Accessories FW 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-accessories-fw-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      },
+      {
+        label: "Director",
+        value: "Terry Richardson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-accessories-2016",
+    client: "Valentino",
+    title: "Accessories 2016",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-accessories-2016/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      },
+      {
+        label: "Award",
+        value: "Luxury Award Monaco 2016 Design and Accessories"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2015",
+    client: "Gucci",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Natasha Poly",
+          "Suvi",
+          "Joan Smalls",
+          "Anja Rubik",
+          "Karmen Pedaru",
+          "Raquel Zimmerman",
+          "Nadja Bender"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  }
 ];
