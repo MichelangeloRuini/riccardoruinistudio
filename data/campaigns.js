@@ -1938,5 +1938,32 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "red-valentino-fw-2015",
+  client: "RED Valentino",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/red-valentino-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Venetia Scott"
+    },
+    {
+      label: "Director",
+      value: "Venetia Scott"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
