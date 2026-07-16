@@ -2056,5 +2056,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "emilio-pucci-fw-2015",
+  client: "Emilio Pucci",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/emilio-pucci-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    },
+    {
+      label: "Model",
+      value: "Gisele Bundchen"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
