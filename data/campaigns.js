@@ -1485,5 +1485,36 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "ermanno-scervino-ss-2017",
+  client: "Ermanno Scervino",
+  title: "SS 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/ermanno-scervino-ss-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Models",
+      value: [
+        "Kenya Kinski",
+        "Will Peltz"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
