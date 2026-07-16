@@ -1699,5 +1699,36 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "red-valentino-ss-2016",
+  client: "RED Valentino",
+  title: "SS 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/red-valentino-ss-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Olivia Bee"
+    },
+    {
+      label: "Director",
+      value: "Olivia Bee"
+    },
+    {
+      label: "Talent",
+      value: "Birdy"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
