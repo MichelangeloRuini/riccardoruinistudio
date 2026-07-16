@@ -1872,5 +1872,33 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-accessories-2016",
+  client: "Valentino",
+  title: "Accessories 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-accessories-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Terry Richardson"
+    },
+    {
+      label: "Award",
+      value: "Luxury Award Monaco 2016 Design and Accessories"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
