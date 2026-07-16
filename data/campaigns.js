@@ -58,13 +58,11 @@ const campaigns = [
     title: "FW 2025",
     category: "Campaigns",
     path: "assets/campaigns/marina-rinaldi-fw25/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
-        value: [
-          "Julia Noni"
-        ]
+        value: "Julia Noni"
       },
       {
         label: "Models",
