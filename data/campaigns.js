@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1197,5 +1197,30 @@ const campaigns = [
       "04.jpg",
       "video-01.mp4"
     ]
-  }
+  },
+
+{
+  id: "valentino-mytheresa-2017",
+  client: "Valentino",
+  title: "Mytheresa 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-mytheresa-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Director",
+      value: "Joanna Nordahl"
+    },
+    {
+      label: "Music",
+      value: "Eliot Sumner"
+    }
+  ],
+
+  media: [
+    "video-01.mp4"
+  ]
+}
 ];
