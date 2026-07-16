@@ -1,0 +1,12 @@
+{
+  "operation": "remove-campaign-media",
+  "campaignId": "valentino-prefall-show-ny-2017",
+  "createdAt": "2026-07-16T12:50:46.953Z",
+  "removedMedia": [
+    "video-01.mp4"
+  ],
+  "mediaBefore": [
+    "video-01.mp4"
+  ],
+  "mediaAfter": []
+}

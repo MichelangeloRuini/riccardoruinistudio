@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1215,81 +1215,90 @@ const campaigns = [
       "video-01.mp4"
     ]
   },
-
-{
-  id: "valentino-men-fw-2017",
-  client: "Valentino",
-  title: "Men FW 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-fw-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Bailey"
-    },
-    {
-      label: "Director",
-      value: "Kes Glozier"
-    },
-    {
-      label: "Models",
-      value: [
-        "Arnaud Courteille",
-        "Dylan Fender",
-        "Finnlay Davis",
-        "Quintin Van Konkelenberg",
-        "Robbi G",
-        "Ye Xiang"
-      ]
-    },
-    {
-      label: "Awards",
-      value: "Bronze at the Epica award 2017"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2017",
-  client: "Valentino",
-  title: "Women FW 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    },
-    {
-      label: "Models",
-      value: [
-        "Giedre Dukauskaite",
-        "Freja Beha Erichsen",
-        "Ansolet Rossouw",
-        "Faretta",
-        "Iman"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "video-01.mp4"
-  ]
-}
+  {
+    id: "valentino-men-fw-2017",
+    client: "Valentino",
+    title: "Men FW 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-fw-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Bailey"
+      },
+      {
+        label: "Director",
+        value: "Kes Glozier"
+      },
+      {
+        label: "Models",
+        value: [
+          "Arnaud Courteille",
+          "Dylan Fender",
+          "Finnlay Davis",
+          "Quintin Van Konkelenberg",
+          "Robbi G",
+          "Ye Xiang"
+        ]
+      },
+      {
+        label: "Awards",
+        value: "Bronze at the Epica award 2017"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2017",
+    client: "Valentino",
+    title: "Women FW 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      },
+      {
+        label: "Models",
+        value: [
+          "Giedre Dukauskaite",
+          "Freja Beha Erichsen",
+          "Ansolet Rossouw",
+          "Faretta",
+          "Iman"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-prefall-show-ny-2017",
+    client: "Valentino",
+    title: "Prefall Show NY 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-prefall-show-ny-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Director",
+        value: "Chiara Clemente"
+      }
+    ],
+    media: [
+      "video-01.mp4"
+    ]
+  }
 ];
