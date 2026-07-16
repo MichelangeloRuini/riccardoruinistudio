@@ -1965,5 +1965,39 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "vionnet-fw-2015",
+  client: "Vionnet",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/vionnet-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Dylan Don"
+    },
+    {
+      label: "Director",
+      value: "Riccardo Ruini"
+    },
+    {
+      label: "Models",
+      value: [
+        "Kim Peers",
+        "Constanza Saravia"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
