@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1301,87 +1301,79 @@ const campaigns = [
       "video-01.mp4"
     ]
   },
-
-{
-  id: "la-perla-fw-2017",
-  client: "La Perla",
-  title: "FW 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/la-perla-fw-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Kendall Jenner"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "ermanno-scervino-fw-2017",
-  client: "Ermanno Scervino",
-  title: "FW 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/ermanno-scervino-fw-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Model",
-      value: "Maria Carla Boscono"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "la-perla-pre-fall-2017",
-  client: "La Perla",
-  title: "Pre Fall 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/la-perla-pre-fall-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Kendall Jenner"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-}
+  {
+    id: "la-perla-fw-2017",
+    client: "La Perla",
+    title: "FW 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/la-perla-fw-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Kendall Jenner"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "ermanno-scervino-fw-2017",
+    client: "Ermanno Scervino",
+    title: "FW 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/ermanno-scervino-fw-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Model",
+        value: "Maria Carla Boscono"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "la-perla-pre-fall-2017",
+    client: "La Perla",
+    title: "Pre Fall 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/la-perla-pre-fall-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Kendall Jenner"
+      },
+      {
+        label: "Awards",
+        value: "World Luxury Award Monaco 2017 Fashion and Style"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  }
 ];
