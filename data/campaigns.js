@@ -1256,5 +1256,40 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-women-fw-2017",
+  client: "Valentino",
+  title: "Women FW 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Sims"
+    },
+    {
+      label: "Models",
+      value: [
+        "Giedre Dukauskaite",
+        "Freja Beha Erichsen",
+        "Ansolet Rossouw",
+        "Faretta",
+        "Iman"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
