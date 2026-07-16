@@ -389,7 +389,7 @@ const campaigns = [
     title: "SS 2022",
     category: "Campaigns",
     path: "assets/campaigns/la-perla-ss22/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -454,7 +454,7 @@ const campaigns = [
     title: "FW 2021",
     category: "Campaigns",
     path: "assets/campaigns/paciotti-fw21/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -516,7 +516,7 @@ const campaigns = [
     title: "FW 2021",
     category: "Campaigns",
     path: "assets/campaigns/blaze-fw21/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -549,7 +549,7 @@ const campaigns = [
     title: "Prefall 2021",
     category: "Campaigns",
     path: "assets/campaigns/blaze-prefall21/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -663,7 +663,7 @@ const campaigns = [
     title: "Ode To Summer 2020",
     category: "Campaigns",
     path: "assets/campaigns/la-perla-ode-to-summer-2020/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -715,7 +715,7 @@ const campaigns = [
     title: "Petit Macramé 2019",
     category: "Campaigns",
     path: "assets/campaigns/la-perla-petit-macramè-2019/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -746,7 +746,7 @@ const campaigns = [
     title: "Maison 2019",
     category: "Campaigns",
     path: "assets/campaigns/la-perla-maison-2019/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -800,7 +800,7 @@ const campaigns = [
     title: "Women SS 2019",
     category: "Campaigns",
     path: "assets/campaigns/marella-women-ss19/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -850,7 +850,7 @@ const campaigns = [
     title: "Women FW 2018",
     category: "Campaigns",
     path: "assets/campaigns/valentino-women-fw18/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -879,7 +879,7 @@ const campaigns = [
     title: "Men FW 2018",
     category: "Campaigns",
     path: "assets/campaigns/valentino-men-fw18/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -907,7 +907,7 @@ const campaigns = [
     title: "FW 2018",
     category: "Campaigns",
     path: "assets/campaigns/marella-fw18/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -930,7 +930,7 @@ const campaigns = [
     title: "FW 2018",
     category: "Campaigns",
     path: "assets/campaigns/ermanno-scervino-fw-2018/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -959,7 +959,7 @@ const campaigns = [
     title: "Prefall 2018",
     category: "Campaigns",
     path: "assets/campaigns/valentino-prefall-2018/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
@@ -991,7 +991,7 @@ const campaigns = [
     title: "Women SS 2018",
     category: "Campaigns",
     path: "assets/campaigns/valentino-women-ss-2018/",
-    border: true,
+    border: false,
     credits: [
       {
         label: "Photographer",
