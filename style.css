@@ -398,6 +398,33 @@ body.entered .custom-cursor {
   text-transform: uppercase;
 }
 
+.search-result-group-heading {
+  margin: 0 0 38px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.search-result-group + .search-result-group {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid currentColor;
+}
+
+.search-result-group .campaign:last-child {
+  margin-bottom: 0;
+}
+
+.portfolio-search-detail-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.portfolio-search-detail-link:hover {
+  color: var(--light-grey);
+}
+
 .no-results {
   font-size: 47px;
   line-height: 0.92;

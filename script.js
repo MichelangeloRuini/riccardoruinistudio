@@ -16,10 +16,7 @@ const clientsWall = document.getElementById("clientsWall");
 const searchInput = document.getElementById("searchInput");
 
 function normalize(text) {
-  return String(text)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  return RRSUnifiedSearch.normalize(text);
 }
 
 function enterSite() {
@@ -53,27 +50,12 @@ if (cursor) {
 }
 
 function getSearchTerms() {
-  const terms = new Set();
+  const campaignRecords = typeof campaigns !== "undefined" ? campaigns : [];
+  const portfolioRecords = typeof portfolioProjects !== "undefined"
+    ? portfolioProjects
+    : [];
 
-  clients.forEach(client => terms.add(client));
-
-  if (typeof campaigns !== "undefined") {
-    campaigns.forEach(campaign => {
-      terms.add(campaign.client);
-      terms.add(campaign.title);
-      terms.add(campaign.category);
-
-      campaign.credits.forEach(credit => {
-        if (Array.isArray(credit.value)) {
-          credit.value.forEach(value => terms.add(value));
-        } else {
-          terms.add(credit.value);
-        }
-      });
-    });
-  }
-
-  return Array.from(terms).filter(Boolean);
+  return RRSUnifiedSearch.getTerms(campaignRecords, portfolioRecords);
 }
 
 function goToSearch(value) {
@@ -164,9 +146,15 @@ function renderSuggestions(input, box) {
     return;
   }
 
-  box.innerHTML = matches
-    .map(match => `<button type="button" class="search-suggestion">${match}</button>`)
-    .join("");
+  box.replaceChildren();
+
+  matches.forEach(match => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "search-suggestion";
+    button.textContent = match;
+    box.appendChild(button);
+  });
 
   box.classList.add("is-visible");
   input.dataset.activeIndex = "-1";

@@ -7,34 +7,32 @@ const query = params.get("q") || "";
 
 globalSearchInput.value = query;
 
-function normalize(text) {
-  return String(text)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+function getPortfolioGroupKey(section) {
+  const key = RRSUnifiedSearch.normalize(section).replace(/[\s_-]+/g, "-");
+
+  return key === "magazine-and-books" ? "magazine-books" : key;
 }
 
-function campaignSearchText(campaign) {
-  const creditsText = campaign.credits
-    .map(credit => {
-      const value = Array.isArray(credit.value)
-        ? credit.value.join(" ")
-        : credit.value;
+function createResultGroup(heading, items, renderItem) {
+  if (items.length === 0) return null;
 
-      return `${credit.label} ${value}`;
-    })
-    .join(" ");
+  const group = document.createElement("section");
+  const title = document.createElement("h2");
 
-  return normalize(`
-    ${campaign.client}
-    ${campaign.title}
-    ${campaign.category}
-    ${creditsText}
-  `);
+  group.className = "search-result-group";
+  title.className = "search-result-group-heading";
+  title.textContent = heading;
+  group.appendChild(title);
+
+  items.forEach((item, index) => {
+    group.appendChild(renderItem(item, index));
+  });
+
+  return group;
 }
 
 function renderSearch() {
-  const cleanQuery = normalize(query.trim());
+  const cleanQuery = RRSUnifiedSearch.normalize(query.trim());
 
   if (!cleanQuery) {
     searchTitle.textContent = "SEARCH";
@@ -42,20 +40,79 @@ function renderSearch() {
     return;
   }
 
-  const results = campaigns.filter(campaign =>
-    campaignSearchText(campaign).includes(cleanQuery)
+  const campaignRecords = typeof campaigns !== "undefined" ? campaigns : [];
+  const portfolioRecords = typeof portfolioProjects !== "undefined"
+    ? portfolioProjects
+    : [];
+  const matchingCampaigns = campaignRecords.filter(campaign =>
+    RRSUnifiedSearch.matches(campaign, "campaign", cleanQuery)
   );
+  const matchingPortfolio = portfolioRecords.filter(project =>
+    RRSUnifiedSearch.matches(project, "portfolio", cleanQuery)
+  );
+  const portfolioGroups = {
+    "brand-identity": [],
+    "magazine-books": [],
+    branding: [],
+    films: []
+  };
+  const otherPortfolioGroups = new Map();
 
-  searchTitle.textContent = `${results.length} RESULTS FOR "${query.toUpperCase()}"`;
+  matchingPortfolio.forEach(project => {
+    const groupKey = getPortfolioGroupKey(project.section);
+    if (portfolioGroups[groupKey]) {
+      portfolioGroups[groupKey].push(project);
+      return;
+    }
 
-  if (results.length === 0) {
-    searchResults.innerHTML = `<div class="no-results">NO RESULTS</div>`;
+    if (!otherPortfolioGroups.has(groupKey)) otherPortfolioGroups.set(groupKey, []);
+    otherPortfolioGroups.get(groupKey).push(project);
+  });
+
+  const totalResults = matchingCampaigns.length + matchingPortfolio.length;
+
+  searchTitle.textContent = `${totalResults} RESULTS FOR "${query.toUpperCase()}"`;
+
+  if (totalResults === 0) {
+    const noResults = document.createElement("div");
+    noResults.className = "no-results";
+    noResults.textContent = "NO RESULTS";
+    searchResults.replaceChildren(noResults);
     return;
   }
 
-  searchResults.innerHTML = results
-    .map((campaign, index) => renderProject(campaign, index, campaign.media))
-    .join("");
+  const groupDefinitions = [
+    ["BRAND IDENTITY", portfolioGroups["brand-identity"], renderPortfolioSearchProject],
+    ["MAGAZINE AND BOOKS", portfolioGroups["magazine-books"], renderPortfolioSearchProject],
+    ["BRANDING", portfolioGroups.branding, renderPortfolioSearchProject],
+    ["CAMPAIGNS", matchingCampaigns, (campaign, index) => {
+      const safeCampaign = {
+        ...campaign,
+        credits: Array.isArray(campaign.credits) ? campaign.credits : [],
+        media: Array.isArray(campaign.media) ? campaign.media : []
+      };
+      const template = document.createElement("template");
+      template.innerHTML = renderProject(safeCampaign, index, safeCampaign.media);
+      return template.content.firstElementChild;
+    }],
+    ["FILMS", portfolioGroups.films, renderPortfolioSearchProject]
+  ];
+
+  otherPortfolioGroups.forEach((items, section) => {
+    groupDefinitions.push([
+      RRSUnifiedSearch.formatSection(section).toUpperCase(),
+      items,
+      renderPortfolioSearchProject
+    ]);
+  });
+  const fragment = document.createDocumentFragment();
+
+  groupDefinitions.forEach(([heading, items, renderItem]) => {
+    const group = createResultGroup(heading, items, renderItem);
+    if (group) fragment.appendChild(group);
+  });
+
+  searchResults.replaceChildren(fragment);
 }
 
 globalSearchInput.addEventListener("keydown", event => {
