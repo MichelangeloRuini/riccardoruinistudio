@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1376,63 +1376,56 @@ const campaigns = [
       "04.jpg"
     ]
   },
-
-{
-  id: "valentino-men-2017",
-  client: "Valentino",
-  title: "Men 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Bailey"
-    },
-    {
-      label: "Director",
-      value: "David Bailey"
-    },
-    {
-      label: "Talent",
-      value: "Baby Strange"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-accessories-fw-2017",
-  client: "Valentino",
-  title: "Accessories FW 2017",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-accessories-fw-2017/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    },
-    {
-      label: "Director",
-      value: "Terry Richardson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-}
+  {
+    id: "valentino-men-2017",
+    client: "Valentino",
+    title: "Men 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Bailey"
+      },
+      {
+        label: "Director",
+        value: "David Bailey"
+      },
+      {
+        label: "Talent",
+        value: "Baby Strange"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-accessories-fw-2017",
+    client: "Valentino",
+    title: "Accessories FW 2017",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-accessories-fw-2017/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      },
+      {
+        label: "Director",
+        value: "Terry Richardson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4",
+      "video-02.mp4"
+    ]
+  }
 ];
