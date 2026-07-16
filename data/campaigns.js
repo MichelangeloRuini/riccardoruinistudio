@@ -1751,5 +1751,36 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "marina-rinaldi-ss-2016",
+  client: "Marina Rinaldi",
+  title: "SS 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/marina-rinaldi-ss-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Bruce Weber"
+    },
+    {
+      label: "Director",
+      value: "Bruce Weber"
+    },
+    {
+      label: "Talent",
+      value: "Patricia Arquette"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
