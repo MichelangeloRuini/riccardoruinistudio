@@ -1906,5 +1906,37 @@ const campaigns = [
     "04.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-men-fw-2015",
+  client: "Valentino",
+  title: "Men FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Bailey"
+    },
+    {
+      label: "Director",
+      value: "David Bailey"
+    },
+    {
+      label: "Model",
+      value: "George Barnett"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
