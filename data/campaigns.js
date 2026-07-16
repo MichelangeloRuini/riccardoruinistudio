@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1427,5 +1427,41 @@ const campaigns = [
       "video-01.mp4",
       "video-02.mp4"
     ]
-  }
+  },
+
+{
+  id: "valentino-ss-women-2017",
+  client: "Valentino",
+  title: "SS Women 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-ss-women-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Sims"
+    },
+    {
+      label: "Models",
+      value: [
+        "Blesnya Minher",
+        "Christy Turlington",
+        "Fei Fei Sun",
+        "Liya Kebede",
+        "Lorena Maraschi",
+        "Mali Koopman",
+        "Ratner"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+}
 ];
