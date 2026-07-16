@@ -1999,5 +1999,36 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "marina-rinaldi-fw-2015",
+  client: "Marina Rinaldi",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/marina-rinaldi-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Bruce Weber"
+    },
+    {
+      label: "Director",
+      value: "Bruce Weber"
+    },
+    {
+      label: "Talent",
+      value: "Patricia Arquette"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
