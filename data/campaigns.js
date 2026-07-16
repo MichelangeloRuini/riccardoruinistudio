@@ -1652,5 +1652,52 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "valentino-women-ss-2016",
+  client: "Valentino",
+  title: "Women SS 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Steve Mccurry"
+    },
+    {
+      label: "Director",
+      value: "Gavin Thurston"
+    },
+    {
+      label: "Models",
+      value: [
+        "Alice Metza",
+        "Cameron Traiber",
+        "Greta Varlese",
+        "Kirin Dejonckheere",
+        "Tami Williams"
+      ]
+    },
+    {
+      label: "Awards",
+      value: [
+        "Clio Fashion & Beauty Award Gold 2016",
+        "World Luxury Award Monaco 2016 Fashion and Style",
+        "Press and Outdoor Key Awards 2016 Beauty Fashion and Luxury",
+        "Epica Awards 2016 Bronze"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
