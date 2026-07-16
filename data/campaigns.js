@@ -1730,5 +1730,26 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "francesco-scognamiglio-ss-2016",
+  client: "Francesco Scognamiglio",
+  title: "SS 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/francesco-scognamiglio-ss-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
