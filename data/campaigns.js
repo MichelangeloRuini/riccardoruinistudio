@@ -1355,5 +1355,33 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "la-perla-pre-fall-2017",
+  client: "La Perla",
+  title: "Pre Fall 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-pre-fall-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Kendall Jenner"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
