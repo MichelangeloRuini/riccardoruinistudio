@@ -1782,5 +1782,40 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "ferragamo-uomo-2016",
+  client: "Ferragamo",
+  title: "Uomo 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/ferragamo-uomo-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Francesco Carrozzini"
+    },
+    {
+      label: "Director",
+      value: "Francesco Carrozzini"
+    },
+    {
+      label: "Talent",
+      value: "Ben Barnes"
+    },
+    {
+      label: "Award",
+      value: "World Luxury Award Monaco 2017 Parfum and Cosmetics"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
