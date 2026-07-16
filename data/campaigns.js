@@ -1463,5 +1463,27 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "dondup-ss-2017",
+  client: "Dondup",
+  title: "SS 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/dondup-ss-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mark Borthwick"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
