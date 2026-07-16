@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1375,5 +1375,36 @@ const campaigns = [
       "03.jpg",
       "04.jpg"
     ]
-  }
+  },
+
+{
+  id: "valentino-men-2017",
+  client: "Valentino",
+  title: "Men 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Bailey"
+    },
+    {
+      label: "Director",
+      value: "David Bailey"
+    },
+    {
+      label: "Talent",
+      value: "Baby Strange"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
+}
 ];
