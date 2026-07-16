@@ -1900,5 +1900,26 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2015",
+  client: "Gucci",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2015/",
+
+  border: false,
+
+  credits: [
+
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
