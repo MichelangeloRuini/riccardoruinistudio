@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -1300,5 +1300,33 @@ const campaigns = [
     media: [
       "video-01.mp4"
     ]
-  }
+  },
+
+{
+  id: "la-perla-fw-2017",
+  client: "La Perla",
+  title: "FW 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/la-perla-fw-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Kendall Jenner"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+}
 ];
