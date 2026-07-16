@@ -1516,5 +1516,41 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-women-fw-2016",
+  client: "Valentino",
+  title: "Women FW 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Steven Meisel"
+    },
+    {
+      label: "Director",
+      value: "Steven Meisel"
+    },
+    {
+      label: "Models",
+      value: [
+        "Julia Nobis",
+        "Karen Elson",
+        "Jamie Bochert",
+        "Katlin Aas"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
