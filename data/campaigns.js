@@ -2113,5 +2113,45 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-pre-fall-2015",
+  client: "Valentino",
+  title: "Pre Fall 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-pre-fall-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Michal Pudelka"
+    },
+    {
+      label: "Director",
+      value: "Michal Pudelka"
+    },
+    {
+      label: "Models",
+      value: [
+        "Grace Hartzel",
+        "Harleth Kuusik",
+        "Ine Neefs",
+        "Maartje Verhoef"
+      ]
+    },
+    {
+      label: "Awards",
+      value: "Clio Fashion & Beauty Award Bronze 2015"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
