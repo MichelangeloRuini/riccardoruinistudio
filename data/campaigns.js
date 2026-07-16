@@ -1622,5 +1622,35 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "ermanno-scervino-fw-2016",
+  client: "Ermanno Scervino",
+  title: "FW 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/ermanno-scervino-fw-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Models",
+      value: [
+        "Hana Jirckova",
+        "Jordan Barett"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
