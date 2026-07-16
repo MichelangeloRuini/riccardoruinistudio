@@ -2030,5 +2030,31 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "peuterey-fw-2015",
+  client: "Peuterey",
+  title: "FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/peuterey-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    },
+    {
+      label: "Model",
+      value: "Carla Ciffoni"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
