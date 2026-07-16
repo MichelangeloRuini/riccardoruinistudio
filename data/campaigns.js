@@ -2082,5 +2082,36 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "liu-jo-jeans-denim-collection-fw-2015",
+  client: "Liu Jo",
+  title: "Jeans Denim Collection FW 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-denim-collection-fw-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Dusan Reljin"
+    },
+    {
+      label: "Director",
+      value: "Dusan Reljin"
+    },
+    {
+      label: "Model",
+      value: "Dree Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
