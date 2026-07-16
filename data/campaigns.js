@@ -1328,5 +1328,32 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "ermanno-scervino-fw-2017",
+  client: "Ermanno Scervino",
+  title: "FW 2017",
+  category: "Campaigns",
+  path: "assets/campaigns/ermanno-scervino-fw-2017/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Model",
+      value: "Maria Carla Boscono"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
