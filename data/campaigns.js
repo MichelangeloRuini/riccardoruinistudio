@@ -1552,5 +1552,43 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "valentino-men-fw-2016",
+  client: "Valentino",
+  title: "Men FW 2016",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-fw-2016/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Bailey"
+    },
+    {
+      label: "Director",
+      value: "David Bailey"
+    },
+    {
+      label: "Models",
+      value: [
+        "Bradley Phillips",
+        "Djavan Mandoula",
+        "Harold Vente",
+        "Jackson Hale",
+        "Thibaud Charon"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
