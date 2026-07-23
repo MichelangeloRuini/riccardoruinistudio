@@ -82,7 +82,7 @@ function renderSearch() {
   }
 
   const groupDefinitions = [
-    ["BRAND IDENTITY", portfolioGroups["brand-identity"], renderPortfolioSearchProject],
+    ["VISUAL IDENTITY", portfolioGroups["brand-identity"], renderPortfolioSearchProject],
     ["MAGAZINE AND BOOKS", portfolioGroups["magazine-books"], renderPortfolioSearchProject],
     ["BRANDING", portfolioGroups.branding, renderPortfolioSearchProject],
     ["CAMPAIGNS", matchingCampaigns, (campaign, index) => {

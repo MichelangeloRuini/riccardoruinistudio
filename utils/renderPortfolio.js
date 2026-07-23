@@ -28,6 +28,10 @@ function createPortfolioProjectCard(project) {
   const image = document.createElement("img");
   const fallback = document.createElement("div");
   const caption = document.createElement("figcaption");
+  const captionInfo = document.createElement("div");
+  const client = document.createElement("span");
+  const title = document.createElement("span");
+  const viewLabel = document.createElement("span");
   const label = getPortfolioProjectLabel(project);
 
   article.className = "portfolio-card";
@@ -46,7 +50,19 @@ function createPortfolioProjectCard(project) {
   fallback.hidden = true;
 
   caption.className = "portfolio-card-caption";
-  caption.textContent = label;
+  captionInfo.className = "portfolio-card-caption-info";
+  client.className = "portfolio-card-client";
+  client.textContent = project.client;
+  title.className = "portfolio-card-title";
+  title.textContent = project.title;
+  viewLabel.className = "portfolio-card-view";
+  viewLabel.textContent = "VIEW ↗";
+
+  captionInfo.appendChild(client);
+  if (typeof project.title === "string" && project.title.trim()) {
+    captionInfo.appendChild(title);
+  }
+  caption.append(captionInfo, viewLabel);
 
   image.addEventListener("error", () => {
     showPortfolioImageFallback(image, fallback, visual);

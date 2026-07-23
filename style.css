@@ -1123,7 +1123,8 @@ body.entered .custom-cursor {
   display: block;
   width: 100%;
   height: auto;
-  transition: opacity 0.25s ease;
+  transform: scale(1);
+  transition: transform 250ms ease;
 }
 
 .portfolio-image-fallback {
@@ -1146,26 +1147,53 @@ body.entered .custom-cursor {
 
 .portfolio-card-caption {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 24px 18px 16px;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 18px;
   color: #fff;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.42), transparent);
-  font-size: 11px;
+  background: rgba(0, 0, 0, 0.12);
+  font-size: 12px;
   line-height: 1.15;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(5px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 250ms ease;
   pointer-events: none;
+}
+
+.portfolio-card-caption-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.portfolio-card-client {
+  font-weight: 600;
+}
+
+.portfolio-card-title {
+  font-size: 10px;
+}
+
+.portfolio-card-view {
+  flex: 0 0 auto;
+  font-size: 10px;
+  letter-spacing: 0.04em;
 }
 
 .portfolio-card-link:hover .portfolio-card-caption,
 .portfolio-card-link:focus .portfolio-card-caption,
 .portfolio-card-link:focus-visible .portfolio-card-caption {
   opacity: 1;
-  transform: translateY(0);
+}
+
+.portfolio-card-link:hover .portfolio-card-visual img,
+.portfolio-card-link:focus .portfolio-card-visual img,
+.portfolio-card-link:focus-visible .portfolio-card-visual img {
+  transform: scale(1.015);
 }
 
 .portfolio-card-link:focus-visible {
@@ -1256,11 +1284,21 @@ body.entered .custom-cursor {
 @media (hover: none) {
   .portfolio-card-caption {
     position: static;
+    display: block;
     padding: 9px 0 0;
     color: #000;
     background: transparent;
     opacity: 1;
-    transform: none;
+  }
+
+  .portfolio-card-view {
+    display: none;
+  }
+
+  .portfolio-card-link:hover .portfolio-card-visual img,
+  .portfolio-card-link:focus .portfolio-card-visual img,
+  .portfolio-card-link:focus-visible .portfolio-card-visual img {
+    transform: scale(1);
   }
 }
 

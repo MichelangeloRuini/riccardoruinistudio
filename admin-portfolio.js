@@ -259,7 +259,7 @@
   }
 
   async function loadProjects() {
-    projectsList.textContent = "Loading Brand Identity projects...";
+    projectsList.textContent = "Loading Visual Identity projects...";
 
     try {
       const response = await fetch(`/api/portfolio-projects?section=${encodeURIComponent(PORTFOLIO_SECTION)}`);
@@ -270,7 +270,7 @@
       projectsList.replaceChildren();
 
       if (!result.projects.length) {
-        projectsList.textContent = "No Brand Identity projects found.";
+        projectsList.textContent = "No Visual Identity projects found.";
         return;
       }
 
@@ -300,7 +300,7 @@
     createButton.hidden = true;
     saveEditButton.hidden = false;
     cancelEditButton.hidden = false;
-    formTitle.textContent = "EDIT BRAND IDENTITY PROJECT";
+    formTitle.textContent = "EDIT VISUAL IDENTITY PROJECT";
     existingCoverSelect.replaceChildren();
 
     project.imageMedia.forEach(filename => {
@@ -333,7 +333,7 @@
     createButton.hidden = false;
     saveEditButton.hidden = true;
     cancelEditButton.hidden = true;
-    formTitle.textContent = "RRS BRAND IDENTITY ADMIN";
+    formTitle.textContent = "RRS VISUAL IDENTITY ADMIN";
     existingCoverSelect.replaceChildren();
   }
 
@@ -363,7 +363,7 @@
     selectedFiles.forEach(file => formData.append("files", file));
 
     createButton.disabled = true;
-    output.value = "Creating Brand Identity project...";
+    output.value = "Creating Visual Identity project...";
 
     try {
       const response = await fetch("/api/create-portfolio-project", {
@@ -388,7 +388,7 @@
     if (!editingProject) return;
 
     saveEditButton.disabled = true;
-    output.value = "Saving Brand Identity metadata...";
+    output.value = "Saving Visual Identity metadata...";
 
     try {
       const response = await fetch("/api/edit-portfolio-project", {

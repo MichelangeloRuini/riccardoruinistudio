@@ -12,7 +12,7 @@
       .toLowerCase()
       .replace(/[\s_]+/g, "-");
     const sectionLabels = {
-      "brand-identity": "Brand Identity",
+      "brand-identity": "Visual Identity",
       "magazine-books": "Magazine and Books",
       "magazine-and-books": "Magazine and Books",
       branding: "Branding",
