@@ -2246,5 +2246,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "trussardi-jeans-ss-2015",
+  client: "Trussardi",
+  title: "Jeans SS 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/trussardi-jeans-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Gadir Rajab"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];

@@ -9,6 +9,8 @@ const campaignsList = document.getElementById("campaignsList");
 const refreshCampaignsButton = document.getElementById("refreshCampaigns");
 const saveCampaignOrderButton = document.getElementById("saveCampaignOrder");
 const publishButton = document.getElementById("publishSite");
+const ADMIN_THUMBNAIL_FALLBACK =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath fill='%231a1a1a' d='M0 0h1v1H0z'/%3E%3C/svg%3E";
 
 const clientInput = document.getElementById("client");
 const titleInput = document.getElementById("title");
@@ -396,6 +398,28 @@ function addStagedEditMediaFiles(files) {
   }
 }
 
+function installDashboardThumbnailFallback(image) {
+  let fallbackAttempted = false;
+
+  function handleThumbnailError() {
+    if (!fallbackAttempted) {
+      fallbackAttempted = true;
+      image.src = ADMIN_THUMBNAIL_FALLBACK;
+      return;
+    }
+
+    image.removeEventListener("error", handleThumbnailError);
+    image.onerror = null;
+
+    const placeholder = document.createElement("div");
+    placeholder.className = image.className;
+    placeholder.setAttribute("aria-hidden", "true");
+    image.replaceWith(placeholder);
+  }
+
+  image.addEventListener("error", handleThumbnailError);
+}
+
 async function loadCampaigns() {
   campaignsList.innerHTML = "Loading campaigns...";
 
@@ -458,7 +482,7 @@ async function loadCampaigns() {
         <img
           class="campaign-thumb"
           src="assets/campaigns/${campaign.id}/01.webp"
-          onerror="this.src='assets/admin/no-preview.jpg'"
+          alt=""
         >
 
         <div class="campaign-row-info">
@@ -478,9 +502,12 @@ async function loadCampaigns() {
 
       campaignsList.appendChild(item);
 
+      const thumbnail = item.querySelector(".campaign-thumb");
       const editButton = item.querySelector(".edit-campaign");
       const duplicateButton = item.querySelector(".duplicate-campaign");
       const deleteButton = item.querySelector(".delete-campaign");
+
+      installDashboardThumbnailFallback(thumbnail);
 
       editButton.addEventListener("click", () => {
         if (isAddingCampaignMedia) return;
