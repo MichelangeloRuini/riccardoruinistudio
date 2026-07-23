@@ -2181,5 +2181,48 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "valentino-women-ss-2015",
+  client: "Valentino",
+  title: "women ss 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Michal Pudelka"
+    },
+    {
+      label: "Director",
+      value: "Michal Pudelka"
+    },
+    {
+      label: "Models",
+      value: [
+        "Clementine Deraedt",
+        "Grace Simmons",
+        "Hedvig Palm",
+        "Maartje Verhoef",
+        "Vanessa Moody"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
