@@ -2392,5 +2392,30 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "gucci-the-lady-web-2015",
+  client: "Gucci",
+  title: "The Lady Web 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-the-lady-web-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Director",
+      value: "Diana Kunst"
+    },
+    {
+      label: "Talent",
+      value: "Lykke Li"
+    }
+  ],
+
+  media: [
+    "video-01.mp4"
+  ]
 }
 ];
