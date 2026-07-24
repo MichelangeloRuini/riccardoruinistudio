@@ -3059,5 +3059,30 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "liu-jo-main-ss-2013",
+  client: "Liu Jo",
+  title: "Main SS 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-main-ss-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
