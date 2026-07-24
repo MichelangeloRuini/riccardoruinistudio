@@ -2830,5 +2830,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "cerruti-fw-2013",
+  client: "Cerruti",
+  title: "FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/cerruti-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Jeff Burton"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
