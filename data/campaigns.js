@@ -3981,5 +3981,30 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "liu-jo-jeans-ss-2010",
+  client: "Liu Jo",
+  title: "Jeans SS 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-ss-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
