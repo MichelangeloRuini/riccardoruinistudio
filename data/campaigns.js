@@ -2330,5 +2330,31 @@ const campaigns = [
     "01.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "falconeri-ss-2015",
+  client: "Falconeri",
+  title: "SS 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/falconeri-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Talent",
+      value: "Stefano Accorsi"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
