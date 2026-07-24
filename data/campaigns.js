@@ -3006,5 +3006,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-forever-now-2013",
+  client: "Gucci",
+  title: "Forever Now 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-forever-now-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Charlotte Casiraghi"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
