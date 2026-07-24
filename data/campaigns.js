@@ -2417,5 +2417,26 @@ const campaigns = [
   media: [
     "video-01.mp4"
   ]
+},
+
+{
+  id: "cerruti-fw-2014",
+  client: "Cerruti",
+  title: "FW 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/cerruti-fw-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Sims"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
