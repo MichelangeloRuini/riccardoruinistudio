@@ -3597,5 +3597,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "liu-jo-bottom-up-fw-2011",
+  client: "Liu Jo",
+  title: "Bottom Up FW 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-bottom-up-fw-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
