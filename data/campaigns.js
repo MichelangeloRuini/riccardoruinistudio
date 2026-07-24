@@ -2804,5 +2804,31 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "elie-saab-fw-2013",
+  client: "Elie Saab",
+  title: "FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/elie-saab-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Craig McDean"
+    },
+    {
+      label: "Model",
+      value: "Karmen Pedaru"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
