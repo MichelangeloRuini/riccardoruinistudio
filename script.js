@@ -1,6 +1,6 @@
 const clients = [
   "10 Magazine", "Allora Fest", "Blazé", "Bulgari", "Bulgari Hotel & Residences",
-  "Cerruti", "Chantecler", "Diesel Watches", "Dirk Bikkembergs", "Dondup",
+  "Cerruti", "Chantecler", "Diesel", "Dirk Bikkembergs", "Dondup",
   "Elie Saab", "Elisabetta Franchi", "Emilio Pucci",  "Ermanno Scervino", "Falconeri", "Fendi", "Feudi di San Gregorio",
   "Ferragamo", "Francesco Scognamiglio", "GQ Style UK", "Gucci", "Hogan",
   "ICON Magazine", "Iceberg", "Intimissimi", "La Perla", "Liberty",
