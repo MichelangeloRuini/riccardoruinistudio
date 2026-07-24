@@ -4082,5 +4082,31 @@ const campaigns = [
     "video-02.mp4",
     "video-03.mp4"
   ]
+},
+
+{
+  id: "bulgari-man-2010",
+  client: "Bulgari",
+  title: "Man 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-man-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    },
+    {
+      label: "Talent",
+      value: "Clive Owen"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
