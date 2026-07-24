@@ -3779,5 +3779,42 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-flora-by-gucci-2011",
+  client: "Gucci",
+  title: "Flora By Gucci 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-flora-by-gucci-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    },
+    {
+      label: "Still Life Photographer",
+      value: "Guido Mocafico"
+    },
+    {
+      label: "Model",
+      value: "Abbey Lee"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg"
+  ]
 }
 ];
