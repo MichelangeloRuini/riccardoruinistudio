@@ -3623,5 +3623,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "patrizia-pepe-fw-2011",
+  client: "Patrizia Pepe",
+  title: "FW 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/patrizia-pepe-fw-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Edita Vilkeviciute"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
