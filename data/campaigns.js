@@ -3057,5 +3057,35 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2012",
+  client: "Gucci",
+  title: "FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Karmen Pedaru",
+        "Nadja Bender"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
