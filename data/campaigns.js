@@ -2688,5 +2688,26 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-flora-family-2014",
+  client: "Gucci",
+  title: "Flora Family 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-flora-family-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Guido Mocafico"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
