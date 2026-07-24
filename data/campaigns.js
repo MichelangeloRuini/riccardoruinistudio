@@ -4180,5 +4180,36 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2009",
+  client: "Gucci",
+  title: "SS 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Models",
+      value: [
+        "Natasha Poly",
+        "Abbey Lee",
+        "Lily Donaldson"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
