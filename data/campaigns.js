@@ -2759,5 +2759,27 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "valentino-men-fw-2013",
+  client: "Valentino",
+  title: "Men FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Craig McDean"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
