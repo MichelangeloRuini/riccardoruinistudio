@@ -3032,5 +3032,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-eyewear-2013",
+  client: "Gucci",
+  title: "Eyewear 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-eyewear-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "James Franco"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
