@@ -4262,5 +4262,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "vilebrequin-ss-2009",
+  client: "Vilebrequin",
+  title: "SS 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/vilebrequin-ss-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Robert Wyatt"
+    },
+    {
+      label: "Model",
+      value: "Jean Francois Poirier"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
