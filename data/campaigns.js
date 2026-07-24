@@ -2300,5 +2300,35 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "liu-jo-bottom-up-ss-2015",
+  client: "Liu Jo",
+  title: "Bottom Up SS 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-bottom-up-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Angelo Pennetta"
+    },
+    {
+      label: "Director",
+      value: "Angelo Pennetta"
+    },
+    {
+      label: "Model",
+      value: "Dree Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
