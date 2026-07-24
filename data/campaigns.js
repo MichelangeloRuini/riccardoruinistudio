@@ -3160,5 +3160,26 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "hogan-fw-2012",
+  client: "Hogan",
+  title: "FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/hogan-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
