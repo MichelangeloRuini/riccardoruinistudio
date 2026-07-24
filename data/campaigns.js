@@ -3672,5 +3672,35 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2011",
+  client: "Gucci",
+  title: "SS 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Karmen Pedaru",
+        "Joan Smalls"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
