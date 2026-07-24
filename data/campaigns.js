@@ -3702,5 +3702,31 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "vilebrequin-ss-2011",
+  client: "Vilebrequin",
+  title: "SS 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/vilebrequin-ss-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "John Balsom"
+    },
+    {
+      label: "Model",
+      value: "Oriol El Cacho"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
