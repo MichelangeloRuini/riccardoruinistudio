@@ -2985,5 +2985,26 @@ const campaigns = [
     "01.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "gucci-kids-2013",
+  client: "Gucci",
+  title: "Kids 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-kids-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
