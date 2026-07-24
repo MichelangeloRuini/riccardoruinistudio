@@ -2955,5 +2955,35 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-man-2013",
+  client: "Bulgari",
+  title: "Man 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-man-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Director",
+      value: "Matteo Garrone"
+    },
+    {
+      label: "Talent",
+      value: "Eric Bana"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
