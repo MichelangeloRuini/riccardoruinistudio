@@ -3816,5 +3816,32 @@ const campaigns = [
     "08.jpg",
     "09.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2010",
+  client: "Gucci",
+  title: "FW 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Raquel Zimmermann"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
