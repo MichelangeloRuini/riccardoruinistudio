@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -524,7 +524,7 @@ const campaigns = [
       },
       {
         label: "Model",
-        value: "Dree Louise Hemingway"
+        value: "Dree Hemingway"
       }
     ],
     media: [
@@ -557,7 +557,7 @@ const campaigns = [
       },
       {
         label: "Model",
-        value: "Dree Louise Hemingway"
+        value: "Dree Hemingway"
       }
     ],
     media: [
@@ -1873,1216 +1873,1036 @@ const campaigns = [
       "04.jpg"
     ]
   },
-
-{
-  id: "valentino-women-fw-2015",
-  client: "Valentino",
-  title: "Women FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Michal Pudelka"
-    },
-    {
-      label: "Models",
-      value: [
-        "Grace Hartzel",
-        "Harleth Kuusik",
-        "Ine Neefs",
-        "Maartje Verhoef"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-men-fw-2015",
-  client: "Valentino",
-  title: "Men FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Bailey"
-    },
-    {
-      label: "Director",
-      value: "David Bailey"
-    },
-    {
-      label: "Model",
-      value: "George Barnett"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "red-valentino-fw-2015",
-  client: "RED Valentino",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/red-valentino-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Venetia Scott"
-    },
-    {
-      label: "Director",
-      value: "Venetia Scott"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "vionnet-fw-2015",
-  client: "Vionnet",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/vionnet-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Dylan Don"
-    },
-    {
-      label: "Director",
-      value: "Riccardo Ruini"
-    },
-    {
-      label: "Models",
-      value: [
-        "Kim Peers",
-        "Constanza Saravia"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "marina-rinaldi-fw-2015",
-  client: "Marina Rinaldi",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/marina-rinaldi-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Bruce Weber"
-    },
-    {
-      label: "Director",
-      value: "Bruce Weber"
-    },
-    {
-      label: "Talent",
-      value: "Patricia Arquette"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "peuterey-fw-2015",
-  client: "Peuterey",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/peuterey-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    },
-    {
-      label: "Model",
-      value: "Carla Ciffoni"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "emilio-pucci-fw-2015",
-  client: "Emilio Pucci",
-  title: "FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/emilio-pucci-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Gisele Bundchen"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-denim-collection-fw-2015",
-  client: "Liu Jo",
-  title: "Jeans Denim Collection FW 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-denim-collection-fw-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Dusan Reljin"
-    },
-    {
-      label: "Director",
-      value: "Dusan Reljin"
-    },
-    {
-      label: "Model",
-      value: "Dree Hemingway"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "valentino-pre-fall-2015",
-  client: "Valentino",
-  title: "Pre Fall 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-pre-fall-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Michal Pudelka"
-    },
-    {
-      label: "Director",
-      value: "Michal Pudelka"
-    },
-    {
-      label: "Models",
-      value: [
-        "Grace Hartzel",
-        "Harleth Kuusik",
-        "Ine Neefs",
-        "Maartje Verhoef"
-      ]
-    },
-    {
-      label: "Awards",
-      value: "Clio Fashion & Beauty Award Bronze 2015"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-ss-2015",
-  client: "GUCCI",
-  title: "SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Malgosia Bela"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2015",
-  client: "Valentino",
-  title: "women ss 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Michal Pudelka"
-    },
-    {
-      label: "Director",
-      value: "Michal Pudelka"
-    },
-    {
-      label: "Models",
-      value: [
-        "Clementine Deraedt",
-        "Grace Simmons",
-        "Hedvig Palm",
-        "Maartje Verhoef",
-        "Vanessa Moody"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "06.jpg",
-    "07.jpg",
-    "08.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "trussardi-main-ss-2015",
-  client: "Trussardi",
-  title: "Main SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/trussardi-main-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Gadir Rajab"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "trussardi-jeans-ss-2015",
-  client: "Trussardi",
-  title: "Jeans SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/trussardi-jeans-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Gadir Rajab"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-ss-2015",
-  client: "Liu Jo",
-  title: "Jeans SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Angelo Pennetta"
-    },
-    {
-      label: "Director",
-      value: "Angelo Pennetta"
-    },
-    {
-      label: "Model",
-      value: "Dree Hemingway"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "liu-jo-bottom-up-ss-2015",
-  client: "Liu Jo",
-  title: "Bottom Up SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-bottom-up-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Angelo Pennetta"
-    },
-    {
-      label: "Director",
-      value: "Angelo Pennetta"
-    },
-    {
-      label: "Model",
-      value: "Dree Hemingway"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "falconeri-ss-2015",
-  client: "Falconeri",
-  title: "SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/falconeri-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Talent",
-      value: "Stefano Accorsi"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "valentino-men-ss-2015",
-  client: "Valentino",
-  title: "Men SS 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-ss-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Bailey"
-    },
-    {
-      label: "Director",
-      value: "David Bailey"
-    },
-    {
-      label: "Models",
-      value: [
-        "George Barnett",
-        "Matthieu Gregoire",
-        "Tommaso de Benedictis"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-the-lady-web-2015",
-  client: "Gucci",
-  title: "The Lady Web 2015",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-the-lady-web-2015/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Director",
-      value: "Diana Kunst"
-    },
-    {
-      label: "Talent",
-      value: "Lykke Li"
-    }
-  ],
-
-  media: [
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "cerruti-fw-2014",
-  client: "Cerruti",
-  title: "FW 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/cerruti-fw-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-main-fw-2014",
-  client: "Liu Jo",
-  title: "Main FW 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-main-fw-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Angelo Pennetta"
-    },
-    {
-      label: "Model",
-      value: "Dree Hemingway"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "falconeri-fw-2014",
-  client: "Falconeri",
-  title: "FW 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/falconeri-fw-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Talents",
-      value: [
-        "Kasia Smutniak",
-        "Stefano Accorsi"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2014",
-  client: "Gucci",
-  title: "SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Amanda Walsh"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2014",
-  client: "Valentino",
-  title: "Women SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Craig McDean"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "valentino-men-ss-2014",
-  client: "Valentino",
-  title: "Men SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Craig McDean"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "emilio-pucci-ss-2014",
-  client: "Emilio Pucci",
-  title: "SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/emilio-pucci-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Gisele Bundchen"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "cerruti-ss-2014",
-  client: "Cerruti",
-  title: "SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/cerruti-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Jeff Burton"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-ss-2014",
-  client: "Liu Jo",
-  title: "Jeans SS 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-ss-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-premiere-eau-de-toilette-2014",
-  client: "Gucci",
-  title: "Premiere Eau de Toilette 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-premiere-eau-de-toilette-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Blake Lively"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "valentino-accessories-2014",
-  client: "Valentino",
-  title: "Accessories 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-accessories-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-flora-family-2014",
-  client: "Gucci",
-  title: "Flora Family 2014",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-flora-family-2014/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Guido Mocafico"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2013",
-  client: "Gucci",
-  title: "FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Abbey Lee"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2013",
-  client: "Valentino",
-  title: "Women FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "valentino-men-fw-2013",
-  client: "Valentino",
-  title: "Men FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-men-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Craig McDean"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "valentino-accessories-fw-2013",
-  client: "Valentino",
-  title: "Accessories FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-accessories-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Terry Richardson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "elie-saab-fw-2013",
-  client: "Elie Saab",
-  title: "FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/elie-saab-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Craig McDean"
-    },
-    {
-      label: "Model",
-      value: "Karmen Pedaru"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "cerruti-fw-2013",
-  client: "Cerruti",
-  title: "FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/cerruti-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Jeff Burton"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "loewe-fw-2013",
-  client: "Loewe",
-  title: "FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/loewe-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Penelope Cruz"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "dirk-bikkembergs-fw-2013",
-  client: "Dirk Bikkembergs",
-  title: "FW 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/dirk-bikkembergs-fw-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2013",
-  client: "Gucci",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Karmen Pedaru",
-        "Anja Rubik"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-ss-2013",
-  client: "Valentino",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sarah Moon"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "cerruti-ss-2013",
-  client: "Cerruti",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/cerruti-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Jeff Burton"
-    },
-    {
-      label: "Model",
-      value: "George Barnett"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "emilio-pucci-ss-2013",
-  client: "Emilio Pucci",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/emilio-pucci-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Amber Valletta"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "loewe-ss-2013",
-  client: "Loewe",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/loewe-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Penelope Cruz"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "vionnet-ss-2013",
-  client: "Vionnet",
-  title: "SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/vionnet-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Katja Rahlwes"
-    },
-    {
-      label: "Model",
-      value: "Malgosia Bela"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-main-ss-2013",
-  client: "Liu Jo",
-  title: "Main SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-main-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-}
+  {
+    id: "valentino-women-fw-2015",
+    client: "Valentino",
+    title: "Women FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Michal Pudelka"
+      },
+      {
+        label: "Models",
+        value: [
+          "Grace Hartzel",
+          "Harleth Kuusik",
+          "Ine Neefs",
+          "Maartje Verhoef"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-men-fw-2015",
+    client: "Valentino",
+    title: "Men FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Bailey"
+      },
+      {
+        label: "Director",
+        value: "David Bailey"
+      },
+      {
+        label: "Model",
+        value: "George Barnett"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "red-valentino-fw-2015",
+    client: "RED Valentino",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/red-valentino-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Venetia Scott"
+      },
+      {
+        label: "Director",
+        value: "Venetia Scott"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "vionnet-fw-2015",
+    client: "Vionnet",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/vionnet-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Dylan Don"
+      },
+      {
+        label: "Director",
+        value: "Riccardo Ruini"
+      },
+      {
+        label: "Models",
+        value: [
+          "Kim Peers",
+          "Constanza Saravia"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "marina-rinaldi-fw-2015",
+    client: "Marina Rinaldi",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/marina-rinaldi-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Bruce Weber"
+      },
+      {
+        label: "Director",
+        value: "Bruce Weber"
+      },
+      {
+        label: "Talent",
+        value: "Patricia Arquette"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "peuterey-fw-2015",
+    client: "Peuterey",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/peuterey-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      },
+      {
+        label: "Model",
+        value: "Carla Ciffoni"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "emilio-pucci-fw-2015",
+    client: "Emilio Pucci",
+    title: "FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/emilio-pucci-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Gisele Bundchen"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-denim-collection-fw-2015",
+    client: "Liu Jo",
+    title: "Jeans Denim Collection FW 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-denim-collection-fw-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Dusan Reljin"
+      },
+      {
+        label: "Director",
+        value: "Dusan Reljin"
+      },
+      {
+        label: "Model",
+        value: "Dree Hemingway"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "valentino-pre-fall-2015",
+    client: "Valentino",
+    title: "Pre Fall 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-pre-fall-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Michal Pudelka"
+      },
+      {
+        label: "Director",
+        value: "Michal Pudelka"
+      },
+      {
+        label: "Models",
+        value: [
+          "Grace Hartzel",
+          "Harleth Kuusik",
+          "Ine Neefs",
+          "Maartje Verhoef"
+        ]
+      },
+      {
+        label: "Awards",
+        value: "Clio Fashion & Beauty Award Bronze 2015"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-ss-2015",
+    client: "GUCCI",
+    title: "SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Malgosia Bela"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2015",
+    client: "Valentino",
+    title: "women ss 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Michal Pudelka"
+      },
+      {
+        label: "Director",
+        value: "Michal Pudelka"
+      },
+      {
+        label: "Models",
+        value: [
+          "Clementine Deraedt",
+          "Grace Simmons",
+          "Hedvig Palm",
+          "Maartje Verhoef",
+          "Vanessa Moody"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "trussardi-main-ss-2015",
+    client: "Trussardi",
+    title: "Main SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/trussardi-main-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Gadir Rajab"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "trussardi-jeans-ss-2015",
+    client: "Trussardi",
+    title: "Jeans SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/trussardi-jeans-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Gadir Rajab"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-ss-2015",
+    client: "Liu Jo",
+    title: "Jeans SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Director",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Model",
+        value: "Dree Hemingway"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "liu-jo-bottom-up-ss-2015",
+    client: "Liu Jo",
+    title: "Bottom Up SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-bottom-up-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Director",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Model",
+        value: "Dree Hemingway"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "falconeri-ss-2015",
+    client: "Falconeri",
+    title: "SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/falconeri-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Talent",
+        value: "Stefano Accorsi"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "valentino-men-ss-2015",
+    client: "Valentino",
+    title: "Men SS 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-ss-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Bailey"
+      },
+      {
+        label: "Director",
+        value: "David Bailey"
+      },
+      {
+        label: "Models",
+        value: [
+          "George Barnett",
+          "Matthieu Gregoire",
+          "Tommaso de Benedictis"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-the-lady-web-2015",
+    client: "Gucci",
+    title: "The Lady Web 2015",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-the-lady-web-2015/",
+    border: false,
+    credits: [
+      {
+        label: "Director",
+        value: "Diana Kunst"
+      },
+      {
+        label: "Talent",
+        value: "Lykke Li"
+      }
+    ],
+    media: [
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "cerruti-fw-2014",
+    client: "Cerruti",
+    title: "FW 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/cerruti-fw-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-main-fw-2014",
+    client: "Liu Jo",
+    title: "Main FW 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-main-fw-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Model",
+        value: "Dree Hemingway"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "falconeri-fw-2014",
+    client: "Falconeri",
+    title: "FW 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/falconeri-fw-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Talents",
+        value: [
+          "Kasia Smutniak",
+          "Stefano Accorsi"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2014",
+    client: "Gucci",
+    title: "SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Amanda Walsh"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2014",
+    client: "Valentino",
+    title: "Women SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Craig McDean"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "valentino-men-ss-2014",
+    client: "Valentino",
+    title: "Men SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Craig McDean"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "emilio-pucci-ss-2014",
+    client: "Emilio Pucci",
+    title: "SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/emilio-pucci-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Gisele Bundchen"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "cerruti-ss-2014",
+    client: "Cerruti",
+    title: "SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/cerruti-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Jeff Burton"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-ss-2014",
+    client: "Liu Jo",
+    title: "Jeans SS 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-ss-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-premiere-eau-de-toilette-2014",
+    client: "Gucci",
+    title: "Premiere Eau de Toilette 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-premiere-eau-de-toilette-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Blake Lively"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "valentino-accessories-2014",
+    client: "Valentino",
+    title: "Accessories 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-accessories-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-flora-family-2014",
+    client: "Gucci",
+    title: "Flora Family 2014",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-flora-family-2014/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Guido Mocafico"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2013",
+    client: "Gucci",
+    title: "FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Abbey Lee"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2013",
+    client: "Valentino",
+    title: "Women FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "valentino-men-fw-2013",
+    client: "Valentino",
+    title: "Men FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-men-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Craig McDean"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "valentino-accessories-fw-2013",
+    client: "Valentino",
+    title: "Accessories FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-accessories-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Terry Richardson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "elie-saab-fw-2013",
+    client: "Elie Saab",
+    title: "FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/elie-saab-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Craig McDean"
+      },
+      {
+        label: "Model",
+        value: "Karmen Pedaru"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "cerruti-fw-2013",
+    client: "Cerruti",
+    title: "FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/cerruti-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Jeff Burton"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "loewe-fw-2013",
+    client: "Loewe",
+    title: "FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/loewe-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Penelope Cruz"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "dirk-bikkembergs-fw-2013",
+    client: "Dirk Bikkembergs",
+    title: "FW 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/dirk-bikkembergs-fw-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2013",
+    client: "Gucci",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Karmen Pedaru",
+          "Anja Rubik"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-ss-2013",
+    client: "Valentino",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sarah Moon"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "cerruti-ss-2013",
+    client: "Cerruti",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/cerruti-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Jeff Burton"
+      },
+      {
+        label: "Model",
+        value: "George Barnett"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "emilio-pucci-ss-2013",
+    client: "Emilio Pucci",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/emilio-pucci-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Amber Valletta"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "loewe-ss-2013",
+    client: "Loewe",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/loewe-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Penelope Cruz"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "vionnet-ss-2013",
+    client: "Vionnet",
+    title: "SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/vionnet-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Katja Rahlwes"
+      },
+      {
+        label: "Model",
+        value: "Malgosia Bela"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-main-ss-2013",
+    client: "Liu Jo",
+    title: "Main SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-main-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  }
 ];
