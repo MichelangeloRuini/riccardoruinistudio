@@ -2493,5 +2493,32 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2014",
+  client: "Gucci",
+  title: "SS 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Amanda Walsh"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
