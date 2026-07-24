@@ -4211,5 +4211,30 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "valentino-women-ss-2009",
+  client: "Valentino",
+  title: "Women SS 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Stephanie Seymour"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
