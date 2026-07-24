@@ -2438,5 +2438,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "liu-jo-main-fw-2014",
+  client: "Liu Jo",
+  title: "Main FW 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-main-fw-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Angelo Pennetta"
+    },
+    {
+      label: "Model",
+      value: "Dree Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
