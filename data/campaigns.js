@@ -3369,5 +3369,37 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "gucci-premiere-2012",
+  client: "Gucci",
+  title: "Première 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-premiere-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Director",
+      value: "Nicolas Winding Refn"
+    },
+    {
+      label: "Talent",
+      value: "Blake Lively"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
