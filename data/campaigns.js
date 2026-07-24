@@ -2544,5 +2544,28 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "valentino-men-ss-2014",
+  client: "Valentino",
+  title: "Men SS 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-ss-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Craig McDean"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
