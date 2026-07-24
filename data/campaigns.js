@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -995,7 +995,7 @@ const campaigns = [
     credits: [
       {
         label: "Photographer",
-        value: "Inez & Vinoodh"
+        value: "Inez and Vinoodh"
       },
       {
         label: "Models",
@@ -3384,88 +3384,76 @@ const campaigns = [
       "video-01.mp4"
     ]
   },
-
-{
-  id: "bulgari-omnia-2012",
-  client: "Bulgari",
-  title: "Omnia 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-omnia-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Models",
-      value: [
-        "Carola Remer",
-        "Josephine Skriver"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "bulgari-man-2012",
-  client: "Bulgari",
-  title: "Man 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-man-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Talent",
-      value: "Clive Owen"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-mon-jasmin-noir-2012",
-  client: "Bulgari",
-  title: "Mon Jasmin Noir 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-mon-jasmin-noir-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "Kirsten Dunst"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-}
+  {
+    id: "bulgari-omnia-2012",
+    client: "Bulgari",
+    title: "Omnia 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-omnia-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Models",
+        value: [
+          "Carola Remer",
+          "Josephine Skriver"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "bulgari-man-2012",
+    client: "Bulgari",
+    title: "Man 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-man-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Talent",
+        value: "Clive Owen"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-mon-jasmin-noir-2012",
+    client: "Bulgari",
+    title: "Mon Jasmin Noir 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-mon-jasmin-noir-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "Kirsten Dunst"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  }
 ];
