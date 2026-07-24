@@ -2877,5 +2877,27 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "dirk-bikkembergs-fw-2013",
+  client: "Dirk Bikkembergs",
+  title: "FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/dirk-bikkembergs-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
