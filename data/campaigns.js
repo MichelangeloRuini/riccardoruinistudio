@@ -3133,5 +3133,32 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "emilio-pucci-fw-2012",
+  client: "Emilio Pucci",
+  title: "FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/emilio-pucci-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Amber Valletta"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
