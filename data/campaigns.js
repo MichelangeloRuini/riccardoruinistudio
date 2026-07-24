@@ -3439,5 +3439,33 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-mon-jasmin-noir-2012",
+  client: "Bulgari",
+  title: "Mon Jasmin Noir 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-mon-jasmin-noir-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "Kirsten Dunst"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
