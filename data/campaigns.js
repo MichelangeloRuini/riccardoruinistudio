@@ -4236,5 +4236,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-cruise-2009",
+  client: "Gucci",
+  title: "Cruise 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-cruise-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Natasha Poly"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
