@@ -3207,5 +3207,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "liu-jo-jeans-fw-2012",
+  client: "Liu Jo",
+  title: "Jeans FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
