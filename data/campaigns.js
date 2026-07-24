@@ -2709,5 +2709,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2013",
+  client: "Gucci",
+  title: "FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Abbey Lee"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
