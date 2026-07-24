@@ -3843,5 +3843,39 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "valentino-women-fw-2010",
+  client: "Valentino",
+  title: "Women FW 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Sims"
+    },
+    {
+      label: "Models",
+      value: [
+        "Freja Beha Erichsen",
+        "Jac Jagaciak",
+        "Tati Cotliar"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg"
+  ]
 }
 ];
