@@ -4032,5 +4032,55 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-guilty-2010",
+  client: "Gucci",
+  title: "Guilty 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-guilty-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Still Life Photographer",
+      value: "Guido Mocafico"
+    },
+    {
+      label: "Director",
+      value: "Frank Miller"
+    },
+    {
+      label: "Talents",
+      value: [
+        "Evan Rachel Wood",
+        "Chris Evans"
+      ]
+    },
+    {
+      label: "Awards",
+      value: [
+        "42° Key Award",
+        "Key Award 2010"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "video-01.mp4",
+    "video-02.mp4",
+    "video-03.mp4"
+  ]
 }
 ];
