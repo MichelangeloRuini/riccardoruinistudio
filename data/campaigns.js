@@ -3258,5 +3258,34 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-pre-fall-2012",
+  client: "Gucci",
+  title: "Pre Fall 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-pre-fall-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Karmen Pedaru",
+        "Nadja Bender"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
