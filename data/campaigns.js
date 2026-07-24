@@ -2781,5 +2781,28 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "valentino-accessories-fw-2013",
+  client: "Valentino",
+  title: "Accessories FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-accessories-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Terry Richardson"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
