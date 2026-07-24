@@ -1,5 +1,5 @@
 const campaigns = [
-  {
+{
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -2904,5 +2904,30 @@ const campaigns = [
     media: [
       "01.jpg"
     ]
-  }
+  },
+
+{
+  id: "liu-jo-jeans-ss-2013",
+  client: "Liu Jo",
+  title: "Jeans SS 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-ss-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
+}
 ];
