@@ -3728,5 +3728,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-cruise-2011",
+  client: "Gucci",
+  title: "Cruise 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-cruise-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Karmen Pedaru"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
