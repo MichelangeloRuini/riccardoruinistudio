@@ -2953,5 +2953,31 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "cerruti-ss-2013",
+  client: "Cerruti",
+  title: "SS 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/cerruti-ss-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Jeff Burton"
+    },
+    {
+      label: "Model",
+      value: "George Barnett"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
