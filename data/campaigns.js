@@ -3318,5 +3318,29 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "valentino-women-ss-2012",
+  client: "Valentino",
+  title: "Women SS 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Deborah Turbeville"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
