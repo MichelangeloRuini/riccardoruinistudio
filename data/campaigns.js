@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -2905,563 +2905,483 @@ const campaigns = [
       "01.jpg"
     ]
   },
-
-{
-  id: "liu-jo-jeans-ss-2013",
-  client: "Liu Jo",
-  title: "Jeans SS 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-ss-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-cruise-2013",
-  client: "Gucci",
-  title: "Cruise 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-cruise-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Karmen Pedaru"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-man-2013",
-  client: "Bulgari",
-  title: "Man 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-man-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Director",
-      value: "Matteo Garrone"
-    },
-    {
-      label: "Talent",
-      value: "Eric Bana"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-kids-2013",
-  client: "Gucci",
-  title: "Kids 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-kids-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-forever-now-2013",
-  client: "Gucci",
-  title: "Forever Now 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-forever-now-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Charlotte Casiraghi"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-eyewear-2013",
-  client: "Gucci",
-  title: "Eyewear 2013",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-eyewear-2013/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "James Franco"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2012",
-  client: "Gucci",
-  title: "FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Karmen Pedaru",
-        "Nadja Bender"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2012",
-  client: "Valentino",
-  title: "Women FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Deborah Turbeville"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "gucci-kids-fw-12",
-  client: "Gucci",
-  title: "Kids FW 12",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-kids-fw-12/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Fabrice Bouquet"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "emilio-pucci-fw-2012",
-  client: "Emilio Pucci",
-  title: "FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/emilio-pucci-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Amber Valletta"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "hogan-fw-2012",
-  client: "Hogan",
-  title: "FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/hogan-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-main-fw-2012",
-  client: "Liu Jo",
-  title: "Main FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-main-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-fw-2012",
-  client: "Liu Jo",
-  title: "Jeans FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "patrizia-pepe-fw-2012",
-  client: "Patrizia Pepe",
-  title: "FW 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/patrizia-pepe-fw-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Anja Rubik"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-pre-fall-2012",
-  client: "Gucci",
-  title: "Pre Fall 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-pre-fall-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Karmen Pedaru",
-        "Nadja Bender"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2012",
-  client: "Gucci",
-  title: "SS 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Karmen Pedaru",
-        "Abbey Lee"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2012",
-  client: "Valentino",
-  title: "Women SS 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Deborah Turbeville"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "patrizia-pepe-ss-2012",
-  client: "Patrizia Pepe",
-  title: "SS 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/patrizia-pepe-ss-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Edita Vilkeviciute"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "gucci-premiere-2012",
-  client: "Gucci",
-  title: "Première 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-premiere-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Director",
-      value: "Nicolas Winding Refn"
-    },
-    {
-      label: "Talent",
-      value: "Blake Lively"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-made-to-measure-2012",
-  client: "Gucci",
-  title: "Made To Measure 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-made-to-measure-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Nathaniel Goldberg"
-    },
-    {
-      label: "Talent",
-      value: "James Franco"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-guilty-black-2012",
-  client: "Gucci",
-  title: "Guilty Black 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-guilty-black-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Director",
-      value: "Frank Miller"
-    },
-    {
-      label: "Talents",
-      value: [
-        "Evan Rachel Wood",
-        "Chris Evans"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "video-01.mp4"
-  ]
-}
+  {
+    id: "liu-jo-jeans-ss-2013",
+    client: "Liu Jo",
+    title: "Jeans SS 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-ss-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-cruise-2013",
+    client: "Gucci",
+    title: "Cruise 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-cruise-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Karmen Pedaru"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-man-2013",
+    client: "Bulgari",
+    title: "Man 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-man-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Director",
+        value: "Matteo Garrone"
+      },
+      {
+        label: "Talent",
+        value: "Eric Bana"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-kids-2013",
+    client: "Gucci",
+    title: "Kids 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-kids-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-forever-now-2013",
+    client: "Gucci",
+    title: "Forever Now 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-forever-now-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Charlotte Casiraghi"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-eyewear-2013",
+    client: "Gucci",
+    title: "Eyewear 2013",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-eyewear-2013/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "James Franco"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2012",
+    client: "Gucci",
+    title: "FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Karmen Pedaru",
+          "Nadja Bender"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2012",
+    client: "Valentino",
+    title: "Women FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Deborah Turbeville"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "gucci-kids-fw-12",
+    client: "Gucci",
+    title: "Kids FW 12",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-kids-fw-12/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Fabrice Bouquet"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "emilio-pucci-fw-2012",
+    client: "Emilio Pucci",
+    title: "FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/emilio-pucci-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Amber Valletta"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "hogan-fw-2012",
+    client: "Hogan",
+    title: "FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/hogan-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-main-fw-2012",
+    client: "Liu Jo",
+    title: "Main FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-main-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-fw-2012",
+    client: "Liu Jo",
+    title: "Jeans FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "patrizia-pepe-fw-2012",
+    client: "Patrizia Pepe",
+    title: "FW 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/patrizia-pepe-fw-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Anja Rubik"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-pre-fall-2012",
+    client: "Gucci",
+    title: "Pre Fall 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-pre-fall-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Karmen Pedaru",
+          "Nadja Bender"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2012",
+    client: "Gucci",
+    title: "SS 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Karmen Pedaru",
+          "Abbey Lee"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2012",
+    client: "Valentino",
+    title: "Women SS 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Deborah Turbeville"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "patrizia-pepe-ss-2012",
+    client: "Patrizia Pepe",
+    title: "SS 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/patrizia-pepe-ss-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Edita Vilkeviciute"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "gucci-premiere-2012",
+    client: "Gucci",
+    title: "Première 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-premiere-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Director",
+        value: "Nicolas Winding Refn"
+      },
+      {
+        label: "Talent",
+        value: "Blake Lively"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-made-to-measure-2012",
+    client: "Gucci",
+    title: "Made To Measure 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-made-to-measure-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Nathaniel Goldberg"
+      },
+      {
+        label: "Talent",
+        value: "James Franco"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-guilty-black-2012",
+    client: "Gucci",
+    title: "Guilty Black 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-guilty-black-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Director",
+        value: "Frank Miller"
+      },
+      {
+        label: "Talents",
+        value: [
+          "Evan Rachel Wood",
+          "Chris Evans"
+        ]
+      },
+      {
+        label: "Awards",
+        value: "45° Key Award"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "video-01.mp4"
+    ]
+  }
 ];
