@@ -2852,5 +2852,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "loewe-fw-2013",
+  client: "Loewe",
+  title: "FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/loewe-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Penelope Cruz"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
