@@ -4153,5 +4153,32 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "valentino-fw-09",
+  client: "Valentino",
+  title: "FW 09",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-fw-09/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Iris Strubegger"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
