@@ -2356,5 +2356,41 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "valentino-men-ss-2015",
+  client: "Valentino",
+  title: "Men SS 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-men-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Bailey"
+    },
+    {
+      label: "Director",
+      value: "David Bailey"
+    },
+    {
+      label: "Models",
+      value: [
+        "George Barnett",
+        "Matthieu Gregoire",
+        "Tommaso de Benedictis"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
