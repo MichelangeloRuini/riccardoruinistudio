@@ -3032,5 +3032,32 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "vionnet-ss-2013",
+  client: "Vionnet",
+  title: "SS 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/vionnet-ss-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Katja Rahlwes"
+    },
+    {
+      label: "Model",
+      value: "Malgosia Bela"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
