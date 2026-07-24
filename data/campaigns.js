@@ -4108,5 +4108,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-sunglasses-2010",
+  client: "Gucci",
+  title: "Sunglasses 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-sunglasses-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Daniel Jackson"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
