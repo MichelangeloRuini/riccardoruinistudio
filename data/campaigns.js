@@ -3287,5 +3287,36 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2012",
+  client: "Gucci",
+  title: "SS 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Karmen Pedaru",
+        "Abbey Lee"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
