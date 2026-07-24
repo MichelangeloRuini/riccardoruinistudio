@@ -3232,5 +3232,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "patrizia-pepe-fw-2012",
+  client: "Patrizia Pepe",
+  title: "FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/patrizia-pepe-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Anja Rubik"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
