@@ -3427,5 +3427,41 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-guilty-black-2012",
+  client: "Gucci",
+  title: "Guilty Black 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-guilty-black-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Director",
+      value: "Frank Miller"
+    },
+    {
+      label: "Talents",
+      value: [
+        "Evan Rachel Wood",
+        "Chris Evans"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
