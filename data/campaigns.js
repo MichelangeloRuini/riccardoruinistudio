@@ -2464,5 +2464,34 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "falconeri-fw-2014",
+  client: "Falconeri",
+  title: "FW 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/falconeri-fw-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Talents",
+      value: [
+        "Kasia Smutniak",
+        "Stefano Accorsi"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
