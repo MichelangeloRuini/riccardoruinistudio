@@ -3342,5 +3342,32 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "patrizia-pepe-ss-2012",
+  client: "Patrizia Pepe",
+  title: "SS 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/patrizia-pepe-ss-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Edita Vilkeviciute"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
