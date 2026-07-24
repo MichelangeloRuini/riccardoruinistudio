@@ -3401,5 +3401,31 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "gucci-made-to-measure-2012",
+  client: "Gucci",
+  title: "Made To Measure 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-made-to-measure-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Nathaniel Goldberg"
+    },
+    {
+      label: "Talent",
+      value: "James Franco"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
