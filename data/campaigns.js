@@ -3904,5 +3904,31 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "gucci-kids-ss-2010",
+  client: "Gucci",
+  title: "Kids SS 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-kids-ss-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Jennifer Lopez"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
