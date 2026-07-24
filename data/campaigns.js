@@ -3181,5 +3181,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "liu-jo-main-fw-2012",
+  client: "Liu Jo",
+  title: "Main FW 2012",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-main-fw-2012/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
