@@ -3649,5 +3649,28 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "valentino-women-ss-2011",
+  client: "Valentino",
+  title: "Women SS 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-ss-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "David Sims"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
