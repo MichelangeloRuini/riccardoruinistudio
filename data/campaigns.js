@@ -3503,5 +3503,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-pre-fall-2011",
+  client: "Gucci",
+  title: "Pre Fall 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-pre-fall-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
