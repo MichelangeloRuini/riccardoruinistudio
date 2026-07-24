@@ -2615,5 +2615,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "liu-jo-jeans-ss-2014",
+  client: "Liu Jo",
+  title: "Jeans SS 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-ss-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Sølve Sundsbø"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
