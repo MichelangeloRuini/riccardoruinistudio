@@ -483,6 +483,7 @@ async function loadCampaigns() {
           class="campaign-thumb"
           src="assets/campaigns/${campaign.id}/01.webp"
           alt=""
+          loading="lazy"
         >
 
         <div class="campaign-row-info">

@@ -2268,5 +2268,37 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "liu-jo-jeans-ss-2015",
+  client: "Liu Jo",
+  title: "Jeans SS 2015",
+  category: "Campaigns",
+  path: "assets/campaigns/liu-jo-jeans-ss-2015/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Angelo Pennetta"
+    },
+    {
+      label: "Director",
+      value: "Angelo Pennetta"
+    },
+    {
+      label: "Model",
+      value: "Dree Hemingway"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];

@@ -6,7 +6,7 @@ function createPortfolioSearchMedia(project, filename) {
   if (mediaType === "video") {
     const video = document.createElement("video");
     video.className = "campaign-media-item";
-    video.autoplay = true;
+    video.dataset.viewportPlayback = "";
     video.muted = true;
     video.loop = true;
     video.controls = true;

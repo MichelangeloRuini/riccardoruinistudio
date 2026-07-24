@@ -34,6 +34,8 @@ function createResultGroup(heading, items, renderItem) {
 function renderSearch() {
   const cleanQuery = RRSUnifiedSearch.normalize(query.trim());
 
+  RRSViewportVideoPlayback.unobserve(searchResults);
+
   if (!cleanQuery) {
     searchTitle.textContent = "SEARCH";
     searchResults.innerHTML = "";
@@ -113,6 +115,7 @@ function renderSearch() {
   });
 
   searchResults.replaceChildren(fragment);
+  RRSViewportVideoPlayback.observe(searchResults);
 }
 
 globalSearchInput.addEventListener("keydown", event => {

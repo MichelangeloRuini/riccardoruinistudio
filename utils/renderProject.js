@@ -28,7 +28,7 @@ function createMediaElement(campaign, file) {
     return `
       <video
         class="campaign-media-item ${campaign.border ? "has-border" : ""}"
-        autoplay
+        data-viewport-playback
         muted
         loop
         playsinline

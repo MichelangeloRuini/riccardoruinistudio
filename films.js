@@ -10,6 +10,7 @@ function getCampaignFilms(campaign) {
   );
 }
 
+RRSViewportVideoPlayback.unobserve(filmsPage);
 filmsPage.innerHTML = campaigns
   .map((campaign, index) => {
     const videoFiles = getCampaignFilms(campaign);
@@ -19,3 +20,4 @@ filmsPage.innerHTML = campaigns
     return renderProject(campaign, index, videoFiles);
   })
   .join("");
+RRSViewportVideoPlayback.observe(filmsPage);
