@@ -4130,5 +4130,28 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2009",
+  client: "Gucci",
+  title: "FW 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
