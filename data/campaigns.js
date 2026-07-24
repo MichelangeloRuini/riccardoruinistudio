@@ -2735,5 +2735,29 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "valentino-women-fw-2013",
+  client: "Valentino",
+  title: "Women FW 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-women-fw-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
