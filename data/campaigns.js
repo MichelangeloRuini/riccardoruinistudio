@@ -3877,5 +3877,32 @@ const campaigns = [
     "05.jpg",
     "06.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2010",
+  client: "Gucci",
+  title: "SS 2010",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2010/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Natasha Poly"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
