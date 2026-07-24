@@ -3754,5 +3754,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-forever-now-2011",
+  client: "Gucci",
+  title: "Forever Now 2011",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-forever-now-2011/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Peter Lindbergh"
+    },
+    {
+      label: "Talent",
+      value: "Charlotte Casiraghi"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
