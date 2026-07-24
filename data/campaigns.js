@@ -2641,5 +2641,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-premiere-eau-de-toilette-2014",
+  client: "Gucci",
+  title: "Premiere Eau de Toilette 2014",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-premiere-eau-de-toilette-2014/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Blake Lively"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
