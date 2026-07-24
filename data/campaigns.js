@@ -2899,5 +2899,35 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2013",
+  client: "Gucci",
+  title: "SS 2013",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2013/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Karmen Pedaru",
+        "Anja Rubik"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
