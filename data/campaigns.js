@@ -3111,5 +3111,27 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "gucci-kids-fw-12",
+  client: "Gucci",
+  title: "Kids FW 12",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-kids-fw-12/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Fabrice Bouquet"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
