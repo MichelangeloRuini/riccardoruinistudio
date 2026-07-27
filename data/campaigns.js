@@ -5016,5 +5016,28 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-the-2006",
+  client: "Bulgari",
+  title: "Thè 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-the-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Coppi & Barbieri"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
