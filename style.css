@@ -1115,6 +1115,71 @@ body.entered .custom-cursor {
     background:#1a1a1a;
 }
 
+/* ABOUT PAGE */
+
+.about-page {
+  padding: 58px var(--side-margin) 80px;
+  font-family: var(--font-editorial);
+  text-transform: uppercase;
+}
+
+.about-page .about-introduction {
+  max-width: 1500px;
+  margin-bottom: clamp(36px, 3.6vw, 58px);
+  font-size: 14px;
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-copy);
+  letter-spacing: 0.11em;
+}
+
+.about-page .about-introduction .editorial-emphasis {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.045em;
+}
+
+.about-page .about-introduction p {
+  margin: 0;
+}
+
+.about-page .about-introduction p + p {
+  margin-top: 20px;
+}
+
+.about-page .about-services {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(24px, 2vw, 36px);
+}
+
+.about-page .about-service {
+  min-width: 0;
+}
+
+.about-page .about-service-group + .about-service-group {
+  margin-top: 36px;
+}
+
+.about-page .about-service-title {
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.about-page .about-service-list {
+  font-size: 14px;
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-copy);
+  letter-spacing: 0.11em;
+}
+
+.about-page .about-service-list p {
+  margin: 0;
+}
+
 /* ==========================================================
    ISOLATED PORTFOLIO SECTIONS
 ========================================================== */
