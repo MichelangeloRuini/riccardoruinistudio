@@ -4656,5 +4656,31 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-jewellery-2008",
+  client: "Gucci",
+  title: "Jewellery 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-jewellery-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "Clare Danes"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
