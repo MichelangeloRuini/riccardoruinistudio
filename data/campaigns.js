@@ -4529,5 +4529,44 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "gucci-flora-by-gucci-2008",
+  client: "Gucci",
+  title: "Flora by Gucci 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-flora-by-gucci-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Director",
+      value: "Chris Cunningham"
+    },
+    {
+      label: "Model",
+      value: "Abbey Lee"
+    },
+    {
+      label: "Awards",
+      value: [
+        "Cannes Lion Best Use of Music Gold prize",
+        "Cannes Lion Best Cosmetics Bronze award",
+        "41° Key Award Eurobest Silver prize"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
