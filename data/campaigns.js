@@ -4995,5 +4995,26 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-amethyste-2006",
+  client: "Bulgari",
+  title: "Amethyste 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-amethyste-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
