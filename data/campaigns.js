@@ -4807,5 +4807,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-cruise-2007",
+  client: "Gucci",
+  title: "Cruise 2007",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-cruise-2007/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Model",
+      value: "Natasha Poly"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
