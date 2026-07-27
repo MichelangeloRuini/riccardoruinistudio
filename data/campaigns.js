@@ -5342,5 +5342,28 @@ const campaigns = [
     "08.jpg",
     "09.jpg"
   ]
+},
+
+{
+  id: "fendi-prefall-2001",
+  client: "Fendi",
+  title: "Prefall 2001",
+  category: "Campaigns",
+  path: "assets/campaigns/fendi-prefall-2001/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Jerome Esch"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
