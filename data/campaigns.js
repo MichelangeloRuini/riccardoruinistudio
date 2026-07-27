@@ -4892,5 +4892,31 @@ const campaigns = [
     "04.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "gucci-jewellery-2007",
+  client: "Gucci",
+  title: "Jewellery 2007",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-jewellery-2007/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "Drew Barrymore"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
