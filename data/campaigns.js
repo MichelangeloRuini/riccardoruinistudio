@@ -4755,5 +4755,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2007",
+  client: "Gucci",
+  title: "FW 2007",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2007/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Craig McDean"
+    },
+    {
+      label: "Model",
+      value: "Natasha Poly"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
