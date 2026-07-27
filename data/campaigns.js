@@ -5187,5 +5187,28 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-high-jewellery-2005",
+  client: "Bulgari",
+  title: "High Jewellery 2005",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-high-jewellery-2005/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Guido Mocafico"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
