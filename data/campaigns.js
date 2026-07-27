@@ -5231,5 +5231,32 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "fendi-ss-2003",
+  client: "Fendi",
+  title: "SS 2003",
+  category: "Campaigns",
+  path: "assets/campaigns/fendi-ss-2003/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Jessica Miller"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
