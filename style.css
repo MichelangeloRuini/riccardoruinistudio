@@ -1135,7 +1135,7 @@ body.entered .custom-cursor {
 .brand-identity-column {
   display: flex;
   flex-direction: column;
-  gap: clamp(54px, 5.4vw, 87px);
+  gap: clamp(24px, 2vw, 36px);
   min-width: 0;
 }
 
