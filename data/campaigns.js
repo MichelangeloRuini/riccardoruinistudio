@@ -5061,5 +5061,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-jewellery-2006",
+  client: "Bulgari",
+  title: "Jewellery 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-jewellery-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Jessica Stam"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
