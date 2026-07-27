@@ -5139,5 +5139,31 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "bulgari-flora-2005",
+  client: "Bulgari",
+  title: "Flora 2005",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-flora-2005/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Jessica Stam"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
