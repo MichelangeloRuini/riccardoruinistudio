@@ -5285,5 +5285,62 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "fendi-ss-2002",
+  client: "Fendi",
+  title: "SS 2002",
+  category: "Campaigns",
+  path: "assets/campaigns/fendi-ss-2002/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
+},
+
+{
+  id: "fendi-fw-2001",
+  client: "Fendi",
+  title: "FW 2001",
+  category: "Campaigns",
+  path: "assets/campaigns/fendi-fw-2001/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Philip Lorca Di Corcia"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "05.jpg",
+    "06.jpg",
+    "07.jpg",
+    "08.jpg",
+    "09.jpg"
+  ]
 }
 ];
