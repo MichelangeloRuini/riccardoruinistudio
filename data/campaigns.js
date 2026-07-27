@@ -4682,5 +4682,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-elisia-2008",
+  client: "Bulgari",
+  title: "Elisia 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-elisia-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Jessica Stam"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
