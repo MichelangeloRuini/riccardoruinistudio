@@ -5087,5 +5087,26 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-crystalline-2005",
+  client: "Bulgari",
+  title: "Crystalline 2005",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-crystalline-2005/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
