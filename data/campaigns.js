@@ -5165,5 +5165,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-jewellery-2005",
+  client: "Bulgari",
+  title: "Jewellery 2005",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-jewellery-2005/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
