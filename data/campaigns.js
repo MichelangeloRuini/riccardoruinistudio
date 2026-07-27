@@ -4470,5 +4470,37 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-fw-2008",
+  client: "Gucci",
+  title: "FW 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-fw-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Models",
+      value: [
+        "Eniko Mihalik",
+        "Abbey Lee",
+        "Lily Donaldson"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
