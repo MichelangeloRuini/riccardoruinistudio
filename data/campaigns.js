@@ -5258,5 +5258,32 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "fendi-fw-2002",
+  client: "Fendi",
+  title: "FW 2002",
+  category: "Campaigns",
+  path: "assets/campaigns/fendi-fw-2002/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Rie Rasmussen"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
