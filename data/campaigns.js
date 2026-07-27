@@ -4441,5 +4441,34 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "bulgari-eyewear-2009",
+  client: "Bulgari",
+  title: "Eyewear 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-eyewear-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Models",
+      value: [
+        "Oriol Elcacho",
+        "Bianca Balti"
+      ]
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
