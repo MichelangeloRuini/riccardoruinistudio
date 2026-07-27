@@ -4833,5 +4833,27 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "missoni-ss-2007",
+  client: "Missoni",
+  title: "SS 2007",
+  category: "Campaigns",
+  path: "assets/campaigns/missoni-ss-2007/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Tom Betterton & Jenny Gage"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
