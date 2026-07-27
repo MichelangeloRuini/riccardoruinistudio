@@ -5108,5 +5108,36 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-aqua-2004",
+  client: "Bulgari",
+  title: "Aqua 2004",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-aqua-2004/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Director",
+      value: "Jason Harrington"
+    },
+    {
+      label: "Model",
+      value: "Oriol Elcacho"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
