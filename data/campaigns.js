@@ -4974,5 +4974,26 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "bulgari-pour-homme-soir-2006",
+  client: "Bulgari",
+  title: "Pour Homme Soir 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-pour-homme-soir-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Willy Vanderperre"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
