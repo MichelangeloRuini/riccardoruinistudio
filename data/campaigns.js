@@ -4708,5 +4708,30 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-tattoo-heart-collection-2008",
+  client: "Gucci",
+  title: "Tattoo Heart Collection 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-tattoo-heart-collection-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "Rihanna"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
