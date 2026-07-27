@@ -4733,5 +4733,27 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-stores-opening-2008",
+  client: "Gucci",
+  title: "Stores Opening 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-stores-opening-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Guido Mocafico"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
