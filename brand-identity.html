@@ -9,7 +9,7 @@
 
 <body class="entered portfolio-public-page">
   <main class="site">
-    <header class="site-header">
+    <header class="site-header site-header--editorial">
       <div class="site-header-left">
         <a href="index.html?skipLanding=true">
           <img src="assets/logo-main.svg" alt="Riccardo Ruini Studio" class="site-logo" />
@@ -17,29 +17,25 @@
         <input class="search" type="text" placeholder="SEARCH" aria-label="Search" />
       </div>
 
-      <nav class="site-nav" aria-label="Primary navigation">
+      <nav class="site-nav site-nav--editorial" aria-label="Primary navigation">
+        <a href="#" class="site-nav-cta">Start a Project</a>
         <a href="index.html?skipLanding=true">Clients</a>
         <a href="campaigns.html">Campaigns</a>
         <a href="films.html">Films</a>
-        <a href="#">Magazine and Books</a>
         <a href="brand-identity.html" class="active" aria-current="page">Visual Identity</a>
-        <a href="#">Branding</a>
+        <a href="#">Events</a>
+        <a href="#">Magazines &amp; Books</a>
         <a href="#">About</a>
       </nav>
     </header>
 
     <section class="brand-identity-page" aria-label="Visual Identity projects">
-      <div class="brand-identity-columns">
-        <div class="brand-identity-column brand-identity-column-left" id="brandIdentityLeftColumn">
-          <div class="brand-identity-introduction">
-            <p>VISUAL IDENTITY IS THE RECOGNIZABLE GRAPHICS OF A BRAND, INCLUDING THE LOGO, COLOR PALETTE, TYPOGRAPHY (FONTS), AND IMAGERY STYLES (PHOTOGRAPHY, ICONOGRAPHY, AND ILLUSTRATION).</p>
-            <p>PACKAGING IS ONE OF THE MOST VITAL COMPONENTS OF A VISUAL IDENTITY.</p>
-            <p>FAR MORE THAN A PROTECTIVE LAYER, IT ACTS AS A BRAND AMBASSADOR, TRANSLATING A COMPANY’S CORE VALUES, COLORS, TYPOGRAPHY, AND LOGO INTO A TANGIBLE, MEMORABLE EXPERIENCE FOR THE CONSUMER.</p>
-          </div>
-        </div>
-
-        <div class="brand-identity-column brand-identity-column-right" id="brandIdentityRightColumn"></div>
+      <div class="brand-identity-introduction">
+        <p><strong class="editorial-emphasis">VISUAL IDENTITY</strong> IS THE RECOGNIZABLE GRAPHICS OF A BRAND,<br>INCLUDING THE LOGO, COLOR PALETTE, TYPOGRAPHY (FONTS), AND IMAGERY STYLES (PHOTOGRAPHY, ICONOGRAPHY, AND ILLUSTRATION).</p>
+        <p>PACKAGING IS ONE OF THE MOST VITAL COMPONENTS OF A VISUAL IDENTITY.<br>FAR MORE THAN A PROTECTIVE LAYER, IT ACTS AS A BRAND AMBASSADOR, TRANSLATING A COMPANY’S CORE VALUES, COLORS, TYPOGRAPHY, AND LOGO<br>INTO A TANGIBLE, MEMORABLE EXPERIENCE FOR THE CUSTOMER.</p>
       </div>
+
+      <div class="brand-identity-columns" id="brandIdentityGrid"></div>
     </section>
 
     <footer class="footer">

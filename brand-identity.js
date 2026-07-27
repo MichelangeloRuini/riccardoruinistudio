@@ -2,11 +2,11 @@ const brandIdentityProjects = Array.isArray(portfolioProjects)
   ? portfolioProjects.filter(project => project.section === "brand-identity")
   : [];
 
-const brandIdentityLeftColumn = document.getElementById("brandIdentityLeftColumn");
-const brandIdentityRightColumn = document.getElementById("brandIdentityRightColumn");
+const brandIdentityGrid = document.getElementById("brandIdentityGrid");
+const brandIdentityFragment = document.createDocumentFragment();
 
-renderPortfolioColumns(
-  brandIdentityLeftColumn,
-  brandIdentityRightColumn,
-  brandIdentityProjects
-);
+brandIdentityProjects.forEach(project => {
+  brandIdentityFragment.appendChild(createPortfolioProjectCard(project));
+});
+
+brandIdentityGrid.replaceChildren(brandIdentityFragment);
