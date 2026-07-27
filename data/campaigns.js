@@ -4598,5 +4598,38 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-gucci-by-gucci-man-2008",
+  client: "Gucci",
+  title: "Gucci by Gucci Man 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-gucci-by-gucci-man-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Director",
+      value: "Jan Wentz"
+    },
+    {
+      label: "Talent",
+      value: "James Franco"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
