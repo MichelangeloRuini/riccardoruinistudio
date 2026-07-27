@@ -4502,5 +4502,32 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "gucci-ss-2008",
+  client: "Gucci",
+  title: "SS 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-ss-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Model",
+      value: "Natasha Poly"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ]
 }
 ];
