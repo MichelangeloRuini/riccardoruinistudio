@@ -4419,5 +4419,27 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "gucci-safilo-young-2009",
+  client: "Gucci",
+  title: "Safilo Young 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-safilo-young-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Daniel Jackson"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
