@@ -4288,5 +4288,37 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "gucci-gucci-by-gucci-sport-2009",
+  client: "Gucci",
+  title: "Gucci by Gucci Sport 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-gucci-by-gucci-sport-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Director",
+      value: "Inez and Vinoodh"
+    },
+    {
+      label: "Talent",
+      value: "James Franco"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
