@@ -4568,5 +4568,35 @@ const campaigns = [
     "02.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "gucci-jasmin-noir-2008",
+  client: "Gucci",
+  title: "Jasmin Noir 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/gucci-jasmin-noir-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Still Life Photographer",
+      value: "Guido Mocafico"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
