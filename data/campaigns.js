@@ -4631,5 +4631,30 @@ const campaigns = [
     "04.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "bulgari-green-jade-2008",
+  client: "Bulgari",
+  title: "Green Jade 2008",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-green-jade-2008/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mario Sorrenti"
+    },
+    {
+      label: "Model",
+      value: "Karlie Kloss"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
