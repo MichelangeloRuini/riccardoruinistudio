@@ -4320,5 +4320,30 @@ const campaigns = [
     "03.jpg",
     "video-01.mp4"
   ]
+},
+
+{
+  id: "bulgari-blv-2009",
+  client: "Bulgari",
+  title: "Blv 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-blv-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Laetitia Casta"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
