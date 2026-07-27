@@ -5210,5 +5210,26 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "bulgari-marry-me-2005",
+  client: "Bulgari",
+  title: "Marry Me 2005",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-marry-me-2005/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
