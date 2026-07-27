@@ -4394,5 +4394,30 @@ const campaigns = [
     "03.jpg",
     "04.jpg"
   ]
+},
+
+{
+  id: "bulgari-2009",
+  client: "Bulgari",
+  title: "2009",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Model",
+      value: "Jessica Stam"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
