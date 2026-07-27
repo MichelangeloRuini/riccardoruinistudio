@@ -4345,5 +4345,26 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "valentino-watches-2009",
+  client: "Valentino",
+  title: "Watches 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/valentino-watches-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Guido Mocafico"
+    }
+  ],
+
+  media: [
+    "01.jpg"
+  ]
 }
 ];
