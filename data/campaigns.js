@@ -4939,5 +4939,40 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-pour-femme-2006",
+  client: "Bulgari",
+  title: "Pour Femme 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-pour-femme-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Directors",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Still Life Photographer",
+      value: "Guido Mocafico"
+    },
+    {
+      label: "Model",
+      value: "Kate Moss"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "video-01.mp4"
+  ]
 }
 ];
