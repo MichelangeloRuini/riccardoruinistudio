@@ -4781,5 +4781,31 @@ const campaigns = [
     "01.jpg",
     "02.jpg"
   ]
+},
+
+{
+  id: "missoni-fw-2007",
+  client: "Missoni",
+  title: "FW 2007",
+  category: "Campaigns",
+  path: "assets/campaigns/missoni-fw-2007/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Tom Betterton & Jenny Gage"
+    },
+    {
+      label: "Model",
+      value: "Behati Prinsloo"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
