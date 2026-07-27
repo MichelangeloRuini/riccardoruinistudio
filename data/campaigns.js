@@ -4366,5 +4366,33 @@ const campaigns = [
   media: [
     "01.jpg"
   ]
+},
+
+{
+  id: "bulgari-jewellery-2009",
+  client: "Bulgari",
+  title: "Jewellery 2009",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-jewellery-2009/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographers",
+      value: "Mert Alas and Marcus Piggott"
+    },
+    {
+      label: "Talent",
+      value: "Julianne Moore"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg",
+    "03.jpg",
+    "04.jpg"
+  ]
 }
 ];
