@@ -5039,5 +5039,27 @@ const campaigns = [
     "02.jpg",
     "03.jpg"
   ]
+},
+
+{
+  id: "bulgari-watches-2006",
+  client: "Bulgari",
+  title: "Watches 2006",
+  category: "Campaigns",
+  path: "assets/campaigns/bulgari-watches-2006/",
+
+  border: false,
+
+  credits: [
+    {
+      label: "Photographer",
+      value: "Mitch Feinberg"
+    }
+  ],
+
+  media: [
+    "01.jpg",
+    "02.jpg"
+  ]
 }
 ];
