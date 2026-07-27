@@ -1180,6 +1180,48 @@ body.entered .custom-cursor {
   margin: 0;
 }
 
+/* EVENTS PAGE */
+
+.events-page {
+  padding: 58px var(--side-margin) 80px;
+  font-family: var(--font-editorial);
+}
+
+.events-page .events-introduction {
+  max-width: 1500px;
+  margin-bottom: clamp(36px, 3.6vw, 58px);
+  font-size: 14px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.22;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.events-page .events-introduction .editorial-emphasis {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.045em;
+}
+
+.events-page .events-introduction p {
+  margin: 0;
+}
+
+.events-page .events-introduction p + p {
+  margin-top: 20px;
+}
+
+.events-page .events-media {
+  width: 100%;
+}
+
+.events-page .events-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #e7e3dc;
+}
+
 /* ==========================================================
    ISOLATED PORTFOLIO SECTIONS
 ========================================================== */
