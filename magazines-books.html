@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visual Identity — Riccardo Ruini Studio</title>
+  <title>Magazines &amp; Books — Riccardo Ruini Studio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="entered portfolio-public-page">
-  <main class="site">
+<body class="entered magazines-books-public-page">
+  <div class="site">
     <header class="site-header site-header--editorial">
       <div class="site-header-left">
         <a href="index.html?skipLanding=true">
@@ -22,21 +22,23 @@
         <a href="index.html?skipLanding=true">Clients</a>
         <a href="campaigns.html">Campaigns</a>
         <a href="films.html">Films</a>
-        <a href="brand-identity.html" class="active" aria-current="page">Visual Identity</a>
+        <a href="brand-identity.html">Visual Identity</a>
         <a href="events.html">Events</a>
-        <a href="magazines-books.html">Magazines &amp; Books</a>
+        <a href="magazines-books.html" class="active" aria-current="page">Magazines &amp; Books</a>
         <a href="about.html">About</a>
       </nav>
     </header>
 
-    <section class="brand-identity-page" aria-label="Visual Identity projects">
-      <div class="brand-identity-introduction">
-        <p><strong class="editorial-emphasis">VISUAL IDENTITY</strong> IS THE RECOGNIZABLE GRAPHICS OF A BRAND,<br>INCLUDING THE LOGO, COLOR PALETTE, TYPOGRAPHY (FONTS), AND IMAGERY STYLES (PHOTOGRAPHY, ICONOGRAPHY, AND ILLUSTRATION).</p>
-        <p>PACKAGING IS ONE OF THE MOST VITAL COMPONENTS OF A VISUAL IDENTITY.<br>FAR MORE THAN A PROTECTIVE LAYER, IT ACTS AS A BRAND AMBASSADOR, TRANSLATING A COMPANY’S CORE VALUES, COLORS, TYPOGRAPHY, AND LOGO<br>INTO A TANGIBLE, MEMORABLE EXPERIENCE FOR THE CUSTOMER.</p>
-      </div>
-
-      <div class="brand-identity-columns" id="brandIdentityGrid"></div>
-    </section>
+    <main class="magazines-books-page">
+      <section
+        class="magazines-books-grid"
+        id="magazinesBooksGrid"
+        aria-label="Magazines and Books projects"
+      ></section>
+      <p class="magazines-books-empty" id="magazinesBooksEmpty" hidden>
+        No Magazines &amp; Books projects are currently available.
+      </p>
+    </main>
 
     <footer class="footer">
       <div class="footer-address">
@@ -68,13 +70,43 @@
         <img src="assets/ui/logo-footer-02.png" class="footer-logo-frame frame-2" alt="" />
       </div>
     </footer>
-  </main>
+  </div>
+
+  <div class="magazines-books-modal" id="magazinesBooksModal" hidden>
+    <div class="magazines-books-modal__backdrop" data-magazines-books-close></div>
+    <section
+      class="magazines-books-modal__content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="magazinesBooksModalTitle"
+      tabindex="-1"
+    >
+      <button
+        class="magazines-books-modal__close"
+        type="button"
+        aria-label="Close Magazines and Books project"
+        data-magazines-books-close
+      >Close</button>
+      <video
+        class="magazines-books-modal__video"
+        muted
+        loop
+        playsinline
+        controls
+        preload="metadata"
+      ></video>
+      <div class="magazines-books-modal__details">
+        <h1 id="magazinesBooksModalTitle"></h1>
+        <dl class="magazines-books-modal__credits" id="magazinesBooksModalCredits"></dl>
+      </div>
+    </section>
+  </div>
 
   <script src="data/campaigns.js"></script>
   <script src="data/portfolio-projects.js"></script>
+  <script src="data/magazines-books.js"></script>
   <script src="utils/searchData.js"></script>
-  <script src="utils/renderPortfolio.js"></script>
-  <script src="brand-identity.js"></script>
+  <script src="magazines-books.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
