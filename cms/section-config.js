@@ -50,6 +50,19 @@ function createSectionConfig(projectRoot = path.resolve(__dirname, "..")) {
       detailMode: "query",
       cmsEnabled: true
     },
+    "magazines-books": {
+      key: "magazines-books",
+      label: "Magazines & Books",
+      dataKind: "magazines-books",
+      dataFile: path.resolve(projectRoot, "data", "magazines-books.js"),
+      collectionName: "magazinesBooks",
+      assetRoot: path.resolve(projectRoot, "assets", "books"),
+      publicAssetPrefix: "assets/books/",
+      trashRoot: path.resolve(projectRoot, "trash", "books"),
+      renderer: null,
+      publicPage: "magazines-books.html",
+      cmsEnabled: true
+    },
     "magazine-books": {
       key: "magazine-books",
       label: "Magazine and Books",

@@ -1711,3 +1711,184 @@ body.entered .custom-cursor {
     width: 100%;
   }
 }
+
+/* ==========================================================
+   MAGAZINES & BOOKS — READ-ONLY ADMIN PANEL
+========================================================== */
+
+.books-admin {
+  min-height: calc(100vh - 96px);
+  background: #111;
+  color: #fff;
+}
+
+.books-admin-dashboard {
+  min-height: inherit;
+}
+
+.books-admin-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.books-admin-header h2 {
+  margin: 0;
+}
+
+.books-admin-toolbar,
+.books-admin-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.books-admin-toolbar button,
+.books-admin-card-actions button,
+.books-admin-secondary-action,
+.books-admin-form-actions button,
+.books-admin-remove-credit {
+  min-height: 34px;
+  border: 1px solid #fff;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.books-admin-toolbar button:disabled,
+.books-admin-card-actions button:disabled,
+.books-admin-secondary-action:disabled,
+.books-admin-form-actions button:disabled,
+.books-admin-remove-credit:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.books-admin-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.books-admin-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #333;
+  background: #181818;
+  transition: border-color 150ms ease, opacity 150ms ease;
+}
+
+.books-admin-card.is-dragging {
+  opacity: 0.45;
+}
+
+.books-admin-card.is-drag-target {
+  border-color: #fff;
+}
+
+.books-admin-drag-handle {
+  padding: 9px 12px;
+  border-bottom: 1px solid #333;
+  color: #aaa;
+  font-size: 10px;
+  text-align: right;
+  text-transform: uppercase;
+  cursor: grab;
+}
+
+.books-admin-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+  outline-offset: -2px;
+}
+
+.books-admin-meta {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  font-size: 11px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.books-admin-meta strong {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.books-admin-meta span {
+  color: #aaa;
+}
+
+.books-admin-card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0 14px 14px;
+}
+
+.books-admin-card-actions button {
+  padding: 7px;
+}
+
+.books-admin-form {
+  border-top: 1px solid #333;
+}
+
+.books-admin-credits {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.books-admin-credit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr) auto;
+  gap: 10px;
+}
+
+.books-admin-credit-row input {
+  min-width: 0;
+}
+
+.books-admin-remove-credit {
+  padding: 7px 12px;
+}
+
+.books-admin-secondary-action {
+  margin-bottom: 24px;
+  padding: 7px 14px;
+}
+
+.books-admin-form-actions {
+  margin: 22px 0;
+}
+
+.books-admin-form-actions button {
+  flex: 1;
+}
+
+.books-admin-output-error {
+  color: #ff8f8f;
+}
+
+.books-admin-status {
+  margin: 20px 0;
+  color: #aaa;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.books-admin-status-error {
+  color: #ff8f8f;
+}
+
+.books-admin-status[hidden] {
+  display: none;
+}

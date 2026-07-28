@@ -6,6 +6,7 @@ const path = require("path");
 const crypto = require("crypto");
 const { exec } = require("child_process");
 const { registerPortfolioProjectRoutes } = require("./cms/portfolio-projects");
+const { registerMagazinesBooksRoutes } = require("./cms/magazines-books");
 
 const app = express();
 const PORT = 3000;
@@ -408,6 +409,7 @@ app.get("/api/campaigns", (req, res) => {
 
   }
 });
+
 app.get("/api/git-status", (req, res) => {
   exec("git status --porcelain=v1 --branch", { cwd: __dirname }, (error, stdout, stderr) => {
     if (error) {
@@ -1562,6 +1564,15 @@ res.json({
   });
 });
 registerPortfolioProjectRoutes(app);
-app.listen(PORT, () => {
-  console.log(`RRS Admin running at http://localhost:${PORT}/admin.html`);
-});
+const magazinesBooksService = registerMagazinesBooksRoutes(app);
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`RRS Admin running at http://localhost:${PORT}/admin.html`);
+  });
+}
+
+module.exports = {
+  app,
+  magazinesBooksService
+};

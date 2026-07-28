@@ -12,6 +12,7 @@
     <select id="cmsSectionSelect">
       <option value="campaigns">Campaigns</option>
       <option value="brand-identity">Visual Identity</option>
+      <option value="magazines-books">Magazines &amp; Books</option>
     </select>
   </section>
 
@@ -164,7 +165,66 @@
     </main>
   </div>
 
+  <div
+    id="magazinesBooksPanel"
+    class="cms-section-panel books-admin"
+    data-cms-section-panel="magazines-books"
+    hidden
+  >
+    <section class="cms-dashboard books-admin-dashboard" aria-labelledby="magazinesBooksHeading">
+      <div class="books-admin-header">
+        <h2 id="magazinesBooksHeading">Magazines &amp; Books</h2>
+        <div class="books-admin-toolbar">
+          <button id="booksSaveOrder" type="button" disabled>Save Order</button>
+          <button id="booksRefresh" type="button">Refresh</button>
+        </div>
+      </div>
+
+      <p id="magazinesBooksStatus" class="books-admin-status" role="status" aria-live="polite">
+        Loading Magazines &amp; Books...
+      </p>
+      <div id="magazinesBooksList" class="books-admin-list" aria-live="polite"></div>
+      <p id="magazinesBooksEmpty" class="books-admin-status" hidden>
+        No Magazines &amp; Books records found.
+      </p>
+      <p id="magazinesBooksError" class="books-admin-status books-admin-status-error" role="alert" hidden></p>
+    </section>
+
+    <main class="admin-page books-admin-form">
+      <h1 id="booksFormTitle">CREATE MAGAZINES &amp; BOOKS PROJECT</h1>
+
+      <label for="booksTitle">TITLE</label>
+      <input id="booksTitle" type="text" maxlength="300" autocomplete="off">
+
+      <label>CREDITS</label>
+      <div id="booksCreditsList" class="books-admin-credits"></div>
+      <button id="booksAddCredit" class="books-admin-secondary-action" type="button">Add Credit</button>
+
+      <div id="booksCreateFields">
+        <label for="booksPosition">POSITION</label>
+        <select id="booksPosition">
+          <option value="top">Top / In alto</option>
+          <option value="bottom" selected>Bottom / In basso</option>
+        </select>
+
+        <label for="booksVideoFile">MP4 VIDEO</label>
+        <input id="booksVideoFile" type="file" accept=".mp4,video/mp4">
+      </div>
+
+      <div class="books-admin-form-actions">
+        <button id="booksCreate" type="button">Create</button>
+        <button id="booksSaveEdit" type="button" hidden>Save Edit</button>
+        <button id="booksCancelEdit" type="button" hidden>Cancel Edit</button>
+      </div>
+
+      <label for="booksOutput">RESULT</label>
+      <textarea id="booksOutput" readonly></textarea>
+      <input id="booksReplaceVideoFile" type="file" accept=".mp4,video/mp4" hidden>
+    </main>
+  </div>
+
   <script src="admin.js?v=2"></script>
   <script src="admin-portfolio.js?v=1"></script>
+  <script src="admin-books.js?v=1"></script>
 </body>
 </html>
