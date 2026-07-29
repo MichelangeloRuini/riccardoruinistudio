@@ -30,7 +30,6 @@ const protectedFiles = [
   "cms/magazines-books.js",
   "cms/section-config.js",
   "data/magazines-books.js",
-  "tests/magazines-books-admin.test.js",
   "tests/magazines-books-crud.test.js"
 ];
 

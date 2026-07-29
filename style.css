@@ -254,7 +254,7 @@ body.entered .custom-cursor {
 .clients-wall {
   width: 205vw;
   color: var(--text-grey);
-  font-size: var(--wall-font-size);
+  font-size: 31.5px;
   line-height: 0.92;
   text-transform: uppercase;
   animation: wallMove 28s linear infinite;

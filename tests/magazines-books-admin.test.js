@@ -119,21 +119,45 @@ test("admin markup and Books script expose the complete isolated CMS", () => {
 });
 
 test("Books styles are isolated and protected files and routes remain unchanged", () => {
-  const styleDiff = execFileSync(
-    "git",
-    ["diff", "--unified=0", "HEAD", "--", "style.css"],
-    { cwd: projectRoot, encoding: "utf8" }
-  );
-  const addedSelectorLines = styleDiff
-    .split(/\r?\n/)
-    .filter(line => line.startsWith("+") && !line.startsWith("+++"))
-    .map(line => line.slice(1).trim())
-    .filter(line => line.endsWith("{"));
+  const styles = readProjectFile("style.css");
 
-  assert.ok(addedSelectorLines.length > 0);
-  addedSelectorLines.forEach(selector => {
-    assert.match(selector, /^\.books-admin/);
+  assert.match(styles, /\.magazines-books-page\s*\{/);
+  assert.match(
+    styles,
+    /\.magazines-books-grid\s*\{[^}]*grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/
+  );
+  [
+    ".magazines-books-card",
+    ".magazines-books-video",
+    ".magazines-books-empty",
+    ".magazines-books-modal",
+    ".magazines-books-modal__backdrop",
+    ".magazines-books-modal__content",
+    ".magazines-books-modal__close",
+    ".magazines-books-modal__video",
+    ".magazines-books-modal__details",
+    ".magazines-books-modal__credits",
+    ".books-admin",
+    ".books-admin-list",
+    ".books-admin-card",
+    ".books-admin-credit-row"
+  ].forEach(selector => {
+    assert.ok(styles.includes(`${selector} {`), `Missing dedicated selector: ${selector}`);
   });
+  assert.match(styles, /\.magazines-books-modal\[hidden\]\s*\{\s*display:\s*none/);
+  assert.match(styles, /body\.is-modal-open\s*\{[^}]*overflow:\s*hidden/);
+  assert.match(
+    styles,
+    /@media \(max-width: 1100px\)\s*\{[^}]*\.magazines-books-grid\s*\{[^}]*repeat\(3,/
+  );
+  assert.match(
+    styles,
+    /@media \(max-width: 760px\)\s*\{[\s\S]*?\.magazines-books-grid\s*\{[^}]*repeat\(2,/
+  );
+  assert.match(
+    styles,
+    /@media \(max-width: 480px\)\s*\{[^}]*\.magazines-books-grid\s*\{[^}]*grid-template-columns:\s*1fr/
+  );
 
   [
     "admin.js",

@@ -1,14 +1,109 @@
+const nonClickableClients = new Set([
+  "Kristin Scott Thomas",
+  "Jack Huston"
+]);
+
 const clients = [
-  "10 Magazine", "Allora Fest", "Blazé", "Bulgari", "Bulgari Hotel & Residences",
-  "Cerruti", "Chantecler", "Diesel", "Dirk Bikkembergs", "Dondup",
-  "Elie Saab", "Elisabetta Franchi", "Emilio Pucci",  "Ermanno Scervino", "Falconeri", "Fendi", "Feudi di San Gregorio",
-  "Ferragamo", "Francesco Scognamiglio", "GQ Style UK", "Gucci", "Hogan",
-  "ICON Magazine", "Iceberg", "Intimissimi", "La Perla", "Liberty",
-  "Liu Jo", "Loewe", "M Missoni", "Marella", "Marina Rinaldi", "Mytheresa",
-  "Paciotti", "Park Hyatt Milano", "Patrizia Pepe", "Peuterey", "Pinko",
-  "Recarlo", "RED Valentino", "Trussardi", "Valentino", "Vilebrequin",
-  "Vionnet", "Vogue", "Vogue Japan", "Walk for Giants"
-];
+  "Yasmin Le Bon",
+  "Dusan Reljin",
+  "Norman Jean Roy",
+  "Jennifer Lopez",
+  "Jacob Bixenman",
+  "Francesco Carrozzini",
+  "Brianna Capozzi",
+  "Georgia May Jagger",
+  "Gia Coppola",
+  "Irina Shayk",
+  "Chris Colls",
+  "Cedric Buchet",
+  "Dree Hemingway",
+  "Arizona Muse",
+  "Henrik Purienne",
+  "Mert Alas and Marcus Piggott",
+  "Lily Aldridge",
+  "Steve Aoki",
+  "Juergen Teller",
+  "Vittoria Ceretti",
+  "Adut Akech",
+  "Grace Hartzel",
+  "Mikael Jansson",
+  "Kaia Gerber",
+  "Inez and Vinoodh",
+  "Gigi Hadid",
+  "Rianne Van Rampaey",
+  "Troye Sivan",
+  "Ellen Von Unwerth",
+  "Terry Richardson",
+  "Carmelo Anthony",
+  "David Bailey",
+  "Kes Glozier",
+  "David Sims",
+  "Kristin Scott Thomas",
+  "Chiara Clemente",
+  "Kendall Jenner",
+  "Peter Lindbergh",
+  "Maria Carla Boscono",
+  "Baby Strange",
+  "Christy Turlington",
+  "Liya Kebede",
+  "Mark Borthwick",
+  "Kenya Kinski",
+  "Will Peltz",
+  "Steven Meisel",
+  "Karen Elson",
+  "Birdy",
+  "Steve Mccurry",
+  "Bruce Weber",
+  "Patricia Arquette",
+  "Ben Barnes",
+  "Michal Pudelka",
+  "Venetia Scott",
+  "Sølve Sundsbø",
+  "Mario Sorrenti",
+  "Gisele Bundchen",
+  "Malgosia Bela",
+  "Angelo Pennetta",
+  "Kasia Smutniak",
+  "Stefano Accorsi",
+  "Lykke Li",
+  "Craig McDean",
+  "Jeff Burton",
+  "Kate Moss",
+  "Blake Lively",
+  "Guido Mocafico",
+  "Abbey Lee",
+  "Penelope Cruz",
+  "Sarah Moon",
+  "Amber Valletta",
+  "Matteo Garrone",
+  "Eric Bana",
+  "Charlotte Casiraghi",
+  "James Franco",
+  "Deborah Turbeville",
+  "Jack Huston",
+  "Nicolas Winding Refn",
+  "Nathaniel Goldberg",
+  "Frank Miller",
+  "Evan Rachel Wood",
+  "Chris Evans",
+  "Clive Owen",
+  "Kirsten Dunst",
+  "Stephanie Seymour",
+  "Laetitia Casta",
+  "Julianne Moore",
+  "Chris Cunningham",
+  "Karlie Kloss",
+  "Clare Danes",
+  "Rihanna",
+  "David Lynch",
+  "Drew Barrymore",
+  "Willy Vanderperre",
+  "Rie Rasmussen",
+  "Philip Lorca Di Corcia"
+].map(name => ({
+  name,
+  clickable: !nonClickableClients.has(name)
+}));
 
 const landing = document.getElementById("landing");
 const cursor = document.querySelector(".custom-cursor");
@@ -76,13 +171,22 @@ function renderClients(list) {
   const repeatedList = list.length > 8 ? [...list, ...list] : list;
 
   repeatedList.forEach((item, index) => {
+    const entry = typeof item === "string"
+      ? { name: item, clickable: true }
+      : item;
     const span = document.createElement("span");
     span.className = "client-name";
-    span.textContent = item;
+    span.textContent = entry.name;
 
-    span.addEventListener("click", () => {
-      goToSearch(item);
-    });
+    if (entry.clickable) {
+      span.classList.add("is-clickable");
+      span.addEventListener("click", () => {
+        goToSearch(entry.name);
+      });
+    } else {
+      span.style.color = "var(--text-grey)";
+      span.style.cursor = "default";
+    }
 
     clientsWall.appendChild(span);
 
