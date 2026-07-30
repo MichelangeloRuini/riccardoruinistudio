@@ -155,6 +155,28 @@ test("GET service returns records in dataset order", () => {
   );
 });
 
+test("GET converts legacy label and value credits to single strings", () => {
+  const fixture = createFixture({
+    records: [
+      initialRecord("book-01", "Legacy", [
+        { label: "Photography", value: "Mert & Marcus" },
+        { label: "", value: "2011-2012" },
+        { label: "Creative Direction", value: "" },
+        { label: " ", value: " " },
+        " ",
+        "Interview by Michelangelo Ruini"
+      ])
+    ]
+  });
+
+  assert.deepEqual(fixture.service.listItems()[0].credits, [
+    "Photography: Mert & Marcus",
+    "2011-2012",
+    "Creative Direction",
+    "Interview by Michelangelo Ruini"
+  ]);
+});
+
 test("CREATE generates a free ID, writes one asset, and honors position", async () => {
   const fixture = createFixture();
   const upload = createUpload(fixture.root);
@@ -168,7 +190,7 @@ test("CREATE generates a free ID, writes one asset, and honors position", async 
 
   assert.equal(item.id, "book-02");
   assert.equal(records[0].id, "book-02");
-  assert.deepEqual(records[0].credits, [{ label: "Creative Direction", value: "Studio" }]);
+  assert.deepEqual(records[0].credits, ["Creative Direction: Studio"]);
   assert.equal(
     fs.existsSync(path.join(fixture.section.assetRoot, "book-02", "video.mp4")),
     true
@@ -226,11 +248,22 @@ test("EDIT changes only title and credits and validates missing records", async 
   const item = await fixture.service.editItem({
     id: "book-01",
     title: "Updated",
-    credits: [{ label: "Editor", value: "Name" }]
+    credits: [
+      "  2011-2012  ",
+      "",
+      "Creative Direction: Riccardo Ruini",
+      { label: "", value: "Interview by Michelangelo Ruini" },
+      { label: "", value: "" }
+    ]
   });
 
   assert.equal(item.title, "Updated");
-  assert.deepEqual(item.credits, [{ label: "Editor", value: "Name" }]);
+  assert.deepEqual(item.credits, [
+    "2011-2012",
+    "Creative Direction: Riccardo Ruini",
+    "Interview by Michelangelo Ruini"
+  ]);
+  assert.deepEqual(readRecords(fixture)[0].credits, item.credits);
   assert.equal(item.id, before.id);
   assert.equal(item.video, before.video);
 
@@ -347,7 +380,7 @@ test("REORDER accepts only a complete permutation and never moves assets", async
 });
 
 test("DUPLICATE deep-clones data, copies video, and inserts after source", async () => {
-  const credits = [{ label: "Creative Direction", value: "Studio" }];
+  const credits = ["Creative Direction: Studio"];
   const fixture = createFixture({
     records: [initialRecord("book-01", "Original", credits), initialRecord("book-02")]
   });

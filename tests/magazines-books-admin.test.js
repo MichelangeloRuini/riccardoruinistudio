@@ -113,6 +113,10 @@ test("admin markup and Books script expose the complete isolated CMS", () => {
   assert.match(scriptSource, /"focus"/);
   assert.match(scriptSource, /"blur"/);
   assert.match(scriptSource, /books-admin-credit-row/);
+  assert.match(scriptSource, /books-admin-credit-input/);
+  assert.match(scriptSource, /placeholder = "Credit"/);
+  assert.match(scriptSource, /\.map\(row =>[\s\S]*?\.filter\(Boolean\)/);
+  assert.doesNotMatch(scriptSource, /books-admin-credit-(label|value)/);
   assert.match(scriptSource, /JSON\.stringify\(\{\s*orderedIds\s*\}\)/);
   assert.doesNotMatch(scriptSource, /\/api\/(campaigns|portfolio-projects|publish|git-status)/);
   assert.doesNotMatch(scriptSource, /\b(campaigns|portfolioProjects)\b/);
@@ -164,8 +168,7 @@ test("Books styles are isolated and protected files and routes remain unchanged"
     "admin-portfolio.js",
     "cms/portfolio-projects.js",
     "data/campaigns.js",
-    "data/portfolio-projects.js",
-    "data/magazines-books.js"
+    "data/portfolio-projects.js"
   ].forEach(filename => {
     assert.equal(readProjectFile(filename), readHeadFile(filename), `${filename} changed.`);
   });

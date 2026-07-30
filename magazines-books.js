@@ -90,28 +90,25 @@
   function validCredits(record) {
     if (!Array.isArray(record.credits)) return [];
 
-    return record.credits.filter(credit => (
-      credit
-      && typeof credit === "object"
-      && typeof credit.label === "string"
-      && credit.label.trim()
-      && typeof credit.value === "string"
-      && credit.value.trim()
-    ));
+    return record.credits
+      .map(credit => {
+        if (typeof credit === "string") return credit.trim();
+        if (!credit || typeof credit !== "object" || Array.isArray(credit)) return "";
+
+        const label = typeof credit.label === "string" ? credit.label.trim() : "";
+        const value = typeof credit.value === "string" ? credit.value.trim() : "";
+        return label && value ? `${label}: ${value}` : label || value;
+      })
+      .filter(Boolean);
   }
 
   function renderCredits(record) {
     modalCredits.replaceChildren();
 
     validCredits(record).forEach(credit => {
-      const group = document.createElement("div");
-      const label = document.createElement("dt");
-      const value = document.createElement("dd");
-
-      label.textContent = credit.label.trim();
-      value.textContent = credit.value.trim();
-      group.append(label, value);
-      modalCredits.appendChild(group);
+      const line = document.createElement("div");
+      line.textContent = credit;
+      modalCredits.appendChild(line);
     });
 
     modalCredits.hidden = modalCredits.childElementCount === 0;

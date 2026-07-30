@@ -25,12 +25,8 @@ const menuPages = [
 ];
 const protectedFiles = [
   "admin.html",
-  "admin-books.js",
   "admin-server.js",
-  "cms/magazines-books.js",
-  "cms/section-config.js",
-  "data/magazines-books.js",
-  "tests/magazines-books-crud.test.js"
+  "cms/section-config.js"
 ];
 
 function extractNavigation(html) {
@@ -92,8 +88,8 @@ test("modal renders the selected title and ordered credits and supports every cl
   assert.match(page, /class="magazines-books-modal__backdrop"/);
   assert.match(renderer, /modalTitle\.textContent = record\.title\.trim\(\)/);
   assert.match(renderer, /validCredits\(record\)\.forEach/);
-  assert.match(renderer, /label\.textContent = credit\.label\.trim\(\)/);
-  assert.match(renderer, /value\.textContent = credit\.value\.trim\(\)/);
+  assert.match(renderer, /line\.textContent = credit/);
+  assert.match(renderer, /`\$\{label\}: \$\{value\}`/);
   assert.match(renderer, /event\.key === "Escape"/);
   assert.match(renderer, /data-magazines-books-close/);
   assert.match(renderer, /document\.body\.classList\.add\("is-modal-open"\)/);

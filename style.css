@@ -254,7 +254,7 @@ body.entered .custom-cursor {
 .clients-wall {
   width: 205vw;
   color: var(--text-grey);
-  font-size: 31.5px;
+  font-size: 35.5px;
   line-height: 0.92;
   text-transform: uppercase;
   animation: wallMove 28s linear infinite;
@@ -1233,9 +1233,9 @@ body.entered .custom-cursor {
 
 .magazines-books-page { padding: 58px var(--side-margin) 80px; font-family: var(--font-editorial); }
 .magazines-books-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.25vw, 24px); }
-.magazines-books-card { display: block; min-width: 0; padding: 0; overflow: hidden; border: 0; background: #e7e3dc; color: inherit; cursor: pointer; }
+.magazines-books-card { display: grid; place-items: center; min-width: 0; aspect-ratio: 1 / 1; box-sizing: border-box; padding: 0; overflow: hidden; border: 0; background: #fff; color: inherit; cursor: pointer; }
 .magazines-books-card:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
-.magazines-books-video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #e7e3dc; }
+.magazines-books-video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; background: #fff; }
 .magazines-books-video.has-load-error { visibility: hidden; }
 .magazines-books-empty { color: var(--text-grey); font-size: 12px; font-weight: var(--font-weight-regular); line-height: var(--line-height-copy); text-transform: uppercase; }
 .magazines-books-modal[hidden] { display: none; }
@@ -1246,17 +1246,17 @@ body.entered .custom-cursor {
 .magazines-books-modal__close { position: absolute; top: 14px; right: 14px; z-index: 2; padding: 7px 11px; border: 1px solid #fff; background: rgba(0, 0, 0, 0.68); color: #fff; font: inherit; font-size: 11px; line-height: 1; text-transform: uppercase; cursor: pointer; }
 .magazines-books-modal__close:hover, .magazines-books-modal__close:focus-visible { background: #fff; color: #000; }
 .magazines-books-modal__video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
-.magazines-books-modal__details { padding: 22px 24px 26px; font-size: 12px; line-height: var(--line-height-copy); text-transform: uppercase; }
+.magazines-books-modal__details { position: absolute; top: 14px; left: 24px; z-index: 2; max-width: calc(100% - 150px); padding: 0; color: #000; background: transparent; font-size: 12px; line-height: var(--line-height-copy); text-transform: uppercase; pointer-events: none; }
 .magazines-books-modal__details h1 { margin: 0; font-size: 14px; font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); }
-.magazines-books-modal__credits { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px 28px; margin-top: 22px; }
+.magazines-books-modal__credits { display: block; margin: 6px 0 0; color: #000; font-size: 11px; font-weight: var(--font-weight-regular); line-height: 1.2; }
 .magazines-books-modal__credits[hidden] { display: none; }
-.magazines-books-modal__credits dt { font-weight: var(--font-weight-bold); }
-.magazines-books-modal__credits dd { margin: 2px 0 0; font-weight: var(--font-weight-light); }
+.magazines-books-modal__credits dt { font-weight: var(--font-weight-regular); }
+.magazines-books-modal__credits dd { margin: 1px 0 3px; font-weight: var(--font-weight-regular); }
 body.is-modal-open { overflow: hidden; }
 
 @media (max-width: 1100px) { .magazines-books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-@media (max-width: 760px) { .magazines-books-public-page .site-header { align-items: flex-start; flex-direction: column; gap: 24px; padding: 24px 20px 20px; } .magazines-books-public-page .site-header-left { width: 100%; justify-content: space-between; gap: 24px; } .magazines-books-public-page .site-logo { width: 145px; } .magazines-books-public-page .search { width: min(42vw, 180px); } .magazines-books-public-page .site-nav { width: 100%; padding-bottom: 5px; gap: 16px; overflow-x: auto; } .magazines-books-page { padding: 38px 20px 60px; } .magazines-books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .magazines-books-modal { padding: 20px; } .magazines-books-modal__content { max-height: calc(100vh - 40px); } .magazines-books-modal__details { padding: 18px 20px 22px; } .magazines-books-public-page .footer { grid-template-columns: 1fr; align-items: start; gap: 30px; padding: 75px 20px 30px; } .magazines-books-public-page .footer-logo { grid-column: 1; justify-self: start; } }
+@media (max-width: 760px) { .magazines-books-public-page .site-header { align-items: flex-start; flex-direction: column; gap: 24px; padding: 24px 20px 20px; } .magazines-books-public-page .site-header-left { width: 100%; justify-content: space-between; gap: 24px; } .magazines-books-public-page .site-logo { width: 145px; } .magazines-books-public-page .search { width: min(42vw, 180px); } .magazines-books-public-page .site-nav { width: 100%; padding-bottom: 5px; gap: 16px; overflow-x: auto; } .magazines-books-page { padding: 38px 20px 60px; } .magazines-books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .magazines-books-modal { padding: 20px; } .magazines-books-modal__content { max-height: calc(100vh - 40px); } .magazines-books-modal__details { left: 14px; max-width: calc(100% - 118px); } .magazines-books-public-page .footer { grid-template-columns: 1fr; align-items: start; gap: 30px; padding: 75px 20px 30px; } .magazines-books-public-page .footer-logo { grid-column: 1; justify-self: start; } }
 
 @media (max-width: 480px) { .magazines-books-grid { grid-template-columns: 1fr; } }
 
@@ -1887,7 +1887,7 @@ body.is-modal-open { overflow: hidden; }
 
 .books-admin-credit-row {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px;
 }
 

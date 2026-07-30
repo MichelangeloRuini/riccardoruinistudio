@@ -102,54 +102,48 @@
       item.title.trim() &&
       Array.isArray(item.credits) &&
       item.credits.every(credit =>
-        credit &&
-        typeof credit.label === "string" &&
-        typeof credit.value === "string"
+        typeof credit === "string" ||
+        (credit && typeof credit === "object" && !Array.isArray(credit))
       ) &&
       typeof item.video === "string" &&
       item.video.trim();
   }
 
-  function addCreditRow(credit = { label: "", value: "" }) {
+  function normalizeCredit(credit) {
+    if (typeof credit === "string") return credit.trim();
+    if (!credit || typeof credit !== "object" || Array.isArray(credit)) return "";
+
+    const label = typeof credit.label === "string" ? credit.label.trim() : "";
+    const value = typeof credit.value === "string" ? credit.value.trim() : "";
+    return label && value ? `${label}: ${value}` : label || value;
+  }
+
+  function addCreditRow(credit = "") {
     const row = document.createElement("div");
-    const labelInput = document.createElement("input");
-    const valueInput = document.createElement("input");
+    const creditInput = document.createElement("input");
     const removeButton = document.createElement("button");
 
     row.className = "books-admin-credit-row";
-    labelInput.type = "text";
-    labelInput.className = "books-admin-credit-label";
-    labelInput.placeholder = "Label";
-    labelInput.value = credit.label;
-    labelInput.maxLength = 150;
-    labelInput.setAttribute("aria-label", "Credit label");
-
-    valueInput.type = "text";
-    valueInput.className = "books-admin-credit-value";
-    valueInput.placeholder = "Value";
-    valueInput.value = credit.value;
-    valueInput.maxLength = 2000;
-    valueInput.setAttribute("aria-label", "Credit value");
+    creditInput.type = "text";
+    creditInput.className = "books-admin-credit-input";
+    creditInput.placeholder = "Credit";
+    creditInput.value = normalizeCredit(credit);
+    creditInput.maxLength = 2152;
+    creditInput.setAttribute("aria-label", "Credit");
 
     removeButton.type = "button";
     removeButton.className = "books-admin-remove-credit";
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", () => row.remove());
 
-    row.append(labelInput, valueInput, removeButton);
+    row.append(creditInput, removeButton);
     creditsList.appendChild(row);
   }
 
   function collectCredits() {
     return Array.from(creditsList.querySelectorAll(".books-admin-credit-row"))
-      .map((row, index) => {
-        const label = row.querySelector(".books-admin-credit-label").value.trim();
-        const value = row.querySelector(".books-admin-credit-value").value.trim();
-        if (!label || !value) {
-          throw new Error(`Credit ${index + 1} requires label and value.`);
-        }
-        return { label, value };
-      });
+      .map(row => row.querySelector(".books-admin-credit-input").value.trim())
+      .filter(Boolean);
   }
 
   function resetForm() {
@@ -170,7 +164,7 @@
     editingId = item.id;
     titleInput.value = item.title;
     creditsList.replaceChildren();
-    item.credits.forEach(addCreditRow);
+    item.credits.map(normalizeCredit).filter(Boolean).forEach(addCreditRow);
     formTitle.textContent = `EDIT ${item.id.toUpperCase()}`;
     createFields.hidden = true;
     createButton.hidden = true;

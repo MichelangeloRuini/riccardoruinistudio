@@ -12,6 +12,7 @@ const {
 const BOOK_ID_PATTERN = /^book-\d{2,}$/;
 const MAX_BOOK_VIDEO_SIZE = 250 * 1024 * 1024;
 const MAX_CREDITS = 50;
+const MAX_CREDIT_LENGTH = 2152;
 
 class MagazinesBooksError extends Error {
   constructor(message, status = 400) {
@@ -47,24 +48,28 @@ function validateCredits(value) {
   if (!Array.isArray(value)) throw booksError("Credits must be an array.");
   if (value.length > MAX_CREDITS) throw booksError(`A maximum of ${MAX_CREDITS} credits is allowed.`);
 
-  return value.map((credit, index) => {
-    if (!credit || typeof credit !== "object" || Array.isArray(credit)) {
-      throw booksError(`Credit ${index + 1} is invalid.`);
-    }
+  return value
+    .map((credit, index) => {
+      let text = "";
 
-    const label = typeof credit.label === "string" ? credit.label.trim() : "";
-    const creditValue = typeof credit.value === "string" ? credit.value.trim() : "";
+      if (typeof credit === "string") {
+        text = credit.trim();
+      } else if (credit && typeof credit === "object" && !Array.isArray(credit)) {
+        const label = typeof credit.label === "string" ? credit.label.trim() : "";
+        const creditValue = typeof credit.value === "string" ? credit.value.trim() : "";
 
-    if (!label || !creditValue) {
-      throw booksError(`Credit ${index + 1} requires label and value.`);
-    }
+        text = label && creditValue ? `${label}: ${creditValue}` : label || creditValue;
+      } else {
+        throw booksError(`Credit ${index + 1} is invalid.`);
+      }
 
-    if (label.length > 150 || creditValue.length > 2000) {
-      throw booksError(`Credit ${index + 1} is too long.`);
-    }
+      if (text.length > MAX_CREDIT_LENGTH) {
+        throw booksError(`Credit ${index + 1} is too long.`);
+      }
 
-    return { label, value: creditValue };
-  });
+      return text;
+    })
+    .filter(Boolean);
 }
 
 function parseCreditsInput(value) {
