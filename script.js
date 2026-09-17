@@ -149,8 +149,48 @@ function getSearchTerms() {
   const portfolioRecords = typeof portfolioProjects !== "undefined"
     ? portfolioProjects
     : [];
+  const magazinesBooksRecords = typeof magazinesBooks !== "undefined"
+    ? magazinesBooks
+    : [];
 
-  return RRSUnifiedSearch.getTerms(campaignRecords, portfolioRecords);
+  return RRSUnifiedSearch.getTerms(
+    campaignRecords,
+    portfolioRecords,
+    magazinesBooksRecords
+  );
+}
+
+function getSearchSuggestionItems() {
+  const campaignRecords = typeof campaigns !== "undefined" ? campaigns : [];
+  const portfolioRecords = typeof portfolioProjects !== "undefined"
+    ? portfolioProjects
+    : [];
+  const magazinesBooksRecords = typeof magazinesBooks !== "undefined"
+    ? magazinesBooks
+    : [];
+
+  return RRSUnifiedSearch.getSuggestionItems(
+    campaignRecords,
+    portfolioRecords,
+    magazinesBooksRecords
+  );
+}
+
+function ensureMagazinesBooksSearchData() {
+  if (typeof magazinesBooks !== "undefined") return;
+  if (!document.head || typeof document.createElement !== "function") return;
+  if (document.querySelector('script[src="data/magazines-books.js"]')) return;
+
+  const datasetScript = document.createElement("script");
+  datasetScript.src = "data/magazines-books.js";
+  datasetScript.addEventListener("load", () => {
+    document.querySelectorAll(".search").forEach(input => {
+      if (input.value.trim().length >= 2) {
+        input.dispatchEvent(new Event("input"));
+      }
+    });
+  }, { once: true });
+  document.head.appendChild(datasetScript);
 }
 
 function goToSearch(value) {
@@ -239,8 +279,8 @@ function renderSuggestions(input, box) {
     return;
   }
 
-  const matches = getSearchTerms()
-    .filter(term => normalize(term).includes(value))
+  const matches = getSearchSuggestionItems()
+    .filter(item => normalize(item.label).includes(value))
     .slice(0, 8);
 
   if (matches.length === 0) {
@@ -256,7 +296,8 @@ function renderSuggestions(input, box) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "search-suggestion";
-    button.textContent = match;
+    button.textContent = match.label;
+    button.dataset.url = match.url;
     box.appendChild(button);
   });
 
@@ -265,7 +306,7 @@ function renderSuggestions(input, box) {
 
   box.querySelectorAll(".search-suggestion").forEach(button => {
     button.addEventListener("click", () => {
-      goToSearch(button.textContent.trim());
+      window.location.href = button.dataset.url;
     });
   });
 }
@@ -308,7 +349,7 @@ document.querySelectorAll(".search").forEach(input => {
       const active = suggestionsBox.querySelector(".search-suggestion.is-active");
 
       if (active) {
-        goToSearch(active.textContent.trim());
+        window.location.href = active.dataset.url;
       } else {
         goToSearch(input.value.trim());
       }
@@ -330,3 +371,5 @@ document.addEventListener("click", event => {
     });
   }
 });
+
+ensureMagazinesBooksSearchData();

@@ -13,8 +13,8 @@
       .replace(/[\s_]+/g, "-");
     const sectionLabels = {
       "brand-identity": "Visual Identity",
-      "magazine-books": "Magazine and Books",
-      "magazine-and-books": "Magazine and Books",
+      "magazine-books": "Magazines & Books",
+      "magazine-and-books": "Magazines & Books",
       branding: "Branding",
       films: "Films"
     };
@@ -42,14 +42,24 @@
 
     addValue(values, record.client);
     addValue(values, record.title);
+
+    if (type === "magazines-books" && typeof record.id === "string") {
+      addValue(values, record.id.replace(/[-_]+/g, " "));
+    }
+
     addValue(
       values,
       type === "portfolio" ? formatSection(record.section) : record.category
     );
 
-    if (type === "campaign" && Array.isArray(record.credits)) {
+    if ((type === "campaign" || type === "magazines-books") && Array.isArray(record.credits)) {
       record.credits.forEach(credit => {
-        if (!credit || typeof credit !== "object") return;
+        if (type === "magazines-books" && typeof credit === "string") {
+          addValue(values, credit);
+          return;
+        }
+
+        if (!credit || typeof credit !== "object" || Array.isArray(credit)) return;
         addValue(values, credit.label);
         addValue(values, credit.value);
       });
@@ -68,7 +78,7 @@
     );
   }
 
-  function getTerms(campaignRecords, portfolioRecords) {
+  function getTerms(campaignRecords, portfolioRecords, magazinesBooksRecords) {
     const uniqueTerms = new Map();
 
     function collect(records, type) {
@@ -84,13 +94,47 @@
 
     collect(campaignRecords, "campaign");
     collect(portfolioRecords, "portfolio");
+    collect(magazinesBooksRecords, "magazines-books");
 
     return Array.from(uniqueTerms.values());
   }
 
+  function getMagazinesBooksUrl(record) {
+    const id = record && typeof record.id === "string" ? record.id.trim() : "";
+
+    return `magazines-books.html?project=${encodeURIComponent(id)}`;
+  }
+
+  function getSuggestionItems(campaignRecords, portfolioRecords, magazinesBooksRecords) {
+    const items = getTerms(campaignRecords, portfolioRecords).map(label => ({
+      label,
+      url: `search.html?q=${encodeURIComponent(label)}`
+    }));
+    const knownLabels = new Set(items.map(item => normalize(item.label)));
+
+    if (Array.isArray(magazinesBooksRecords)) {
+      magazinesBooksRecords.forEach(record => {
+        getSearchableValues(record, "magazines-books").forEach(label => {
+          const key = normalize(label);
+
+          if (!key || knownLabels.has(key)) return;
+          knownLabels.add(key);
+          items.push({
+            label,
+            url: getMagazinesBooksUrl(record)
+          });
+        });
+      });
+    }
+
+    return items;
+  }
+
   global.RRSUnifiedSearch = {
     formatSection,
+    getMagazinesBooksUrl,
     getSearchableValues,
+    getSuggestionItems,
     getTerms,
     matches,
     normalize

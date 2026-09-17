@@ -98,6 +98,23 @@ test("modal renders the selected title and ordered credits and supports every cl
   assert.match(renderer, /modalVideo\.removeAttribute\("src"\)/);
 });
 
+test("project query opens the existing modal for a valid record and ignores unknown IDs", () => {
+  assert.match(
+    renderer,
+    /new URLSearchParams\(window\.location\.search\)\.get\("project"\)/
+  );
+  assert.match(
+    renderer,
+    /records\.find\(record => record\.id === requestedProjectId\)/
+  );
+  assert.match(
+    renderer,
+    /if \(requestedRecord\) \{\s*openModal\(requestedRecord, cardsById\.get\(requestedRecord\.id\)\);\s*\}/
+  );
+  assert.equal((renderer.match(/function openModal\(/g) || []).length, 1);
+  assert.doesNotMatch(renderer, /throw new Error/);
+});
+
 test("dataset yields eight ordered cards without hardcoding records in the frontend", () => {
   const context = {};
   vm.createContext(context);

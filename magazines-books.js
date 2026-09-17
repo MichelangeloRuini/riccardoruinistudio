@@ -11,6 +11,7 @@
   const closeButton = modal && modal.querySelector(".magazines-books-modal__close");
   const observedVideos = new Set();
   const visibleVideos = new Set();
+  const cardsById = new Map();
   let lastFocusedCard = null;
   let modalIsOpen = false;
 
@@ -201,12 +202,21 @@
     : [];
 
   records.forEach(record => {
-    grid.appendChild(createCard(record));
+    const card = createCard(record);
+    cardsById.set(record.id, card);
+    grid.appendChild(card);
   });
 
   if (records.length === 0) {
     grid.hidden = true;
     emptyState.hidden = false;
+  }
+
+  const requestedProjectId = new URLSearchParams(window.location.search).get("project");
+  const requestedRecord = records.find(record => record.id === requestedProjectId);
+
+  if (requestedRecord) {
+    openModal(requestedRecord, cardsById.get(requestedRecord.id));
   }
 
   modal.querySelectorAll("[data-magazines-books-close]").forEach(control => {
