@@ -372,4 +372,117 @@ document.addEventListener("click", event => {
   }
 });
 
+/* START A PROJECT */
+
+function initializeStartProjectModal() {
+  const triggers = Array.from(document.querySelectorAll(".site-nav-cta"));
+
+  if (triggers.length === 0 || document.getElementById("startProjectModal")) return;
+
+  const modal = document.createElement("div");
+  const backdrop = document.createElement("div");
+  const dialog = document.createElement("section");
+  const exitButton = document.createElement("button");
+  const content = document.createElement("div");
+  const title = document.createElement("h2");
+  const copy = document.createElement("p");
+  const email = document.createElement("a");
+  let activeTrigger = null;
+  let previouslyFocusedElement = null;
+  let modalIsOpen = false;
+
+  modal.id = "startProjectModal";
+  modal.className = "start-project-modal";
+  modal.hidden = true;
+
+  backdrop.className = "start-project-modal__backdrop";
+  backdrop.setAttribute("aria-hidden", "true");
+
+  dialog.className = "start-project-modal__dialog";
+  dialog.setAttribute("role", "dialog");
+  dialog.setAttribute("aria-modal", "true");
+  dialog.setAttribute("aria-labelledby", "startProjectModalTitle");
+
+  exitButton.type = "button";
+  exitButton.className = "start-project-modal__exit";
+  exitButton.textContent = "EXIT";
+  exitButton.setAttribute("aria-label", "Close Start a Project");
+
+  content.className = "start-project-modal__content";
+  title.id = "startProjectModalTitle";
+  title.className = "start-project-modal__title";
+  title.textContent = "START A PROJECT";
+  copy.className = "start-project-modal__copy";
+  copy.textContent = "FOR PROJECT INQUIRIES, COLLABORATIONS AND NEW BUSINESS:";
+  email.className = "start-project-modal__email";
+  email.href = "mailto:info@riccardoruinistudio.com";
+  email.textContent = "INFO@RICCARDORUINISTUDIO.COM";
+
+  content.append(title, copy, email);
+  dialog.append(exitButton, content);
+  modal.append(backdrop, dialog);
+  document.body.appendChild(modal);
+
+  function openModal(trigger) {
+    activeTrigger = trigger;
+    previouslyFocusedElement = document.activeElement;
+    modalIsOpen = true;
+    modal.hidden = false;
+    document.body.classList.add("is-start-project-modal-open");
+    exitButton.focus();
+  }
+
+  function closeModal() {
+    if (!modalIsOpen) return;
+
+    modalIsOpen = false;
+    modal.hidden = true;
+    document.body.classList.remove("is-start-project-modal-open");
+
+    const focusTarget = activeTrigger || previouslyFocusedElement;
+    if (focusTarget && focusTarget.isConnected && typeof focusTarget.focus === "function") {
+      focusTarget.focus();
+    }
+
+    activeTrigger = null;
+    previouslyFocusedElement = null;
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", event => {
+      event.preventDefault();
+      openModal(trigger);
+    });
+  });
+
+  exitButton.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", event => {
+    if (!modalIsOpen) return;
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      closeModal();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusableElements = [exitButton, email];
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+    let nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
+
+    if (currentIndex === -1) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = focusableElements.length - 1;
+    if (nextIndex >= focusableElements.length) nextIndex = 0;
+
+    event.preventDefault();
+    focusableElements[nextIndex].focus();
+  }, true);
+}
+
+initializeStartProjectModal();
+
 ensureMagazinesBooksSearchData();
