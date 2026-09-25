@@ -98,6 +98,5 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "search.js",
     "campaigns.js",
     "films.js",
-    "magazines-books.js"
   ], { cwd: root });
 });

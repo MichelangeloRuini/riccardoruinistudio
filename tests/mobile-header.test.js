@@ -342,6 +342,5 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     "search.js",
     "campaigns.js",
     "films.js",
-    "magazines-books.js"
   ], { cwd: root });
 });

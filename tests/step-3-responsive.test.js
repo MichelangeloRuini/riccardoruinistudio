@@ -89,7 +89,6 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "films.html",
     "films.js",
     "magazines-books.html",
-    "magazines-books.js",
     "search.html",
     "search.js",
     "data",

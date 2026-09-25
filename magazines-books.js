@@ -115,6 +115,39 @@
     modalCredits.hidden = modalCredits.childElementCount === 0;
   }
 
+  function getFocusableModalElements() {
+    return Array.from(modalContent.querySelectorAll(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])'
+    )).filter(element => !element.hidden && typeof element.focus === "function");
+  }
+
+  function containModalFocus(event) {
+    if (!modalIsOpen || event.key !== "Tab") return;
+
+    const focusableElements = getFocusableModalElements();
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      modalContent.focus();
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    const focusIsOutsideModal = !modalContent.contains(document.activeElement);
+
+    if (event.shiftKey && (document.activeElement === firstElement || focusIsOutsideModal)) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (!event.shiftKey && (document.activeElement === lastElement || focusIsOutsideModal)) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+
   function openModal(record, card) {
     lastFocusedCard = card;
     modalIsOpen = true;
@@ -236,7 +269,10 @@
     if (event.key === "Escape" && modalIsOpen) {
       event.preventDefault();
       closeModal();
+      return;
     }
+
+    containModalFocus(event);
   });
 
   document.addEventListener("visibilitychange", () => {
