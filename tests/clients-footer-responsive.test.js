@@ -26,7 +26,8 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
   assert.match(tabletStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
   assert.match(tabletStyles, /\.footer\.footer\s*>\s*\*\s*\{[\s\S]*?min-width:\s*0/);
   assert.match(tabletStyles, /\.footer-newsletter input\s*\{[\s\S]*?width:\s*100%[\s\S]*?max-width:\s*100%/);
-  assert.doesNotMatch(headStyles, /GLOBAL RESPONSIVE FOOTER \/ MOBILE CLIENTS/);
+  assert.match(headStyles, /GLOBAL RESPONSIVE FOOTER \/ MOBILE CLIENTS/);
+  assert.match(headStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
 });
 
 test("the global footer becomes one column at 760px with a responsive logo", () => {

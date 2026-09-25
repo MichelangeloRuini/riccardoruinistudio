@@ -2357,3 +2357,142 @@ body.is-mobile-menu-open {
     transform: translateX(-12vw);
   }
 }
+
+/* ==========================================================
+   STEP 3 RESPONSIVE: ABOUT / EVENTS / VISUAL IDENTITY
+========================================================== */
+
+@media (max-width: 1100px) {
+  .about-page,
+  .events-page,
+  .brand-identity-page {
+    min-width: 0;
+    padding: 48px clamp(32px, 5vw, var(--side-margin)) 72px;
+  }
+
+  .about-page .about-introduction,
+  .events-page .events-introduction,
+  .brand-identity-page .brand-identity-introduction {
+    max-width: 100%;
+  }
+
+  .about-page .about-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(36px, 6vw, 64px);
+    row-gap: 52px;
+  }
+
+  .about-page .about-service-title,
+  .about-page .about-service-list,
+  .events-page .events-introduction,
+  .brand-identity-page .brand-identity-introduction {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .events-page .events-media,
+  .events-page .events-video,
+  .brand-identity-page .brand-identity-columns,
+  .brand-identity-page .portfolio-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .brand-identity-page .brand-identity-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand-identity-page .brand-identity-columns .portfolio-card-visual {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-page,
+  .events-page,
+  .brand-identity-page {
+    padding: 38px 20px 60px;
+  }
+
+  .about-page .about-introduction {
+    font-size: 12px;
+    letter-spacing: 0.065em;
+  }
+
+  .about-page .about-introduction .editorial-emphasis,
+  .about-page .about-service-title {
+    letter-spacing: 0.025em;
+  }
+
+  .about-page .about-services {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 48px;
+  }
+
+  .about-page .about-service-title,
+  .about-page .about-service-list {
+    font-size: 12px;
+  }
+
+  .about-page .about-service-list {
+    letter-spacing: 0.065em;
+  }
+
+  .about-page .about-service-group + .about-service-group {
+    margin-top: 38px;
+  }
+
+  .events-page .events-introduction {
+    margin-bottom: 36px;
+    font-size: 12.5px;
+    letter-spacing: 0.065em;
+  }
+
+  .events-page .events-introduction .editorial-emphasis {
+    letter-spacing: 0.025em;
+  }
+
+  .events-page .events-media,
+  .events-page .events-video {
+    width: 100%;
+  }
+
+  .brand-identity-page .brand-identity-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    row-gap: 56px;
+    column-gap: 0;
+  }
+
+  .brand-identity-page .brand-identity-introduction {
+    font-size: 12.5px;
+    letter-spacing: 0.065em;
+  }
+
+  .brand-identity-page .brand-identity-introduction .editorial-emphasis {
+    letter-spacing: 0.025em;
+  }
+
+  .brand-identity-page .brand-identity-introduction br {
+    display: inline;
+  }
+
+  .brand-identity-page .brand-identity-introduction br::after {
+    content: " ";
+  }
+
+  .brand-identity-page .brand-identity-columns .portfolio-card {
+    width: 100%;
+  }
+
+  .brand-identity-page .brand-identity-columns .portfolio-card-caption {
+    position: static;
+    display: flex;
+    padding: 9px 0 0;
+    color: #000;
+    background: transparent;
+    opacity: 1;
+  }
+}

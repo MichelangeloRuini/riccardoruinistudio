@@ -230,7 +230,9 @@ test("the 1100px shell hides the desktop nav and exposes MENU without changing d
   assert.match(mobileBlock, /\.site-nav\.site-nav--editorial\s*\{[\s\S]*?position:\s*fixed/);
   assert.match(mobileBlock, /visibility:\s*hidden/);
   assert.match(mobileBlock, /\.is-mobile-menu-open\s*\{[\s\S]*?visibility:\s*visible/);
-  assert.doesNotMatch(headStyles, /site-menu-toggle|site-nav-exit/);
+  assert.match(headStyles, /GLOBAL MOBILE \/ TABLET HEADER SHELL/);
+  assert.match(headStyles, /\.site-menu-toggle,/);
+  assert.match(headStyles, /\.site-nav-exit/);
 });
 
 test("mobile navigation reuses the real eight links and preserves their order and active state", () => {
