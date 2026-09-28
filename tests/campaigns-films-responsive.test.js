@@ -12,7 +12,9 @@ const filmsPage = read("films.html");
 const renderer = read("utils/renderProject.js");
 const marker = "STEP 5 RESPONSIVE: CAMPAIGNS / FILMS";
 const markerIndex = styles.indexOf(marker);
-const responsiveStyles = styles.slice(markerIndex);
+const nextMarker = "STEP 6 RESPONSIVE: SEARCH RESULTS / PROJECT DETAIL";
+const nextMarkerIndex = styles.indexOf(nextMarker, markerIndex);
+const responsiveStyles = styles.slice(markerIndex, nextMarkerIndex);
 
 test("Campaigns and Films desktop CSS is unchanged above 820px", () => {
   const headStyles = execFileSync("git", ["show", "HEAD:style.css"], {
