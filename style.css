@@ -2638,3 +2638,72 @@ body.is-mobile-menu-open {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ==========================================================
+   STEP 5 RESPONSIVE: CAMPAIGNS / FILMS
+========================================================== */
+
+@media (max-width: 820px) {
+  #campaignsPage.campaigns-page,
+  #filmsPage.campaigns-page {
+    min-width: 0;
+    padding: 24px 20px 72px;
+  }
+
+  #campaignsPage .campaign,
+  #filmsPage .campaign {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  #campaignsPage .campaign:last-child,
+  #filmsPage .campaign:last-child {
+    margin-bottom: 0;
+  }
+
+  #campaignsPage .campaign-info,
+  #campaignsPage .campaign-media,
+  #filmsPage .campaign-info,
+  #filmsPage .campaign-media {
+    order: 0;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #campaignsPage .campaign-info-inner,
+  #filmsPage .campaign-info-inner,
+  #campaignsPage .campaign.info-right .campaign-info-inner,
+  #filmsPage .campaign.info-right .campaign-info-inner {
+    position: static;
+    top: auto;
+    width: 100%;
+    text-align: left;
+  }
+
+  #campaignsPage .campaign-media,
+  #filmsPage .campaign-media {
+    gap: 14px;
+  }
+
+  #campaignsPage .campaign-media picture,
+  #filmsPage .campaign-media picture {
+    display: block;
+    width: 100%;
+  }
+
+  #campaignsPage .campaign-media-item,
+  #filmsPage .campaign-media-item,
+  #campaignsPage .campaign-media img,
+  #campaignsPage .campaign-media video,
+  #filmsPage .campaign-media img,
+  #filmsPage .campaign-media video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
