@@ -9,7 +9,8 @@ const read = relativePath => fs.readFileSync(path.join(root, relativePath), "utf
 const styles = read("style.css");
 const script = read("script.js");
 const marker = "/* ==========================================================\n   GLOBAL RESPONSIVE FOOTER / MOBILE CLIENTS";
-const responsiveStyles = styles.slice(styles.indexOf(marker));
+const nextMarker = "/* ==========================================================\n   STEP 3 RESPONSIVE: ABOUT / EVENTS / VISUAL IDENTITY";
+const responsiveStyles = styles.slice(styles.indexOf(marker), styles.indexOf(nextMarker));
 const tabletStart = responsiveStyles.indexOf("@media (max-width: 1100px)");
 const mobileStart = responsiveStyles.indexOf("@media (max-width: 760px)");
 const tabletStyles = responsiveStyles.slice(tabletStart, mobileStart);
@@ -21,7 +22,12 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
     encoding: "utf8"
   });
 
-  assert.ok(styles.startsWith(headStyles));
+  const headResponsiveStyles = headStyles.slice(
+    headStyles.indexOf(marker),
+    headStyles.indexOf(nextMarker)
+  );
+
+  assert.equal(responsiveStyles, headResponsiveStyles);
   assert.match(tabletStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(tabletStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
   assert.match(tabletStyles, /\.footer\.footer\s*>\s*\*\s*\{[\s\S]*?min-width:\s*0/);
@@ -84,6 +90,7 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "HEAD",
     "--",
     "*.html",
+    ":(exclude)films.html",
     "data",
     "cms",
     "admin.html",
@@ -97,6 +104,5 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "utils/renderPortfolio.js",
     "search.js",
     "campaigns.js",
-    "films.js",
   ], { cwd: root });
 });

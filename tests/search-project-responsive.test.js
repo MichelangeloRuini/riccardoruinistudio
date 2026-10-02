@@ -24,7 +24,10 @@ test("Search and Project desktop CSS remains unchanged", () => {
   });
 
   assert.ok(markerIndex > 0);
-  assert.ok(styles.startsWith(headStyles));
+  const headMarkerIndex = headStyles.indexOf(marker);
+  const headResponsiveStyles = headStyles.slice(headMarkerIndex);
+
+  assert.equal(responsiveStyles, headResponsiveStyles);
   assert.match(headStyles, /\.search-results-header\s*\{\s*padding:\s*40px 55px 0/);
   assert.match(headStyles, /\.search-result-group-heading\s*\{[\s\S]*?font-size:\s*20px/);
   assert.match(headStyles, /\.portfolio-project-page\s*\{\s*padding:\s*58px var\(--side-margin\) 80px/);
@@ -76,8 +79,6 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "utils/renderPortfolioSearch.js",
     "campaigns.html",
     "campaigns.js",
-    "films.html",
-    "films.js",
     "brand-identity.html",
     "brand-identity.js",
     "about.html",

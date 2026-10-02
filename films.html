@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="entered">
+<body class="entered films-public-page">
 
   <main class="site">
 
@@ -32,7 +32,34 @@
       </nav>
     </header>
 
-    <section class="campaigns-page" id="filmsPage"></section>
+    <section class="films-page" id="filmsPage">
+      <div class="films-grid" id="filmsGrid" aria-label="Films"></div>
+    </section>
+
+    <div class="films-modal" id="filmsModal" hidden>
+      <div class="films-modal__backdrop" data-films-close></div>
+      <div
+        class="films-modal__content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filmsModalTitle"
+        tabindex="-1"
+      >
+        <button class="films-modal__close" type="button" data-films-close>EXIT</button>
+        <video
+          class="films-modal__video"
+          muted
+          loop
+          playsinline
+          controls
+          preload="metadata"
+        ></video>
+        <div class="films-modal__details">
+          <h1 id="filmsModalTitle"></h1>
+          <dl class="films-modal__credits" id="filmsModalCredits"></dl>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="footer-address">
@@ -71,7 +98,7 @@
 <script src="data/portfolio-projects.js"></script>
 <script src="utils/searchData.js"></script>
 <script src="utils/viewportVideoPlayback.js"></script>
-<script src="utils/renderProject.js"></script>
+<script src="utils/renderFilmsGrid.js"></script>
 <script src="films.js"></script>
 <script src="script.js"></script>
 </body>

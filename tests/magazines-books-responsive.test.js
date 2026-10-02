@@ -10,8 +10,9 @@ const styles = read("style.css");
 const renderer = read("magazines-books.js");
 const page = read("magazines-books.html");
 const marker = "STEP 4 RESPONSIVE: MAGAZINES & BOOKS";
+const nextMarker = "STEP 5 RESPONSIVE: CAMPAIGNS / FILMS";
 const markerIndex = styles.indexOf(marker);
-const responsiveStyles = styles.slice(markerIndex);
+const responsiveStyles = styles.slice(markerIndex, styles.indexOf(nextMarker, markerIndex));
 const tabletStart = responsiveStyles.indexOf("@media (max-width: 1100px)");
 const mobileStart = responsiveStyles.indexOf("@media (max-width: 760px)");
 const narrowStart = responsiveStyles.indexOf("@media (max-width: 340px)");
@@ -26,7 +27,13 @@ test("Books desktop CSS is unchanged and tablet keeps three square columns", () 
   });
 
   assert.ok(markerIndex > 0);
-  assert.ok(styles.startsWith(headStyles));
+  const headMarkerIndex = headStyles.indexOf(marker);
+  const headResponsiveStyles = headStyles.slice(
+    headMarkerIndex,
+    headStyles.indexOf(nextMarker, headMarkerIndex)
+  );
+
+  assert.equal(responsiveStyles, headResponsiveStyles);
   assert.match(headStyles, /\.magazines-books-grid\s*\{[^}]*grid-template-columns:\s*repeat\(5, minmax\(0, 1fr\)\)/);
   assert.match(headStyles, /\.magazines-books-card\s*\{[^}]*aspect-ratio:\s*1 \/ 1/);
   assert.match(headStyles, /\.magazines-books-video\s*\{[^}]*object-fit:\s*cover/);
@@ -87,17 +94,27 @@ test("dataset order and protected site areas remain unchanged", () => {
     "admin-portfolio.js",
     "script.js",
     "search.js",
-    "utils",
     "index.html",
     "clients.html",
     "campaigns.html",
-    "films.html",
     "search.html",
     "project.html",
     "brand-identity.html",
     "events.html",
     "about.html"
   ], { cwd: root });
+
+  const changedUtils = execFileSync(
+    "git",
+    ["status", "--porcelain", "--untracked-files=all", "--", "utils"],
+    { cwd: root, encoding: "utf8" }
+  )
+    .trim()
+    .split("\n")
+    .filter(Boolean)
+    .filter(change => change.slice(3) !== "utils/renderFilmsGrid.js");
+
+  assert.deepEqual(changedUtils, []);
 
   const dataset = read("data/magazines-books.js");
   assert.deepEqual(

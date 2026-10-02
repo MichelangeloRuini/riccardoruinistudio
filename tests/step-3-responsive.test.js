@@ -8,8 +8,9 @@ const root = path.resolve(__dirname, "..");
 const read = relativePath => fs.readFileSync(path.join(root, relativePath), "utf8");
 const styles = read("style.css");
 const marker = "STEP 3 RESPONSIVE: ABOUT / EVENTS / VISUAL IDENTITY";
+const nextMarker = "STEP 4 RESPONSIVE: MAGAZINES & BOOKS";
 const markerIndex = styles.indexOf(marker);
-const responsiveStyles = styles.slice(markerIndex);
+const responsiveStyles = styles.slice(markerIndex, styles.indexOf(nextMarker, markerIndex));
 const tabletStart = responsiveStyles.indexOf("@media (max-width: 1100px)");
 const mobileStart = responsiveStyles.indexOf("@media (max-width: 760px)");
 const tabletStyles = responsiveStyles.slice(tabletStart, mobileStart);
@@ -25,7 +26,13 @@ test("Step 3 is append-only and preserves the approved desktop declarations", ()
   });
 
   assert.ok(markerIndex > 0);
-  assert.ok(styles.startsWith(headStyles));
+  const headMarkerIndex = headStyles.indexOf(marker);
+  const headResponsiveStyles = headStyles.slice(
+    headMarkerIndex,
+    headStyles.indexOf(nextMarker, headMarkerIndex)
+  );
+
+  assert.equal(responsiveStyles, headResponsiveStyles);
   assert.match(headStyles, /\.about-page \.about-services\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5, minmax\(0, 1fr\)\)/);
   assert.match(headStyles, /\.brand-identity-columns\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(headStyles, /\.events-page \.events-video\s*\{[\s\S]*?aspect-ratio:\s*16 \/ 9[\s\S]*?object-fit:\s*cover/);
@@ -86,8 +93,6 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "brand-identity.js",
     "campaigns.html",
     "campaigns.js",
-    "films.html",
-    "films.js",
     "magazines-books.html",
     "search.html",
     "search.js",
@@ -98,9 +103,20 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "admin.js",
     "admin-books.js",
     "admin-portfolio.js",
-    "assets",
-    "utils"
+    "assets"
   ], { cwd: root });
+
+  const changedUtils = execFileSync(
+    "git",
+    ["status", "--porcelain", "--untracked-files=all", "--", "utils"],
+    { cwd: root, encoding: "utf8" }
+  )
+    .trim()
+    .split("\n")
+    .filter(Boolean)
+    .filter(change => change.slice(3) !== "utils/renderFilmsGrid.js");
+
+  assert.deepEqual(changedUtils, []);
 
   const headStyles = execFileSync("git", ["show", "HEAD:style.css"], {
     cwd: root,

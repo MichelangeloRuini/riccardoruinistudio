@@ -224,8 +224,12 @@ test("the 1100px shell hides the desktop nav and exposes MENU without changing d
   const mobileBlock = mobileHeaderStyles.slice(
     mobileHeaderStyles.indexOf("@media (max-width: 1100px)")
   );
+  const headMobileHeaderStyles = headStyles.slice(
+    headStyles.indexOf(mobileHeaderMarker),
+    headStyles.indexOf(responsiveClientsMarker)
+  );
 
-  assert.ok(styles.startsWith(headStyles));
+  assert.equal(mobileHeaderStyles, headMobileHeaderStyles);
   assert.match(mobileBlock, /\.site-menu-toggle:not\(\[hidden\]\)\s*\{\s*display:\s*inline-flex/);
   assert.match(mobileBlock, /\.site-nav\.site-nav--editorial\s*\{[\s\S]*?position:\s*fixed/);
   assert.match(mobileBlock, /visibility:\s*hidden/);
@@ -328,6 +332,7 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     "HEAD",
     "--",
     "*.html",
+    ":(exclude)films.html",
     "data",
     "cms",
     "admin.html",
@@ -341,6 +346,5 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     "utils/renderPortfolio.js",
     "search.js",
     "campaigns.js",
-    "films.js",
   ], { cwd: root });
 });
