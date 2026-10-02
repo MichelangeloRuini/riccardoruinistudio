@@ -69,7 +69,14 @@
       const description = document.createElement("dd");
 
       term.textContent = label;
-      description.textContent = cleanValues.join("\n");
+      cleanValues.forEach(value => {
+        const link = document.createElement("a");
+
+        link.className = "films-modal__credit-link";
+        link.href = `search.html?q=${encodeURIComponent(value)}`;
+        link.textContent = value;
+        description.appendChild(link);
+      });
       group.append(term, description);
       modalCredits.appendChild(group);
     });

@@ -80,8 +80,48 @@ test("modal is accessible, uses the selected source, and renders ordered real cr
   assert.match(controller, /modalVideo\.src = record\.source/);
   assert.match(controller, /campaign\.credits\.forEach/);
   assert.match(controller, /term\.textContent = label/);
-  assert.match(controller, /description\.textContent = cleanValues\.join\("\\n"\)/);
+  assert.match(controller, /cleanValues\.forEach\(value =>/);
+  assert.match(controller, /description\.appendChild\(link\)/);
   assert.match(styles, /\.films-modal__video\s*\{[\s\S]*?object-fit:\s*contain/);
+});
+
+test("modal credit labels stay plain while each real value links to the existing Search", () => {
+  const context = {};
+  vm.createContext(context);
+  vm.runInContext(`${read("data/campaigns.js")}\n;globalThis.records = campaigns;`, context);
+
+  const filmCampaigns = context.records.filter(campaign =>
+    campaign.media.some(file => file.toLowerCase().endsWith(".mp4"))
+  );
+  const filmCreditValues = filmCampaigns.flatMap(campaign =>
+    campaign.credits.flatMap(credit => Array.isArray(credit.value) ? credit.value : [credit.value])
+  );
+
+  assert.ok(filmCreditValues.includes("Mert Alas and Marcus Piggott"));
+  assert.ok(filmCreditValues.includes("Jennifer Lopez"));
+  assert.match(controller, /const term = document\.createElement\("dt"\)/);
+  assert.doesNotMatch(controller, /term\.appendChild\(link\)|term\.href/);
+  assert.match(controller, /const link = document\.createElement\("a"\)/);
+  assert.match(controller, /link\.href = `search\.html\?q=\$\{encodeURIComponent\(value\)\}`/);
+  assert.match(controller, /link\.textContent = value/);
+  assert.doesNotMatch(controller, /link\.target|target="_blank"/);
+  assert.equal(
+    `search.html?q=${encodeURIComponent("Mert Alas and Marcus Piggott")}`,
+    "search.html?q=Mert%20Alas%20and%20Marcus%20Piggott"
+  );
+  assert.equal(
+    `search.html?q=${encodeURIComponent("Jennifer Lopez")}`,
+    "search.html?q=Jennifer%20Lopez"
+  );
+});
+
+test("credit links remain interactive on desktop and touch without becoming modal close controls", () => {
+  assert.match(styles, /\.films-modal__details\s*\{[\s\S]*?pointer-events:\s*auto/);
+  assert.match(styles, /\.films-modal__credit-link\s*\{[\s\S]*?color:\s*inherit[\s\S]*?text-decoration:\s*none/);
+  assert.match(styles, /\.films-modal__credit-link:hover,[\s\S]*?text-decoration:\s*underline/);
+  assert.match(styles, /@media \(max-width: 760px\)[\s\S]*?\.films-modal__credit-link\s*\{[\s\S]*?min-height:\s*32px/);
+  assert.match(controller, /modal\.querySelectorAll\("\[data-films-close\]"\)/);
+  assert.doesNotMatch(controller, /link\.(?:dataset\.filmsClose|setAttribute\("data-films-close")/);
 });
 
 test("modal close paths, focus management, scroll lock, and playback lifecycle are complete", () => {
