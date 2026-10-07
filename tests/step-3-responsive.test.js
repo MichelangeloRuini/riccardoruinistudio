@@ -89,7 +89,6 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "events.html",
     "brand-identity.html",
     "project.html",
-    "script.js",
     "brand-identity.js",
     "campaigns.html",
     "campaigns.js",

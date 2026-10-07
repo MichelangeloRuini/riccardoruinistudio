@@ -92,7 +92,6 @@ test("dataset order and protected site areas remain unchanged", () => {
     "admin.js",
     "admin-books.js",
     "admin-portfolio.js",
-    "script.js",
     "search.js",
     "index.html",
     "clients.html",

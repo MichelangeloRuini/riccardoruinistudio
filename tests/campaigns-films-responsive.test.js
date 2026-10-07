@@ -87,7 +87,6 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "magazines-books.js",
     "index.html",
     "clients.html",
-    "script.js",
     "data",
     "cms",
     "admin.html",

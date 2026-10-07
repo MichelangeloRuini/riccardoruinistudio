@@ -540,12 +540,65 @@ function initializeStartProjectModal() {
   const dialog = document.createElement("section");
   const exitButton = document.createElement("button");
   const content = document.createElement("div");
+  const kicker = document.createElement("p");
   const title = document.createElement("h2");
-  const copy = document.createElement("p");
+  const intro = document.createElement("p");
+  const form = document.createElement("form");
+  const nameInput = document.createElement("input");
+  const emailInput = document.createElement("input");
+  const companyInput = document.createElement("input");
+  const serviceSelect = document.createElement("select");
+  const descriptionInput = document.createElement("textarea");
+  const budgetSelect = document.createElement("select");
+  const submitArea = document.createElement("div");
+  const submitButton = document.createElement("button");
+  const formMessage = document.createElement("p");
+  const directContact = document.createElement("div");
+  const separator = document.createElement("div");
+  const directLine = document.createElement("p");
+  const directLabel = document.createElement("span");
   const email = document.createElement("a");
+  const serviceOptions = [
+    "Creative Direction",
+    "Brand Identity",
+    "Campaigns",
+    "Films & Content",
+    "Events & Experiences",
+    "Publishing",
+    "Other"
+  ];
+  const budgetOptions = [
+    "Under €10K",
+    "€10K–25K",
+    "€25K–50K",
+    "€50K–100K",
+    "€100K+",
+    "Prefer not to say"
+  ];
   let activeTrigger = null;
   let previouslyFocusedElement = null;
   let modalIsOpen = false;
+
+  function createField(labelText, control, modifier = "") {
+    const field = document.createElement("div");
+    const label = document.createElement("label");
+
+    field.className = `start-project-modal__field${modifier ? ` ${modifier}` : ""}`;
+    label.className = "start-project-modal__label";
+    label.htmlFor = control.id;
+    label.textContent = labelText;
+    field.append(label, control);
+    return field;
+  }
+
+  function appendOptions(select, options) {
+    options.forEach(value => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value;
+      select.appendChild(option);
+    });
+  }
 
   modal.id = "startProjectModal";
   modal.className = "start-project-modal";
@@ -565,16 +618,101 @@ function initializeStartProjectModal() {
   exitButton.setAttribute("aria-label", "Close Start a Project");
 
   content.className = "start-project-modal__content";
+  kicker.className = "start-project-modal__kicker";
+  kicker.textContent = "START A PROJECT";
   title.id = "startProjectModalTitle";
   title.className = "start-project-modal__title";
-  title.textContent = "START A PROJECT";
-  copy.className = "start-project-modal__copy";
-  copy.textContent = "FOR PROJECT INQUIRIES, COLLABORATIONS AND NEW BUSINESS:";
+  title.textContent = "LET’S WORK TOGETHER";
+  intro.className = "start-project-modal__intro";
+  intro.textContent = "TELL US ABOUT YOUR PROJECT AND WE’LL GET BACK TO YOU AS SOON AS POSSIBLE.";
+
+  form.className = "start-project-modal__form";
+  form.setAttribute("aria-describedby", "startProjectFormMessage");
+
+  nameInput.id = "startProjectName";
+  nameInput.name = "name";
+  nameInput.type = "text";
+  nameInput.autocomplete = "name";
+  nameInput.placeholder = "FULL NAME";
+  nameInput.required = true;
+
+  emailInput.id = "startProjectEmail";
+  emailInput.name = "email";
+  emailInput.type = "email";
+  emailInput.autocomplete = "email";
+  emailInput.placeholder = "EMAIL";
+  emailInput.required = true;
+
+  companyInput.id = "startProjectCompany";
+  companyInput.name = "company";
+  companyInput.type = "text";
+  companyInput.autocomplete = "organization";
+  companyInput.placeholder = "COMPANY / WEBSITE";
+
+  serviceSelect.id = "startProjectService";
+  serviceSelect.name = "service";
+  appendOptions(serviceSelect, serviceOptions);
+  serviceSelect.selectedIndex = -1;
+
+  descriptionInput.id = "startProjectDescription";
+  descriptionInput.name = "description";
+  descriptionInput.rows = 5;
+  descriptionInput.required = true;
+  descriptionInput.placeholder = "PROJECT DESCRIPTION";
+
+  budgetSelect.id = "startProjectBudget";
+  budgetSelect.name = "budget";
+  appendOptions(budgetSelect, budgetOptions);
+  budgetSelect.selectedIndex = -1;
+
+  submitArea.className = "start-project-modal__submit-area";
+  submitButton.type = "submit";
+  submitButton.className = "start-project-modal__submit";
+  submitButton.textContent = "SEND INQUIRY";
+  formMessage.id = "startProjectFormMessage";
+  formMessage.className = "start-project-modal__form-message";
+  formMessage.setAttribute("aria-live", "polite");
+  formMessage.hidden = true;
+  formMessage.textContent = "FORM SUBMISSION WILL BE AVAILABLE SOON. PLEASE CONTACT US AT INFO@RICCARDORUINISTUDIO.COM";
+  submitArea.append(submitButton, formMessage);
+
+  const serviceField = createField(
+    "SERVICE",
+    serviceSelect,
+    "start-project-modal__field--select"
+  );
+  const budgetField = createField(
+    "ESTIMATED BUDGET",
+    budgetSelect,
+    "start-project-modal__field--select"
+  );
+
+  serviceSelect.addEventListener("change", () => serviceField.classList.add("has-value"));
+  budgetSelect.addEventListener("change", () => budgetField.classList.add("has-value"));
+
+  form.append(
+    createField("FULL NAME", nameInput),
+    createField("EMAIL", emailInput),
+    createField("COMPANY / WEBSITE", companyInput),
+    serviceField,
+    createField("PROJECT DESCRIPTION", descriptionInput, "start-project-modal__field--wide"),
+    budgetField,
+    submitArea
+  );
+
+  directContact.className = "start-project-modal__direct";
+  separator.className = "start-project-modal__separator";
+  separator.setAttribute("aria-hidden", "true");
+  directLine.className = "start-project-modal__direct-line";
+  directLabel.className = "start-project-modal__direct-label";
+  directLabel.textContent = "OR WRITE DIRECTLY TO ";
   email.className = "start-project-modal__email";
   email.href = "mailto:info@riccardoruinistudio.com";
   email.textContent = "INFO@RICCARDORUINISTUDIO.COM";
+  directLine.append(directLabel, email);
+  directContact.append(separator, directLine);
 
-  content.append(title, copy, email);
+  content.append(kicker, title, intro, form, directContact);
   dialog.append(exitButton, content);
   modal.append(backdrop, dialog);
   document.body.appendChild(modal);
@@ -584,6 +722,7 @@ function initializeStartProjectModal() {
     previouslyFocusedElement = document.activeElement;
     modalIsOpen = true;
     modal.hidden = false;
+    formMessage.hidden = true;
     document.body.classList.add("is-start-project-modal-open");
     exitButton.focus();
   }
@@ -618,6 +757,10 @@ function initializeStartProjectModal() {
 
   exitButton.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    formMessage.hidden = false;
+  });
 
   document.addEventListener("keydown", event => {
     if (!modalIsOpen) return;
@@ -631,7 +774,17 @@ function initializeStartProjectModal() {
 
     if (event.key !== "Tab") return;
 
-    const focusableElements = [exitButton, email];
+    const focusableElements = [
+      exitButton,
+      nameInput,
+      emailInput,
+      companyInput,
+      serviceSelect,
+      descriptionInput,
+      budgetSelect,
+      submitButton,
+      email
+    ];
     const currentIndex = focusableElements.indexOf(document.activeElement);
     let nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
 

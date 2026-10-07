@@ -151,10 +151,17 @@ function createFixture() {
     return null;
   }
 
+  function findAllByTag(rootElement, tagName) {
+    const matches = rootElement.tagName === tagName.toUpperCase() ? [rootElement] : [];
+    rootElement.children.forEach(child => matches.push(...findAllByTag(child, tagName)));
+    return matches;
+  }
+
   return {
     context,
     document,
     documentListeners,
+    findAllByTag,
     findByClass,
     trigger
   };
@@ -177,11 +184,17 @@ test("all public Start a Project links use the shared global hook", () => {
   });
 });
 
-test("the modal is created once with accessible neutral content and the official email", () => {
+test("the modal is created once with its editorial hierarchy and official email", () => {
   const fixture = createFixture();
   const modal = fixture.document.getElementById("startProjectModal");
   const dialog = fixture.findByClass(modal, "start-project-modal__dialog");
   const exitButton = fixture.findByClass(modal, "start-project-modal__exit");
+  const kicker = fixture.findByClass(modal, "start-project-modal__kicker");
+  const title = fixture.findByClass(modal, "start-project-modal__title");
+  const intro = fixture.findByClass(modal, "start-project-modal__intro");
+  const separator = fixture.findByClass(modal, "start-project-modal__separator");
+  const directLine = fixture.findByClass(modal, "start-project-modal__direct-line");
+  const directLabel = fixture.findByClass(modal, "start-project-modal__direct-label");
   const email = fixture.findByClass(modal, "start-project-modal__email");
   const childCount = fixture.document.body.children.length;
 
@@ -191,11 +204,95 @@ test("the modal is created once with accessible neutral content and the official
   assert.equal(dialog.getAttribute("aria-labelledby"), "startProjectModalTitle");
   assert.equal(exitButton.tagName, "BUTTON");
   assert.equal(exitButton.textContent, "EXIT");
+  assert.equal(exitButton.getAttribute("aria-label"), "Close Start a Project");
+  assert.equal(kicker.textContent, "START A PROJECT");
+  assert.equal(title.textContent, "LET’S WORK TOGETHER");
+  assert.equal(intro.textContent, "TELL US ABOUT YOUR PROJECT AND WE’LL GET BACK TO YOU AS SOON AS POSSIBLE.");
+  assert.equal(separator.getAttribute("aria-hidden"), "true");
+  assert.equal(directLabel.textContent, "OR WRITE DIRECTLY TO ");
+  assert.deepEqual(directLine.children, [directLabel, email]);
   assert.equal(email.href, "mailto:info@riccardoruinistudio.com");
   assert.equal(email.textContent, "INFO@RICCARDORUINISTUDIO.COM");
 
   fixture.context.initializeStartProjectModal();
   assert.equal(fixture.document.body.children.length, childCount);
+});
+
+test("the form exposes associated labels, correct field semantics, and only the requested options", () => {
+  const fixture = createFixture();
+  const modal = fixture.document.getElementById("startProjectModal");
+  const labels = fixture.findAllByTag(modal, "label");
+  const name = fixture.document.getElementById("startProjectName");
+  const email = fixture.document.getElementById("startProjectEmail");
+  const company = fixture.document.getElementById("startProjectCompany");
+  const service = fixture.document.getElementById("startProjectService");
+  const description = fixture.document.getElementById("startProjectDescription");
+  const budget = fixture.document.getElementById("startProjectBudget");
+
+  assert.deepEqual(
+    labels.map(label => [label.textContent, label.htmlFor]),
+    [
+      ["FULL NAME", "startProjectName"],
+      ["EMAIL", "startProjectEmail"],
+      ["COMPANY / WEBSITE", "startProjectCompany"],
+      ["SERVICE", "startProjectService"],
+      ["PROJECT DESCRIPTION", "startProjectDescription"],
+      ["ESTIMATED BUDGET", "startProjectBudget"]
+    ]
+  );
+  assert.equal(name.type, "text");
+  assert.equal(name.autocomplete, "name");
+  assert.equal(name.placeholder, "FULL NAME");
+  assert.equal(name.required, true);
+  assert.equal(email.type, "email");
+  assert.equal(email.autocomplete, "email");
+  assert.equal(email.placeholder, "EMAIL");
+  assert.equal(email.required, true);
+  assert.equal(company.autocomplete, "organization");
+  assert.equal(company.placeholder, "COMPANY / WEBSITE");
+  assert.equal(description.tagName, "TEXTAREA");
+  assert.equal(description.required, true);
+  assert.equal(description.placeholder, "PROJECT DESCRIPTION");
+  assert.equal(service.selectedIndex, -1);
+  assert.equal(budget.selectedIndex, -1);
+  assert.deepEqual(
+    service.children.map(option => option.textContent),
+    [
+      "Creative Direction",
+      "Brand Identity",
+      "Campaigns",
+      "Films & Content",
+      "Events & Experiences",
+      "Publishing",
+      "Other"
+    ]
+  );
+  assert.deepEqual(
+    budget.children.map(option => option.textContent),
+    ["Under €10K", "€10K–25K", "€25K–50K", "€50K–100K", "€100K+", "Prefer not to say"]
+  );
+});
+
+test("submit is intercepted locally and reveals the honest temporary message without an API call", () => {
+  const fixture = createFixture();
+  const modal = fixture.document.getElementById("startProjectModal");
+  const form = fixture.findByClass(modal, "start-project-modal__form");
+  const message = fixture.findByClass(modal, "start-project-modal__form-message");
+  const event = clickEvent();
+  const initializer = read("script.js").match(
+    /function initializeStartProjectModal\(\)[\s\S]*?\n}\n\ninitializeStartProjectModal\(\);/
+  );
+
+  assert.equal(message.hidden, true);
+  form.dispatch("submit", event);
+  assert.equal(event.defaultPrevented, true);
+  assert.equal(message.hidden, false);
+  assert.equal(
+    message.textContent,
+    "FORM SUBMISSION WILL BE AVAILABLE SOON. PLEASE CONTACT US AT INFO@RICCARDORUINISTUDIO.COM"
+  );
+  assert.ok(initializer);
+  assert.doesNotMatch(initializer[0], /fetch\(|XMLHttpRequest|\.submit\(\)|action\s*=/);
 });
 
 test("click opens without navigation and EXIT closes with scroll and focus restoration", () => {
@@ -253,6 +350,68 @@ test("backdrop and Escape close, while clicks inside the dialog do not", () => {
   assert.equal(modal.hidden, true);
 });
 
+test("focus remains trapped across every form control and restores after close", () => {
+  const fixture = createFixture();
+  const modal = fixture.document.getElementById("startProjectModal");
+  const exitButton = fixture.findByClass(modal, "start-project-modal__exit");
+  const directEmail = fixture.findByClass(modal, "start-project-modal__email");
+  const keydown = fixture.documentListeners.get("keydown").at(-1);
+
+  fixture.document.activeElement = fixture.trigger;
+  fixture.trigger.dispatch("click", clickEvent());
+  fixture.document.activeElement = directEmail;
+
+  const tab = {
+    key: "Tab",
+    shiftKey: false,
+    defaultPrevented: false,
+    preventDefault() {
+      this.defaultPrevented = true;
+    }
+  };
+  keydown.listener(tab);
+  assert.equal(tab.defaultPrevented, true);
+  assert.equal(fixture.document.activeElement, exitButton);
+
+  const shiftTab = {
+    key: "Tab",
+    shiftKey: true,
+    defaultPrevented: false,
+    preventDefault() {
+      this.defaultPrevented = true;
+    }
+  };
+  keydown.listener(shiftTab);
+  assert.equal(shiftTab.defaultPrevented, true);
+  assert.equal(fixture.document.activeElement, directEmail);
+
+  exitButton.dispatch("click");
+  assert.equal(fixture.document.activeElement, fixture.trigger);
+});
+
+test("the poster-like form stays geometric on desktop and becomes a safe single column on mobile", () => {
+  const styles = read("style.css");
+  const modalStyles = styles.slice(styles.indexOf("/* START A PROJECT MODAL */"));
+
+  assert.match(modalStyles, /\.start-project-modal\s*\{[\s\S]*?height:\s*100vh;[\s\S]*?height:\s*100dvh;[\s\S]*?overflow:\s*hidden/);
+  assert.match(modalStyles, /\.start-project-modal__content\s*\{[\s\S]*?width:\s*min\(90vw, 1600px\)[\s\S]*?overflow-x:\s*hidden;[\s\S]*?overflow-y:\s*auto/);
+  assert.match(modalStyles, /\.start-project-modal__form\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(modalStyles, /\.start-project-modal__kicker\s*\{[\s\S]*?font-size:\s*clamp\(24px, 2vw, 30px\)/);
+  assert.match(modalStyles, /\.start-project-modal__title\s*\{[\s\S]*?font-size:\s*clamp\(64px, 7\.5vw, 130px\)[\s\S]*?font-weight:\s*var\(--font-weight-bold\)/);
+  assert.match(modalStyles, /\.start-project-modal__intro\s*\{[\s\S]*?font-size:\s*clamp\(22px, 2vw, 28px\)/);
+  assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?border:\s*2px solid #000;[\s\S]*?border-radius:\s*0/);
+  assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?height:\s*clamp\(82px, 7vw, 100px\)[\s\S]*?text-align:\s*center/);
+  assert.match(modalStyles, /\.start-project-modal__field textarea\s*\{[\s\S]*?min-height:\s*clamp\(190px, 17vw, 240px\)[\s\S]*?padding:\s*28px 30px/);
+  assert.match(modalStyles, /\.start-project-modal__submit\s*\{[\s\S]*?height:\s*clamp\(82px, 7vw, 100px\)[\s\S]*?background:\s*#000;[\s\S]*?color:\s*#fff/);
+  assert.match(modalStyles, /\.start-project-modal__separator\s*\{[\s\S]*?height:\s*2px;[\s\S]*?background:\s*#000/);
+  assert.match(modalStyles, /\.start-project-modal__email\s*\{[\s\S]*?font-weight:\s*var\(--font-weight-bold\)/);
+  assert.match(modalStyles, /\.start-project-modal__exit\s*\{[\s\S]*?safe-area-inset-top[\s\S]*?min-width:\s*44px;[\s\S]*?min-height:\s*44px/);
+  assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?width:\s*calc\(100% - 40px\)[\s\S]*?\.start-project-modal__title\s*\{[\s\S]*?clamp\(42px, 13vw, 54px\)/);
+  assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?\.start-project-modal__form\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
+  assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?height:\s*clamp\(68px, 20vw, 78px\)/);
+  assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?\.start-project-modal__direct-line\s*\{[\s\S]*?font-size:\s*clamp\(16px, 4\.3vw, 18px\)/);
+});
+
 test("Start a Project stays isolated from the Magazines & Books modal", () => {
   const script = read("script.js");
   const initializer = script.match(
@@ -279,6 +438,6 @@ test("datasets, CMS, admin, APIs, assets, and public HTML remain unchanged", () 
     "admin-books.js",
     "admin-portfolio.js",
     "assets",
-    ...publicPages.filter(relativePath => relativePath !== "films.html")
+    ...publicPages
   ], { cwd: root });
 });

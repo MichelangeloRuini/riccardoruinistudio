@@ -70,7 +70,6 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "--",
     "search.html",
     "search.js",
-    "script.js",
     "project.html",
     "project.js",
     "utils/searchData.js",
