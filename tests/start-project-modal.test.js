@@ -393,23 +393,42 @@ test("the poster-like form stays geometric on desktop and becomes a safe single 
   const styles = read("style.css");
   const modalStyles = styles.slice(styles.indexOf("/* START A PROJECT MODAL */"));
 
-  assert.match(modalStyles, /\.start-project-modal\s*\{[\s\S]*?height:\s*100vh;[\s\S]*?height:\s*100dvh;[\s\S]*?overflow:\s*hidden/);
-  assert.match(modalStyles, /\.start-project-modal__content\s*\{[\s\S]*?width:\s*min\(90vw, 1600px\)[\s\S]*?overflow-x:\s*hidden;[\s\S]*?overflow-y:\s*auto/);
+  assert.match(modalStyles, /\.start-project-modal\s*\{[^}]*height:\s*100vh;[^}]*height:\s*100dvh;[^}]*overflow-x:\s*hidden;[^}]*overflow-y:\s*auto/);
+  assert.match(modalStyles, /\.start-project-modal__dialog\s*\{[^}]*min-height:\s*100vh;[^}]*min-height:\s*100dvh;[^}]*overflow:\s*visible/);
+  assert.match(modalStyles, /\.start-project-modal__content\s*\{[^}]*width:\s*min\(90vw, 1600px\)[^}]*min-height:\s*100vh;[^}]*min-height:\s*100dvh;[^}]*overflow:\s*visible/);
+  assert.doesNotMatch(modalStyles, /\.start-project-modal__content\s*\{[^}]*overflow-y:\s*auto/);
   assert.match(modalStyles, /\.start-project-modal__form\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(modalStyles, /\.start-project-modal__kicker\s*\{[\s\S]*?font-size:\s*clamp\(18px, 1\.4vw, 20px\)/);
   assert.match(modalStyles, /\.start-project-modal__title\s*\{[\s\S]*?font-size:\s*35\.5px;[\s\S]*?font-weight:\s*var\(--font-weight-bold\)/);
   assert.match(modalStyles, /\.start-project-modal__intro\s*\{[\s\S]*?font-size:\s*clamp\(16px, 1\.2vw, 18px\)/);
-  assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?border:\s*2px solid #000;[\s\S]*?border-radius:\s*0/);
+  assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?border:\s*2px solid var\(--site-background\);[\s\S]*?border-radius:\s*0/);
   assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?height:\s*clamp\(64px, 4\.8vw, 72px\)[\s\S]*?text-align:\s*center/);
   assert.match(modalStyles, /\.start-project-modal__field textarea\s*\{[\s\S]*?min-height:\s*clamp\(150px, 11vw, 170px\)[\s\S]*?padding:\s*22px 24px/);
-  assert.match(modalStyles, /\.start-project-modal__submit\s*\{[\s\S]*?height:\s*clamp\(64px, 4\.8vw, 72px\)[\s\S]*?background:\s*#000;[\s\S]*?color:\s*#fff/);
-  assert.match(modalStyles, /\.start-project-modal__separator\s*\{[\s\S]*?height:\s*2px;[\s\S]*?background:\s*#000/);
+  assert.match(modalStyles, /\.start-project-modal__submit\s*\{[\s\S]*?height:\s*clamp\(64px, 4\.8vw, 72px\)[\s\S]*?background:\s*var\(--site-background\);[\s\S]*?color:\s*#000/);
+  assert.match(modalStyles, /\.start-project-modal__separator\s*\{[\s\S]*?height:\s*2px;[\s\S]*?background:\s*var\(--site-background\)/);
   assert.match(modalStyles, /\.start-project-modal__email\s*\{[\s\S]*?font-weight:\s*var\(--font-weight-bold\)/);
-  assert.match(modalStyles, /\.start-project-modal__exit\s*\{[\s\S]*?safe-area-inset-top[\s\S]*?min-width:\s*44px;[\s\S]*?min-height:\s*44px/);
+  assert.match(modalStyles, /\.start-project-modal__exit\s*\{[^}]*position:\s*fixed;[^}]*safe-area-inset-top[^}]*min-width:\s*44px;[^}]*min-height:\s*44px/);
   assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?width:\s*calc\(100% - 40px\)[\s\S]*?\.start-project-modal__title\s*\{[\s\S]*?clamp\(36px, 10vw, 42px\)/);
   assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?\.start-project-modal__form\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
   assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?height:\s*clamp\(60px, 16vw, 68px\)/);
   assert.match(modalStyles, /@media \(max-width: 760px\)[\s\S]*?\.start-project-modal__direct-line\s*\{[\s\S]*?font-size:\s*clamp\(14px, 3\.8vw, 16px\)/);
+});
+
+test("the modal alone inverts the existing RRS cream and black palette", () => {
+  const styles = read("style.css");
+  const modalStyles = styles.slice(styles.indexOf("/* START A PROJECT MODAL */"));
+
+  assert.match(styles, /--site-background:\s*#f8f6f2/);
+  assert.match(modalStyles, /\.start-project-modal\s*\{[^}]*background:\s*#000;[^}]*color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /\.start-project-modal__backdrop\s*\{[^}]*background:\s*#000/);
+  assert.match(modalStyles, /\.start-project-modal__exit\s*\{[^}]*border:\s*2px solid var\(--site-background\);[^}]*border-radius:\s*0;[^}]*color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /\.start-project-modal__field input,[\s\S]*?border:\s*2px solid var\(--site-background\);[\s\S]*?background:\s*transparent;[\s\S]*?color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /input::placeholder,[\s\S]*?textarea::placeholder\s*\{[^}]*color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /input:-webkit-autofill,[\s\S]*?-webkit-text-fill-color:\s*var\(--site-background\);[\s\S]*?caret-color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /\.start-project-modal__field--select option\s*\{[^}]*background:\s*#000;[^}]*color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /\.start-project-modal__submit\s*\{[^}]*border:\s*2px solid var\(--site-background\);[^}]*background:\s*var\(--site-background\);[^}]*color:\s*#000/);
+  assert.match(modalStyles, /\.start-project-modal__submit:hover,[\s\S]*?background:\s*#000;[\s\S]*?color:\s*var\(--site-background\)/);
+  assert.match(modalStyles, /\.start-project-modal__separator\s*\{[^}]*background:\s*var\(--site-background\)/);
 });
 
 test("Start a Project stays isolated from the Magazines & Books modal", () => {

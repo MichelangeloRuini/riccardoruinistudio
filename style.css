@@ -1617,16 +1617,18 @@ body.is-modal-open { overflow: hidden; }
   z-index: 1100;
   height: 100vh;
   height: 100dvh;
-  overflow: hidden;
-  background: var(--site-background);
-  color: #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #000;
+  color: var(--site-background);
   font-family: var(--font-editorial);
 }
 
 .start-project-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: var(--site-background);
+  background: #000;
   cursor: pointer;
 }
 
@@ -1634,41 +1636,43 @@ body.is-modal-open { overflow: hidden; }
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible;
   outline: none;
 }
 
 .start-project-modal__exit {
-  position: absolute;
+  position: fixed;
   top: max(20px, env(safe-area-inset-top));
   right: max(5vw, env(safe-area-inset-right));
   z-index: 2;
   min-width: 44px;
   min-height: 44px;
   padding: 0 8px;
-  border: 0;
+  border: 2px solid var(--site-background);
+  border-radius: 0;
   background: transparent;
-  color: inherit;
+  color: var(--site-background);
   font: inherit;
   font-size: var(--nav-font-size);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .start-project-modal__content {
   width: min(90vw, 1600px);
-  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding:
     max(84px, calc(env(safe-area-inset-top) + 70px))
     0
     max(64px, calc(env(safe-area-inset-bottom) + 44px));
   margin: 0 auto;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: visible;
   text-align: left;
   text-transform: uppercase;
 }
@@ -1743,10 +1747,11 @@ body.is-modal-open { overflow: hidden; }
 .start-project-modal__field textarea {
   width: 100%;
   min-width: 0;
-  border: 2px solid #000;
+  border: 2px solid var(--site-background);
   border-radius: 0;
   background: transparent;
-  color: #000;
+  color: var(--site-background);
+  caret-color: var(--site-background);
   font: inherit;
   font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-regular);
@@ -1767,8 +1772,8 @@ body.is-modal-open { overflow: hidden; }
 }
 
 .start-project-modal__field--select option {
-  background: var(--site-background);
-  color: #000;
+  background: #000;
+  color: var(--site-background);
 }
 
 .start-project-modal__field--select::after {
@@ -1779,6 +1784,7 @@ body.is-modal-open { overflow: hidden; }
   font-size: 18px;
   font-weight: var(--font-weight-regular);
   line-height: 1;
+  color: var(--site-background);
   pointer-events: none;
   transform: translateY(-50%);
 }
@@ -1815,15 +1821,24 @@ body.is-modal-open { overflow: hidden; }
 
 .start-project-modal__field input::placeholder,
 .start-project-modal__field textarea::placeholder {
-  color: #000;
+  color: var(--site-background);
   opacity: 1;
+}
+
+.start-project-modal__field input:-webkit-autofill,
+.start-project-modal__field input:-webkit-autofill:hover,
+.start-project-modal__field input:-webkit-autofill:focus {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--site-background);
+  caret-color: var(--site-background);
 }
 
 .start-project-modal__field input:focus-visible,
 .start-project-modal__field select:focus-visible,
 .start-project-modal__field textarea:focus-visible {
   border-width: 3px;
-  outline: 2px solid #000;
+  outline: 2px solid var(--site-background);
   outline-offset: 3px;
 }
 
@@ -1838,26 +1853,27 @@ body.is-modal-open { overflow: hidden; }
   width: 100%;
   height: clamp(64px, 4.8vw, 72px);
   padding: 12px 52px;
-  border: 2px solid #000;
+  border: 2px solid var(--site-background);
   border-radius: 0;
-  background: #000;
-  color: #fff;
+  background: var(--site-background);
+  color: #000;
   font: inherit;
   font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-copy);
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .start-project-modal__submit:hover,
 .start-project-modal__submit:focus-visible {
-  background: var(--site-background);
-  color: #000;
+  background: #000;
+  color: var(--site-background);
 }
 
 .start-project-modal__submit:focus-visible {
-  outline: 2px solid #000;
+  outline: 2px solid var(--site-background);
   outline-offset: 4px;
 }
 
@@ -1880,7 +1896,7 @@ body.is-modal-open { overflow: hidden; }
   width: 100%;
   height: 2px;
   margin: 0 0 24px;
-  background: #000;
+  background: var(--site-background);
 }
 
 .start-project-modal__direct-line {
@@ -1901,9 +1917,16 @@ body.is-modal-open { overflow: hidden; }
   text-underline-offset: 3px;
 }
 
+.start-project-modal__exit:hover,
+.start-project-modal__exit:focus-visible {
+  border-color: var(--site-background);
+  background: var(--site-background);
+  color: #000;
+}
+
 .start-project-modal__exit:focus-visible,
 .start-project-modal__email:focus-visible {
-  outline: 2px solid #000;
+  outline: 2px solid var(--site-background);
   outline-offset: 5px;
 }
 
