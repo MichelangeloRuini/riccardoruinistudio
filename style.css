@@ -1663,9 +1663,9 @@ body.is-modal-open { overflow: hidden; }
   width: min(90vw, 1600px);
   height: 100%;
   padding:
-    max(104px, calc(env(safe-area-inset-top) + 84px))
+    max(84px, calc(env(safe-area-inset-top) + 70px))
     0
-    max(84px, calc(env(safe-area-inset-bottom) + 56px));
+    max(64px, calc(env(safe-area-inset-bottom) + 44px));
   margin: 0 auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1685,8 +1685,8 @@ body.is-modal-open { overflow: hidden; }
 }
 
 .start-project-modal__kicker {
-  margin: 0 0 14px;
-  font-size: clamp(24px, 2vw, 30px);
+  margin: 0 0 8px;
+  font-size: clamp(18px, 1.4vw, 20px);
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.035em;
 }
@@ -1694,18 +1694,18 @@ body.is-modal-open { overflow: hidden; }
 .start-project-modal__title {
   max-width: 1500px;
   margin: 0;
-  font-size: clamp(64px, 7.5vw, 130px);
+  font-size: 35.5px;
   font-weight: var(--font-weight-bold);
-  line-height: 0.92;
+  line-height: 0.98;
   letter-spacing: -0.035em;
 }
 
 .start-project-modal__intro {
   max-width: 880px;
-  margin: clamp(34px, 3vw, 48px) 0 clamp(62px, 6vw, 92px);
-  font-size: clamp(22px, 2vw, 28px);
+  margin: 18px 0 38px;
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-light);
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: 0.035em;
 }
 
@@ -1713,7 +1713,7 @@ body.is-modal-open { overflow: hidden; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
-  gap: clamp(28px, 2.6vw, 38px) clamp(30px, 2.8vw, 40px);
+  gap: 22px 30px;
 }
 
 .start-project-modal__field {
@@ -1748,7 +1748,7 @@ body.is-modal-open { overflow: hidden; }
   background: transparent;
   color: #000;
   font: inherit;
-  font-size: clamp(20px, 1.7vw, 26px);
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-copy);
   text-transform: uppercase;
@@ -1756,8 +1756,8 @@ body.is-modal-open { overflow: hidden; }
 
 .start-project-modal__field input,
 .start-project-modal__field select {
-  height: clamp(82px, 7vw, 100px);
-  padding: 16px 64px;
+  height: clamp(64px, 4.8vw, 72px);
+  padding: 12px 52px;
   text-align: center;
 }
 
@@ -1774,9 +1774,9 @@ body.is-modal-open { overflow: hidden; }
 .start-project-modal__field--select::after {
   position: absolute;
   top: 50%;
-  right: 28px;
+  right: 24px;
   content: "↓";
-  font-size: 22px;
+  font-size: 18px;
   font-weight: var(--font-weight-regular);
   line-height: 1;
   pointer-events: none;
@@ -1793,13 +1793,13 @@ body.is-modal-open { overflow: hidden; }
   display: grid;
   width: auto;
   height: auto;
-  padding: 16px 64px;
+  padding: 12px 52px;
   overflow: visible;
   place-items: center;
   clip: auto;
   white-space: normal;
   border: 0;
-  font-size: clamp(20px, 1.7vw, 26px);
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-copy);
   letter-spacing: 0;
@@ -1807,8 +1807,8 @@ body.is-modal-open { overflow: hidden; }
 }
 
 .start-project-modal__field textarea {
-  min-height: clamp(190px, 17vw, 240px);
-  padding: 28px 30px;
+  min-height: clamp(150px, 11vw, 170px);
+  padding: 22px 24px;
   resize: vertical;
   text-align: left;
 }
@@ -1836,14 +1836,14 @@ body.is-modal-open { overflow: hidden; }
 
 .start-project-modal__submit {
   width: 100%;
-  height: clamp(82px, 7vw, 100px);
-  padding: 16px 64px;
+  height: clamp(64px, 4.8vw, 72px);
+  padding: 12px 52px;
   border: 2px solid #000;
   border-radius: 0;
   background: #000;
   color: #fff;
   font: inherit;
-  font-size: clamp(20px, 1.7vw, 26px);
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-copy);
   text-transform: uppercase;
@@ -1873,19 +1873,19 @@ body.is-modal-open { overflow: hidden; }
 
 .start-project-modal__direct {
   width: 100%;
-  margin-top: clamp(62px, 6vw, 92px);
+  margin-top: 44px;
 }
 
 .start-project-modal__separator {
   width: 100%;
   height: 2px;
-  margin: 0 0 clamp(34px, 3vw, 48px);
+  margin: 0 0 24px;
   background: #000;
 }
 
 .start-project-modal__direct-line {
   margin: 0;
-  font-size: clamp(20px, 1.7vw, 26px);
+  font-size: clamp(16px, 1.2vw, 18px);
   letter-spacing: 0.025em;
 }
 
@@ -1917,19 +1917,19 @@ body.is-start-project-modal-open {
   }
 
   .start-project-modal__kicker {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .start-project-modal__title {
-    font-size: clamp(58px, 8vw, 86px);
+    font-size: 35.5px;
   }
 
   .start-project-modal__intro {
-    font-size: clamp(20px, 2.5vw, 25px);
+    font-size: 16px;
   }
 
   .start-project-modal__form {
-    gap: 30px;
+    gap: 22px 26px;
   }
 }
 
@@ -1948,24 +1948,24 @@ body.is-start-project-modal-open {
   }
 
   .start-project-modal__kicker {
-    margin-bottom: 10px;
-    font-size: 17px;
+    margin-bottom: 8px;
+    font-size: clamp(15px, 4vw, 17px);
   }
 
   .start-project-modal__title {
-    font-size: clamp(42px, 13vw, 54px);
-    line-height: 0.94;
+    font-size: clamp(36px, 10vw, 42px);
+    line-height: 0.98;
   }
 
   .start-project-modal__intro {
-    margin: 28px 0 48px;
-    font-size: clamp(16px, 4.8vw, 20px);
-    line-height: 1.12;
+    margin: 20px 0 38px;
+    font-size: clamp(15px, 4vw, 17px);
+    line-height: 1.15;
   }
 
   .start-project-modal__form {
     grid-template-columns: minmax(0, 1fr);
-    gap: 36px;
+    gap: 28px;
   }
 
   .start-project-modal__field--wide {
@@ -1973,38 +1973,38 @@ body.is-start-project-modal-open {
   }
 
   .start-project-modal__field textarea {
-    min-height: 180px;
-    padding: 22px 20px;
+    min-height: clamp(150px, 42vw, 170px);
+    padding: 20px;
   }
 
   .start-project-modal__field input,
   .start-project-modal__field select,
   .start-project-modal__submit {
-    height: clamp(68px, 20vw, 78px);
-    padding: 14px 48px;
-    font-size: clamp(17px, 5vw, 20px);
+    height: clamp(60px, 16vw, 68px);
+    padding: 12px 44px;
+    font-size: clamp(15px, 4vw, 16px);
   }
 
   .start-project-modal__field--select:not(.has-value) .start-project-modal__label {
-    padding: 14px 48px;
-    font-size: clamp(17px, 5vw, 20px);
+    padding: 12px 44px;
+    font-size: clamp(15px, 4vw, 16px);
   }
 
   .start-project-modal__field--select::after {
     right: 20px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .start-project-modal__direct {
-    margin-top: 64px;
+    margin-top: 44px;
   }
 
   .start-project-modal__separator {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 
   .start-project-modal__direct-line {
-    font-size: clamp(16px, 4.3vw, 18px);
+    font-size: clamp(14px, 3.8vw, 16px);
     line-height: 1.15;
   }
 }
