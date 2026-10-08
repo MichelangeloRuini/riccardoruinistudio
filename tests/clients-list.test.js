@@ -366,7 +366,7 @@ test("the renderer creates exactly 131 real same-tab links with encoded Search U
   });
 });
 
-test("the wall uses no random order and no duplicated render sequence", () => {
+test("the single wall sequence starts immediately without JS or CSS delay", () => {
   const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
   const styles = fs.readFileSync(path.join(root, "style.css"), "utf8");
   const renderer = script.slice(
@@ -374,10 +374,14 @@ test("the wall uses no random order and no duplicated render sequence", () => {
     script.indexOf("/* SEARCH SUGGESTIONS */")
   );
 
-  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random/);
+  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random|setTimeout|requestAnimationFrame/);
   assert.match(renderer, /document\.createElement\("a"\)/);
-  assert.match(styles, /animation:\s*wallMove 28s ease-in-out infinite alternate/);
-  assert.match(styles, /animation:\s*wallMoveMobile 28s ease-in-out infinite alternate/);
+  assert.match(styles, /animation:\s*wallMove 28s linear infinite alternate/);
+  assert.match(styles, /animation:\s*wallMoveMobile 28s linear infinite alternate/);
+  assert.doesNotMatch(styles, /\.clients-wall\s*\{[^}]*animation-delay/);
+  assert.doesNotMatch(styles, /\.clients-wall\s*\{[^}]*animation-play-state:\s*paused/);
+  assert.match(styles, /@keyframes wallMove\s*\{\s*from\s*\{\s*transform:\s*translateX\(0\)/);
+  assert.match(styles, /@keyframes wallMoveMobile\s*\{\s*from\s*\{\s*transform:\s*translateX\(0\)/);
 });
 
 test("known supplied typos and non-canonical variants are absent", () => {

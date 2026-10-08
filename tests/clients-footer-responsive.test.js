@@ -55,7 +55,7 @@ test("Clients mobile uses compact type, real side padding, and proportional move
   assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
   assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?font-size:\s*clamp\(28px, 7\.5vw, 32px\)/);
   assert.match(mobileStyles, /line-height:\s*1/);
-  assert.match(mobileStyles, /animation:\s*wallMoveMobile 28s ease-in-out infinite alternate/);
+  assert.match(mobileStyles, /animation:\s*wallMoveMobile 28s linear infinite alternate/);
   assert.match(mobileStyles, /translateX\(-12vw\)/);
   assert.doesNotMatch(mobileStyles, /translateX\(-420px\)/);
 });
