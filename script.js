@@ -811,4 +811,28 @@ function initializeStartProjectModal() {
 
 initializeStartProjectModal();
 
+/* SECTION FOOTER CHARACTERS */
+
+function initializeSectionFooterCharacter() {
+  const characterByPage = {
+    "about.html": "assets/ui/diavoletto-about.png",
+    "clients.html": "assets/ui/diavoletto-clients-talents.png",
+    "brand-identity.html": "assets/ui/diavoletto-visual-identity.png",
+    "films.html": "assets/ui/diavoletto-films.png",
+    "magazines-books.html": "assets/ui/diavoletto-magazines-books.png"
+  };
+  const locationPath = window.location.pathname || window.location.href || "";
+  const page = locationPath.split("/").pop().split("?")[0] || "index.html";
+  const character = characterByPage[page];
+
+  if (!character) return;
+
+  document.querySelectorAll(".footer-logo-frame").forEach(frame => {
+    frame.src = character;
+    frame.classList.add("is-section-character");
+  });
+}
+
+initializeSectionFooterCharacter();
+
 ensureMagazinesBooksSearchData();

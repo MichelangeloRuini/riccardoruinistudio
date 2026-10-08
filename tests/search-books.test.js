@@ -141,6 +141,11 @@ test("datasets, CMS, admin, protected renderers, and assets remain unchanged", (
     "brand-identity.js",
     "admin-server.js",
     "cms",
-    "assets"
+    "assets",
+    ":(exclude)assets/ui/diavoletto-about.png",
+    ":(exclude)assets/ui/diavoletto-clients-talents.png",
+    ":(exclude)assets/ui/diavoletto-visual-identity.png",
+    ":(exclude)assets/ui/diavoletto-films.png",
+    ":(exclude)assets/ui/diavoletto-magazines-books.png"
   ], { cwd: root });
 });

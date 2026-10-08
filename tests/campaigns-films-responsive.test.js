@@ -85,6 +85,11 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "admin.js",
     "admin-books.js",
     "admin-portfolio.js",
-    "assets"
+    "assets",
+    ":(exclude)assets/ui/diavoletto-about.png",
+    ":(exclude)assets/ui/diavoletto-clients-talents.png",
+    ":(exclude)assets/ui/diavoletto-visual-identity.png",
+    ":(exclude)assets/ui/diavoletto-films.png",
+    ":(exclude)assets/ui/diavoletto-magazines-books.png"
   ], { cwd: root });
 });

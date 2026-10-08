@@ -151,6 +151,11 @@ test("dataset, Search, CMS, APIs, assets, and unrelated sections remain unchange
     "diff", "--quiet", "HEAD", "--",
     "data", "search.js", "utils/searchData.js", "cms", "admin.html",
     "admin-server.js", "admin.js", "admin-books.js", "admin-portfolio.js", "assets",
+    ":(exclude)assets/ui/diavoletto-about.png",
+    ":(exclude)assets/ui/diavoletto-clients-talents.png",
+    ":(exclude)assets/ui/diavoletto-visual-identity.png",
+    ":(exclude)assets/ui/diavoletto-films.png",
+    ":(exclude)assets/ui/diavoletto-magazines-books.png",
     "magazines-books.js", "brand-identity.js", "events.js"
   ], { cwd: root });
 });

@@ -15,6 +15,13 @@ const tabletStart = responsiveStyles.indexOf("@media (max-width: 1100px)");
 const mobileStart = responsiveStyles.indexOf("@media (max-width: 760px)");
 const tabletStyles = responsiveStyles.slice(tabletStart, mobileStart);
 const mobileStyles = responsiveStyles.slice(mobileStart);
+const footerCharacterAssets = [
+  "assets/ui/diavoletto-about.png",
+  "assets/ui/diavoletto-clients-talents.png",
+  "assets/ui/diavoletto-visual-identity.png",
+  "assets/ui/diavoletto-films.png",
+  "assets/ui/diavoletto-magazines-books.png"
+];
 
 test("the global footer uses two fluid columns at 1100px and preserves desktop CSS", () => {
   const headStyles = execFileSync("git", ["show", "HEAD:style.css"], {
@@ -50,6 +57,43 @@ test("the global footer becomes one column at 760px with a responsive logo", () 
   assert.match(mobileStyles, /padding:\s*75px 20px 30px/);
 });
 
+test("section footer characters use one centralized page map and the existing frame pair", () => {
+  const expectedMappings = {
+    "about.html": "assets/ui/diavoletto-about.png",
+    "clients.html": "assets/ui/diavoletto-clients-talents.png",
+    "brand-identity.html": "assets/ui/diavoletto-visual-identity.png",
+    "films.html": "assets/ui/diavoletto-films.png",
+    "magazines-books.html": "assets/ui/diavoletto-magazines-books.png"
+  };
+
+  Object.entries(expectedMappings).forEach(([page, asset]) => {
+    assert.match(script, new RegExp(`"${page}": "${asset}"`));
+  });
+
+  assert.match(script, /document\.querySelectorAll\("\.footer-logo-frame"\)\.forEach/);
+  assert.match(script, /frame\.src = character/);
+  assert.match(script, /frame\.classList\.add\("is-section-character"\)/);
+  assert.match(styles, /\.footer-logo-frame\.is-section-character\s*\{[^}]*width:\s*100%[^}]*height:\s*100%[^}]*object-fit:\s*contain[^}]*object-position:\s*right top/);
+
+  footerCharacterAssets.forEach(asset => {
+    const contents = fs.readFileSync(path.join(root, asset));
+    assert.deepEqual([...contents.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  });
+});
+
+test("Campaigns and unmapped pages retain the original animated footer character", () => {
+  ["campaigns.html", "index.html", "search.html", "project.html", "events.html"].forEach(page => {
+    const html = read(page);
+    assert.equal((html.match(/<footer class="footer">/g) || []).length, 1);
+    assert.match(html, /assets\/ui\/logo-footer-01\.png/);
+    assert.match(html, /assets\/ui\/logo-footer-02\.png/);
+  });
+
+  assert.doesNotMatch(script, /"campaigns\.html"\s*:|"index\.html"\s*:|"search\.html"\s*:|"project\.html"\s*:|"events\.html"\s*:/);
+  assert.match(styles, /\.frame-1\s*\{[^}]*animation:\s*footerLogoOne 2s steps\(1, end\) infinite/);
+  assert.match(styles, /\.frame-2\s*\{[^}]*animation:\s*footerLogoTwo 2s steps\(1, end\) infinite/);
+});
+
 test("Clients mobile uses compact type, real side padding, and proportional movement", () => {
   assert.match(mobileStyles, /\.clients-section\s*\{[\s\S]*?padding:\s*0 20px 48px/);
   assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
@@ -75,6 +119,10 @@ test("the curated wall may change while unrelated landing, Search, and modal log
   const landingStart = "const landing = document.getElementById";
   const rendererStart = "function renderClients";
   const filterStart = "if (searchInput && clientsWall)";
+  const removeFooterCharacterInitializer = value => value.replace(
+    /\n\/\* SECTION FOOTER CHARACTERS \*\/[\s\S]*?\ninitializeSectionFooterCharacter\(\);\n/,
+    ""
+  );
 
   assert.equal(
     script.slice(script.indexOf(landingStart), script.indexOf(rendererStart)),
@@ -85,8 +133,8 @@ test("the curated wall may change while unrelated landing, Search, and modal log
     headScript.slice(headScript.indexOf(filterStart), headScript.indexOf(searchSuggestionsMarker))
   );
   assert.equal(
-    script.slice(script.indexOf(searchSuggestionsMarker)),
-    headScript.slice(headScript.indexOf(searchSuggestionsMarker))
+    removeFooterCharacterInitializer(script.slice(script.indexOf(searchSuggestionsMarker))),
+    removeFooterCharacterInitializer(headScript.slice(headScript.indexOf(searchSuggestionsMarker)))
   );
   assert.match(script, /document\.createElement\("a"\)/);
   assert.doesNotMatch(script.slice(script.indexOf(rendererStart), script.indexOf(filterStart)), /repeatedList/);
@@ -119,6 +167,11 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "admin-books.js",
     "admin-portfolio.js",
     "assets",
+    ":(exclude)assets/ui/diavoletto-about.png",
+    ":(exclude)assets/ui/diavoletto-clients-talents.png",
+    ":(exclude)assets/ui/diavoletto-visual-identity.png",
+    ":(exclude)assets/ui/diavoletto-films.png",
+    ":(exclude)assets/ui/diavoletto-magazines-books.png",
     "utils/searchData.js",
     "utils/renderProject.js",
     "utils/renderPortfolio.js",
