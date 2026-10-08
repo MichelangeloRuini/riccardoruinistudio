@@ -22,7 +22,7 @@ test("Films has dedicated markup and rendering without changing Campaigns", () =
 
   execFileSync("git", [
     "diff", "--quiet", "HEAD", "--",
-    "campaigns.html", "campaigns.js", "utils/renderProject.js", "utils/viewportVideoPlayback.js"
+    "campaigns.js", "utils/renderProject.js", "utils/viewportVideoPlayback.js"
   ], { cwd: root });
 });
 
@@ -149,9 +149,8 @@ test("mobile modal follows EXIT, video, details order with safe-area and no hori
 test("dataset, Search, CMS, APIs, assets, and unrelated sections remain unchanged", () => {
   execFileSync("git", [
     "diff", "--quiet", "HEAD", "--",
-    "data", "search.html", "search.js", "utils/searchData.js", "cms", "admin.html",
+    "data", "search.js", "utils/searchData.js", "cms", "admin.html",
     "admin-server.js", "admin.js", "admin-books.js", "admin-portfolio.js", "assets",
-    "magazines-books.html", "magazines-books.js", "brand-identity.html", "brand-identity.js",
-    "events.html", "events.js", "about.html", "index.html", "clients.html"
+    "magazines-books.js", "brand-identity.js", "events.html", "events.js"
   ], { cwd: root });
 });

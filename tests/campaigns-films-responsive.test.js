@@ -34,7 +34,7 @@ test("Campaigns desktop CSS and implementation remain unchanged", () => {
   assert.match(headStyles, /\.campaign-media-item\.has-border\s*\{\s*border:\s*1px solid #000/);
   assert.match(styles, /\.campaign-media-item\.has-border\s*\{\s*border:\s*1px solid #000/);
 
-  execFileSync("git", ["diff", "--quiet", "HEAD", "--", "campaigns.html", "campaigns.js", "utils/renderProject.js"], {
+  execFileSync("git", ["diff", "--quiet", "HEAD", "--", "campaigns.js", "utils/renderProject.js"], {
     cwd: root
   });
 });
@@ -72,21 +72,13 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "--quiet",
     "HEAD",
     "--",
-    "campaigns.html",
     "campaigns.js",
     "utils/renderProject.js",
     "utils/viewportVideoPlayback.js",
-    "search.html",
     "search.js",
-    "project.html",
-    "brand-identity.html",
     "brand-identity.js",
-    "about.html",
     "events.html",
-    "magazines-books.html",
     "magazines-books.js",
-    "index.html",
-    "clients.html",
     "data",
     "cms",
     "admin.html",

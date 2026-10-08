@@ -21,7 +21,6 @@ const expectedLabels = [
   "Campaigns",
   "Films",
   "Visual Identity",
-  "Events",
   "Magazines & Books",
   "About"
 ];
@@ -239,7 +238,7 @@ test("the 1100px shell hides the desktop nav and exposes MENU without changing d
   assert.match(headStyles, /\.site-nav-exit/);
 });
 
-test("mobile navigation reuses the real eight links and preserves their order and active state", () => {
+test("mobile navigation reuses the seven public links and preserves their order and active state", () => {
   const fixture = createFixture();
   const menuButton = fixture.document.getElementById("siteMenuToggle");
 
@@ -332,7 +331,15 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     "HEAD",
     "--",
     "*.html",
+    ":(exclude)index.html",
+    ":(exclude)clients.html",
+    ":(exclude)campaigns.html",
     ":(exclude)films.html",
+    ":(exclude)search.html",
+    ":(exclude)project.html",
+    ":(exclude)brand-identity.html",
+    ":(exclude)magazines-books.html",
+    ":(exclude)about.html",
     "data",
     "cms",
     "admin.html",

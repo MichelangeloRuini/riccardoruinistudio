@@ -52,6 +52,13 @@ function expectedMenuOnlyChange(relativePath) {
     : baseline;
 }
 
+function expectedEventsHidden(relativePath) {
+  return expectedMenuOnlyChange(relativePath).replace(
+    '<a href="events.html">Events</a>',
+    '<!-- Events temporarily hidden from public navigation. -->'
+  );
+}
+
 test("public page loads the dataset and dedicated renderer inside the editorial shell", () => {
   assert.ok(fs.existsSync(path.join(root, "magazines-books.html")));
   assert.match(page, /<header class="site-header site-header--editorial">/);
@@ -147,20 +154,22 @@ test("layout is five columns on desktop with isolated tablet and mobile adaptati
   assert.match(styles, /body\.is-modal-open\s*\{[\s\S]*?overflow:\s*hidden/);
 });
 
-test("all real public menus use the approved order and only the new page is Books-active", () => {
-  const labels = [
+test("public menus preserve their order while Events stays available only on its direct page", () => {
+  const publicLabels = [
     "Start a Project",
     "Clients",
     "Campaigns",
     "Films",
     "Visual Identity",
-    "Events",
     "Magazines &amp; Books",
     "About"
   ];
 
   menuPages.forEach(relativePath => {
     const navigation = extractNavigation(read(relativePath));
+    const labels = relativePath === "events.html"
+      ? [...publicLabels.slice(0, 5), "Events", ...publicLabels.slice(5)]
+      : publicLabels;
     let previousIndex = -1;
 
     labels.forEach(label => {
@@ -168,6 +177,10 @@ test("all real public menus use the approved order and only the new page is Book
       assert.ok(index > previousIndex, `${relativePath}: ${label} must follow the approved order`);
       previousIndex = index;
     });
+
+    if (relativePath !== "events.html") {
+      assert.doesNotMatch(navigation, /href="events\.html"|>Events<\/a>/);
+    }
 
     assert.match(
       navigation,
@@ -197,9 +210,13 @@ test("all real public menus use the approved order and only the new page is Book
   );
 });
 
-test("Campaigns and Visual Identity internals differ from HEAD only by the menu link", () => {
-  assert.equal(read("campaigns.html"), expectedMenuOnlyChange("campaigns.html"));
-  assert.equal(read("brand-identity.html"), expectedMenuOnlyChange("brand-identity.html"));
+test("public page internals differ from HEAD only by the temporarily hidden Events link", () => {
+  menuPages
+    .filter(relativePath => relativePath !== "events.html")
+    .forEach(relativePath => {
+      assert.equal(read(relativePath), expectedEventsHidden(relativePath));
+    });
+
   assert.match(read("campaigns.html"), /id="campaignsPage"/);
   assert.match(read("campaigns.html"), /<script src="campaigns\.js"><\/script>/);
   assert.match(read("brand-identity.html"), /id="brandIdentityGrid"/);

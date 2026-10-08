@@ -457,6 +457,6 @@ test("datasets, CMS, admin, APIs, assets, and public HTML remain unchanged", () 
     "admin-books.js",
     "admin-portfolio.js",
     "assets",
-    ...publicPages
+    ...publicPages.filter(relativePath => relativePath === "events.html")
   ], { cwd: root });
 });
