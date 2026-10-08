@@ -108,6 +108,7 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     ":(exclude)search.html",
     ":(exclude)project.html",
     ":(exclude)brand-identity.html",
+    ":(exclude)events.html",
     ":(exclude)magazines-books.html",
     ":(exclude)about.html",
     "data",

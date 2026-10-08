@@ -92,7 +92,6 @@ test("dataset order and protected site areas remain unchanged", () => {
     "admin-books.js",
     "admin-portfolio.js",
     "search.js",
-    "events.html",
   ], { cwd: root });
 
   const changedUtils = execFileSync(

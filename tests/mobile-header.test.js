@@ -17,7 +17,7 @@ const mobileHeaderStyles = styles.slice(
 );
 const expectedLabels = [
   "START A PROJECT",
-  "Clients",
+  "Clients & Talents",
   "Campaigns",
   "Films",
   "Visual Identity",
@@ -338,6 +338,7 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     ":(exclude)search.html",
     ":(exclude)project.html",
     ":(exclude)brand-identity.html",
+    ":(exclude)events.html",
     ":(exclude)magazines-books.html",
     ":(exclude)about.html",
     "data",

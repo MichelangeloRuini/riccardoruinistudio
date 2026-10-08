@@ -85,7 +85,6 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "--quiet",
     "HEAD",
     "--",
-    "events.html",
     "brand-identity.js",
     "campaigns.js",
     "search.js",

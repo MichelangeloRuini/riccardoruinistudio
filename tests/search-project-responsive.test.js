@@ -76,7 +76,6 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "utils/renderPortfolioSearch.js",
     "campaigns.js",
     "brand-identity.js",
-    "events.html",
     "magazines-books.js",
     "data",
     "cms",

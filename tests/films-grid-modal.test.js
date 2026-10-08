@@ -151,6 +151,6 @@ test("dataset, Search, CMS, APIs, assets, and unrelated sections remain unchange
     "diff", "--quiet", "HEAD", "--",
     "data", "search.js", "utils/searchData.js", "cms", "admin.html",
     "admin-server.js", "admin.js", "admin-books.js", "admin-portfolio.js", "assets",
-    "magazines-books.js", "brand-identity.js", "events.html", "events.js"
+    "magazines-books.js", "brand-identity.js", "events.js"
   ], { cwd: root });
 });

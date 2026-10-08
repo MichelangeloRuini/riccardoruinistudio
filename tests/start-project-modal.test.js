@@ -443,7 +443,7 @@ test("Start a Project stays isolated from the Magazines & Books modal", () => {
   assert.match(initializer[0], /stopImmediatePropagation\(\)/);
 });
 
-test("datasets, CMS, admin, APIs, assets, and public HTML remain unchanged", () => {
+test("datasets, CMS, admin, APIs, and assets remain unchanged", () => {
   execFileSync("git", [
     "diff",
     "--quiet",
@@ -456,7 +456,6 @@ test("datasets, CMS, admin, APIs, assets, and public HTML remain unchanged", () 
     "admin.js",
     "admin-books.js",
     "admin-portfolio.js",
-    "assets",
-    ...publicPages.filter(relativePath => relativePath === "events.html")
+    "assets"
   ], { cwd: root });
 });

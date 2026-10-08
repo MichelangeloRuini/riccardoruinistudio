@@ -77,7 +77,6 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "utils/viewportVideoPlayback.js",
     "search.js",
     "brand-identity.js",
-    "events.html",
     "magazines-books.js",
     "data",
     "cms",
