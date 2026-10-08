@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const root = path.resolve(__dirname, "..");
 
-const expectedClients = [
+const expectedTalents = [
   "Yasmin Le Bon",
   "Dusan Reljin",
   "Norman Jean Roy",
@@ -41,7 +41,6 @@ const expectedClients = [
   "David Bailey",
   "Kes Glozier",
   "David Sims",
-  "Kristin Scott Thomas",
   "Chiara Clemente",
   "Kendall Jenner",
   "Peter Lindbergh",
@@ -83,7 +82,6 @@ const expectedClients = [
   "Charlotte Casiraghi",
   "James Franco",
   "Deborah Turbeville",
-  "Jack Huston",
   "Nicolas Winding Refn",
   "Nathaniel Goldberg",
   "Frank Miller",
@@ -105,9 +103,70 @@ const expectedClients = [
   "Philip Lorca Di Corcia"
 ];
 
-const absentClients = new Set([
+const expectedBrands = [
+  "Blazé",
+  "Bulgari",
+  "Bulgari Hotel & Residences London",
+  "Cerruti",
+  "Chantecler",
+  "Diesel",
+  "Dirk Bikkembergs",
+  "Dondup",
+  "Elie Saab",
+  "Elisabetta Franchi",
+  "Emilio Pucci",
+  "Ermanno Scervino",
+  "Falconeri",
+  "Fendi",
+  "Ferragamo",
+  "Feudi di San Gregorio",
+  "Francesco Scognamiglio",
+  "Gucci",
+  "Hogan",
+  "Intimissimi",
+  "La Perla",
+  "Liberty",
+  "Liu Jo",
+  "Loewe",
+  "Marella",
+  "Marina Rinaldi",
+  "Missoni",
+  "Paciotti",
+  "Patrizia Pepe",
+  "Peuterey",
+  "Pinko",
+  "RED Valentino",
+  "Trussardi",
+  "Valentino",
+  "Vilebrequin",
+  "Vionnet",
+  "Walk For Giants"
+];
+
+function getExpectedWall() {
+  const entries = [];
+  let previousTalentIndex = 0;
+
+  expectedBrands.forEach((brand, brandIndex) => {
+    const nextTalentIndex = Math.floor(
+      ((brandIndex + 1) * expectedTalents.length) / expectedBrands.length
+    );
+
+    expectedTalents.slice(previousTalentIndex, nextTalentIndex).forEach(name => {
+      entries.push({ name, type: "talent" });
+    });
+    entries.push({ name: brand, type: "brand" });
+    previousTalentIndex = nextTalentIndex;
+  });
+
+  return entries;
+}
+
+const expectedClients = getExpectedWall();
+const excludedNames = new Set([
   "Kristin Scott Thomas",
-  "Jack Huston"
+  "Jack Huston",
+  "Allora Fest"
 ]);
 
 function loadCollection(filename, collectionName) {
@@ -140,11 +199,12 @@ function loadClientsScript() {
   };
   const document = {
     addEventListener: () => {},
-    createElement: () => ({
+    createElement: tagName => ({
       addEventListener(type, listener) {
         this.listeners[type] = listener;
       },
       classList: createClassList(),
+      tagName: tagName.toUpperCase(),
       listeners: {},
       style: {},
       textContent: ""
@@ -178,7 +238,7 @@ function loadClientsScript() {
   return {
     clients: Array.from(context.clientEntries, entry => ({
       name: entry.name,
-      clickable: entry.clickable
+      type: entry.type
     })),
     context,
     nodes,
@@ -204,28 +264,45 @@ function getCreditOccurrences(campaigns) {
   return occurrences;
 }
 
-test("Clients contains the canonical list in the requested order without duplicates", () => {
+test("the curated wall contains one stable mixed sequence of 37 brands and 94 talents", () => {
   const { clients } = loadClientsScript();
   const names = clients.map(client => client.name);
 
-  assert.deepEqual(names, expectedClients);
-  assert.equal(names.length, 96);
+  assert.deepEqual(clients, expectedClients);
+  assert.equal(names.length, 131);
   assert.equal(new Set(names).size, names.length);
-  assert.deepEqual(
-    clients.filter(client => !client.clickable).map(client => client.name),
-    Array.from(absentClients)
-  );
+  assert.equal(clients.filter(client => client.type === "brand").length, 37);
+  assert.equal(clients.filter(client => client.type === "talent").length, 94);
+  excludedNames.forEach(name => assert.equal(names.includes(name), false));
+
+  const brandIndexes = clients
+    .map((client, index) => client.type === "brand" ? index : -1)
+    .filter(index => index >= 0);
+  assert.equal(brandIndexes[0], 2);
+  brandIndexes.slice(1).forEach((index, position) => {
+    const distance = index - brandIndexes[position];
+    assert.ok(distance === 3 || distance === 4);
+  });
 });
 
-test("every clickable Client is an exact credit value and produces search results", () => {
+test("all 131 wall entries come from real structured data and produce Search results", () => {
   const campaigns = loadCollection("data/campaigns.js", "campaigns");
   const portfolioProjects = loadCollection(
     "data/portfolio-projects.js",
     "portfolioProjects"
   );
+  const magazinesBooks = loadCollection(
+    "data/magazines-books.js",
+    "magazinesBooks"
+  );
   const beforeCampaigns = JSON.stringify(campaigns);
   const beforePortfolio = JSON.stringify(portfolioProjects);
-  const occurrences = getCreditOccurrences(campaigns);
+  const beforeMagazinesBooks = JSON.stringify(magazinesBooks);
+  const creditOccurrences = getCreditOccurrences(campaigns);
+  const clientOccurrences = new Set([
+    ...campaigns.map(campaign => campaign.client),
+    ...portfolioProjects.map(project => project.client)
+  ]);
   const searchContext = { window: {} };
   searchContext.window = searchContext;
   vm.createContext(searchContext);
@@ -242,50 +319,65 @@ test("every clickable Client is an exact credit value and produces search result
     const matchingPortfolio = portfolioProjects.filter(project =>
       searchContext.RRSUnifiedSearch.matches(project, "portfolio", client.name)
     );
+    const matchingMagazinesBooks = magazinesBooks.filter(record =>
+      searchContext.RRSUnifiedSearch.matches(record, "magazines-books", client.name)
+    );
 
-    if (client.clickable) {
+    if (client.type === "brand") {
       assert.ok(
-        occurrences.get(client.name) > 0,
-        `${client.name} must exactly match at least one credit`
-      );
-      assert.ok(
-        matchingCampaigns.length + matchingPortfolio.length > 0,
-        `${client.name} must produce at least one result`
+        clientOccurrences.has(client.name),
+        `${client.name} must exactly match a structured client field`
       );
     } else {
-      assert.equal(occurrences.has(client.name), false);
-      assert.equal(matchingCampaigns.length + matchingPortfolio.length, 0);
+      assert.ok(
+        creditOccurrences.get(client.name) > 0,
+        `${client.name} must exactly match at least one real credit`
+      );
     }
+
+    assert.ok(
+      matchingCampaigns.length
+        + matchingPortfolio.length
+        + matchingMagazinesBooks.length > 0,
+      `${client.name} must produce at least one result`
+    );
   });
 
   assert.equal(JSON.stringify(campaigns), beforeCampaigns);
   assert.equal(JSON.stringify(portfolioProjects), beforePortfolio);
+  assert.equal(JSON.stringify(magazinesBooks), beforeMagazinesBooks);
 });
 
-test("clickable entries generate their exact encoded query and absent entries do not link", () => {
+test("the renderer creates exactly 131 real same-tab links with encoded Search URLs", () => {
   const fixture = loadClientsScript();
   fixture.renderClients(fixture.clients);
-  const firstPass = fixture.nodes.slice(0, expectedClients.length);
+  assert.equal(fixture.nodes.length, 131);
 
-  firstPass.forEach((node, index) => {
-    const name = expectedClients[index];
-
+  fixture.nodes.forEach((node, index) => {
+    const name = expectedClients[index].name;
+    assert.equal(node.tagName, "A");
     assert.equal(node.textContent, name);
-    if (absentClients.has(name)) {
-      assert.equal(node.classList.contains("is-clickable"), false);
-      assert.equal(node.listeners.click, undefined);
-      assert.equal(node.style.cursor, "default");
-      assert.equal(node.style.color, "var(--text-grey)");
-      return;
-    }
-
-    assert.equal(node.classList.contains("is-clickable"), true);
-    node.listeners.click();
+    assert.equal(node.className, "client-name is-clickable");
     assert.equal(
-      fixture.context.window.location.href,
+      node.href,
       `search.html?q=${encodeURIComponent(name)}`
     );
+    assert.equal(node.target, undefined);
   });
+});
+
+test("the wall uses no random order and no duplicated render sequence", () => {
+  const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
+  const styles = fs.readFileSync(path.join(root, "style.css"), "utf8");
+  const renderer = script.slice(
+    script.indexOf("function renderClients"),
+    script.indexOf("/* SEARCH SUGGESTIONS */")
+  );
+
+  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random/);
+  assert.match(renderer, /document\.createElement\("a"\)/);
+  assert.match(styles, /animation:\s*wallMove 28s ease-in-out infinite alternate/);
+  assert.match(styles, /animation:\s*wallMoveMobile 28s ease-in-out infinite alternate/);
 });
 
 test("known supplied typos and non-canonical variants are absent", () => {
@@ -309,4 +401,5 @@ test("known supplied typos and non-canonical variants are absent", () => {
   ];
 
   rejectedVariants.forEach(variant => assert.equal(names.has(variant), false));
+  excludedNames.forEach(name => assert.equal(names.has(name), false));
 });

@@ -1,109 +1,136 @@
-const nonClickableClients = new Set([
-  "Kristin Scott Thomas",
-  "Jack Huston"
-]);
-
 const clients = [
-  "Yasmin Le Bon",
-  "Dusan Reljin",
-  "Norman Jean Roy",
-  "Jennifer Lopez",
-  "Jacob Bixenman",
-  "Francesco Carrozzini",
-  "Brianna Capozzi",
-  "Georgia May Jagger",
-  "Gia Coppola",
-  "Irina Shayk",
-  "Chris Colls",
-  "Cedric Buchet",
-  "Dree Hemingway",
-  "Arizona Muse",
-  "Henrik Purienne",
-  "Mert Alas and Marcus Piggott",
-  "Lily Aldridge",
-  "Steve Aoki",
-  "Juergen Teller",
-  "Vittoria Ceretti",
-  "Adut Akech",
-  "Grace Hartzel",
-  "Mikael Jansson",
-  "Kaia Gerber",
-  "Inez and Vinoodh",
-  "Gigi Hadid",
-  "Rianne Van Rampaey",
-  "Troye Sivan",
-  "Ellen Von Unwerth",
-  "Terry Richardson",
-  "Carmelo Anthony",
-  "David Bailey",
-  "Kes Glozier",
-  "David Sims",
-  "Kristin Scott Thomas",
-  "Chiara Clemente",
-  "Kendall Jenner",
-  "Peter Lindbergh",
-  "Maria Carla Boscono",
-  "Baby Strange",
-  "Christy Turlington",
-  "Liya Kebede",
-  "Mark Borthwick",
-  "Kenya Kinski",
-  "Will Peltz",
-  "Steven Meisel",
-  "Karen Elson",
-  "Birdy",
-  "Steve Mccurry",
-  "Bruce Weber",
-  "Patricia Arquette",
-  "Ben Barnes",
-  "Michal Pudelka",
-  "Venetia Scott",
-  "Sølve Sundsbø",
-  "Mario Sorrenti",
-  "Gisele Bundchen",
-  "Malgosia Bela",
-  "Angelo Pennetta",
-  "Kasia Smutniak",
-  "Stefano Accorsi",
-  "Lykke Li",
-  "Craig McDean",
-  "Jeff Burton",
-  "Kate Moss",
-  "Blake Lively",
-  "Guido Mocafico",
-  "Abbey Lee",
-  "Penelope Cruz",
-  "Sarah Moon",
-  "Amber Valletta",
-  "Matteo Garrone",
-  "Eric Bana",
-  "Charlotte Casiraghi",
-  "James Franco",
-  "Deborah Turbeville",
-  "Jack Huston",
-  "Nicolas Winding Refn",
-  "Nathaniel Goldberg",
-  "Frank Miller",
-  "Evan Rachel Wood",
-  "Chris Evans",
-  "Clive Owen",
-  "Kirsten Dunst",
-  "Stephanie Seymour",
-  "Laetitia Casta",
-  "Julianne Moore",
-  "Chris Cunningham",
-  "Karlie Kloss",
-  "Clare Danes",
-  "Rihanna",
-  "David Lynch",
-  "Drew Barrymore",
-  "Willy Vanderperre",
-  "Rie Rasmussen",
-  "Philip Lorca Di Corcia"
-].map(name => ({
-  name,
-  clickable: !nonClickableClients.has(name)
-}));
+  { name: "Yasmin Le Bon", type: "talent" },
+  { name: "Dusan Reljin", type: "talent" },
+  { name: "Blazé", type: "brand" },
+  { name: "Norman Jean Roy", type: "talent" },
+  { name: "Jennifer Lopez", type: "talent" },
+  { name: "Jacob Bixenman", type: "talent" },
+  { name: "Bulgari", type: "brand" },
+  { name: "Francesco Carrozzini", type: "talent" },
+  { name: "Brianna Capozzi", type: "talent" },
+  { name: "Bulgari Hotel & Residences London", type: "brand" },
+  { name: "Georgia May Jagger", type: "talent" },
+  { name: "Gia Coppola", type: "talent" },
+  { name: "Irina Shayk", type: "talent" },
+  { name: "Cerruti", type: "brand" },
+  { name: "Chris Colls", type: "talent" },
+  { name: "Cedric Buchet", type: "talent" },
+  { name: "Chantecler", type: "brand" },
+  { name: "Dree Hemingway", type: "talent" },
+  { name: "Arizona Muse", type: "talent" },
+  { name: "Henrik Purienne", type: "talent" },
+  { name: "Diesel", type: "brand" },
+  { name: "Mert Alas and Marcus Piggott", type: "talent" },
+  { name: "Lily Aldridge", type: "talent" },
+  { name: "Dirk Bikkembergs", type: "brand" },
+  { name: "Steve Aoki", type: "talent" },
+  { name: "Juergen Teller", type: "talent" },
+  { name: "Vittoria Ceretti", type: "talent" },
+  { name: "Dondup", type: "brand" },
+  { name: "Adut Akech", type: "talent" },
+  { name: "Grace Hartzel", type: "talent" },
+  { name: "Elie Saab", type: "brand" },
+  { name: "Mikael Jansson", type: "talent" },
+  { name: "Kaia Gerber", type: "talent" },
+  { name: "Inez and Vinoodh", type: "talent" },
+  { name: "Elisabetta Franchi", type: "brand" },
+  { name: "Gigi Hadid", type: "talent" },
+  { name: "Rianne Van Rampaey", type: "talent" },
+  { name: "Emilio Pucci", type: "brand" },
+  { name: "Troye Sivan", type: "talent" },
+  { name: "Ellen Von Unwerth", type: "talent" },
+  { name: "Terry Richardson", type: "talent" },
+  { name: "Ermanno Scervino", type: "brand" },
+  { name: "Carmelo Anthony", type: "talent" },
+  { name: "David Bailey", type: "talent" },
+  { name: "Kes Glozier", type: "talent" },
+  { name: "Falconeri", type: "brand" },
+  { name: "David Sims", type: "talent" },
+  { name: "Chiara Clemente", type: "talent" },
+  { name: "Fendi", type: "brand" },
+  { name: "Kendall Jenner", type: "talent" },
+  { name: "Peter Lindbergh", type: "talent" },
+  { name: "Maria Carla Boscono", type: "talent" },
+  { name: "Ferragamo", type: "brand" },
+  { name: "Baby Strange", type: "talent" },
+  { name: "Christy Turlington", type: "talent" },
+  { name: "Feudi di San Gregorio", type: "brand" },
+  { name: "Liya Kebede", type: "talent" },
+  { name: "Mark Borthwick", type: "talent" },
+  { name: "Kenya Kinski", type: "talent" },
+  { name: "Francesco Scognamiglio", type: "brand" },
+  { name: "Will Peltz", type: "talent" },
+  { name: "Steven Meisel", type: "talent" },
+  { name: "Gucci", type: "brand" },
+  { name: "Karen Elson", type: "talent" },
+  { name: "Birdy", type: "talent" },
+  { name: "Steve Mccurry", type: "talent" },
+  { name: "Hogan", type: "brand" },
+  { name: "Bruce Weber", type: "talent" },
+  { name: "Patricia Arquette", type: "talent" },
+  { name: "Intimissimi", type: "brand" },
+  { name: "Ben Barnes", type: "talent" },
+  { name: "Michal Pudelka", type: "talent" },
+  { name: "Venetia Scott", type: "talent" },
+  { name: "La Perla", type: "brand" },
+  { name: "Sølve Sundsbø", type: "talent" },
+  { name: "Mario Sorrenti", type: "talent" },
+  { name: "Liberty", type: "brand" },
+  { name: "Gisele Bundchen", type: "talent" },
+  { name: "Malgosia Bela", type: "talent" },
+  { name: "Angelo Pennetta", type: "talent" },
+  { name: "Liu Jo", type: "brand" },
+  { name: "Kasia Smutniak", type: "talent" },
+  { name: "Stefano Accorsi", type: "talent" },
+  { name: "Loewe", type: "brand" },
+  { name: "Lykke Li", type: "talent" },
+  { name: "Craig McDean", type: "talent" },
+  { name: "Jeff Burton", type: "talent" },
+  { name: "Marella", type: "brand" },
+  { name: "Kate Moss", type: "talent" },
+  { name: "Blake Lively", type: "talent" },
+  { name: "Guido Mocafico", type: "talent" },
+  { name: "Marina Rinaldi", type: "brand" },
+  { name: "Abbey Lee", type: "talent" },
+  { name: "Penelope Cruz", type: "talent" },
+  { name: "Missoni", type: "brand" },
+  { name: "Sarah Moon", type: "talent" },
+  { name: "Amber Valletta", type: "talent" },
+  { name: "Matteo Garrone", type: "talent" },
+  { name: "Paciotti", type: "brand" },
+  { name: "Eric Bana", type: "talent" },
+  { name: "Charlotte Casiraghi", type: "talent" },
+  { name: "Patrizia Pepe", type: "brand" },
+  { name: "James Franco", type: "talent" },
+  { name: "Deborah Turbeville", type: "talent" },
+  { name: "Nicolas Winding Refn", type: "talent" },
+  { name: "Peuterey", type: "brand" },
+  { name: "Nathaniel Goldberg", type: "talent" },
+  { name: "Frank Miller", type: "talent" },
+  { name: "Pinko", type: "brand" },
+  { name: "Evan Rachel Wood", type: "talent" },
+  { name: "Chris Evans", type: "talent" },
+  { name: "Clive Owen", type: "talent" },
+  { name: "RED Valentino", type: "brand" },
+  { name: "Kirsten Dunst", type: "talent" },
+  { name: "Stephanie Seymour", type: "talent" },
+  { name: "Trussardi", type: "brand" },
+  { name: "Laetitia Casta", type: "talent" },
+  { name: "Julianne Moore", type: "talent" },
+  { name: "Chris Cunningham", type: "talent" },
+  { name: "Valentino", type: "brand" },
+  { name: "Karlie Kloss", type: "talent" },
+  { name: "Clare Danes", type: "talent" },
+  { name: "Vilebrequin", type: "brand" },
+  { name: "Rihanna", type: "talent" },
+  { name: "David Lynch", type: "talent" },
+  { name: "Drew Barrymore", type: "talent" },
+  { name: "Vionnet", type: "brand" },
+  { name: "Willy Vanderperre", type: "talent" },
+  { name: "Rie Rasmussen", type: "talent" },
+  { name: "Philip Lorca Di Corcia", type: "talent" },
+  { name: "Walk For Giants", type: "brand" }
+];
 
 const landing = document.getElementById("landing");
 const cursor = document.querySelector(".custom-cursor");
@@ -208,33 +235,18 @@ function renderClients(list) {
     return;
   }
 
-  const isMobileClientsLayout = typeof window.matchMedia === "function"
-    && window.matchMedia("(max-width: 760px)").matches;
-  const repeatedList = list.length > 8 && !isMobileClientsLayout
-    ? [...list, ...list]
-    : list;
-
-  repeatedList.forEach((item, index) => {
+  list.forEach((item, index) => {
     const entry = typeof item === "string"
-      ? { name: item, clickable: true }
+      ? { name: item }
       : item;
-    const span = document.createElement("span");
-    span.className = "client-name";
-    span.textContent = entry.name;
+    const link = document.createElement("a");
+    link.className = "client-name is-clickable";
+    link.href = `search.html?q=${encodeURIComponent(entry.name)}`;
+    link.textContent = entry.name;
 
-    if (entry.clickable) {
-      span.classList.add("is-clickable");
-      span.addEventListener("click", () => {
-        goToSearch(entry.name);
-      });
-    } else {
-      span.style.color = "var(--text-grey)";
-      span.style.cursor = "default";
-    }
+    clientsWall.appendChild(link);
 
-    clientsWall.appendChild(span);
-
-    if (index < repeatedList.length - 1) {
+    if (index < list.length - 1) {
       clientsWall.append(" / ");
     }
   });

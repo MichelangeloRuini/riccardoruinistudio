@@ -127,7 +127,20 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
   ]) {
     const start = headStyles.indexOf(protectedMarker);
     const currentStart = styles.indexOf(protectedMarker);
-    const headSection = headStyles.slice(start, headStyles.indexOf("/* ==========================================================", start + protectedMarker.length));
-    assert.equal(styles.slice(currentStart, currentStart + headSection.length), headSection);
+    const headEnd = headStyles.indexOf("/* ==========================================================", start + protectedMarker.length);
+    const currentEnd = styles.indexOf("/* ==========================================================", currentStart + protectedMarker.length);
+    let headSection = headStyles.slice(start, headEnd);
+    let currentSection = styles.slice(currentStart, currentEnd);
+
+    if (protectedMarker === "GLOBAL RESPONSIVE FOOTER / MOBILE CLIENTS") {
+      const normalizeAuthorizedWallMotion = value => value.replace(
+        /animation:\s*wallMoveMobile 28s [^;]+;/,
+        "animation: <authorized-wall-motion>;"
+      );
+      headSection = normalizeAuthorizedWallMotion(headSection);
+      currentSection = normalizeAuthorizedWallMotion(currentSection);
+    }
+
+    assert.equal(currentSection, headSection);
   }
 });

@@ -257,7 +257,7 @@ body.entered .custom-cursor {
   font-size: 35.5px;
   line-height: 0.92;
   text-transform: uppercase;
-  animation: wallMove 28s linear infinite;
+  animation: wallMove 28s ease-in-out infinite alternate;
 }
 
 .clients-wall.is-filtered {
@@ -268,6 +268,7 @@ body.entered .custom-cursor {
 .client-name {
   color: var(--text-grey);
   cursor: pointer;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -2980,7 +2981,7 @@ body.is-mobile-menu-open {
     line-height: 1;
     overflow-wrap: normal;
     word-break: normal;
-    animation: wallMoveMobile 28s linear infinite;
+    animation: wallMoveMobile 28s ease-in-out infinite alternate;
   }
 
   .client-name.is-clickable {

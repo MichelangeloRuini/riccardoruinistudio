@@ -27,7 +27,14 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
     headStyles.indexOf(nextMarker)
   );
 
-  assert.equal(responsiveStyles, headResponsiveStyles);
+  const normalizeWallMotion = value => value.replace(
+    /animation:\s*wallMoveMobile 28s [^;]+;/,
+    "animation: <authorized-wall-motion>;"
+  );
+  assert.equal(
+    normalizeWallMotion(responsiveStyles),
+    normalizeWallMotion(headResponsiveStyles)
+  );
   assert.match(tabletStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(tabletStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
   assert.match(tabletStyles, /\.footer\.footer\s*>\s*\*\s*\{[\s\S]*?min-width:\s*0/);
@@ -48,7 +55,7 @@ test("Clients mobile uses compact type, real side padding, and proportional move
   assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
   assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?font-size:\s*clamp\(28px, 7\.5vw, 32px\)/);
   assert.match(mobileStyles, /line-height:\s*1/);
-  assert.match(mobileStyles, /animation:\s*wallMoveMobile 28s linear infinite/);
+  assert.match(mobileStyles, /animation:\s*wallMoveMobile 28s ease-in-out infinite alternate/);
   assert.match(mobileStyles, /translateX\(-12vw\)/);
   assert.doesNotMatch(mobileStyles, /translateX\(-420px\)/);
 });
@@ -59,26 +66,30 @@ test("the landing has a vh fallback and a dynamic viewport height on mobile", ()
   assert.match(mobileStyles, /\.landing-logo img\s*\{[\s\S]*?max-width:\s*100%/);
 });
 
-test("Clients data, Search/filter, and the approved Step 1 JavaScript remain protected", () => {
+test("the curated wall may change while unrelated landing, Search, and modal logic stays protected", () => {
   const headScript = execFileSync("git", ["show", "HEAD:script.js"], {
     cwd: root,
     encoding: "utf8"
   });
   const searchSuggestionsMarker = "/* SEARCH SUGGESTIONS */";
-  const clientsStart = "const clients = [";
-  const clientsEnd = "const landing = document.getElementById";
+  const landingStart = "const landing = document.getElementById";
+  const rendererStart = "function renderClients";
   const filterStart = "if (searchInput && clientsWall)";
 
   assert.equal(
-    script.slice(script.indexOf(clientsStart), script.indexOf(clientsEnd)),
-    headScript.slice(headScript.indexOf(clientsStart), headScript.indexOf(clientsEnd))
+    script.slice(script.indexOf(landingStart), script.indexOf(rendererStart)),
+    headScript.slice(headScript.indexOf(landingStart), headScript.indexOf(rendererStart))
   );
   assert.equal(
     script.slice(script.indexOf(filterStart), script.indexOf(searchSuggestionsMarker)),
     headScript.slice(headScript.indexOf(filterStart), headScript.indexOf(searchSuggestionsMarker))
   );
-  assert.match(script, /matchMedia\("\(max-width: 760px\)"\)\.matches/);
-  assert.match(script, /list\.length > 8 && !isMobileClientsLayout/);
+  assert.equal(
+    script.slice(script.indexOf(searchSuggestionsMarker)),
+    headScript.slice(headScript.indexOf(searchSuggestionsMarker))
+  );
+  assert.match(script, /document\.createElement\("a"\)/);
+  assert.doesNotMatch(script.slice(script.indexOf(rendererStart), script.indexOf(filterStart)), /repeatedList/);
   assert.match(script, /function initializeMobileHeader\(\)/);
   assert.match(script, /document\.addEventListener\("rrs:open-start-project"/);
 });
