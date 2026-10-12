@@ -263,15 +263,22 @@ function initializeMobileClientsWall() {
   const autoScrollSpeed = 12;
   const initialScrollRatio = 0.4;
   const dragThreshold = 8;
+  const scrollSettleDelay = 180;
+  const resumeRampDuration = 500;
   const horizontalKeys = new Set(["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"]);
   let animationFrame = null;
   let positioningFrame = null;
+  let resumeTimer = null;
   let lastTimestamp = null;
+  let rampStartTimestamp = null;
   let autoScrollPosition = 0;
   let mobileIsActive = false;
   let wallIsReady = false;
+  let wallIsVisible = true;
   let savedMobileScrollLeft = null;
-  let userHasInteracted = false;
+  let manualInteractionIsActive = false;
+  let resumeWithRamp = false;
+  let hintHasBeenDismissed = false;
   let pointerStart = null;
 
   wrapper.classList.add("is-positioning");
@@ -283,6 +290,14 @@ function initializeMobileClientsWall() {
     }
 
     lastTimestamp = null;
+    rampStartTimestamp = null;
+  }
+
+  function cancelAutoplayResume() {
+    if (resumeTimer !== null) {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = null;
+    }
   }
 
   function cancelPositioning() {
@@ -295,14 +310,23 @@ function initializeMobileClientsWall() {
   function autoScroll(timestamp) {
     animationFrame = null;
 
-    if (!mobileQuery.matches || reducedMotionQuery.matches || userHasInteracted || document.hidden) {
+    if (
+      !mobileQuery.matches ||
+      reducedMotionQuery.matches ||
+      manualInteractionIsActive ||
+      document.hidden ||
+      !wallIsVisible
+    ) {
       lastTimestamp = null;
       return;
     }
 
     if (lastTimestamp !== null) {
       const maximumScroll = Math.max(0, wrapper.scrollWidth - wrapper.clientWidth);
-      const distance = autoScrollSpeed * ((timestamp - lastTimestamp) / 1000);
+      const rampProgress = rampStartTimestamp === null
+        ? 1
+        : Math.min(1, (timestamp - rampStartTimestamp) / resumeRampDuration);
+      const distance = autoScrollSpeed * rampProgress * ((timestamp - lastTimestamp) / 1000);
       const nextPosition = Math.min(maximumScroll, autoScrollPosition + distance);
 
       autoScrollPosition = nextPosition;
@@ -310,35 +334,64 @@ function initializeMobileClientsWall() {
 
       if (nextPosition >= maximumScroll) {
         lastTimestamp = null;
+        rampStartTimestamp = null;
         return;
       }
+    }
+
+    if (rampStartTimestamp === null && resumeWithRamp) {
+      rampStartTimestamp = timestamp;
+      resumeWithRamp = false;
     }
 
     lastTimestamp = timestamp;
     animationFrame = window.requestAnimationFrame(autoScroll);
   }
 
-  function startAutoScroll() {
+  function startAutoScroll(progressively = false) {
     if (
       animationFrame !== null ||
       !wallIsReady ||
       !mobileQuery.matches ||
       reducedMotionQuery.matches ||
-      userHasInteracted ||
-      document.hidden
+      manualInteractionIsActive ||
+      document.hidden ||
+      !wallIsVisible
     ) return;
 
     lastTimestamp = null;
+    rampStartTimestamp = null;
+    resumeWithRamp = progressively;
     autoScrollPosition = wrapper.scrollLeft;
     animationFrame = window.requestAnimationFrame(autoScroll);
   }
 
-  function registerManualInteraction() {
-    if (!mobileQuery.matches || userHasInteracted) return;
+  function dismissHint() {
+    if (hintHasBeenDismissed) return;
 
-    userHasInteracted = true;
-    stopAutoScroll();
+    hintHasBeenDismissed = true;
     hint.classList.add("is-dismissed");
+  }
+
+  function beginManualInteraction() {
+    if (!mobileQuery.matches) return;
+
+    manualInteractionIsActive = true;
+    resumeWithRamp = true;
+    cancelAutoplayResume();
+    stopAutoScroll();
+  }
+
+  function resumeAfterNativeScrollSettles() {
+    if (!mobileQuery.matches || !manualInteractionIsActive) return;
+
+    cancelAutoplayResume();
+    resumeTimer = window.setTimeout(() => {
+      resumeTimer = null;
+      manualInteractionIsActive = false;
+      autoScrollPosition = wrapper.scrollLeft;
+      startAutoScroll(true);
+    }, scrollSettleDelay);
   }
 
   function activateMobileWall() {
@@ -374,7 +427,11 @@ function initializeMobileClientsWall() {
     mobileIsActive = false;
     wallIsReady = false;
     cancelPositioning();
+    cancelAutoplayResume();
     stopAutoScroll();
+    manualInteractionIsActive = false;
+    resumeWithRamp = false;
+    pointerStart = null;
     wrapper.scrollLeft = 0;
     wrapper.classList.remove("is-positioning");
   }
@@ -389,30 +446,57 @@ function initializeMobileClientsWall() {
   }
 
   wrapper.addEventListener("pointerdown", event => {
-    if (!mobileQuery.matches || userHasInteracted) return;
+    if (!mobileQuery.matches) return;
     pointerStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    beginManualInteraction();
   }, { passive: true });
   wrapper.addEventListener("pointermove", event => {
-    if (!pointerStart || event.pointerId !== pointerStart.id || userHasInteracted) return;
+    if (!pointerStart || event.pointerId !== pointerStart.id) return;
 
     const horizontalDistance = Math.abs(event.clientX - pointerStart.x);
     const verticalDistance = Math.abs(event.clientY - pointerStart.y);
     if (horizontalDistance >= dragThreshold && horizontalDistance >= verticalDistance) {
-      registerManualInteraction();
-      pointerStart = null;
+      dismissHint();
     }
   }, { passive: true });
   ["pointerup", "pointercancel"].forEach(type => {
     wrapper.addEventListener(type, () => {
       pointerStart = null;
+      resumeAfterNativeScrollSettles();
     }, { passive: true });
   });
   wrapper.addEventListener("wheel", event => {
-    if (Math.abs(event.deltaX) > 0) registerManualInteraction();
+    if (Math.abs(event.deltaX) === 0) return;
+
+    beginManualInteraction();
+    dismissHint();
+    resumeAfterNativeScrollSettles();
   }, { passive: true });
   wrapper.addEventListener("keydown", event => {
-    if (horizontalKeys.has(event.key)) registerManualInteraction();
+    if (!horizontalKeys.has(event.key)) return;
+
+    beginManualInteraction();
+    dismissHint();
+    resumeAfterNativeScrollSettles();
   });
+  wrapper.addEventListener("scroll", () => {
+    if (manualInteractionIsActive) resumeAfterNativeScrollSettles();
+  }, { passive: true });
+
+  if (typeof IntersectionObserver === "function") {
+    const wallVisibilityObserver = new IntersectionObserver(entries => {
+      const currentEntry = entries[entries.length - 1];
+      wallIsVisible = Boolean(currentEntry && currentEntry.isIntersecting);
+
+      if (!wallIsVisible) {
+        stopAutoScroll();
+        return;
+      }
+
+      startAutoScroll(resumeWithRamp);
+    }, { threshold: 0.01 });
+    wallVisibilityObserver.observe(wrapper);
+  }
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
@@ -420,7 +504,7 @@ function initializeMobileClientsWall() {
       return;
     }
 
-    startAutoScroll();
+    startAutoScroll(resumeWithRamp);
   });
 
   const handleMotionPreferenceChange = () => {
@@ -429,7 +513,7 @@ function initializeMobileClientsWall() {
       return;
     }
 
-    startAutoScroll();
+    startAutoScroll(resumeWithRamp);
   };
 
   if (typeof mobileQuery.addEventListener === "function") {

@@ -375,18 +375,27 @@ test("the single wall sequence keeps desktop motion and uses one slow mobile scr
   );
   const mobileStyles = styles.slice(styles.indexOf("@media (max-width: 760px)"));
 
-  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random|setTimeout/);
+  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random/);
   assert.match(renderer, /document\.createElement\("a"\)/);
   assert.match(renderer, /const autoScrollSpeed = 12/);
   assert.match(renderer, /const initialScrollRatio = 0\.4/);
   assert.match(renderer, /wrapper\.scrollWidth - wrapper\.clientWidth/);
   assert.match(renderer, /autoScrollPosition \+ distance/);
   assert.match(renderer, /window\.requestAnimationFrame\(autoScroll\)/);
+  assert.equal((renderer.match(/window\.requestAnimationFrame\(autoScroll\)/g) || []).length, 2);
   assert.match(renderer, /wrapper\.clientWidth === 0 \|\| maximumScroll === 0/);
   assert.match(renderer, /new ResizeObserver/);
+  assert.match(renderer, /new IntersectionObserver/);
+  assert.match(renderer, /const scrollSettleDelay = 180/);
+  assert.match(renderer, /const resumeRampDuration = 500/);
   assert.match(renderer, /wrapper\.addEventListener\("pointermove"/);
   assert.match(renderer, /horizontalDistance >= dragThreshold/);
+  assert.match(renderer, /wrapper\.addEventListener\("scroll"/);
+  assert.match(renderer, /manualInteractionIsActive/);
+  assert.match(renderer, /startAutoScroll\(true\)/);
+  assert.match(renderer, /autoScrollPosition = wrapper\.scrollLeft/);
   assert.match(renderer, /hint\.classList\.add\("is-dismissed"\)/);
+  assert.doesNotMatch(renderer, /userHasInteracted/);
   assert.match(renderer, /reducedMotionQuery\.matches/);
   assert.match(styles, /animation:\s*wallMove 28s linear infinite alternate/);
   assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?animation:\s*none/);
