@@ -69,15 +69,10 @@ function expectedPublicNavigation(relativePath) {
     return expectedNavigation;
   }
 
-  return expectedNavigation
-    .replace(
-      '<section class="clients-section">\n      <div class="clients-wall-wrapper">',
-      '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">'
-    )
-    .replace(
-      '        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n    </section>',
-      '        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n    </section>'
-    );
+  return expectedNavigation.replace(
+    '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>',
+    '<section class="clients-section">\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>'
+  );
 }
 
 test("public page loads the dataset and dedicated renderer inside the editorial shell", () => {

@@ -377,14 +377,15 @@ test("the single wall sequence keeps desktop motion and uses one slow mobile scr
 
   assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random|setTimeout/);
   assert.match(renderer, /document\.createElement\("a"\)/);
-  assert.match(renderer, /const autoScrollSpeed = 8/);
-  assert.match(renderer, /const initialScrollRatio = 0\.35/);
+  assert.match(renderer, /const autoScrollSpeed = 12/);
+  assert.match(renderer, /const initialScrollRatio = 0\.4/);
   assert.match(renderer, /wrapper\.scrollWidth - wrapper\.clientWidth/);
   assert.match(renderer, /autoScrollPosition \+ distance/);
   assert.match(renderer, /window\.requestAnimationFrame\(autoScroll\)/);
   assert.match(renderer, /wrapper\.clientWidth === 0 \|\| maximumScroll === 0/);
   assert.match(renderer, /new ResizeObserver/);
-  assert.match(renderer, /wrapper\.addEventListener\("pointerdown", registerManualInteraction/);
+  assert.match(renderer, /wrapper\.addEventListener\("pointermove"/);
+  assert.match(renderer, /horizontalDistance >= dragThreshold/);
   assert.match(renderer, /hint\.classList\.add\("is-dismissed"\)/);
   assert.match(renderer, /reducedMotionQuery\.matches/);
   assert.match(styles, /animation:\s*wallMove 28s linear infinite alternate/);

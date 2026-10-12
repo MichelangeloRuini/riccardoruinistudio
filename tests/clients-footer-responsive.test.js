@@ -94,24 +94,24 @@ test("Campaigns and unmapped pages retain the original animated footer character
 });
 
 test("Clients mobile is one manually scrollable editorial poster", () => {
-  assert.match(mobileStyles, /\.clients-section\s*\{[\s\S]*?padding:\s*0 0 48px[\s\S]*?overflow:\s*hidden/);
+  assert.match(mobileStyles, /\.clients-section\s*\{[\s\S]*?padding:\s*0 0 48px[\s\S]*?overflow:\s*visible/);
   assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden/);
   assert.match(mobileStyles, /touch-action:\s*pan-x pan-y/);
-  assert.match(mobileStyles, /\.clients-wall-hint\s*\{[\s\S]*?position:\s*absolute[\s\S]*?bottom:\s*48px[\s\S]*?pointer-events:\s*none/);
+  assert.match(mobileStyles, /\.clients-wall-hint\s*\{[\s\S]*?position:\s*sticky[\s\S]*?top:\s*calc\(100svh - 48px\)[\s\S]*?pointer-events:\s*none/);
   assert.match(mobileStyles, /background:\s*linear-gradient\([\s\S]*?var\(--site-background\)[\s\S]*?font-size:\s*11px[\s\S]*?font-weight:\s*var\(--font-weight-light\)[\s\S]*?letter-spacing:\s*0\.11em/);
   assert.match(mobileStyles, /transition:\s*opacity 300ms ease, visibility 0s linear 300ms/);
   assert.match(mobileStyles, /@media \(max-width: 760px\) and \(prefers-reduced-motion: reduce\)[\s\S]*?\.clients-wall-hint\s*\{\s*transition:\s*none/);
-  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?width:\s*2200px/);
-  assert.match(mobileStyles, /font-size:\s*clamp\(52px, 13\.85vw, 58px\)/);
+  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?width:\s*1600px/);
+  assert.match(mobileStyles, /font-size:\s*34px/);
   assert.match(mobileStyles, /font-weight:\s*var\(--font-weight-bold\)/);
-  assert.match(mobileStyles, /line-height:\s*0\.95/);
+  assert.match(mobileStyles, /line-height:\s*1\.05/);
   assert.match(mobileStyles, /animation:\s*none/);
   assert.match(mobileStyles, /transform:\s*none/);
   assert.doesNotMatch(mobileStyles, /wallMoveMobile|scroll-snap/);
 
   ["index.html", "clients.html"].forEach(page => {
     const html = read(page);
-    assert.match(html, /class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0"[\s\S]*?<p class="clients-wall-hint">← DRAG TO EXPLORE →<\/p>/);
+    assert.match(html, /<p class="clients-wall-hint">← DRAG TO EXPLORE →<\/p>[\s\S]*?class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0"/);
   });
 });
 

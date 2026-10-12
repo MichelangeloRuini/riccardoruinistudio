@@ -131,12 +131,12 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     let currentSection = styles.slice(currentStart, currentEnd);
 
     if (protectedMarker === "GLOBAL RESPONSIVE FOOTER / MOBILE CLIENTS") {
-      const normalizeAuthorizedWallMotion = value => value.replace(
-        /animation:\s*wallMoveMobile 28s [^;]+;/,
-        "animation: <authorized-wall-motion>;"
+      const normalizeAuthorizedClientsRules = value => value.replace(
+        /\n  \.clients-[^{]+\{[^}]*\}/g,
+        "\n  <authorized-clients-rule>"
       );
-      headSection = normalizeAuthorizedWallMotion(headSection);
-      currentSection = normalizeAuthorizedWallMotion(currentSection);
+      headSection = normalizeAuthorizedClientsRules(headSection);
+      currentSection = normalizeAuthorizedClientsRules(currentSection);
     }
 
     assert.equal(currentSection, headSection);

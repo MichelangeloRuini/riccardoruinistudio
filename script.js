@@ -260,8 +260,9 @@ function initializeMobileClientsWall() {
 
   const mobileQuery = window.matchMedia("(max-width: 760px)");
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const autoScrollSpeed = 8;
-  const initialScrollRatio = 0.35;
+  const autoScrollSpeed = 12;
+  const initialScrollRatio = 0.4;
+  const dragThreshold = 8;
   const horizontalKeys = new Set(["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"]);
   let animationFrame = null;
   let positioningFrame = null;
@@ -271,6 +272,7 @@ function initializeMobileClientsWall() {
   let wallIsReady = false;
   let savedMobileScrollLeft = null;
   let userHasInteracted = false;
+  let pointerStart = null;
 
   wrapper.classList.add("is-positioning");
 
@@ -362,6 +364,11 @@ function initializeMobileClientsWall() {
     });
   }
 
+  function prepareMobileWall() {
+    if (!mobileQuery.matches || wallIsReady || wrapper.clientWidth === 0) return;
+    activateMobileWall();
+  }
+
   function deactivateMobileWall() {
     if (mobileIsActive) savedMobileScrollLeft = wrapper.scrollLeft;
     mobileIsActive = false;
@@ -381,7 +388,25 @@ function initializeMobileClientsWall() {
     deactivateMobileWall();
   }
 
-  wrapper.addEventListener("pointerdown", registerManualInteraction, { passive: true });
+  wrapper.addEventListener("pointerdown", event => {
+    if (!mobileQuery.matches || userHasInteracted) return;
+    pointerStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  }, { passive: true });
+  wrapper.addEventListener("pointermove", event => {
+    if (!pointerStart || event.pointerId !== pointerStart.id || userHasInteracted) return;
+
+    const horizontalDistance = Math.abs(event.clientX - pointerStart.x);
+    const verticalDistance = Math.abs(event.clientY - pointerStart.y);
+    if (horizontalDistance >= dragThreshold && horizontalDistance >= verticalDistance) {
+      registerManualInteraction();
+      pointerStart = null;
+    }
+  }, { passive: true });
+  ["pointerup", "pointercancel"].forEach(type => {
+    wrapper.addEventListener(type, () => {
+      pointerStart = null;
+    }, { passive: true });
+  });
   wrapper.addEventListener("wheel", event => {
     if (Math.abs(event.deltaX) > 0) registerManualInteraction();
   }, { passive: true });
@@ -417,17 +442,22 @@ function initializeMobileClientsWall() {
 
   if (typeof ResizeObserver === "function") {
     const wallResizeObserver = new ResizeObserver(() => {
-      if (mobileIsActive && !wallIsReady && wrapper.clientWidth > 0) activateMobileWall();
+      if (mobileIsActive && !wallIsReady) prepareMobileWall();
     });
     wallResizeObserver.observe(wrapper);
-  } else if (typeof MutationObserver === "function") {
+  }
+
+  if (typeof MutationObserver === "function") {
     const siteVisibilityObserver = new MutationObserver(() => {
       if (mobileIsActive && !wallIsReady && document.body.classList.contains("entered")) {
-        activateMobileWall();
+        prepareMobileWall();
       }
     });
     siteVisibilityObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
   }
+
+  window.addEventListener("load", prepareMobileWall, { once: true });
+  window.addEventListener("pageshow", prepareMobileWall);
 
   handleBreakpointChange();
 }
