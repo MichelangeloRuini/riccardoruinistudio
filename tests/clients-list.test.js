@@ -366,22 +366,35 @@ test("the renderer creates exactly 131 real same-tab links with encoded Search U
   });
 });
 
-test("the single wall sequence starts immediately without JS or CSS delay", () => {
+test("the single wall sequence keeps desktop motion and uses one slow mobile scroller", () => {
   const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
   const styles = fs.readFileSync(path.join(root, "style.css"), "utf8");
   const renderer = script.slice(
     script.indexOf("function renderClients"),
     script.indexOf("/* SEARCH SUGGESTIONS */")
   );
+  const mobileStyles = styles.slice(styles.indexOf("@media (max-width: 760px)"));
 
-  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random|setTimeout|requestAnimationFrame/);
+  assert.doesNotMatch(renderer, /repeatedList|\.\.\.list|Math\.random|setTimeout/);
   assert.match(renderer, /document\.createElement\("a"\)/);
+  assert.match(renderer, /const autoScrollSpeed = 8/);
+  assert.match(renderer, /const initialScrollRatio = 0\.35/);
+  assert.match(renderer, /wrapper\.scrollWidth - wrapper\.clientWidth/);
+  assert.match(renderer, /autoScrollPosition \+ distance/);
+  assert.match(renderer, /window\.requestAnimationFrame\(autoScroll\)/);
+  assert.match(renderer, /wrapper\.clientWidth === 0 \|\| maximumScroll === 0/);
+  assert.match(renderer, /new ResizeObserver/);
+  assert.match(renderer, /wrapper\.addEventListener\("pointerdown", registerManualInteraction/);
+  assert.match(renderer, /hint\.classList\.add\("is-dismissed"\)/);
+  assert.match(renderer, /reducedMotionQuery\.matches/);
   assert.match(styles, /animation:\s*wallMove 28s linear infinite alternate/);
-  assert.match(styles, /animation:\s*wallMoveMobile 28s linear infinite alternate/);
+  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?animation:\s*none/);
+  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?transform:\s*none/);
+  assert.doesNotMatch(styles, /animation:\s*wallMoveMobile|@keyframes wallMoveMobile/);
   assert.doesNotMatch(styles, /\.clients-wall\s*\{[^}]*animation-delay/);
   assert.doesNotMatch(styles, /\.clients-wall\s*\{[^}]*animation-play-state:\s*paused/);
   assert.match(styles, /@keyframes wallMove\s*\{\s*from\s*\{\s*transform:\s*translateX\(0\)/);
-  assert.match(styles, /@keyframes wallMoveMobile\s*\{\s*from\s*\{\s*transform:\s*translateX\(0\)/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.clients-wall\s*\{[^}]*animation:\s*none[^}]*transform:\s*none/);
 });
 
 test("known supplied typos and non-canonical variants are absent", () => {

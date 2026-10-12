@@ -60,10 +60,24 @@ function expectedPublicNavigation(relativePath) {
       '<!-- Events temporarily hidden from public navigation. -->'
     );
 
-  return expectedEventsState.replace(
+  const expectedNavigation = expectedEventsState.replace(
     '>Clients</a>',
     '>Clients &amp; Talents</a>'
   );
+
+  if (!["index.html", "clients.html"].includes(relativePath)) {
+    return expectedNavigation;
+  }
+
+  return expectedNavigation
+    .replace(
+      '<section class="clients-section">\n      <div class="clients-wall-wrapper">',
+      '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">'
+    )
+    .replace(
+      '        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n    </section>',
+      '        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n    </section>'
+    );
 }
 
 test("public page loads the dataset and dedicated renderer inside the editorial shell", () => {
@@ -217,7 +231,7 @@ test("public menus preserve their order while Events stays available only on its
   );
 });
 
-test("public page internals differ from HEAD only by approved navigation labels", () => {
+test("public page internals differ from HEAD only by approved navigation and wall accessibility", () => {
   menuPages.forEach(relativePath => {
     assert.equal(read(relativePath), expectedPublicNavigation(relativePath));
   });

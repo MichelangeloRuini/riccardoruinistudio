@@ -252,6 +252,188 @@ function renderClients(list) {
   });
 }
 
+function initializeMobileClientsWall() {
+  const wrapper = document.querySelector(".clients-wall-wrapper");
+  const hint = document.querySelector(".clients-wall-hint");
+
+  if (!clientsWall || !wrapper || !hint || typeof window.matchMedia !== "function") return;
+
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const autoScrollSpeed = 8;
+  const initialScrollRatio = 0.35;
+  const horizontalKeys = new Set(["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"]);
+  let animationFrame = null;
+  let positioningFrame = null;
+  let lastTimestamp = null;
+  let autoScrollPosition = 0;
+  let mobileIsActive = false;
+  let wallIsReady = false;
+  let savedMobileScrollLeft = null;
+  let userHasInteracted = false;
+
+  wrapper.classList.add("is-positioning");
+
+  function stopAutoScroll() {
+    if (animationFrame !== null) {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+
+    lastTimestamp = null;
+  }
+
+  function cancelPositioning() {
+    if (positioningFrame !== null) {
+      window.cancelAnimationFrame(positioningFrame);
+      positioningFrame = null;
+    }
+  }
+
+  function autoScroll(timestamp) {
+    animationFrame = null;
+
+    if (!mobileQuery.matches || reducedMotionQuery.matches || userHasInteracted || document.hidden) {
+      lastTimestamp = null;
+      return;
+    }
+
+    if (lastTimestamp !== null) {
+      const maximumScroll = Math.max(0, wrapper.scrollWidth - wrapper.clientWidth);
+      const distance = autoScrollSpeed * ((timestamp - lastTimestamp) / 1000);
+      const nextPosition = Math.min(maximumScroll, autoScrollPosition + distance);
+
+      autoScrollPosition = nextPosition;
+      wrapper.scrollLeft = nextPosition;
+
+      if (nextPosition >= maximumScroll) {
+        lastTimestamp = null;
+        return;
+      }
+    }
+
+    lastTimestamp = timestamp;
+    animationFrame = window.requestAnimationFrame(autoScroll);
+  }
+
+  function startAutoScroll() {
+    if (
+      animationFrame !== null ||
+      !wallIsReady ||
+      !mobileQuery.matches ||
+      reducedMotionQuery.matches ||
+      userHasInteracted ||
+      document.hidden
+    ) return;
+
+    lastTimestamp = null;
+    autoScrollPosition = wrapper.scrollLeft;
+    animationFrame = window.requestAnimationFrame(autoScroll);
+  }
+
+  function registerManualInteraction() {
+    if (!mobileQuery.matches || userHasInteracted) return;
+
+    userHasInteracted = true;
+    stopAutoScroll();
+    hint.classList.add("is-dismissed");
+  }
+
+  function activateMobileWall() {
+    mobileIsActive = true;
+    wallIsReady = false;
+    wrapper.classList.add("is-positioning");
+    cancelPositioning();
+
+    positioningFrame = window.requestAnimationFrame(() => {
+      positioningFrame = null;
+
+      if (!mobileIsActive || !mobileQuery.matches) return;
+
+      const maximumScroll = Math.max(0, wrapper.scrollWidth - wrapper.clientWidth);
+      if (wrapper.clientWidth === 0 || maximumScroll === 0) return;
+
+      const initialPosition = maximumScroll * initialScrollRatio;
+      wrapper.scrollLeft = Math.min(maximumScroll, savedMobileScrollLeft ?? initialPosition);
+      autoScrollPosition = wrapper.scrollLeft;
+      wallIsReady = true;
+      wrapper.classList.remove("is-positioning");
+      startAutoScroll();
+    });
+  }
+
+  function deactivateMobileWall() {
+    if (mobileIsActive) savedMobileScrollLeft = wrapper.scrollLeft;
+    mobileIsActive = false;
+    wallIsReady = false;
+    cancelPositioning();
+    stopAutoScroll();
+    wrapper.scrollLeft = 0;
+    wrapper.classList.remove("is-positioning");
+  }
+
+  function handleBreakpointChange() {
+    if (mobileQuery.matches) {
+      activateMobileWall();
+      return;
+    }
+
+    deactivateMobileWall();
+  }
+
+  wrapper.addEventListener("pointerdown", registerManualInteraction, { passive: true });
+  wrapper.addEventListener("wheel", event => {
+    if (Math.abs(event.deltaX) > 0) registerManualInteraction();
+  }, { passive: true });
+  wrapper.addEventListener("keydown", event => {
+    if (horizontalKeys.has(event.key)) registerManualInteraction();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopAutoScroll();
+      return;
+    }
+
+    startAutoScroll();
+  });
+
+  const handleMotionPreferenceChange = () => {
+    if (reducedMotionQuery.matches) {
+      stopAutoScroll();
+      return;
+    }
+
+    startAutoScroll();
+  };
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", handleBreakpointChange);
+    reducedMotionQuery.addEventListener("change", handleMotionPreferenceChange);
+  } else {
+    mobileQuery.addListener(handleBreakpointChange);
+    reducedMotionQuery.addListener(handleMotionPreferenceChange);
+  }
+
+  if (typeof ResizeObserver === "function") {
+    const wallResizeObserver = new ResizeObserver(() => {
+      if (mobileIsActive && !wallIsReady && wrapper.clientWidth > 0) activateMobileWall();
+    });
+    wallResizeObserver.observe(wrapper);
+  } else if (typeof MutationObserver === "function") {
+    const siteVisibilityObserver = new MutationObserver(() => {
+      if (mobileIsActive && !wallIsReady && document.body.classList.contains("entered")) {
+        activateMobileWall();
+      }
+    });
+    siteVisibilityObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  }
+
+  handleBreakpointChange();
+}
+
+document.addEventListener("DOMContentLoaded", initializeMobileClientsWall, { once: true });
+
 if (searchInput && clientsWall) {
   searchInput.addEventListener("input", () => {
     const value = normalize(searchInput.value.trim());
