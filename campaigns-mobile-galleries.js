@@ -26,6 +26,8 @@
 
     const originalMediaItems = Array.from(media.children);
     const items = getVisualItems(media);
+    const isMirrored = campaign.classList.contains("info-right");
+    const visualItems = isMirrored ? items.slice().reverse() : items;
     const gallery = document.createElement("div");
     const title = campaign.querySelector(".campaign-title")?.textContent
       .replace(/\s+/g, " ")
@@ -33,14 +35,12 @@
 
     gallery.className = "campaign-gallery";
     info.before(gallery);
-    items.forEach(item => media.append(item));
+    visualItems.forEach(item => media.append(item));
 
-    if (campaign.classList.contains("info-left")) {
-      media.prepend(info);
-    } else if (items[0]) {
-      items[0].after(info);
-    } else {
+    if (isMirrored) {
       media.append(info);
+    } else {
+      media.prepend(info);
     }
 
     gallery.append(media);
@@ -50,7 +50,9 @@
     let indicators = null;
     let buttons = [];
     let frameRequest = 0;
+    let initialScrollRequest = 0;
     let activeIndex = -1;
+    let hasUserExplored = false;
     const loadTargets = items.map(item => item.matches("picture")
       ? item.querySelector("img")
       : item
@@ -109,6 +111,32 @@
       frameRequest = global.requestAnimationFrame(updateActiveIndicator);
     }
 
+    function positionMirroredAtStart() {
+      initialScrollRequest = 0;
+      if (!isMirrored || hasUserExplored) return;
+
+      media.scrollLeft = media.scrollWidth - media.clientWidth;
+      scheduleIndicatorUpdate();
+    }
+
+    function scheduleMirroredStartPosition() {
+      if (!isMirrored || hasUserExplored || initialScrollRequest) return;
+      initialScrollRequest = global.requestAnimationFrame(positionMirroredAtStart);
+    }
+
+    function markAsExplored() {
+      hasUserExplored = true;
+      if (initialScrollRequest) {
+        global.cancelAnimationFrame(initialScrollRequest);
+        initialScrollRequest = 0;
+      }
+    }
+
+    function handleLayoutChange() {
+      scheduleMirroredStartPosition();
+      scheduleIndicatorUpdate();
+    }
+
     if (items.length > 1) {
       indicators = document.createElement("div");
       indicators.className = "campaign-gallery-indicators";
@@ -122,6 +150,7 @@
         button.type = "button";
         button.setAttribute("aria-label", `Show media ${index + 1} of ${items.length}`);
         button.addEventListener("click", () => {
+          markAsExplored();
           const mediaRect = media.getBoundingClientRect();
           const itemRect = item.getBoundingClientRect();
           const targetLeft = media.scrollLeft + itemRect.left - mediaRect.left;
@@ -141,22 +170,30 @@
     }
 
     media.addEventListener("scroll", scheduleIndicatorUpdate, { passive: true });
-    global.addEventListener("resize", scheduleIndicatorUpdate, { passive: true });
-    global.addEventListener("load", scheduleIndicatorUpdate, { once: true });
+    media.addEventListener("pointerdown", markAsExplored, { passive: true });
+    media.addEventListener("touchstart", markAsExplored, { passive: true });
+    media.addEventListener("wheel", markAsExplored, { passive: true });
+    global.addEventListener("resize", handleLayoutChange, { passive: true });
+    global.addEventListener("load", handleLayoutChange, { once: true });
     loadTargets.forEach(target => {
-      target.addEventListener("load", scheduleIndicatorUpdate, { once: true });
-      target.addEventListener("loadedmetadata", scheduleIndicatorUpdate, { once: true });
+      target.addEventListener("load", handleLayoutChange, { once: true });
+      target.addEventListener("loadedmetadata", handleLayoutChange, { once: true });
     });
+    scheduleMirroredStartPosition();
     scheduleIndicatorUpdate();
 
     return () => {
       if (frameRequest) global.cancelAnimationFrame(frameRequest);
+      if (initialScrollRequest) global.cancelAnimationFrame(initialScrollRequest);
       media.removeEventListener("scroll", scheduleIndicatorUpdate);
-      global.removeEventListener("resize", scheduleIndicatorUpdate);
-      global.removeEventListener("load", scheduleIndicatorUpdate);
+      media.removeEventListener("pointerdown", markAsExplored);
+      media.removeEventListener("touchstart", markAsExplored);
+      media.removeEventListener("wheel", markAsExplored);
+      global.removeEventListener("resize", handleLayoutChange);
+      global.removeEventListener("load", handleLayoutChange);
       loadTargets.forEach(target => {
-        target.removeEventListener("load", scheduleIndicatorUpdate);
-        target.removeEventListener("loadedmetadata", scheduleIndicatorUpdate);
+        target.removeEventListener("load", handleLayoutChange);
+        target.removeEventListener("loadedmetadata", handleLayoutChange);
       });
       media.removeAttribute("role");
       media.removeAttribute("aria-label");

@@ -54,7 +54,7 @@ test("Campaigns mobile keeps campaigns vertical with independently scrolling edi
   assert.match(responsiveStyles, /#campaignsPage\.campaigns-page\s*\{[\s\S]*?display:\s*block[\s\S]*?height:\s*auto[\s\S]*?overflow:\s*visible/);
   assert.match(responsiveStyles, /touch-action:\s*pan-x pan-y/);
   assert.match(responsiveStyles, /-webkit-overflow-scrolling:\s*touch/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?display:\s*block[\s\S]*?width:\s*100%[\s\S]*?margin:\s*0 0 clamp\(46px, 12vw, 56px\)/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?display:\s*block[\s\S]*?width:\s*100%[\s\S]*?margin:\s*0 0 clamp\(20px, 5\.5vw, 24px\)/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-info\s*\{[\s\S]*?width:\s*clamp\(112px, 34vw, 146px\)[\s\S]*?flex:\s*0 0 clamp\(112px, 34vw, 146px\)[\s\S]*?order:\s*0[\s\S]*?scroll-snap-align:\s*start/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media\s*\{[\s\S]*?flex-direction:\s*row[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden[\s\S]*?scroll-snap-type:\s*x proximity/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture\s*\{[\s\S]*?max-width:\s*60vw[\s\S]*?scroll-snap-align:\s*start/);
@@ -74,19 +74,24 @@ test("Campaigns mobile galleries create accessible variable-width pagination", (
   assert.match(mobileGalleries, /filter\(item => item\.matches\("picture, video"\)\)/);
   assert.match(mobileGalleries, /itemA\.matches\("video"\)/);
   assert.match(mobileGalleries, /const info = campaign\.querySelector\(":scope > \.campaign-info"\)/);
+  assert.match(mobileGalleries, /const isMirrored = campaign\.classList\.contains\("info-right"\)/);
+  assert.match(mobileGalleries, /const visualItems = isMirrored \? items\.slice\(\)\.reverse\(\) : items/);
   assert.match(mobileGalleries, /media\.prepend\(info\)/);
-  assert.match(mobileGalleries, /items\[0\]\.after\(info\)/);
+  assert.match(mobileGalleries, /media\.append\(info\)/);
+  assert.match(mobileGalleries, /media\.scrollLeft = media\.scrollWidth - media\.clientWidth/);
+  assert.match(mobileGalleries, /hasUserExplored/);
+  assert.match(mobileGalleries, /addEventListener\("resize", handleLayoutChange/);
   assert.match(mobileGalleries, /originalMediaItems\.forEach\(item => media\.append\(item\)\)/);
   assert.match(mobileGalleries, /visibleWidth = Math\.max/);
   assert.match(mobileGalleries, /requestAnimationFrame\(updateActiveIndicator\)/);
-  assert.match(mobileGalleries, /addEventListener\("load", scheduleIndicatorUpdate/);
-  assert.match(mobileGalleries, /addEventListener\("loadedmetadata", scheduleIndicatorUpdate/);
+  assert.match(mobileGalleries, /addEventListener\("load", handleLayoutChange/);
+  assert.match(mobileGalleries, /addEventListener\("loadedmetadata", handleLayoutChange/);
   assert.match(mobileGalleries, /className = "campaign-gallery-dot"/);
   assert.match(mobileGalleries, /--campaign-gallery-count/);
   assert.match(mobileGalleries, /setAttribute\("aria-label", `Show media/);
   assert.match(mobileGalleries, /prefers-reduced-motion: reduce/);
   assert.match(mobileGalleries, /media\.scrollTo\(\{/);
-  assert.doesNotMatch(mobileGalleries, /preventDefault|setInterval|cloneNode|autoplay/);
+  assert.doesNotMatch(mobileGalleries, /preventDefault|setInterval|cloneNode|autoplay|scaleX|direction\s*=/);
 });
 
 test("Campaigns preserves DOM order while Films uses a dedicated grid", () => {

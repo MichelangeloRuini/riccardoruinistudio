@@ -3494,7 +3494,7 @@ body.is-mobile-menu-open {
     display: block;
     width: 100%;
     min-width: 0;
-    margin: 0 0 clamp(46px, 12vw, 56px);
+    margin: 0 0 clamp(20px, 5.5vw, 24px);
   }
 
   #campaignsPage .campaign:last-child {
