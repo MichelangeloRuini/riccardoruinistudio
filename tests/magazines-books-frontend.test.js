@@ -65,6 +65,13 @@ function expectedPublicNavigation(relativePath) {
     '>Clients &amp; Talents</a>'
   );
 
+  if (relativePath === "campaigns.html") {
+    return expectedNavigation.replace(
+      '<script src="campaigns.js"></script>',
+      '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>'
+    );
+  }
+
   if (!["index.html", "clients.html"].includes(relativePath)) {
     return expectedNavigation;
   }
