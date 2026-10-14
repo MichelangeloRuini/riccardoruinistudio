@@ -10,17 +10,21 @@
   let galleryCleanups = [];
 
   function getVisualItems(media) {
-    return Array.from(media.children).sort((itemA, itemB) => {
-      const itemAIsVideo = itemA.matches("video") ? 1 : 0;
-      const itemBIsVideo = itemB.matches("video") ? 1 : 0;
-      return itemAIsVideo - itemBIsVideo;
-    });
+    return Array.from(media.children)
+      .filter(item => item.matches("picture, video"))
+      .sort((itemA, itemB) => {
+        const itemAIsVideo = itemA.matches("video") ? 1 : 0;
+        const itemBIsVideo = itemB.matches("video") ? 1 : 0;
+        return itemAIsVideo - itemBIsVideo;
+      });
   }
 
   function createGallery(campaign, campaignIndex) {
     const media = campaign.querySelector(":scope > .campaign-media");
-    if (!media) return null;
+    const info = campaign.querySelector(":scope > .campaign-info");
+    if (!media || !info) return null;
 
+    const originalMediaItems = Array.from(media.children);
     const items = getVisualItems(media);
     const gallery = document.createElement("div");
     const title = campaign.querySelector(".campaign-title")?.textContent
@@ -28,10 +32,20 @@
       .trim() || `Campaign ${campaignIndex + 1}`;
 
     gallery.className = "campaign-gallery";
-    media.before(gallery);
+    info.before(gallery);
+    items.forEach(item => media.append(item));
+
+    if (campaign.classList.contains("info-left")) {
+      media.prepend(info);
+    } else if (items[0]) {
+      items[0].after(info);
+    } else {
+      media.append(info);
+    }
+
     gallery.append(media);
     media.setAttribute("role", "region");
-    media.setAttribute("aria-label", `${title} media gallery`);
+    media.setAttribute("aria-label", `${title} horizontal campaign`);
 
     let indicators = null;
     let buttons = [];
@@ -147,7 +161,9 @@
       media.removeAttribute("role");
       media.removeAttribute("aria-label");
       media.scrollLeft = 0;
-      gallery.before(media);
+      info.remove();
+      originalMediaItems.forEach(item => media.append(item));
+      gallery.before(info, media);
       gallery.remove();
     };
   }

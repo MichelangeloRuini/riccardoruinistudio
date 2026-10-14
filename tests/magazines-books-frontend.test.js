@@ -66,6 +66,10 @@ function expectedPublicNavigation(relativePath) {
   );
 
   if (relativePath === "campaigns.html") {
+    if (expectedNavigation.includes('<script src="campaigns-mobile-galleries.js"></script>')) {
+      return expectedNavigation;
+    }
+
     return expectedNavigation.replace(
       '<script src="campaigns.js"></script>',
       '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>'

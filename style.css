@@ -3491,41 +3491,28 @@ body.is-mobile-menu-open {
   }
 
   #campaignsPage .campaign {
-    display: grid;
+    display: block;
     width: 100%;
     min-width: 0;
-    grid-template-columns: minmax(112px, 34vw) minmax(0, 1fr);
-    align-items: start;
-    gap: clamp(10px, 3vw, 14px);
-    margin: 0 0 clamp(72px, 20vw, 92px);
-  }
-
-  #campaignsPage .campaign.info-right {
-    grid-template-columns: minmax(0, 1fr) minmax(112px, 34vw);
+    margin: 0 0 clamp(46px, 12vw, 56px);
   }
 
   #campaignsPage .campaign:last-child {
     margin-bottom: 0;
   }
 
-  #campaignsPage .campaign.info-left .campaign-info,
-  #campaignsPage .campaign.info-right .campaign-gallery {
-    order: 1;
-  }
-
-  #campaignsPage .campaign.info-left .campaign-gallery,
-  #campaignsPage .campaign.info-right .campaign-info {
-    order: 2;
-  }
-
-  #campaignsPage .campaign-info,
   #campaignsPage .campaign-gallery {
     width: 100%;
     min-width: 0;
   }
 
   #campaignsPage .campaign-info {
+    width: clamp(112px, 34vw, 146px);
+    min-width: clamp(112px, 34vw, 146px);
+    flex: 0 0 clamp(112px, 34vw, 146px);
+    order: 0;
     padding-top: clamp(54px, 16vw, 74px);
+    scroll-snap-align: start;
   }
 
   #campaignsPage .campaign-info-inner,
@@ -3590,19 +3577,17 @@ body.is-mobile-menu-open {
   #campaignsPage .campaign-media picture {
     display: block;
     width: auto;
-    max-width: calc(100% - 30px);
+    max-width: 60vw;
     flex: 0 0 auto;
-    order: 1;
     scroll-snap-align: start;
   }
 
   #campaignsPage .campaign-media > video {
     width: auto;
-    max-width: calc(100% - 30px);
+    max-width: 60vw;
     height: auto;
-    max-height: clamp(230px, 68vw, 292px);
+    max-height: clamp(276px, 81.6vw, 350px);
     flex: 0 0 auto;
-    order: 2;
     object-fit: contain;
     scroll-snap-align: start;
   }
@@ -3613,17 +3598,26 @@ body.is-mobile-menu-open {
     width: auto;
     max-width: 100%;
     height: auto;
-    max-height: clamp(230px, 68vw, 292px);
+    max-height: clamp(276px, 81.6vw, 350px);
     object-fit: contain;
   }
 
   #campaignsPage .campaign-gallery-indicators {
     display: flex;
+    width: calc(100% - clamp(112px, 34vw, 146px) - clamp(10px, 3vw, 14px));
     height: 44px;
     align-items: center;
     justify-content: center;
     gap: 0;
     overflow: hidden;
+  }
+
+  #campaignsPage .campaign.info-left .campaign-gallery-indicators {
+    justify-self: end;
+  }
+
+  #campaignsPage .campaign.info-right .campaign-gallery-indicators {
+    justify-self: start;
   }
 
   #campaignsPage .campaign-gallery-dot {

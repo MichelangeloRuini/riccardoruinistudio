@@ -49,21 +49,20 @@ test("the existing 761px to 820px Campaigns layout still stacks info before full
   assert.doesNotMatch(responsiveStyles, /#searchResults|\.search-result-group/);
 });
 
-test("Campaigns mobile keeps campaigns vertical with independent horizontal galleries", () => {
+test("Campaigns mobile keeps campaigns vertical with independently scrolling editorial blocks", () => {
   assert.match(responsiveStyles, /@media \(max-width: 760px\)/);
   assert.match(responsiveStyles, /#campaignsPage\.campaigns-page\s*\{[\s\S]*?display:\s*block[\s\S]*?height:\s*auto[\s\S]*?overflow:\s*visible/);
   assert.match(responsiveStyles, /touch-action:\s*pan-x pan-y/);
   assert.match(responsiveStyles, /-webkit-overflow-scrolling:\s*touch/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?width:\s*100%[\s\S]*?grid-template-columns:\s*minmax\(112px, 34vw\) minmax\(0, 1fr\)[\s\S]*?margin:\s*0 0 clamp\(72px, 20vw, 92px\)/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-right\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) minmax\(112px, 34vw\)/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left \.campaign-info,[\s\S]*?#campaignsPage \.campaign\.info-right \.campaign-gallery\s*\{\s*order:\s*1/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left \.campaign-gallery,[\s\S]*?#campaignsPage \.campaign\.info-right \.campaign-info\s*\{\s*order:\s*2/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?display:\s*block[\s\S]*?width:\s*100%[\s\S]*?margin:\s*0 0 clamp\(46px, 12vw, 56px\)/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-info\s*\{[\s\S]*?width:\s*clamp\(112px, 34vw, 146px\)[\s\S]*?flex:\s*0 0 clamp\(112px, 34vw, 146px\)[\s\S]*?order:\s*0[\s\S]*?scroll-snap-align:\s*start/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media\s*\{[\s\S]*?flex-direction:\s*row[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden[\s\S]*?scroll-snap-type:\s*x proximity/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture\s*\{[\s\S]*?order:\s*1[\s\S]*?scroll-snap-align:\s*start/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media > video\s*\{[\s\S]*?order:\s*2[\s\S]*?scroll-snap-align:\s*start/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture\s*\{[\s\S]*?max-width:\s*calc\(100% - 30px\)/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media > video\s*\{[\s\S]*?max-width:\s*calc\(100% - 30px\)[\s\S]*?max-height:\s*clamp\(230px, 68vw, 292px\)[\s\S]*?object-fit:\s*contain/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture\s*\{[\s\S]*?max-width:\s*60vw[\s\S]*?scroll-snap-align:\s*start/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-media > video\s*\{[\s\S]*?max-width:\s*60vw[\s\S]*?max-height:\s*clamp\(276px, 81\.6vw, 350px\)[\s\S]*?object-fit:\s*contain/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture \.campaign-media-item,[\s\S]*?max-width:\s*100%[\s\S]*?height:\s*auto[\s\S]*?object-fit:\s*contain/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-gallery-indicators\s*\{[\s\S]*?width:\s*calc\(100% - clamp\(112px, 34vw, 146px\) - clamp\(10px, 3vw, 14px\)\)/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left \.campaign-gallery-indicators\s*\{\s*justify-self:\s*end/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-right \.campaign-gallery-indicators\s*\{\s*justify-self:\s*start/);
   assert.doesNotMatch(responsiveStyles, /#campaignsPage \.campaign-media > :not\(:first-child\)/);
   assert.doesNotMatch(responsiveStyles, /autoplay|cloneNode/);
 });
@@ -72,8 +71,12 @@ test("Campaigns mobile galleries create accessible variable-width pagination", (
   assert.match(campaignsPage, /<script src="campaigns-mobile-galleries\.js"><\/script>/);
   assert.match(mobileGalleries, /const MOBILE_QUERY = "\(max-width: 760px\)"/);
   assert.match(mobileGalleries, /querySelectorAll\(":scope > \.campaign"\)/);
-  assert.match(mobileGalleries, /Array\.from\(media\.children\)\.sort/);
+  assert.match(mobileGalleries, /filter\(item => item\.matches\("picture, video"\)\)/);
   assert.match(mobileGalleries, /itemA\.matches\("video"\)/);
+  assert.match(mobileGalleries, /const info = campaign\.querySelector\(":scope > \.campaign-info"\)/);
+  assert.match(mobileGalleries, /media\.prepend\(info\)/);
+  assert.match(mobileGalleries, /items\[0\]\.after\(info\)/);
+  assert.match(mobileGalleries, /originalMediaItems\.forEach\(item => media\.append\(item\)\)/);
   assert.match(mobileGalleries, /visibleWidth = Math\.max/);
   assert.match(mobileGalleries, /requestAnimationFrame\(updateActiveIndicator\)/);
   assert.match(mobileGalleries, /addEventListener\("load", scheduleIndicatorUpdate/);
