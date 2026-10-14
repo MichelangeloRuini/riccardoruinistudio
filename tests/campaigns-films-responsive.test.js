@@ -39,13 +39,29 @@ test("Campaigns desktop CSS and implementation remain unchanged", () => {
   });
 });
 
-test("the existing 820px Campaigns layout still stacks info before full-width media", () => {
+test("the existing 761px to 820px Campaigns layout still stacks info before full-width media", () => {
   assert.match(responsiveStyles, /@media \(max-width: 820px\)/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign,[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)[\s\S]*?gap:\s*24px/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-info,[\s\S]*?#campaignsPage \.campaign-media,[\s\S]*?order:\s*0[\s\S]*?width:\s*100%/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-info-inner,[\s\S]*?position:\s*static[\s\S]*?top:\s*auto[\s\S]*?text-align:\s*left/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media-item,[\s\S]*?#campaignsPage \.campaign-media video,[\s\S]*?width:\s*100%[\s\S]*?height:\s*auto/);
   assert.doesNotMatch(responsiveStyles, /#searchResults|\.search-result-group/);
+});
+
+test("Campaigns mobile is one free-scrolling horizontal editorial wall", () => {
+  assert.match(responsiveStyles, /@media \(max-width: 760px\)/);
+  assert.match(responsiveStyles, /#campaignsPage\.campaigns-page\s*\{[\s\S]*?display:\s*grid[\s\S]*?height:\s*clamp\(620px, 80svh, 680px\)[\s\S]*?grid-template-rows:\s*repeat\(2, minmax\(0, 1fr\)\)[\s\S]*?grid-auto-flow:\s*column[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden/);
+  assert.match(responsiveStyles, /touch-action:\s*pan-x pan-y/);
+  assert.match(responsiveStyles, /-webkit-overflow-scrolling:\s*touch/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?width:\s*max-content[\s\S]*?grid-template-columns:\s*clamp\(148px, 42vw, 180px\) auto/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left\s*\{\s*align-self:\s*flex-start/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-right\s*\{[\s\S]*?grid-template-columns:\s*auto clamp\(148px, 42vw, 180px\)[\s\S]*?align-self:\s*flex-end/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left \.campaign-info,[\s\S]*?#campaignsPage \.campaign\.info-right \.campaign-media\s*\{\s*order:\s*1/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign\.info-left \.campaign-media,[\s\S]*?#campaignsPage \.campaign\.info-right \.campaign-info\s*\{\s*order:\s*2/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-media\s*\{[\s\S]*?flex-direction:\s*row/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-media > :not\(:first-child\)\s*\{\s*display:\s*none/);
+  assert.match(responsiveStyles, /#campaignsPage \.campaign-media-item,[\s\S]*?height:\s*clamp\(224px, 62vw, 260px\)[\s\S]*?object-fit:\s*contain/);
+  assert.doesNotMatch(responsiveStyles, /scroll-snap|autoplay|cloneNode/);
 });
 
 test("Campaigns preserves DOM order while Films uses a dedicated grid", () => {
