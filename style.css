@@ -2984,7 +2984,7 @@ body.is-mobile-menu-open {
 
   .clients-section {
     position: relative;
-    padding: 0 0 48px;
+    padding: 0 0 128px;
     overflow: visible;
   }
 
@@ -3015,22 +3015,23 @@ body.is-mobile-menu-open {
 
   .clients-wall-hint {
     position: sticky;
-    top: calc(100vh - 48px);
-    top: calc(100svh - 48px);
+    top: calc(100vh - 128px);
+    top: calc(100svh - 128px);
     z-index: 2;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     width: 100%;
-    height: 48px;
-    margin-bottom: -48px;
+    height: 128px;
+    margin-bottom: -128px;
     padding: 0 20px 30px;
     background: linear-gradient(
       to bottom,
-      transparent,
-      var(--site-background)
+      rgba(248, 246, 242, 0),
+      rgba(248, 246, 242, 0.42) 55%,
+      rgba(248, 246, 242, 0.9) 100%
     );
-    color: var(--text-grey);
+    color: #555;
     font-family: var(--font-editorial);
     font-size: 11px;
     font-weight: var(--font-weight-light);
@@ -3050,10 +3051,10 @@ body.is-mobile-menu-open {
   }
 
   .clients-wall {
-    width: 1600px;
+    width: 1800px;
     max-width: none;
     padding: 0;
-    font-size: 34px;
+    font-size: 32px;
     font-weight: var(--font-weight-bold);
     line-height: 1.05;
     letter-spacing: var(--tracking-editorial);
