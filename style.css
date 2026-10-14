@@ -3577,16 +3577,16 @@ body.is-mobile-menu-open {
   #campaignsPage .campaign-media picture {
     display: block;
     width: auto;
-    max-width: 60vw;
+    max-width: 72vw;
     flex: 0 0 auto;
     scroll-snap-align: start;
   }
 
   #campaignsPage .campaign-media > video {
     width: auto;
-    max-width: 60vw;
+    max-width: 72vw;
     height: auto;
-    max-height: clamp(276px, 81.6vw, 350px);
+    max-height: clamp(331.2px, 97.92vw, 420px);
     flex: 0 0 auto;
     object-fit: contain;
     scroll-snap-align: start;
@@ -3598,7 +3598,7 @@ body.is-mobile-menu-open {
     width: auto;
     max-width: 100%;
     height: auto;
-    max-height: clamp(276px, 81.6vw, 350px);
+    max-height: clamp(331.2px, 97.92vw, 420px);
     object-fit: contain;
   }
 
