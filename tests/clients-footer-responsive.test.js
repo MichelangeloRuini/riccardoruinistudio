@@ -49,11 +49,17 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
   assert.match(headStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
 });
 
-test("the global footer becomes one column at 760px with a responsive logo", () => {
-  assert.match(mobileStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
-  assert.match(mobileStyles, /\.footer \.footer-newsletter,[\s\S]*?\.footer \.footer-logo\s*\{\s*grid-column:\s*1/);
-  assert.match(mobileStyles, /\.footer \.footer-logo\s*\{[\s\S]*?width:\s*min\(150px, 100%\)[\s\S]*?height:\s*95px/);
-  assert.match(mobileStyles, /padding:\s*75px 20px 30px/);
+test("the global mobile footer uses the editorial two-column layout", () => {
+  assert.match(mobileStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1\.5fr\) minmax\(120px, 1fr\)/);
+  assert.match(mobileStyles, /grid-template-areas:\s*"social address"\s*"legal logo"\s*"newsletter logo"/);
+  assert.match(mobileStyles, /\.footer \.footer-address\s*\{\s*grid-area:\s*address/);
+  assert.match(mobileStyles, /\.footer \.footer-social\s*\{\s*grid-area:\s*social/);
+  assert.match(mobileStyles, /\.footer \.footer-legal\s*\{\s*grid-area:\s*legal/);
+  assert.match(mobileStyles, /\.footer \.footer-newsletter\s*\{\s*grid-area:\s*newsletter/);
+  assert.match(mobileStyles, /\.footer \.footer-newsletter,[\s\S]*?\.footer \.footer-newsletter input\s*\{[\s\S]*?width:\s*100%[\s\S]*?max-width:\s*100%/);
+  assert.match(mobileStyles, /\.footer \.footer-logo\s*\{[\s\S]*?grid-area:\s*logo[\s\S]*?max-width:\s*126px[\s\S]*?height:\s*120px/);
+  assert.match(mobileStyles, /\.footer \.footer-logo-frame,[\s\S]*?object-position:\s*right bottom/);
+  assert.match(mobileStyles, /padding:\s*64px 20px max\(28px, env\(safe-area-inset-bottom\)\)/);
 });
 
 test("section footer characters use one centralized page map and the existing frame pair", () => {

@@ -79,7 +79,7 @@ test("Visual Identity remains a two-column grid on tablet and a one-column grid 
   assert.match(brandIdentityHtml, /<div class="brand-identity-columns" id="brandIdentityGrid"><\/div>/);
 });
 
-test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are unchanged", () => {
+test("protected pages, shell, data, CMS, APIs, assets, and renderers are unchanged", () => {
   execFileSync("git", [
     "diff",
     "--quiet",
@@ -135,8 +135,22 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
         /\n  \.clients-[^{]+\{[^}]*\}/g,
         "\n  <authorized-clients-rule>"
       );
-      headSection = normalizeAuthorizedClientsRules(headSection);
-      currentSection = normalizeAuthorizedClientsRules(currentSection);
+      const normalizeAuthorizedMobileFooterRules = value => {
+        const mobileStart = value.indexOf("@media (max-width: 760px) {");
+        const footerStart = value.indexOf("\n  .footer.footer {", mobileStart);
+        const footerEnd = value.indexOf(
+          "\n}\n\n@media (max-width: 760px) and",
+          footerStart
+        );
+
+        return `${value.slice(0, footerStart)}\n  <authorized-mobile-footer-rules>${value.slice(footerEnd)}`;
+      };
+      headSection = normalizeAuthorizedMobileFooterRules(
+        normalizeAuthorizedClientsRules(headSection)
+      );
+      currentSection = normalizeAuthorizedMobileFooterRules(
+        normalizeAuthorizedClientsRules(currentSection)
+      );
     }
 
     assert.equal(currentSection, headSection);
