@@ -107,8 +107,8 @@ test("Clients mobile is one manually scrollable editorial poster", () => {
   assert.match(mobileStyles, /background:\s*linear-gradient\([\s\S]*?rgba\(248, 246, 242, 0\)[\s\S]*?rgba\(248, 246, 242, 0\.9\) 100%[\s\S]*?font-size:\s*11px[\s\S]*?font-weight:\s*var\(--font-weight-light\)[\s\S]*?letter-spacing:\s*0\.11em/);
   assert.match(mobileStyles, /transition:\s*opacity 300ms ease, visibility 0s linear 300ms/);
   assert.match(mobileStyles, /@media \(max-width: 760px\) and \(prefers-reduced-motion: reduce\)[\s\S]*?\.clients-wall-hint\s*\{\s*transition:\s*none/);
-  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?width:\s*1800px/);
-  assert.match(mobileStyles, /font-size:\s*32px/);
+  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?width:\s*1575px/);
+  assert.match(mobileStyles, /font-size:\s*28px/);
   assert.match(mobileStyles, /font-weight:\s*var\(--font-weight-bold\)/);
   assert.match(mobileStyles, /line-height:\s*1\.05/);
   assert.match(mobileStyles, /animation:\s*none/);
