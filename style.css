@@ -3549,9 +3549,7 @@ body.is-mobile-menu-open {
   }
 
   #campaignsPage .campaign-gallery {
-    display: grid;
-    grid-template-rows: auto 44px;
-    align-items: start;
+    display: block;
   }
 
   #campaignsPage .campaign-media {
@@ -3577,16 +3575,16 @@ body.is-mobile-menu-open {
   #campaignsPage .campaign-media picture {
     display: block;
     width: auto;
-    max-width: 72vw;
+    max-width: 79.2vw;
     flex: 0 0 auto;
     scroll-snap-align: start;
   }
 
   #campaignsPage .campaign-media > video {
     width: auto;
-    max-width: 72vw;
+    max-width: 79.2vw;
     height: auto;
-    max-height: clamp(331.2px, 97.92vw, 420px);
+    max-height: clamp(364.32px, 107.712vw, 462px);
     flex: 0 0 auto;
     object-fit: contain;
     scroll-snap-align: start;
@@ -3598,60 +3596,8 @@ body.is-mobile-menu-open {
     width: auto;
     max-width: 100%;
     height: auto;
-    max-height: clamp(331.2px, 97.92vw, 420px);
+    max-height: clamp(364.32px, 107.712vw, 462px);
     object-fit: contain;
-  }
-
-  #campaignsPage .campaign-gallery-indicators {
-    display: flex;
-    width: calc(100% - clamp(112px, 34vw, 146px) - clamp(10px, 3vw, 14px));
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    overflow: hidden;
-  }
-
-  #campaignsPage .campaign.info-left .campaign-gallery-indicators {
-    justify-self: end;
-  }
-
-  #campaignsPage .campaign.info-right .campaign-gallery-indicators {
-    justify-self: start;
-  }
-
-  #campaignsPage .campaign-gallery-dot {
-    position: relative;
-    display: grid;
-    width: min(24px, calc(100% / var(--campaign-gallery-count)));
-    height: 44px;
-    min-width: 12px;
-    max-width: 24px;
-    flex: 1 1 24px;
-    padding: 0;
-    border: 0;
-    place-items: center;
-    appearance: none;
-    background: transparent;
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-
-  #campaignsPage .campaign-gallery-dot::before {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #c7c7c7;
-    content: "";
-  }
-
-  #campaignsPage .campaign-gallery-dot.is-active::before {
-    background: #6f6f6f;
-  }
-
-  #campaignsPage .campaign-gallery-dot:focus-visible {
-    outline: 1px solid #000;
-    outline-offset: -8px;
   }
 }
 
