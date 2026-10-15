@@ -68,7 +68,7 @@ function renderProject(campaign, index, mediaFiles) {
     .join("");
 
   return `
-    <section class="campaign ${layout}">
+    <section class="campaign mobile-campaign-layout ${layout}">
       <aside class="campaign-info">
         <div class="campaign-info-inner">
           <div class="campaign-title">

@@ -16,6 +16,9 @@ const markerIndex = styles.indexOf(marker);
 const nextMarker = "STEP 6 RESPONSIVE: SEARCH RESULTS / PROJECT DETAIL";
 const nextMarkerIndex = styles.indexOf(nextMarker, markerIndex);
 const responsiveStyles = styles.slice(markerIndex, nextMarkerIndex);
+const mobileStart = responsiveStyles.indexOf("@media (max-width: 760px)");
+const tabletStyles = responsiveStyles.slice(0, mobileStart);
+const mobileStyles = responsiveStyles.slice(mobileStart);
 
 test("Campaigns desktop CSS and implementation remain unchanged", () => {
   const headStyles = execFileSync("git", ["show", "HEAD:style.css"], {
@@ -35,9 +38,10 @@ test("Campaigns desktop CSS and implementation remain unchanged", () => {
   assert.match(headStyles, /\.campaign-media-item\.has-border\s*\{\s*border:\s*1px solid #000/);
   assert.match(styles, /\.campaign-media-item\.has-border\s*\{\s*border:\s*1px solid #000/);
 
-  execFileSync("git", ["diff", "--quiet", "HEAD", "--", "campaigns.js", "utils/renderProject.js"], {
+  execFileSync("git", ["diff", "--quiet", "HEAD", "--", "campaigns.js"], {
     cwd: root
   });
+  assert.match(renderer, /class="campaign mobile-campaign-layout \$\{layout\}"/);
 });
 
 test("the existing 761px to 820px Campaigns layout still stacks info before full-width media", () => {
@@ -46,7 +50,7 @@ test("the existing 761px to 820px Campaigns layout still stacks info before full
   assert.match(responsiveStyles, /#campaignsPage \.campaign-info,[\s\S]*?#campaignsPage \.campaign-media,[\s\S]*?order:\s*0[\s\S]*?width:\s*100%/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-info-inner,[\s\S]*?position:\s*static[\s\S]*?top:\s*auto[\s\S]*?text-align:\s*left/);
   assert.match(responsiveStyles, /#campaignsPage \.campaign-media-item,[\s\S]*?#campaignsPage \.campaign-media video,[\s\S]*?width:\s*100%[\s\S]*?height:\s*auto/);
-  assert.doesNotMatch(responsiveStyles, /#searchResults|\.search-result-group/);
+  assert.doesNotMatch(tabletStyles, /#searchResults|\.search-result-group/);
 });
 
 test("Campaigns mobile keeps campaigns vertical with independently scrolling editorial blocks", () => {
@@ -54,12 +58,13 @@ test("Campaigns mobile keeps campaigns vertical with independently scrolling edi
   assert.match(responsiveStyles, /#campaignsPage\.campaigns-page\s*\{[\s\S]*?display:\s*block[\s\S]*?height:\s*auto[\s\S]*?overflow:\s*visible/);
   assert.match(responsiveStyles, /touch-action:\s*pan-x pan-y/);
   assert.match(responsiveStyles, /-webkit-overflow-scrolling:\s*touch/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign\s*\{[\s\S]*?display:\s*block[\s\S]*?width:\s*100%[\s\S]*?margin:\s*0 0 clamp\(20px, 5\.5vw, 24px\)/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-info\s*\{[\s\S]*?width:\s*clamp\(112px, 34vw, 146px\)[\s\S]*?flex:\s*0 0 clamp\(112px, 34vw, 146px\)[\s\S]*?order:\s*0[\s\S]*?scroll-snap-align:\s*start/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media\s*\{[\s\S]*?flex-direction:\s*row[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden[\s\S]*?scroll-snap-type:\s*x proximity/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture\s*\{[\s\S]*?max-width:\s*79\.2vw[\s\S]*?scroll-snap-align:\s*start/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media > video\s*\{[\s\S]*?max-width:\s*79\.2vw[\s\S]*?max-height:\s*clamp\(364\.32px, 107\.712vw, 462px\)[\s\S]*?object-fit:\s*contain/);
-  assert.match(responsiveStyles, /#campaignsPage \.campaign-media picture \.campaign-media-item,[\s\S]*?max-width:\s*100%[\s\S]*?height:\s*auto[\s\S]*?object-fit:\s*contain/);
+  assert.match(mobileStyles, /--mobile-campaign-spacing:\s*calc\(clamp\(20px, 5\.5vw, 24px\) \+ 20px\)/);
+  assert.match(mobileStyles, /\.campaign\.mobile-campaign-layout\s*\{[\s\S]*?display:\s*block[\s\S]*?width:\s*100%[\s\S]*?margin:\s*0 0 var\(--mobile-campaign-spacing\)/);
+  assert.match(mobileStyles, /\.mobile-campaign-layout \.campaign-info\s*\{[\s\S]*?width:\s*clamp\(112px, 34vw, 146px\)[\s\S]*?flex:\s*0 0 clamp\(112px, 34vw, 146px\)[\s\S]*?order:\s*0[\s\S]*?scroll-snap-align:\s*start/);
+  assert.match(mobileStyles, /\.mobile-campaign-layout \.campaign-media\s*\{[\s\S]*?flex-direction:\s*row[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden[\s\S]*?scroll-snap-type:\s*x proximity/);
+  assert.match(mobileStyles, /\.mobile-campaign-layout \.campaign-media picture\s*\{[\s\S]*?max-width:\s*79\.2vw[\s\S]*?scroll-snap-align:\s*start/);
+  assert.match(mobileStyles, /\.mobile-campaign-layout \.campaign-media > video\s*\{[\s\S]*?max-width:\s*79\.2vw[\s\S]*?max-height:\s*clamp\(364\.32px, 107\.712vw, 462px\)[\s\S]*?object-fit:\s*contain/);
+  assert.match(mobileStyles, /\.mobile-campaign-layout \.campaign-media picture \.campaign-media-item,[\s\S]*?max-width:\s*100%[\s\S]*?height:\s*auto[\s\S]*?object-fit:\s*contain/);
   assert.doesNotMatch(responsiveStyles, /campaign-gallery-indicators|campaign-gallery-dot/);
   assert.doesNotMatch(responsiveStyles, /#campaignsPage \.campaign-media > :not\(:first-child\)/);
   assert.doesNotMatch(responsiveStyles, /autoplay|cloneNode/);
@@ -68,7 +73,7 @@ test("Campaigns mobile keeps campaigns vertical with independently scrolling edi
 test("Campaigns mobile galleries preserve scrolling without pagination indicators", () => {
   assert.match(campaignsPage, /<script src="campaigns-mobile-galleries\.js"><\/script>/);
   assert.match(mobileGalleries, /const MOBILE_QUERY = "\(max-width: 760px\)"/);
-  assert.match(mobileGalleries, /querySelectorAll\(":scope > \.campaign"\)/);
+  assert.match(mobileGalleries, /root\.querySelectorAll\(selector\)/);
   assert.match(mobileGalleries, /filter\(item => item\.matches\("picture, video"\)\)/);
   assert.match(mobileGalleries, /itemA\.matches\("video"\)/);
   assert.match(mobileGalleries, /const info = campaign\.querySelector\(":scope > \.campaign-info"\)/);
@@ -80,6 +85,9 @@ test("Campaigns mobile galleries preserve scrolling without pagination indicator
   assert.match(mobileGalleries, /hasUserExplored/);
   assert.match(mobileGalleries, /addEventListener\("resize", handleLayoutChange/);
   assert.match(mobileGalleries, /originalMediaItems\.forEach\(item => media\.append\(item\)\)/);
+  assert.match(mobileGalleries, /global\.RRSMobileCampaignGalleries\s*=\s*\{/);
+  assert.match(mobileGalleries, /refresh:\s*synchronizeGalleries/);
+  assert.match(mobileGalleries, /disableGalleries\(\);[\s\S]*?root\.querySelectorAll\(selector\)/);
   assert.match(mobileGalleries, /addEventListener\("load", handleLayoutChange/);
   assert.match(mobileGalleries, /addEventListener\("loadedmetadata", handleLayoutChange/);
   assert.doesNotMatch(mobileGalleries, /indicator|campaign-gallery-dot|aria-current|media\.scrollTo/);
@@ -111,9 +119,7 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "HEAD",
     "--",
     "campaigns.js",
-    "utils/renderProject.js",
     "utils/viewportVideoPlayback.js",
-    "search.js",
     "brand-identity.js",
     "magazines-books.js",
     "data",

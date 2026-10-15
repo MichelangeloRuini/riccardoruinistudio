@@ -8,6 +8,9 @@ const root = path.resolve(__dirname, "..");
 const read = relativePath => fs.readFileSync(path.join(root, relativePath), "utf8");
 const styles = read("style.css");
 const searchRenderer = read("search.js");
+const searchPage = read("search.html");
+const projectRenderer = read("utils/renderProject.js");
+const mobileGalleries = read("campaigns-mobile-galleries.js");
 const projectScript = read("project.js");
 const marker = "STEP 6 RESPONSIVE: SEARCH RESULTS / PROJECT DETAIL";
 const markerIndex = styles.indexOf(marker);
@@ -52,6 +55,17 @@ test("Search groups, URLs, and Books integration remain unchanged", () => {
   assert.match(searchRenderer, /window\.location\.href = `search\.html\?q=\$\{encodeURIComponent\(value\)\}`/);
 });
 
+test("Campaign results reuse the shared mobile Campaigns renderer and gallery lifecycle", () => {
+  assert.match(searchPage, /<script src="campaigns-mobile-galleries\.js"><\/script>[\s\S]*?<script src="search\.js"><\/script>/);
+  assert.match(projectRenderer, /class="campaign mobile-campaign-layout \$\{layout\}"/);
+  assert.match(searchRenderer, /renderProject\(safeCampaign, index, safeCampaign\.media\)/);
+  assert.match(searchRenderer, /result\.classList\.add\("search-campaign-result"\)/);
+  assert.match(searchRenderer, /RRSMobileCampaignGalleries\.create\(searchResults,[\s\S]*?selector:\s*"\.search-campaign-result"/);
+  assert.match(searchRenderer, /searchResults\.replaceChildren\(fragment\);\s*searchCampaignGalleries\.refresh\(\)/);
+  assert.match(mobileGalleries, /disableGalleries\(\);[\s\S]*?root\.querySelectorAll\(selector\)/);
+  assert.doesNotMatch(mobileGalleries, /preventDefault|campaign-gallery-dot|indicator/);
+});
+
 test("Project Detail stacks its header and preserves complete full-width media", () => {
   assert.match(projectStyles, /#portfolioProjectPage\.portfolio-project-page,[\s\S]*?padding:\s*38px 20px 60px/);
   assert.match(projectStyles, /#portfolioProjectPage \.portfolio-project-header\s*\{[\s\S]*?flex-direction:\s*column[\s\S]*?gap:\s*16px[\s\S]*?margin-bottom:\s*32px/);
@@ -68,10 +82,8 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "--quiet",
     "HEAD",
     "--",
-    "search.js",
     "project.js",
     "utils/searchData.js",
-    "utils/renderProject.js",
     "utils/renderPortfolio.js",
     "utils/renderPortfolioSearch.js",
     "campaigns.js",

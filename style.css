@@ -3490,23 +3490,28 @@ body.is-mobile-menu-open {
     overflow: visible;
   }
 
-  #campaignsPage .campaign {
+  :is(#campaignsPage, #searchResults) {
+    --mobile-campaign-spacing: calc(clamp(20px, 5.5vw, 24px) + 20px);
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign.mobile-campaign-layout {
     display: block;
     width: 100%;
     min-width: 0;
-    margin: 0 0 clamp(20px, 5.5vw, 24px);
+    margin: 0 0 var(--mobile-campaign-spacing);
   }
 
-  #campaignsPage .campaign:last-child {
+  #campaignsPage > .mobile-campaign-layout:last-child,
+  #searchResults .search-campaign-result:last-child {
     margin-bottom: 0;
   }
 
-  #campaignsPage .campaign-gallery {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-gallery {
     width: 100%;
     min-width: 0;
   }
 
-  #campaignsPage .campaign-info {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-info {
     width: clamp(112px, 34vw, 146px);
     min-width: clamp(112px, 34vw, 146px);
     flex: 0 0 clamp(112px, 34vw, 146px);
@@ -3515,44 +3520,44 @@ body.is-mobile-menu-open {
     scroll-snap-align: start;
   }
 
-  #campaignsPage .campaign-info-inner,
-  #campaignsPage .campaign.info-right .campaign-info-inner {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-info-inner,
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout.info-right .campaign-info-inner {
     position: static;
     top: auto;
     width: 100%;
   }
 
-  #campaignsPage .campaign.info-left .campaign-info-inner {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout.info-left .campaign-info-inner {
     text-align: right;
   }
 
-  #campaignsPage .campaign.info-right .campaign-info-inner {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout.info-right .campaign-info-inner {
     text-align: left;
   }
 
-  #campaignsPage .campaign-title {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-title {
     margin-bottom: 10px;
     font-size: clamp(14px, 4vw, 17px);
     line-height: 1.06;
     overflow-wrap: anywhere;
   }
 
-  #campaignsPage .credit-group {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .credit-group {
     margin-bottom: 7px;
   }
 
-  #campaignsPage .credit-label,
-  #campaignsPage .credit-value {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .credit-label,
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .credit-value {
     font-size: clamp(9px, 2.55vw, 11px);
     line-height: 1.14;
     overflow-wrap: anywhere;
   }
 
-  #campaignsPage .campaign-gallery {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-gallery {
     display: block;
   }
 
-  #campaignsPage .campaign-media {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media {
     display: flex;
     width: 100%;
     min-width: 0;
@@ -3568,11 +3573,11 @@ body.is-mobile-menu-open {
     scrollbar-width: none;
   }
 
-  #campaignsPage .campaign-media::-webkit-scrollbar {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media::-webkit-scrollbar {
     display: none;
   }
 
-  #campaignsPage .campaign-media picture {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media picture {
     display: block;
     width: auto;
     max-width: 79.2vw;
@@ -3580,7 +3585,7 @@ body.is-mobile-menu-open {
     scroll-snap-align: start;
   }
 
-  #campaignsPage .campaign-media > video {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media > video {
     width: auto;
     max-width: 79.2vw;
     height: auto;
@@ -3590,8 +3595,8 @@ body.is-mobile-menu-open {
     scroll-snap-align: start;
   }
 
-  #campaignsPage .campaign-media picture .campaign-media-item,
-  #campaignsPage .campaign-media picture img {
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media picture .campaign-media-item,
+  :is(#campaignsPage, #searchResults) .mobile-campaign-layout .campaign-media picture img {
     display: block;
     width: auto;
     max-width: 100%;

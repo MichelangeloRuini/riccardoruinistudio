@@ -2,12 +2,6 @@
   "use strict";
 
   const MOBILE_QUERY = "(max-width: 760px)";
-  const campaignsPage = document.getElementById("campaignsPage");
-
-  if (!campaignsPage) return;
-
-  const mediaQuery = global.matchMedia(MOBILE_QUERY);
-  let galleryCleanups = [];
 
   function getVisualItems(media) {
     return Array.from(media.children)
@@ -110,31 +104,72 @@
     };
   }
 
-  function enableGalleries() {
-    if (galleryCleanups.length) return;
-    galleryCleanups = Array.from(campaignsPage.querySelectorAll(":scope > .campaign"))
-      .map(createGallery)
-      .filter(Boolean);
-  }
+  function createController(root, options = {}) {
+    if (!root) return null;
 
-  function disableGalleries() {
-    galleryCleanups.forEach(cleanup => cleanup());
-    galleryCleanups = [];
-  }
+    const selector = options.selector || ".mobile-campaign-layout";
+    const mediaQuery = global.matchMedia(MOBILE_QUERY);
+    let galleryCleanups = [];
+    let destroyed = false;
 
-  function synchronizeGalleries() {
-    if (mediaQuery.matches) {
-      enableGalleries();
-    } else {
+    function disableGalleries() {
+      galleryCleanups.forEach(cleanup => cleanup());
+      galleryCleanups = [];
+    }
+
+    function enableGalleries() {
+      disableGalleries();
+      galleryCleanups = Array.from(root.querySelectorAll(selector))
+        .map(createGallery)
+        .filter(Boolean);
+    }
+
+    function synchronizeGalleries() {
+      if (destroyed) return;
+
+      if (mediaQuery.matches) {
+        enableGalleries();
+      } else {
+        disableGalleries();
+      }
+    }
+
+    function destroy() {
+      if (destroyed) return;
+      destroyed = true;
+      mediaQuery.removeEventListener("change", synchronizeGalleries);
       disableGalleries();
     }
+
+    mediaQuery.addEventListener("change", synchronizeGalleries);
+    synchronizeGalleries();
+
+    return {
+      refresh: synchronizeGalleries,
+      destroy
+    };
   }
 
-  mediaQuery.addEventListener("change", synchronizeGalleries);
-  global.addEventListener("pagehide", () => {
-    mediaQuery.removeEventListener("change", synchronizeGalleries);
-    disableGalleries();
-  }, { once: true });
+  const controllers = [];
+  const campaignsPage = document.getElementById("campaignsPage");
 
-  synchronizeGalleries();
+  function registerController(root, options) {
+    const controller = createController(root, options);
+    if (controller) controllers.push(controller);
+    return controller;
+  }
+
+  global.RRSMobileCampaignGalleries = {
+    create: registerController
+  };
+
+  if (campaignsPage) {
+    registerController(campaignsPage, {
+      selector: ":scope > .mobile-campaign-layout"
+    });
+  }
+
+  global.addEventListener("pagehide", () => {
+    controllers.forEach(controller => controller?.destroy());
+  }, { once: true });
 }(window));

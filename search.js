@@ -1,6 +1,9 @@
 const searchResults = document.getElementById("searchResults");
 const searchTitle = document.getElementById("searchTitle");
 const globalSearchInput = document.getElementById("globalSearchInput");
+const searchCampaignGalleries = RRSMobileCampaignGalleries.create(searchResults, {
+  selector: ".search-campaign-result"
+});
 
 const params = new URLSearchParams(window.location.search);
 const query = params.get("q") || "";
@@ -76,6 +79,7 @@ function renderSearch() {
   if (!cleanQuery) {
     searchTitle.textContent = "SEARCH";
     searchResults.innerHTML = "";
+    searchCampaignGalleries.refresh();
     return;
   }
 
@@ -124,6 +128,7 @@ function renderSearch() {
     noResults.className = "no-results";
     noResults.textContent = "NO RESULTS";
     searchResults.replaceChildren(noResults);
+    searchCampaignGalleries.refresh();
     return;
   }
 
@@ -139,7 +144,9 @@ function renderSearch() {
       };
       const template = document.createElement("template");
       template.innerHTML = renderProject(safeCampaign, index, safeCampaign.media);
-      return template.content.firstElementChild;
+      const result = template.content.firstElementChild;
+      result.classList.add("search-campaign-result");
+      return result;
     }],
     ["FILMS", portfolioGroups.films, renderPortfolioSearchProject]
   ];
@@ -159,6 +166,7 @@ function renderSearch() {
   });
 
   searchResults.replaceChildren(fragment);
+  searchCampaignGalleries.refresh();
   RRSViewportVideoPlayback.observe(searchResults);
 }
 
