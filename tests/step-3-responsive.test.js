@@ -131,10 +131,15 @@ test("protected pages, shell, data, CMS, APIs, assets, and renderers are unchang
     let currentSection = styles.slice(currentStart, currentEnd);
 
     if (protectedMarker === "GLOBAL RESPONSIVE FOOTER / MOBILE CLIENTS") {
-      const normalizeAuthorizedClientsRules = value => value.replace(
-        /\n  \.clients-[^{]+\{[^}]*\}/g,
-        "\n  <authorized-clients-rule>"
-      );
+      const normalizeAuthorizedClientsRules = value => value
+        .replace(
+          /\n  \.clients-wall,\s*\n  \.clients-wall \.client-name \{\s*-webkit-text-size-adjust: 100%;\s*text-size-adjust: 100%;\s*\}\n/g,
+          ""
+        )
+        .replace(
+          /\n  \.clients-[^{]+\{[^}]*\}/g,
+          "\n  <authorized-clients-rule>"
+        );
       const normalizeAuthorizedMobileFooterRules = value => {
         const mobileStart = value.indexOf("@media (max-width: 760px) {");
         const footerStart = value.indexOf("\n  .footer.footer {", mobileStart);

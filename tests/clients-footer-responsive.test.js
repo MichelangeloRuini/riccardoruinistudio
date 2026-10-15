@@ -111,6 +111,7 @@ test("Clients mobile is one manually scrollable editorial poster", () => {
   assert.match(mobileStyles, /font-size:\s*28px/);
   assert.match(mobileStyles, /font-weight:\s*var\(--font-weight-bold\)/);
   assert.match(mobileStyles, /line-height:\s*1\.05/);
+  assert.match(mobileStyles, /\.clients-wall,\s*\.clients-wall \.client-name\s*\{[\s\S]*?-webkit-text-size-adjust:\s*100%[\s\S]*?text-size-adjust:\s*100%/);
   assert.match(mobileStyles, /animation:\s*none/);
   assert.match(mobileStyles, /transform:\s*none/);
   assert.doesNotMatch(mobileStyles, /wallMoveMobile|scroll-snap/);

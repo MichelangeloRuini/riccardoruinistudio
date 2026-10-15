@@ -3064,6 +3064,12 @@ body.is-mobile-menu-open {
     transform: none;
   }
 
+  .clients-wall,
+  .clients-wall .client-name {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   .footer.footer {
     grid-template-columns: minmax(0, 1.5fr) minmax(120px, 1fr);
     grid-template-areas:
