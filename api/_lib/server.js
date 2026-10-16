@@ -82,14 +82,43 @@ function parseJsonBody(req, maxBytes = JSON_LIMIT_BYTES) {
 }
 
 function getSupabaseConfig({ serviceRole = false } = {}) {
-  const url = String(process.env.SUPABASE_URL || "").trim().replace(/\/+$/, "");
+  const configuredUrl = String(process.env.SUPABASE_URL || "").trim();
   const anonKey = String(process.env.SUPABASE_ANON_KEY || "").trim();
   const serviceRoleKey = String(process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
 
-  if (!url || !anonKey || (serviceRole && !serviceRoleKey)) {
+  if (!configuredUrl || !anonKey || (serviceRole && !serviceRoleKey)) {
     throw new HttpError(503, "service_not_configured", "This service is not configured yet.");
   }
 
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(configuredUrl);
+  } catch {
+    const error = new HttpError(503, "service_not_configured", "This service is not configured yet.");
+    error.diagnosticType = "url_invalid";
+    throw error;
+  }
+
+  const invalidProtocol = parsedUrl.protocol !== "https:"
+    && !(process.env.NODE_ENV !== "production" && parsedUrl.protocol === "http:");
+  const hasUnexpectedUrlParts = parsedUrl.username
+    || parsedUrl.password
+    || parsedUrl.search
+    || parsedUrl.hash
+    || (parsedUrl.pathname !== "/" && parsedUrl.pathname !== "");
+  if (invalidProtocol || hasUnexpectedUrlParts) {
+    const error = new HttpError(503, "service_not_configured", "This service is not configured yet.");
+    error.diagnosticType = "url_invalid";
+    throw error;
+  }
+
+  if (/[^\x20-\x7e]/.test(anonKey) || /[^\x20-\x7e]/.test(serviceRoleKey)) {
+    const error = new HttpError(503, "service_not_configured", "This service is not configured yet.");
+    error.diagnosticType = "request_invalid";
+    throw error;
+  }
+
+  const url = parsedUrl.origin;
   return { url, anonKey, serviceRoleKey };
 }
 
@@ -98,18 +127,66 @@ function isLegacyJwtKey(value) {
   return parts.length === 3 && parts[0].startsWith("eyJ");
 }
 
-function logSupabaseFailure(phase, status) {
+function classifySupabaseFetchError(error) {
+  const name = String((error && error.name) || "").toUpperCase();
+  const code = String(
+    (error && error.code)
+    || (error && error.cause && error.cause.code)
+    || ""
+  ).toUpperCase();
+
+  if (name === "TIMEOUTERROR" || name === "ABORTERROR" || [
+    "ETIMEDOUT",
+    "UND_ERR_CONNECT_TIMEOUT",
+    "UND_ERR_HEADERS_TIMEOUT",
+    "UND_ERR_BODY_TIMEOUT"
+  ].includes(code)) return "timeout";
+
+  if (["ENOTFOUND", "EAI_AGAIN", "EAI_FAIL", "ENODATA"].includes(code)) return "dns";
+
+  if ([
+    "CERT_HAS_EXPIRED",
+    "DEPTH_ZERO_SELF_SIGNED_CERT",
+    "ERR_TLS_CERT_ALTNAME_INVALID",
+    "SELF_SIGNED_CERT_IN_CHAIN",
+    "UNABLE_TO_GET_ISSUER_CERT",
+    "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+  ].includes(code) || code.startsWith("ERR_TLS_")) return "tls";
+
+  if ([
+    "ECONNREFUSED",
+    "ECONNRESET",
+    "EHOSTUNREACH",
+    "ENETUNREACH",
+    "UND_ERR_SOCKET"
+  ].includes(code)) return "connection";
+
+  if (code === "ERR_INVALID_URL") return "url_invalid";
+  if (["ERR_INVALID_CHAR", "ERR_HTTP_INVALID_HEADER_VALUE", "UND_ERR_INVALID_ARG"].includes(code)) {
+    return "request_invalid";
+  }
+  return "network_or_runtime";
+}
+
+function logSupabaseFailure(phase, status, failureType = "http_response") {
   const safePhase = typeof phase === "string" && /^[a-z0-9_]{1,64}$/.test(phase)
     ? phase
     : "unknown";
   console.error("[online-cms] supabase request failed", {
     phase: safePhase,
+    failureType,
     upstreamStatus: Number.isInteger(status) ? status : null
   });
 }
 
 async function requestSupabase(path, options = {}) {
-  const config = getSupabaseConfig({ serviceRole: options.serviceRole });
+  let config;
+  try {
+    config = getSupabaseConfig({ serviceRole: options.serviceRole });
+  } catch (error) {
+    logSupabaseFailure(options.phase, null, error.diagnosticType || "configuration");
+    throw error;
+  }
   const apiKey = options.serviceRole ? config.serviceRoleKey : config.anonKey;
   const headers = {
     apikey: apiKey,
@@ -128,8 +205,8 @@ async function requestSupabase(path, options = {}) {
       signal: AbortSignal.timeout(SUPABASE_TIMEOUT_MS)
     });
   } catch (error) {
-    logSupabaseFailure(options.phase, null);
-    throw error;
+    logSupabaseFailure(options.phase, null, classifySupabaseFetchError(error));
+    throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
   }
   const text = await response.text();
   let data = null;
@@ -146,7 +223,7 @@ async function requestSupabase(path, options = {}) {
     ? options.expectedStatuses
     : [];
   if (!response.ok && !expectedStatuses.includes(response.status)) {
-    logSupabaseFailure(options.phase, response.status);
+    logSupabaseFailure(options.phase, response.status, "http_response");
   }
 
   return { ok: response.ok, status: response.status, data };

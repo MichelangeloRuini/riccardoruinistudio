@@ -385,12 +385,69 @@ test("Supabase failures log only a fixed phase and upstream HTTP status", async 
     assert.equal(logs.length, 1);
     assert.deepEqual(logs[0], [
       "[online-cms] supabase request failed",
-      { phase: "admin_login_rate_limit", upstreamStatus: 401 }
+      {
+        phase: "admin_login_rate_limit",
+        failureType: "http_response",
+        upstreamStatus: 401
+      }
     ]);
     const serializedLogs = JSON.stringify(logs);
     assert.doesNotMatch(serializedLogs, /admin@example\.com|strong-password/);
     assert.doesNotMatch(serializedLogs, /sensitive upstream response/);
     assert.doesNotMatch(serializedLogs, /sb_(?:publishable|secret)_/);
+  } finally {
+    console.error = originalConsoleError;
+    global.fetch = originalFetch;
+    restoreEnvironment();
+  }
+});
+
+test("Supabase network diagnostics distinguish failures without logging exception details", async () => {
+  const restoreEnvironment = installEnvironment();
+  const originalFetch = global.fetch;
+  const originalConsoleError = console.error;
+  const scenarios = [
+    ["dns", { cause: { code: "ENOTFOUND" } }],
+    ["connection", { cause: { code: "ECONNREFUSED" } }],
+    ["timeout", { name: "TimeoutError" }],
+    ["tls", { cause: { code: "ERR_TLS_CERT_ALTNAME_INVALID" } }]
+  ];
+
+  try {
+    for (const [failureType, properties] of scenarios) {
+      const logs = [];
+      console.error = (...values) => logs.push(values);
+      global.fetch = async () => {
+        const error = new Error("sensitive exception detail");
+        Object.assign(error, properties);
+        throw error;
+      };
+
+      await assert.rejects(
+        requestSupabase("/rest/v1/example", { phase: "network_test" }),
+        error => error.status === 500 && error.code === "internal_error"
+      );
+      assert.deepEqual(logs, [[
+        "[online-cms] supabase request failed",
+        { phase: "network_test", failureType, upstreamStatus: null }
+      ]]);
+      assert.doesNotMatch(JSON.stringify(logs), /sensitive exception detail/);
+    }
+
+    const logs = [];
+    console.error = (...values) => logs.push(values);
+    process.env.SUPABASE_URL = "not-a-valid-url";
+    global.fetch = async () => {
+      throw new Error("fetch must not run for an invalid URL");
+    };
+    await assert.rejects(
+      requestSupabase("/rest/v1/example", { phase: "url_test" }),
+      error => error.status === 503 && error.code === "service_not_configured"
+    );
+    assert.deepEqual(logs, [[
+      "[online-cms] supabase request failed",
+      { phase: "url_test", failureType: "url_invalid", upstreamStatus: null }
+    ]]);
   } finally {
     console.error = originalConsoleError;
     global.fetch = originalFetch;
