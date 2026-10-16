@@ -87,7 +87,6 @@ test("protected pages, shell, data, CMS, APIs, assets, and renderers are unchang
     "--",
     "brand-identity.js",
     "campaigns.js",
-    "search.js",
     "data",
     "cms",
     "admin.html",

@@ -66,13 +66,16 @@ function expectedPublicNavigation(relativePath) {
   );
 
   if (relativePath === "campaigns.html") {
-    if (expectedNavigation.includes('<script src="campaigns-mobile-galleries.js"></script>')) {
-      return expectedNavigation;
-    }
-
     return expectedNavigation.replace(
-      '<script src="campaigns.js"></script>',
-      '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>'
+      '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>',
+      '<script src="campaigns-mobile-detail.js"></script>'
+    );
+  }
+
+  if (relativePath === "search.html") {
+    return expectedNavigation.replace(
+      '<script src="campaigns-mobile-galleries.js"></script>',
+      '<script src="campaigns-mobile-detail.js"></script>'
     );
   }
 
@@ -243,7 +246,7 @@ test("public page internals differ from HEAD only by approved navigation and wal
   });
 
   assert.match(read("campaigns.html"), /id="campaignsPage"/);
-  assert.match(read("campaigns.html"), /<script src="campaigns\.js"><\/script>/);
+  assert.match(read("campaigns.html"), /<script src="campaigns-mobile-detail\.js"><\/script>/);
   assert.match(read("brand-identity.html"), /id="brandIdentityGrid"/);
   assert.match(read("brand-identity.html"), /<script src="brand-identity\.js"><\/script>/);
 });

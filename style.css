@@ -3610,6 +3610,223 @@ body.is-mobile-menu-open {
     max-height: clamp(364.32px, 107.712vw, 462px);
     object-fit: contain;
   }
+
+  :is(#campaignsPage, #searchResults) .campaigns-mobile-list {
+    display: block;
+    width: 100%;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card {
+    width: 100%;
+    margin: 0 0 30px;
+    padding: 0 0 20px;
+    border-bottom: 1px solid #000;
+    color: #000;
+    font-family: var(--font-editorial);
+    text-transform: uppercase;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card:last-child {
+    margin-bottom: 0;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__client,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__title {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__client {
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__title {
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #000;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__cover:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 4px;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__hover {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0.12);
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transition: opacity 250ms ease;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :is(#campaignsPage, #searchResults) .campaign-mobile-card__cover:hover .campaign-mobile-card__hover {
+      opacity: 1;
+    }
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__cover:focus-visible .campaign-mobile-card__hover {
+    opacity: 1;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__cover picture,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-card__media {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail[hidden] {
+    display: none;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail {
+    position: fixed;
+    top: var(--campaign-detail-top, 0);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 19;
+    display: block;
+    width: 100%;
+    padding: 20px 16px max(32px, env(safe-area-inset-bottom));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-editorial);
+    text-transform: uppercase;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 42%);
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 28px;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__identity {
+    margin: 0;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.15;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__identity span,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits a {
+    display: block;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__aside {
+    min-width: 0;
+    text-align: right;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__close {
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    margin: -12px -10px 10px 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__close::after {
+    content: "";
+    position: absolute;
+    inset: 7px 3px;
+    border: 1px solid #fff;
+    pointer-events: none;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__close:focus-visible,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits {
+    margin: 0;
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits div + div {
+    margin-top: 9px;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits dt,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits dd,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits a {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: var(--font-weight-bold);
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__credits a {
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media-item,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media-item img,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media-item video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media-item.has-border,
+  :is(#campaignsPage, #searchResults) .campaign-mobile-detail__media-item img.has-border {
+    border: 1px solid #fff;
+  }
 }
 
 /* ==========================================================

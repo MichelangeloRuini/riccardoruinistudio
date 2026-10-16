@@ -149,7 +149,7 @@ test("mobile modal follows EXIT, video, details order with safe-area and no hori
 test("dataset, Search, CMS, APIs, assets, and unrelated sections remain unchanged", () => {
   execFileSync("git", [
     "diff", "--quiet", "HEAD", "--",
-    "data", "search.js", "utils/searchData.js", "cms", "admin.html",
+    "data", "utils/searchData.js", "cms", "admin.html",
     "admin-server.js", "admin.js", "admin-books.js", "admin-portfolio.js", "assets",
     ":(exclude)assets/ui/diavoletto-about.png",
     ":(exclude)assets/ui/diavoletto-clients-talents.png",

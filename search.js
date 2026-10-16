@@ -1,9 +1,11 @@
 const searchResults = document.getElementById("searchResults");
 const searchTitle = document.getElementById("searchTitle");
 const globalSearchInput = document.getElementById("globalSearchInput");
-const searchCampaignGalleries = RRSMobileCampaignGalleries.create(searchResults, {
-  selector: ".search-campaign-result"
-});
+const searchCampaignRecords = typeof campaigns !== "undefined" ? campaigns : [];
+const searchCampaignDetail = RRSMobileCampaignDetail.create(
+  searchResults,
+  searchCampaignRecords
+);
 
 const params = new URLSearchParams(window.location.search);
 const query = params.get("q") || "";
@@ -74,12 +76,13 @@ function renderMagazinesBooksSearchResult(record, index) {
 function renderSearch() {
   const cleanQuery = RRSUnifiedSearch.normalize(query.trim());
 
+  searchCampaignDetail.prepareForRender();
   RRSViewportVideoPlayback.unobserve(searchResults);
 
   if (!cleanQuery) {
     searchTitle.textContent = "SEARCH";
     searchResults.innerHTML = "";
-    searchCampaignGalleries.refresh();
+    searchCampaignDetail.refresh();
     return;
   }
 
@@ -128,7 +131,7 @@ function renderSearch() {
     noResults.className = "no-results";
     noResults.textContent = "NO RESULTS";
     searchResults.replaceChildren(noResults);
-    searchCampaignGalleries.refresh();
+    searchCampaignDetail.refresh();
     return;
   }
 
@@ -142,6 +145,13 @@ function renderSearch() {
         credits: Array.isArray(campaign.credits) ? campaign.credits : [],
         media: Array.isArray(campaign.media) ? campaign.media : []
       };
+
+      if (searchCampaignDetail.matches()) {
+        const result = RRSMobileCampaignDetail.createCard(safeCampaign);
+        result.classList.add("search-campaign-result");
+        return result;
+      }
+
       const template = document.createElement("template");
       template.innerHTML = renderProject(safeCampaign, index, safeCampaign.media);
       const result = template.content.firstElementChild;
@@ -166,7 +176,7 @@ function renderSearch() {
   });
 
   searchResults.replaceChildren(fragment);
-  searchCampaignGalleries.refresh();
+  searchCampaignDetail.refresh();
   RRSViewportVideoPlayback.observe(searchResults);
 }
 
@@ -180,4 +190,5 @@ globalSearchInput.addEventListener("keydown", event => {
   }
 });
 
+window.matchMedia("(max-width: 760px)").addEventListener("change", renderSearch);
 renderSearch();

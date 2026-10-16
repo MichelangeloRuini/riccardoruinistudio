@@ -197,7 +197,6 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "utils/searchData.js",
     "utils/renderProject.js",
     "utils/renderPortfolio.js",
-    "search.js",
     "campaigns.js",
   ], { cwd: root });
 });
