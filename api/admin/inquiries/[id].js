@@ -33,16 +33,20 @@ module.exports = async function inquiryDetail(req, res) {
         method: "PATCH",
         accessToken: auth.accessToken,
         prefer: "return=representation",
-        body: { status }
+        body: { status },
+        phase: "admin_inquiry_update"
       });
     } else {
       query.set("select", "id,created_at,name,email,company,service,description,budget,status");
       result = await requestSupabase(`/rest/v1/project_inquiries?${query}`, {
-        accessToken: auth.accessToken
+        accessToken: auth.accessToken,
+        phase: "admin_inquiry_detail"
       });
     }
 
-    if (!result.ok) throw new Error(`detail_${result.status}`);
+    if (!result.ok) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
     if (!Array.isArray(result.data) || result.data.length === 0) {
       throw new HttpError(404, "not_found", "Inquiry not found.");
     }

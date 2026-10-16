@@ -26,9 +26,12 @@ module.exports = async function listInquiries(req, res) {
     if (ADMIN_STATUSES.has(requestedStatus)) query.set("status", `eq.${requestedStatus}`);
 
     const result = await requestSupabase(`/rest/v1/project_inquiries?${query}`, {
-      accessToken: auth.accessToken
+      accessToken: auth.accessToken,
+      phase: "admin_inquiry_list"
     });
-    if (!result.ok) throw new Error(`list_${result.status}`);
+    if (!result.ok) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
 
     sendJson(res, 200, { ok: true, inquiries: result.data || [] });
   } catch (error) {

@@ -87,10 +87,13 @@ async function handler(req, res) {
     const rateLimit = await requestSupabase("/rest/v1/rpc/check_project_inquiry_rate_limit", {
       method: "POST",
       serviceRole: true,
-      body: { p_key_hash: keyHash, p_max_requests: 5, p_window_seconds: 900 }
+      body: { p_key_hash: keyHash, p_max_requests: 5, p_window_seconds: 900 },
+      phase: "project_inquiry_rate_limit"
     });
 
-    if (!rateLimit.ok) throw new Error(`rate_limit_${rateLimit.status}`);
+    if (!rateLimit.ok) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
     if (rateLimit.data !== true) {
       res.setHeader("Retry-After", "900");
       throw new HttpError(429, "rate_limited", "Too many attempts. Please try again later.");
@@ -100,9 +103,12 @@ async function handler(req, res) {
       method: "POST",
       serviceRole: true,
       prefer: "return=minimal",
-      body: inquiry
+      body: inquiry,
+      phase: "project_inquiry_insert"
     });
-    if (!insert.ok) throw new Error(`insert_${insert.status}`);
+    if (!insert.ok) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
 
     sendJson(res, 201, {
       ok: true,

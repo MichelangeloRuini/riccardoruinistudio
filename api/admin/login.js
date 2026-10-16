@@ -29,9 +29,12 @@ module.exports = async function login(req, res) {
     const rateLimit = await requestSupabase("/rest/v1/rpc/check_project_inquiry_rate_limit", {
       method: "POST",
       serviceRole: true,
-      body: { p_key_hash: keyHash, p_max_requests: 10, p_window_seconds: 900 }
+      body: { p_key_hash: keyHash, p_max_requests: 10, p_window_seconds: 900 },
+      phase: "admin_login_rate_limit"
     });
-    if (!rateLimit.ok) throw new Error(`login_rate_limit_${rateLimit.status}`);
+    if (!rateLimit.ok) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
     if (rateLimit.data !== true) {
       res.setHeader("Retry-After", "900");
       throw new HttpError(429, "rate_limited", "Too many login attempts. Please try again later.");
@@ -39,8 +42,14 @@ module.exports = async function login(req, res) {
 
     const result = await requestSupabase("/auth/v1/token?grant_type=password", {
       method: "POST",
-      body: { email, password }
+      body: { email, password },
+      phase: "admin_login_password",
+      expectedStatuses: [400, 401, 422]
     });
+
+    if (!result.ok && ![400, 401, 422].includes(result.status)) {
+      throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+    }
 
     if (
       !result.ok

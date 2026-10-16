@@ -82,9 +82,9 @@ function parseJsonBody(req, maxBytes = JSON_LIMIT_BYTES) {
 }
 
 function getSupabaseConfig({ serviceRole = false } = {}) {
-  const url = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
-  const anonKey = process.env.SUPABASE_ANON_KEY;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = String(process.env.SUPABASE_URL || "").trim().replace(/\/+$/, "");
+  const anonKey = String(process.env.SUPABASE_ANON_KEY || "").trim();
+  const serviceRoleKey = String(process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
 
   if (!url || !anonKey || (serviceRole && !serviceRoleKey)) {
     throw new HttpError(503, "service_not_configured", "This service is not configured yet.");
@@ -93,23 +93,44 @@ function getSupabaseConfig({ serviceRole = false } = {}) {
   return { url, anonKey, serviceRoleKey };
 }
 
+function isLegacyJwtKey(value) {
+  const parts = String(value || "").split(".");
+  return parts.length === 3 && parts[0].startsWith("eyJ");
+}
+
+function logSupabaseFailure(phase, status) {
+  const safePhase = typeof phase === "string" && /^[a-z0-9_]{1,64}$/.test(phase)
+    ? phase
+    : "unknown";
+  console.error("[online-cms] supabase request failed", {
+    phase: safePhase,
+    upstreamStatus: Number.isInteger(status) ? status : null
+  });
+}
+
 async function requestSupabase(path, options = {}) {
   const config = getSupabaseConfig({ serviceRole: options.serviceRole });
   const apiKey = options.serviceRole ? config.serviceRoleKey : config.anonKey;
-  const authorization = options.accessToken || apiKey;
   const headers = {
     apikey: apiKey,
-    Authorization: `Bearer ${authorization}`,
     ...(options.body === undefined ? {} : { "Content-Type": "application/json" }),
     ...(options.prefer ? { Prefer: options.prefer } : {})
   };
+  const authorization = options.accessToken || (isLegacyJwtKey(apiKey) ? apiKey : "");
+  if (authorization) headers.Authorization = `Bearer ${authorization}`;
 
-  const response = await fetch(`${config.url}${path}`, {
-    method: options.method || "GET",
-    headers,
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
-    signal: AbortSignal.timeout(SUPABASE_TIMEOUT_MS)
-  });
+  let response;
+  try {
+    response = await fetch(`${config.url}${path}`, {
+      method: options.method || "GET",
+      headers,
+      body: options.body === undefined ? undefined : JSON.stringify(options.body),
+      signal: AbortSignal.timeout(SUPABASE_TIMEOUT_MS)
+    });
+  } catch (error) {
+    logSupabaseFailure(options.phase, null);
+    throw error;
+  }
   const text = await response.text();
   let data = null;
 
@@ -119,6 +140,13 @@ async function requestSupabase(path, options = {}) {
     } catch {
       data = null;
     }
+  }
+
+  const expectedStatuses = Array.isArray(options.expectedStatuses)
+    ? options.expectedStatuses
+    : [];
+  if (!response.ok && !expectedStatuses.includes(response.status)) {
+    logSupabaseFailure(options.phase, response.status);
   }
 
   return { ok: response.ok, status: response.status, data };
@@ -191,7 +219,14 @@ function clearSessionCookies(res) {
 
 async function getAuthUser(accessToken) {
   if (!accessToken) return null;
-  const result = await requestSupabase("/auth/v1/user", { accessToken });
+  const result = await requestSupabase("/auth/v1/user", {
+    accessToken,
+    phase: "admin_session_user",
+    expectedStatuses: [401, 403]
+  });
+  if (!result.ok && ![401, 403].includes(result.status)) {
+    throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+  }
   return result.ok && result.data && result.data.id ? result.data : null;
 }
 
@@ -199,8 +234,13 @@ async function refreshSession(refreshToken) {
   if (!refreshToken) return null;
   const result = await requestSupabase("/auth/v1/token?grant_type=refresh_token", {
     method: "POST",
-    body: { refresh_token: refreshToken }
+    body: { refresh_token: refreshToken },
+    phase: "admin_session_refresh",
+    expectedStatuses: [400, 401, 403]
   });
+  if (!result.ok && ![400, 401, 403].includes(result.status)) {
+    throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+  }
   return result.ok
     && result.data
     && result.data.access_token
@@ -215,7 +255,13 @@ async function assertAdmin(accessToken, userId) {
     user_id: `eq.${userId}`,
     limit: "1"
   });
-  const result = await requestSupabase(`/rest/v1/admin_users?${query}`, { accessToken });
+  const result = await requestSupabase(`/rest/v1/admin_users?${query}`, {
+    accessToken,
+    phase: "admin_membership_check"
+  });
+  if (!result.ok) {
+    throw new HttpError(500, "internal_error", "The request could not be completed. Please try again.");
+  }
   return result.ok && Array.isArray(result.data) && result.data.length === 1;
 }
 

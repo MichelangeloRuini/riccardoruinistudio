@@ -9,8 +9,11 @@ const logout = require("../api/admin/logout");
 const session = require("../api/admin/session");
 const listInquiries = require("../api/admin/inquiries");
 const inquiryDetail = require("../api/admin/inquiries/[id]");
+const { requestSupabase } = require("../api/_lib/server");
 
 const root = path.resolve(__dirname, "..");
+const PUBLISHABLE_TEST_KEY = "sb_publishable_test_key";
+const SECRET_TEST_KEY = "sb_secret_test_key";
 
 function responseFixture() {
   const headers = new Map();
@@ -58,8 +61,8 @@ function installEnvironment() {
   const previous = { ...process.env };
   process.env.PROJECT_INQUIRIES_ENABLED = "true";
   process.env.SUPABASE_URL = "https://example.supabase.co";
-  process.env.SUPABASE_ANON_KEY = "anon-test-key";
-  process.env.SUPABASE_SERVICE_ROLE_KEY = "service-test-key";
+  process.env.SUPABASE_ANON_KEY = PUBLISHABLE_TEST_KEY;
+  process.env.SUPABASE_SERVICE_ROLE_KEY = SECRET_TEST_KEY;
   process.env.RATE_LIMIT_SECRET = "0123456789abcdef0123456789abcdef";
   process.env.ALLOWED_ORIGINS = "https://preview.example.com";
   return () => {
@@ -109,6 +112,27 @@ test("server validation normalizes inquiry data and rejects unknown options", ()
   );
 });
 
+test("legacy JWT API keys retain their bearer header during migration", async () => {
+  const restoreEnvironment = installEnvironment();
+  const originalFetch = global.fetch;
+  const legacyKey = "eyJlegacy.header.signature";
+  let requestOptions;
+  process.env.SUPABASE_ANON_KEY = legacyKey;
+  global.fetch = async (_url, options) => {
+    requestOptions = options;
+    return fetchResponse(200, { ok: true });
+  };
+
+  try {
+    await requestSupabase("/rest/v1/example", { phase: "legacy_key_test" });
+    assert.equal(requestOptions.headers.apikey, legacyKey);
+    assert.equal(requestOptions.headers.Authorization, `Bearer ${legacyKey}`);
+  } finally {
+    global.fetch = originalFetch;
+    restoreEnvironment();
+  }
+});
+
 test("public endpoint persists only after persistent rate limiting succeeds", async () => {
   const restoreEnvironment = installEnvironment();
   const originalFetch = global.fetch;
@@ -130,7 +154,10 @@ test("public endpoint persists only after persistent rate limiting succeeds", as
     const inserted = JSON.parse(calls[1].options.body);
     assert.equal(inserted.email, "ada@example.com");
     assert.equal(Object.hasOwn(inserted, "website"), false);
-    assert.equal(calls[1].options.headers.apikey, "service-test-key");
+    assert.equal(calls[0].options.headers.apikey, SECRET_TEST_KEY);
+    assert.equal(Object.hasOwn(calls[0].options.headers, "Authorization"), false);
+    assert.equal(calls[1].options.headers.apikey, SECRET_TEST_KEY);
+    assert.equal(Object.hasOwn(calls[1].options.headers, "Authorization"), false);
   } finally {
     global.fetch = originalFetch;
     restoreEnvironment();
@@ -253,7 +280,9 @@ test("admin login verifies membership server-side and stores tokens only in Http
   const restoreEnvironment = installEnvironment();
   const originalFetch = global.fetch;
   const auth = adminSession();
-  global.fetch = async url => {
+  const calls = [];
+  global.fetch = async (url, options) => {
+    calls.push({ url, options });
     if (url.endsWith("/rpc/check_project_inquiry_rate_limit")) return fetchResponse(200, true);
     if (url.includes("grant_type=password")) return fetchResponse(200, auth);
     if (url.includes("/rest/v1/admin_users")) return fetchResponse(200, [{ user_id: auth.user.id }]);
@@ -271,6 +300,12 @@ test("admin login verifies membership server-side and stores tokens only in Http
     assert.equal(cookies.length, 2);
     assert.ok(cookies.every(value => value.includes("HttpOnly") && value.includes("SameSite=Strict")));
     assert.doesNotMatch(res.body, /access-token|refresh-token/);
+    assert.equal(calls[0].options.headers.apikey, SECRET_TEST_KEY);
+    assert.equal(Object.hasOwn(calls[0].options.headers, "Authorization"), false);
+    assert.equal(calls[1].options.headers.apikey, PUBLISHABLE_TEST_KEY);
+    assert.equal(Object.hasOwn(calls[1].options.headers, "Authorization"), false);
+    assert.equal(calls[2].options.headers.apikey, PUBLISHABLE_TEST_KEY);
+    assert.equal(calls[2].options.headers.Authorization, "Bearer access-token");
   } finally {
     global.fetch = originalFetch;
     restoreEnvironment();
@@ -325,6 +360,39 @@ test("CMS login has an IP-keyed persistent rate limit independent from public in
     assert.equal(body.p_max_requests, 10);
     assert.equal(body.p_window_seconds, 900);
   } finally {
+    global.fetch = originalFetch;
+    restoreEnvironment();
+  }
+});
+
+test("Supabase failures log only a fixed phase and upstream HTTP status", async () => {
+  const restoreEnvironment = installEnvironment();
+  const originalFetch = global.fetch;
+  const originalConsoleError = console.error;
+  const logs = [];
+  global.fetch = async () => fetchResponse(401, {
+    message: "sensitive upstream response that must not be logged"
+  });
+  console.error = (...values) => logs.push(values);
+
+  try {
+    const res = responseFixture();
+    await login(requestFixture({
+      body: { email: "admin@example.com", password: "strong-password" }
+    }), res);
+
+    assert.equal(res.statusCode, 500);
+    assert.equal(logs.length, 1);
+    assert.deepEqual(logs[0], [
+      "[online-cms] supabase request failed",
+      { phase: "admin_login_rate_limit", upstreamStatus: 401 }
+    ]);
+    const serializedLogs = JSON.stringify(logs);
+    assert.doesNotMatch(serializedLogs, /admin@example\.com|strong-password/);
+    assert.doesNotMatch(serializedLogs, /sensitive upstream response/);
+    assert.doesNotMatch(serializedLogs, /sb_(?:publishable|secret)_/);
+  } finally {
+    console.error = originalConsoleError;
     global.fetch = originalFetch;
     restoreEnvironment();
   }
@@ -451,6 +519,7 @@ test("browser code contains no Supabase credentials and no public signup flow", 
     fs.readFileSync(path.join(root, "online-cms/index.html"), "utf8")
   ].join("\n");
   assert.doesNotMatch(browserSources, /SUPABASE_(?:URL|ANON_KEY|SERVICE_ROLE_KEY)/);
+  assert.doesNotMatch(browserSources, /sb_secret_/);
   assert.doesNotMatch(browserSources, /signUp|\/signup|Create account/i);
 });
 

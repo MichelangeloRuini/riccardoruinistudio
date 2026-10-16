@@ -26,24 +26,26 @@ In each project:
 
 Do not add an insert policy for `anon` on `project_inquiries`. Public writes pass through the server function only.
 
-The migration deliberately keeps the admin membership helper in the non-exposed `private` schema, grants administrators only `SELECT` plus `UPDATE (status)`, and limits `service_role` to inquiry inserts plus the persistent rate-limit table/RPC used by Start a Project and CMS login. Keep the service-role key server-side: it bypasses RLS.
+The migration deliberately keeps the admin membership helper in the non-exposed `private` schema, grants administrators only `SELECT` plus `UPDATE (status)`, and limits the `service_role` database role to inquiry inserts plus the persistent rate-limit table/RPC used by Start a Project and CMS login. Keep the Supabase secret key server-side: it maps to `service_role` and bypasses RLS.
 
 ## 2. Configure Vercel
 
 Use the Vercel project with Framework Preset **Other** and keep the repository root as the Root Directory. Do not configure a public output directory; Vercel serves the static site and discovers the Node.js functions in `api/`.
 
-Create the variables documented in `.env.example` separately for Preview and Production. Use the matching Supabase project in each environment; never reuse Preview keys in Production or vice versa. The service role key and rate-limit secret are server-side secrets. They must never use a `NEXT_PUBLIC_`, `VITE_`, or other public prefix.
+Create the variables documented in `.env.example` separately for Preview and Production. Use the matching Supabase project in each environment; never reuse Preview keys in Production or vice versa. The Supabase secret key and rate-limit secret are server-side secrets. They must never use a `NEXT_PUBLIC_`, `VITE_`, or other public prefix.
 
 | Variable | Preview | Production |
 | --- | --- | --- |
 | `SUPABASE_URL` | Preview project URL | Production project URL |
-| `SUPABASE_ANON_KEY` | Preview anon/publishable key | Production anon/publishable key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Preview service-role key | Production service-role key |
+| `SUPABASE_ANON_KEY` | Preview `sb_publishable_...` key | Production `sb_publishable_...` key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Preview `sb_secret_...` key | Production `sb_secret_...` key |
 | `ALLOWED_ORIGINS` | Exact Preview aliases | Exact Production origins |
 | `RATE_LIMIT_SECRET` | Unique random value | A different unique random value |
 | `PROJECT_INQUIRIES_ENABLED` | Start as `false` | Keep `false` until separately approved |
 
-The current API client is compatible with the configured legacy `anon` and `service_role` keys. Supabase has announced their deprecation by the end of 2026, so plan a separate migration to publishable/secret keys and repeat the authentication, RLS and rate-limit checks before disabling the legacy keys.
+The environment-variable names are retained for Vercel compatibility, but their values use Supabase's current publishable and secret key formats. The API client sends API keys only in the `apikey` header and reserves `Authorization: Bearer` for Supabase Auth user JWTs. Legacy JWT-based `anon` and `service_role` keys remain supported during migration.
+
+The `sb_secret_...` value must exist only in Vercel's encrypted server-side environment and must never be placed in browser code, source control, URLs or logs. After a leaked legacy `service_role` key has been replaced everywhere and the Preview integration is verified, deactivate that legacy key in Supabase.
 
 Generate each rate-limit secret locally with `openssl rand -hex 32`, then paste it directly into the corresponding Vercel environment-variable field. Do not put the generated value in a shell command, issue tracker, chat, repository file, or build log.
 

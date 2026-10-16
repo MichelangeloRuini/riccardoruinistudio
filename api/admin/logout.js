@@ -16,7 +16,12 @@ module.exports = async function logout(req, res) {
     const accessToken = parseCookies(req)[ACCESS_COOKIE];
     if (accessToken) {
       try {
-        await requestSupabase("/auth/v1/logout", { method: "POST", accessToken });
+        await requestSupabase("/auth/v1/logout", {
+          method: "POST",
+          accessToken,
+          phase: "admin_logout",
+          expectedStatuses: [401, 403]
+        });
       } catch {
         // Always clear the browser session, even if upstream revocation is unavailable.
       }
