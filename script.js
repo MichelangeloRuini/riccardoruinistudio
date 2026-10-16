@@ -858,6 +858,7 @@ function initializeStartProjectModal() {
   const serviceSelect = document.createElement("select");
   const descriptionInput = document.createElement("textarea");
   const budgetSelect = document.createElement("select");
+  const websiteInput = document.createElement("input");
   const submitArea = document.createElement("div");
   const submitButton = document.createElement("button");
   const formMessage = document.createElement("p");
@@ -943,6 +944,7 @@ function initializeStartProjectModal() {
   nameInput.autocomplete = "name";
   nameInput.placeholder = "FULL NAME";
   nameInput.required = true;
+  nameInput.maxLength = 120;
 
   emailInput.id = "startProjectEmail";
   emailInput.name = "email";
@@ -950,12 +952,14 @@ function initializeStartProjectModal() {
   emailInput.autocomplete = "email";
   emailInput.placeholder = "EMAIL";
   emailInput.required = true;
+  emailInput.maxLength = 254;
 
   companyInput.id = "startProjectCompany";
   companyInput.name = "company";
   companyInput.type = "text";
   companyInput.autocomplete = "organization";
   companyInput.placeholder = "COMPANY / WEBSITE";
+  companyInput.maxLength = 200;
 
   serviceSelect.id = "startProjectService";
   serviceSelect.name = "service";
@@ -967,11 +971,19 @@ function initializeStartProjectModal() {
   descriptionInput.rows = 5;
   descriptionInput.required = true;
   descriptionInput.placeholder = "PROJECT DESCRIPTION";
+  descriptionInput.maxLength = 5000;
 
   budgetSelect.id = "startProjectBudget";
   budgetSelect.name = "budget";
   appendOptions(budgetSelect, budgetOptions);
   budgetSelect.selectedIndex = -1;
+
+  websiteInput.name = "website";
+  websiteInput.type = "text";
+  websiteInput.tabIndex = -1;
+  websiteInput.autocomplete = "off";
+  websiteInput.hidden = true;
+  websiteInput.setAttribute("aria-hidden", "true");
 
   submitArea.className = "start-project-modal__submit-area";
   submitButton.type = "submit";
@@ -981,7 +993,6 @@ function initializeStartProjectModal() {
   formMessage.className = "start-project-modal__form-message";
   formMessage.setAttribute("aria-live", "polite");
   formMessage.hidden = true;
-  formMessage.textContent = "FORM SUBMISSION WILL BE AVAILABLE SOON. PLEASE CONTACT US AT INFO@RICCARDORUINISTUDIO.COM";
   submitArea.append(submitButton, formMessage);
 
   const serviceField = createField(
@@ -1005,6 +1016,7 @@ function initializeStartProjectModal() {
     serviceField,
     createField("PROJECT DESCRIPTION", descriptionInput, "start-project-modal__field--wide"),
     budgetField,
+    websiteInput,
     submitArea
   );
 
@@ -1065,9 +1077,61 @@ function initializeStartProjectModal() {
 
   exitButton.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
-  form.addEventListener("submit", event => {
+  form.addEventListener("submit", async event => {
     event.preventDefault();
-    formMessage.hidden = false;
+    if (submitButton.disabled) return;
+    if (typeof form.reportValidity === "function" && !form.reportValidity()) return;
+
+    submitButton.disabled = true;
+    submitButton.setAttribute("aria-busy", "true");
+    submitButton.textContent = "SENDING…";
+    formMessage.hidden = true;
+
+    try {
+      const response = await fetch("/api/start-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: nameInput.value,
+          email: emailInput.value,
+          company: companyInput.value,
+          service: serviceSelect.value,
+          description: descriptionInput.value,
+          budget: budgetSelect.value,
+          website: websiteInput.value
+        })
+      });
+      let payload = {};
+      try {
+        payload = await response.json();
+      } catch {
+        payload = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(payload.message || "WE COULD NOT SEND YOUR INQUIRY. PLEASE TRY AGAIN.");
+      }
+
+      nameInput.value = "";
+      emailInput.value = "";
+      companyInput.value = "";
+      descriptionInput.value = "";
+      websiteInput.value = "";
+      serviceSelect.selectedIndex = -1;
+      budgetSelect.selectedIndex = -1;
+      serviceField.classList.remove("has-value");
+      budgetField.classList.remove("has-value");
+      formMessage.textContent = payload.message || "THANK YOU. YOUR INQUIRY HAS BEEN RECEIVED.";
+    } catch (error) {
+      formMessage.textContent = error && error.message
+        ? error.message
+        : "WE COULD NOT SEND YOUR INQUIRY. PLEASE TRY AGAIN.";
+    } finally {
+      formMessage.hidden = false;
+      submitButton.disabled = false;
+      submitButton.setAttribute("aria-busy", "false");
+      submitButton.textContent = "SEND INQUIRY";
+    }
   });
 
   document.addEventListener("keydown", event => {

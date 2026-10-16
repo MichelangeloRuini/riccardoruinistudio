@@ -141,6 +141,10 @@ test("the curated wall may change while unrelated landing, Search, and modal log
     /\n\/\* SECTION FOOTER CHARACTERS \*\/[\s\S]*?\ninitializeSectionFooterCharacter\(\);\n/,
     ""
   );
+  const removeStartProjectInitializer = value => value.replace(
+    /\n\/\* START A PROJECT \*\/[\s\S]*?\ninitializeStartProjectModal\(\);\n/,
+    ""
+  );
 
   assert.equal(
     script.slice(script.indexOf(landingStart), script.indexOf(rendererStart)),
@@ -151,8 +155,8 @@ test("the curated wall may change while unrelated landing, Search, and modal log
     headScript.slice(headScript.indexOf(filterStart), headScript.indexOf(searchSuggestionsMarker))
   );
   assert.equal(
-    removeFooterCharacterInitializer(script.slice(script.indexOf(searchSuggestionsMarker))),
-    removeFooterCharacterInitializer(headScript.slice(headScript.indexOf(searchSuggestionsMarker)))
+    removeStartProjectInitializer(removeFooterCharacterInitializer(script.slice(script.indexOf(searchSuggestionsMarker)))),
+    removeStartProjectInitializer(removeFooterCharacterInitializer(headScript.slice(headScript.indexOf(searchSuggestionsMarker))))
   );
   assert.match(script, /document\.createElement\("a"\)/);
   assert.doesNotMatch(script.slice(script.indexOf(rendererStart), script.indexOf(filterStart)), /repeatedList/);

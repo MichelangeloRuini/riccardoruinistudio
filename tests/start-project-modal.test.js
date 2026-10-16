@@ -30,7 +30,7 @@ function createClassList() {
   };
 }
 
-function createFixture() {
+function createFixture({ fetchImpl = async () => ({ ok: false, json: async () => ({}) }) } = {}) {
   const ids = new Map();
   const documentListeners = new Map();
 
@@ -46,6 +46,7 @@ function createFixture() {
       this.hidden = false;
       this.isConnected = false;
       this.textContent = "";
+      this.value = "";
     }
 
     set id(value) {
@@ -83,7 +84,7 @@ function createFixture() {
     }
 
     dispatch(type, event = {}) {
-      (this.listeners.get(type) || []).forEach(listener => listener(event));
+      return Promise.all((this.listeners.get(type) || []).map(listener => listener(event)));
     }
 
     setAttribute(name, value) {
@@ -131,6 +132,7 @@ function createFixture() {
   const context = {
     document,
     Event: class Event {},
+    fetch: fetchImpl,
     RRSUnifiedSearch: { normalize: value => String(value).toLowerCase() },
     setTimeout: () => {},
     URLSearchParams,
@@ -273,26 +275,81 @@ test("the form exposes associated labels, correct field semantics, and only the 
   );
 });
 
-test("submit is intercepted locally and reveals the honest temporary message without an API call", () => {
-  const fixture = createFixture();
+test("submit waits for database confirmation, sends normalized form data, and clears fields on success", async () => {
+  let request;
+  const fixture = createFixture({
+    fetchImpl: async (url, options) => {
+      request = { url, options };
+      return {
+        ok: true,
+        json: async () => ({ message: "THANK YOU. YOUR INQUIRY HAS BEEN RECEIVED." })
+      };
+    }
+  });
   const modal = fixture.document.getElementById("startProjectModal");
   const form = fixture.findByClass(modal, "start-project-modal__form");
   const message = fixture.findByClass(modal, "start-project-modal__form-message");
+  const name = fixture.document.getElementById("startProjectName");
+  const email = fixture.document.getElementById("startProjectEmail");
+  const company = fixture.document.getElementById("startProjectCompany");
+  const service = fixture.document.getElementById("startProjectService");
+  const description = fixture.document.getElementById("startProjectDescription");
+  const budget = fixture.document.getElementById("startProjectBudget");
   const event = clickEvent();
-  const initializer = read("script.js").match(
-    /function initializeStartProjectModal\(\)[\s\S]*?\n}\n\ninitializeStartProjectModal\(\);/
-  );
+
+  name.value = "Ada Lovelace";
+  email.value = "ADA@EXAMPLE.COM";
+  company.value = "Analytical Engines";
+  service.value = "Brand Identity";
+  description.value = "A new identity.";
+  budget.value = "€25K–50K";
 
   assert.equal(message.hidden, true);
-  form.dispatch("submit", event);
+  await form.dispatch("submit", event);
   assert.equal(event.defaultPrevented, true);
   assert.equal(message.hidden, false);
-  assert.equal(
-    message.textContent,
-    "FORM SUBMISSION WILL BE AVAILABLE SOON. PLEASE CONTACT US AT INFO@RICCARDORUINISTUDIO.COM"
-  );
-  assert.ok(initializer);
-  assert.doesNotMatch(initializer[0], /fetch\(|XMLHttpRequest|\.submit\(\)|action\s*=/);
+  assert.equal(message.textContent, "THANK YOU. YOUR INQUIRY HAS BEEN RECEIVED.");
+  assert.equal(request.url, "/api/start-project");
+  assert.equal(request.options.method, "POST");
+  assert.deepEqual(JSON.parse(request.options.body), {
+    name: "Ada Lovelace",
+    email: "ADA@EXAMPLE.COM",
+    company: "Analytical Engines",
+    service: "Brand Identity",
+    description: "A new identity.",
+    budget: "€25K–50K",
+    website: ""
+  });
+  assert.equal(name.value, "");
+  assert.equal(email.value, "");
+  assert.equal(description.value, "");
+  assert.equal(service.selectedIndex, -1);
+  assert.equal(budget.selectedIndex, -1);
+});
+
+test("failed submission keeps entered data and allows a retry", async () => {
+  const fixture = createFixture({
+    fetchImpl: async () => ({
+      ok: false,
+      json: async () => ({ message: "The request could not be completed." })
+    })
+  });
+  const modal = fixture.document.getElementById("startProjectModal");
+  const form = fixture.findByClass(modal, "start-project-modal__form");
+  const message = fixture.findByClass(modal, "start-project-modal__form-message");
+  const submit = fixture.findByClass(modal, "start-project-modal__submit");
+  const name = fixture.document.getElementById("startProjectName");
+  const description = fixture.document.getElementById("startProjectDescription");
+
+  name.value = "Grace Hopper";
+  description.value = "A campaign.";
+  await form.dispatch("submit", clickEvent());
+
+  assert.equal(name.value, "Grace Hopper");
+  assert.equal(description.value, "A campaign.");
+  assert.equal(message.textContent, "The request could not be completed.");
+  assert.equal(message.hidden, false);
+  assert.equal(submit.disabled, false);
 });
 
 test("click opens without navigation and EXIT closes with scroll and focus restoration", () => {

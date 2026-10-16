@@ -1,0 +1,14 @@
+admin.html
+admin.js
+admin-books.js
+admin-portfolio.js
+admin-server.js
+.env*
+cms/
+docs/
+tests/
+tools/
+supabase/
+temp-upload/
+trash/
+*.log
