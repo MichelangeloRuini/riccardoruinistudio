@@ -30,7 +30,10 @@ function createClassList() {
   };
 }
 
-function createFixture() {
+function createFixture({
+  enabled = true,
+  fetchImpl = async () => ({ ok: false, json: async () => ({}) })
+} = {}) {
   const ids = new Map();
   const documentListeners = new Map();
 
@@ -46,6 +49,7 @@ function createFixture() {
       this.hidden = false;
       this.isConnected = false;
       this.textContent = "";
+      this.value = "";
     }
 
     set id(value) {
@@ -77,13 +81,22 @@ function createFixture() {
       return child;
     }
 
+    insertBefore(child, reference) {
+      const index = this.children.indexOf(reference);
+      if (index < 0) return this.appendChild(child);
+      this.children.splice(index, 0, child);
+      child.parentNode = this;
+      child.isConnected = this.isConnected;
+      return child;
+    }
+
     addEventListener(type, listener) {
       if (!this.listeners.has(type)) this.listeners.set(type, []);
       this.listeners.get(type).push(listener);
     }
 
     dispatch(type, event = {}) {
-      (this.listeners.get(type) || []).forEach(listener => listener(event));
+      return Promise.all((this.listeners.get(type) || []).map(listener => listener(event)));
     }
 
     setAttribute(name, value) {
@@ -131,6 +144,15 @@ function createFixture() {
   const context = {
     document,
     Event: class Event {},
+    fetch: (url, options) => {
+      if (url === "/api/start-project-status") {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ enabled })
+        });
+      }
+      return fetchImpl(url, options);
+    },
     RRSUnifiedSearch: { normalize: value => String(value).toLowerCase() },
     setTimeout: () => {},
     URLSearchParams,
@@ -163,6 +185,12 @@ function createFixture() {
     documentListeners,
     findAllByTag,
     findByClass,
+    async settleAvailability() {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    },
     trigger
   };
 }
@@ -184,8 +212,9 @@ test("all public Start a Project links use the shared global hook", () => {
   });
 });
 
-test("the modal is created once with its editorial hierarchy and official email", () => {
+test("the modal is created once with its editorial hierarchy and official email", async () => {
   const fixture = createFixture();
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const dialog = fixture.findByClass(modal, "start-project-modal__dialog");
   const exitButton = fixture.findByClass(modal, "start-project-modal__exit");
@@ -218,8 +247,9 @@ test("the modal is created once with its editorial hierarchy and official email"
   assert.equal(fixture.document.body.children.length, childCount);
 });
 
-test("the form exposes associated labels, correct field semantics, and only the requested options", () => {
+test("the form exposes associated labels, correct field semantics, and only the requested options", async () => {
   const fixture = createFixture();
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const labels = fixture.findAllByTag(modal, "label");
   const name = fixture.document.getElementById("startProjectName");
@@ -273,30 +303,88 @@ test("the form exposes associated labels, correct field semantics, and only the 
   );
 });
 
-test("submit is intercepted locally and reveals the honest temporary message without an API call", () => {
-  const fixture = createFixture();
+test("submit waits for database confirmation, sends normalized form data, and clears fields on success", async () => {
+  let request;
+  const fixture = createFixture({
+    fetchImpl: async (url, options) => {
+      request = { url, options };
+      return {
+        ok: true,
+        json: async () => ({ message: "THANK YOU. YOUR INQUIRY HAS BEEN RECEIVED." })
+      };
+    }
+  });
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const form = fixture.findByClass(modal, "start-project-modal__form");
   const message = fixture.findByClass(modal, "start-project-modal__form-message");
+  const name = fixture.document.getElementById("startProjectName");
+  const email = fixture.document.getElementById("startProjectEmail");
+  const company = fixture.document.getElementById("startProjectCompany");
+  const service = fixture.document.getElementById("startProjectService");
+  const description = fixture.document.getElementById("startProjectDescription");
+  const budget = fixture.document.getElementById("startProjectBudget");
   const event = clickEvent();
-  const initializer = read("script.js").match(
-    /function initializeStartProjectModal\(\)[\s\S]*?\n}\n\ninitializeStartProjectModal\(\);/
-  );
+
+  name.value = "Ada Lovelace";
+  email.value = "ADA@EXAMPLE.COM";
+  company.value = "Analytical Engines";
+  service.value = "Brand Identity";
+  description.value = "A new identity.";
+  budget.value = "€25K–50K";
 
   assert.equal(message.hidden, true);
-  form.dispatch("submit", event);
+  await form.dispatch("submit", event);
   assert.equal(event.defaultPrevented, true);
   assert.equal(message.hidden, false);
-  assert.equal(
-    message.textContent,
-    "FORM SUBMISSION WILL BE AVAILABLE SOON. PLEASE CONTACT US AT INFO@RICCARDORUINISTUDIO.COM"
-  );
-  assert.ok(initializer);
-  assert.doesNotMatch(initializer[0], /fetch\(|XMLHttpRequest|\.submit\(\)|action\s*=/);
+  assert.equal(message.textContent, "THANK YOU. YOUR INQUIRY HAS BEEN RECEIVED.");
+  assert.equal(request.url, "/api/start-project");
+  assert.equal(request.options.method, "POST");
+  assert.deepEqual(JSON.parse(request.options.body), {
+    name: "Ada Lovelace",
+    email: "ADA@EXAMPLE.COM",
+    company: "Analytical Engines",
+    service: "Brand Identity",
+    description: "A new identity.",
+    budget: "€25K–50K",
+    website: ""
+  });
+  assert.equal(name.value, "");
+  assert.equal(email.value, "");
+  assert.equal(description.value, "");
+  assert.equal(service.selectedIndex, -1);
+  assert.equal(budget.selectedIndex, -1);
 });
 
-test("click opens without navigation and EXIT closes with scroll and focus restoration", () => {
+test("failed submission keeps entered data and allows a retry", async () => {
+  const fixture = createFixture({
+    fetchImpl: async () => ({
+      ok: false,
+      json: async () => ({ message: "The request could not be completed." })
+    })
+  });
+  await fixture.settleAvailability();
+  const modal = fixture.document.getElementById("startProjectModal");
+  const form = fixture.findByClass(modal, "start-project-modal__form");
+  const message = fixture.findByClass(modal, "start-project-modal__form-message");
+  const submit = fixture.findByClass(modal, "start-project-modal__submit");
+  const name = fixture.document.getElementById("startProjectName");
+  const description = fixture.document.getElementById("startProjectDescription");
+
+  name.value = "Grace Hopper";
+  description.value = "A campaign.";
+  await form.dispatch("submit", clickEvent());
+
+  assert.equal(name.value, "Grace Hopper");
+  assert.equal(description.value, "A campaign.");
+  assert.equal(message.textContent, "The request could not be completed.");
+  assert.equal(message.hidden, false);
+  assert.equal(submit.disabled, false);
+});
+
+test("click opens without navigation and EXIT closes with scroll and focus restoration", async () => {
   const fixture = createFixture();
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const exitButton = fixture.findByClass(modal, "start-project-modal__exit");
   const event = clickEvent();
@@ -316,8 +404,9 @@ test("click opens without navigation and EXIT closes with scroll and focus resto
   assert.equal(fixture.document.activeElement, fixture.trigger);
 });
 
-test("backdrop and Escape close, while clicks inside the dialog do not", () => {
+test("backdrop and Escape close, while clicks inside the dialog do not", async () => {
   const fixture = createFixture();
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const backdrop = fixture.findByClass(modal, "start-project-modal__backdrop");
   const dialog = fixture.findByClass(modal, "start-project-modal__dialog");
@@ -350,8 +439,9 @@ test("backdrop and Escape close, while clicks inside the dialog do not", () => {
   assert.equal(modal.hidden, true);
 });
 
-test("focus remains trapped across every form control and restores after close", () => {
+test("focus remains trapped across every form control and restores after close", async () => {
   const fixture = createFixture();
+  await fixture.settleAvailability();
   const modal = fixture.document.getElementById("startProjectModal");
   const exitButton = fixture.findByClass(modal, "start-project-modal__exit");
   const directEmail = fixture.findByClass(modal, "start-project-modal__email");
@@ -387,6 +477,38 @@ test("focus remains trapped across every form control and restores after close",
 
   exitButton.dispatch("click");
   assert.equal(fixture.document.activeElement, fixture.trigger);
+});
+
+test("disabled inquiries render only the temporary email contact and never submit", async () => {
+  let submissionCount = 0;
+  const fixture = createFixture({
+    enabled: false,
+    fetchImpl: async () => {
+      submissionCount += 1;
+      return { ok: true, json: async () => ({}) };
+    }
+  });
+  await fixture.settleAvailability();
+  const modal = fixture.document.getElementById("startProjectModal");
+  const intro = fixture.findByClass(modal, "start-project-modal__intro");
+  const direct = fixture.findByClass(modal, "start-project-modal__direct");
+  const directLabel = fixture.findByClass(modal, "start-project-modal__direct-label");
+  const email = fixture.findByClass(modal, "start-project-modal__email");
+
+  assert.equal(fixture.findByClass(modal, "start-project-modal__form"), null);
+  assert.equal(fixture.findByClass(modal, "start-project-modal__submit"), null);
+  assert.equal(fixture.findByClass(modal, "start-project-modal__form-message"), null);
+  assert.equal(fixture.findAllByTag(modal, "input").length, 0);
+  assert.equal(fixture.findAllByTag(modal, "textarea").length, 0);
+  assert.equal(fixture.findAllByTag(modal, "select").length, 0);
+  assert.equal(intro.textContent, "PROJECT INQUIRIES ARE TEMPORARILY AVAILABLE BY EMAIL.");
+  assert.equal(direct.classList.contains("start-project-modal__direct--temporary"), true);
+  assert.equal(directLabel.textContent, "WRITE TO ");
+  assert.equal(email.href, "mailto:info@riccardoruinistudio.com");
+
+  await fixture.trigger.dispatch("click", clickEvent());
+  assert.equal(modal.hidden, false);
+  assert.equal(submissionCount, 0);
 });
 
 test("the poster-like form stays geometric on desktop and becomes a safe single column on mobile", () => {

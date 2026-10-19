@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>RRS Online CMS</title>
+  <link rel="stylesheet" href="cms.css">
+</head>
+<body>
+  <main class="cms-shell">
+    <header class="cms-header">
+      <a class="cms-brand" href="/" aria-label="Riccardo Ruini Studio home">
+        <img src="../assets/logo-main.svg" alt="Riccardo Ruini Studio">
+      </a>
+      <p>ONLINE CMS</p>
+    </header>
+
+    <section id="loginView" class="login-view" aria-labelledby="loginTitle">
+      <form id="loginForm" class="login-card">
+        <p class="eyebrow">ADMINISTRATION</p>
+        <h1 id="loginTitle">LOGIN</h1>
+
+        <label for="loginEmail">EMAIL</label>
+        <input id="loginEmail" name="email" type="email" autocomplete="username" maxlength="254" required>
+
+        <label for="loginPassword">PASSWORD</label>
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="1024" required>
+
+        <button type="submit">LOGIN</button>
+        <p id="loginMessage" class="form-message" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section id="dashboardView" class="dashboard-view" aria-labelledby="dashboardTitle" hidden>
+      <div class="dashboard-heading">
+        <div>
+          <p class="eyebrow">DASHBOARD</p>
+          <h1 id="dashboardTitle">PROJECT INQUIRIES</h1>
+        </div>
+        <div class="dashboard-actions">
+          <span id="adminIdentity"></span>
+          <button id="logoutButton" class="text-button" type="button">LOGOUT</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label for="statusFilter">STATUS</label>
+        <select id="statusFilter">
+          <option value="">ALL</option>
+          <option value="new">NEW</option>
+          <option value="read">READ</option>
+          <option value="archived">ARCHIVED</option>
+        </select>
+        <button id="refreshButton" class="text-button" type="button">REFRESH</button>
+      </div>
+
+      <p id="dashboardMessage" class="dashboard-message" role="status" aria-live="polite">LOADING…</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>DATE</th>
+              <th>NAME</th>
+              <th>COMPANY</th>
+              <th>EMAIL</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="inquiriesBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="inquiryDialog" class="inquiry-dialog" aria-labelledby="inquiryTitle">
+    <button id="closeInquiry" class="dialog-close" type="button" aria-label="Close inquiry">CLOSE</button>
+    <p class="eyebrow">PROJECT INQUIRY</p>
+    <h2 id="inquiryTitle">DETAIL</h2>
+    <dl id="inquiryDetails"></dl>
+    <div class="status-editor">
+      <label for="detailStatus">STATUS</label>
+      <select id="detailStatus">
+        <option value="new">NEW</option>
+        <option value="read">READ</option>
+        <option value="archived">ARCHIVED</option>
+      </select>
+      <button id="saveStatus" type="button">SAVE STATUS</button>
+    </div>
+    <p id="detailMessage" class="form-message" role="status" aria-live="polite" hidden></p>
+  </dialog>
+
+  <script src="cms.js" defer></script>
+</body>
+</html>

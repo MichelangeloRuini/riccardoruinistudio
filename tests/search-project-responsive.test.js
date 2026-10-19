@@ -8,6 +8,9 @@ const root = path.resolve(__dirname, "..");
 const read = relativePath => fs.readFileSync(path.join(root, relativePath), "utf8");
 const styles = read("style.css");
 const searchRenderer = read("search.js");
+const searchPage = read("search.html");
+const projectRenderer = read("utils/renderProject.js");
+const mobileCampaignDetail = read("campaigns-mobile-detail.js");
 const projectScript = read("project.js");
 const marker = "STEP 6 RESPONSIVE: SEARCH RESULTS / PROJECT DETAIL";
 const markerIndex = styles.indexOf(marker);
@@ -16,6 +19,11 @@ const searchStart = responsiveStyles.indexOf("@media (max-width: 820px)");
 const projectStart = responsiveStyles.indexOf("@media (max-width: 760px)");
 const searchStyles = responsiveStyles.slice(searchStart, projectStart);
 const projectStyles = responsiveStyles.slice(projectStart);
+const campaignsMarker = "STEP 5 RESPONSIVE: CAMPAIGNS / FILMS";
+const campaignsResponsiveStyles = styles.slice(
+  styles.indexOf(campaignsMarker),
+  markerIndex
+);
 
 test("Search and Project desktop CSS remains unchanged", () => {
   const headStyles = execFileSync("git", ["show", "HEAD:style.css"], {
@@ -52,6 +60,47 @@ test("Search groups, URLs, and Books integration remain unchanged", () => {
   assert.match(searchRenderer, /window\.location\.href = `search\.html\?q=\$\{encodeURIComponent\(value\)\}`/);
 });
 
+test("Campaign results reuse the shared mobile Campaigns card and detail controller", () => {
+  assert.match(searchPage, /<script src="campaigns-mobile-detail\.js"><\/script>[\s\S]*?<script src="search\.js"><\/script>/);
+  assert.doesNotMatch(searchPage, /campaigns-mobile-galleries\.js/);
+  assert.match(projectRenderer, /class="campaign mobile-campaign-layout \$\{layout\}"/);
+  assert.match(searchRenderer, /RRSMobileCampaignDetail\.create\(\s*searchResults,\s*searchCampaignRecords\s*\)/);
+  assert.match(searchRenderer, /if \(searchCampaignDetail\.matches\(\)\)[\s\S]*?RRSMobileCampaignDetail\.createCard\(safeCampaign\)/);
+  assert.match(searchRenderer, /renderProject\(safeCampaign, index, safeCampaign\.media\)/);
+  assert.match(searchRenderer, /result\.classList\.add\("search-campaign-result"\)/);
+  assert.match(searchRenderer, /searchCampaignDetail\.prepareForRender\(\)[\s\S]*?searchResults\.replaceChildren\(fragment\);\s*searchCampaignDetail\.refresh\(\)/);
+  assert.match(mobileCampaignDetail, /global\.RRSMobileCampaignDetail = \{\s*create: createController,\s*createCard/);
+  assert.match(mobileCampaignDetail, /const imageFile = mediaFiles\.find\(file => !file\.toLowerCase\(\)\.endsWith\("\.mp4"\)\)/);
+  assert.match(mobileCampaignDetail, /card\.append\(client, coverButton, title\)/);
+  assert.match(campaignsResponsiveStyles, /:is\(#campaignsPage, #searchResults\) \.campaign-mobile-card[\s\S]*?border-bottom:\s*1px solid #000/);
+  assert.match(campaignsResponsiveStyles, /campaign-mobile-card__hover[\s\S]*?background:\s*rgba\(0, 0, 0, 0\.12\)[\s\S]*?transition:\s*opacity 250ms ease/);
+  assert.match(campaignsResponsiveStyles, /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?campaign-mobile-card__cover:hover/);
+  assert.doesNotMatch(mobileCampaignDetail, /campaign-gallery-dot|autoplay|\.play\(/);
+});
+
+test("Search Campaign detail preserves query, results, scroll, focus, and media order", () => {
+  assert.match(searchRenderer, /const query = params\.get\("q"\) \|\| "";\s*globalSearchInput\.value = query/);
+  assert.match(searchRenderer, /window\.matchMedia\("\(max-width: 760px\)"\)\.addEventListener\("change", renderSearch\)/);
+  assert.match(mobileCampaignDetail, /lockedScrollY = global\.scrollY/);
+  assert.match(mobileCampaignDetail, /global\.scrollTo\(0, lockedScrollY\)/);
+  assert.match(mobileCampaignDetail, /focusTarget\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(mobileCampaignDetail, /event\.key === "Escape"[\s\S]*?closeDetail\(\)/);
+  assert.match(mobileCampaignDetail, /photographs\.forEach[\s\S]*?videos\.forEach/);
+  assert.match(mobileCampaignDetail, /setBackgroundAvailability\(true\)[\s\S]*?lockPageScroll\(\)/);
+  assert.match(mobileCampaignDetail, /setBackgroundAvailability\(false\)[\s\S]*?unlockPageScroll\(\)/);
+  assert.match(mobileCampaignDetail, /clearDetailMedia\(\)[\s\S]*?detailMedia\.replaceChildren\(\)/);
+  assert.match(campaignsResponsiveStyles, /campaign-mobile-detail__close::after[\s\S]*?border:\s*1px solid #fff/);
+  assert.match(campaignsResponsiveStyles, /campaign-mobile-detail__credits dt,[\s\S]*?font-weight:\s*var\(--font-weight-bold\)/);
+});
+
+test("only the Campaigns group switches renderer on mobile", () => {
+  assert.match(searchRenderer, /\["VISUAL IDENTITY", portfolioGroups\["brand-identity"\], renderPortfolioSearchProject\]/);
+  assert.match(searchRenderer, /\["MAGAZINES & BOOKS", matchingMagazinesBooks, renderMagazinesBooksSearchResult\]/);
+  assert.match(searchRenderer, /\["BRANDING", portfolioGroups\.branding, renderPortfolioSearchProject\]/);
+  assert.match(searchRenderer, /\["FILMS", portfolioGroups\.films, renderPortfolioSearchProject\]/);
+  assert.match(searchRenderer, /otherPortfolioGroups\.forEach[\s\S]*?renderPortfolioSearchProject/);
+});
+
 test("Project Detail stacks its header and preserves complete full-width media", () => {
   assert.match(projectStyles, /#portfolioProjectPage\.portfolio-project-page,[\s\S]*?padding:\s*38px 20px 60px/);
   assert.match(projectStyles, /#portfolioProjectPage \.portfolio-project-header\s*\{[\s\S]*?flex-direction:\s*column[\s\S]*?gap:\s*16px[\s\S]*?margin-bottom:\s*32px/);
@@ -68,10 +117,8 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "--quiet",
     "HEAD",
     "--",
-    "search.js",
     "project.js",
     "utils/searchData.js",
-    "utils/renderProject.js",
     "utils/renderPortfolio.js",
     "utils/renderPortfolioSearch.js",
     "campaigns.js",

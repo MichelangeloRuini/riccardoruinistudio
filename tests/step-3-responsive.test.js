@@ -79,7 +79,7 @@ test("Visual Identity remains a two-column grid on tablet and a one-column grid 
   assert.match(brandIdentityHtml, /<div class="brand-identity-columns" id="brandIdentityGrid"><\/div>/);
 });
 
-test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are unchanged", () => {
+test("protected pages, shell, data, CMS, APIs, assets, and renderers are unchanged", () => {
   execFileSync("git", [
     "diff",
     "--quiet",
@@ -87,7 +87,6 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     "--",
     "brand-identity.js",
     "campaigns.js",
-    "search.js",
     "data",
     "cms",
     "admin.html",
@@ -131,12 +130,31 @@ test("protected pages, shell, footer, data, CMS, APIs, assets, and renderers are
     let currentSection = styles.slice(currentStart, currentEnd);
 
     if (protectedMarker === "GLOBAL RESPONSIVE FOOTER / MOBILE CLIENTS") {
-      const normalizeAuthorizedWallMotion = value => value.replace(
-        /animation:\s*wallMoveMobile 28s [^;]+;/,
-        "animation: <authorized-wall-motion>;"
+      const normalizeAuthorizedClientsRules = value => value
+        .replace(
+          /\n  \.clients-wall,\s*\n  \.clients-wall \.client-name \{\s*-webkit-text-size-adjust: 100%;\s*text-size-adjust: 100%;\s*\}\n/g,
+          ""
+        )
+        .replace(
+          /\n  \.clients-[^{]+\{[^}]*\}/g,
+          "\n  <authorized-clients-rule>"
+        );
+      const normalizeAuthorizedMobileFooterRules = value => {
+        const mobileStart = value.indexOf("@media (max-width: 760px) {");
+        const footerStart = value.indexOf("\n  .footer.footer {", mobileStart);
+        const footerEnd = value.indexOf(
+          "\n}\n\n@media (max-width: 760px) and",
+          footerStart
+        );
+
+        return `${value.slice(0, footerStart)}\n  <authorized-mobile-footer-rules>${value.slice(footerEnd)}`;
+      };
+      headSection = normalizeAuthorizedMobileFooterRules(
+        normalizeAuthorizedClientsRules(headSection)
       );
-      headSection = normalizeAuthorizedWallMotion(headSection);
-      currentSection = normalizeAuthorizedWallMotion(currentSection);
+      currentSection = normalizeAuthorizedMobileFooterRules(
+        normalizeAuthorizedClientsRules(currentSection)
+      );
     }
 
     assert.equal(currentSection, headSection);

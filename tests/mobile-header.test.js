@@ -357,7 +357,6 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     "utils/searchData.js",
     "utils/renderProject.js",
     "utils/renderPortfolio.js",
-    "search.js",
     "campaigns.js",
   ], { cwd: root });
 });

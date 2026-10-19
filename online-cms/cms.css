@@ -1,0 +1,282 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #f8f6f2;
+  --black: #000;
+  --grey: #777;
+  --line: #c9c6bf;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--black);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+button,
+input,
+select {
+  border-radius: 0;
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.cms-shell {
+  width: min(1440px, calc(100% - 64px));
+  margin: 0 auto;
+}
+
+.cms-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 108px;
+  border-bottom: 2px solid var(--black);
+  font-size: 12px;
+}
+
+.cms-brand img {
+  display: block;
+  width: 185px;
+}
+
+.login-view {
+  display: grid;
+  min-height: calc(100vh - 108px);
+  place-items: center;
+  padding: 48px 0;
+}
+
+.login-card {
+  display: grid;
+  width: min(100%, 540px);
+  gap: 12px;
+}
+
+.eyebrow,
+.cms-header p {
+  margin: 0;
+  font-size: 12px;
+}
+
+h1,
+h2 {
+  margin: 4px 0 32px;
+  font-size: clamp(32px, 4vw, 64px);
+  line-height: .95;
+}
+
+.login-card label,
+.toolbar label,
+.status-editor label {
+  margin-top: 12px;
+  font-size: 11px;
+}
+
+.login-card input,
+.login-card button,
+.toolbar select,
+.status-editor select,
+.status-editor button {
+  min-height: 56px;
+  padding: 0 16px;
+  border: 2px solid var(--black);
+  background: transparent;
+  color: var(--black);
+}
+
+.login-card button,
+.status-editor button {
+  margin-top: 12px;
+  background: var(--black);
+  color: var(--cream);
+}
+
+.form-message,
+.dashboard-message {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.dashboard-view {
+  padding: 64px 0 96px;
+}
+
+.dashboard-heading,
+.dashboard-actions,
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dashboard-actions,
+.toolbar {
+  font-size: 11px;
+}
+
+.text-button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+}
+
+.toolbar {
+  justify-content: flex-start;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.toolbar select {
+  min-height: 40px;
+}
+
+.toolbar .text-button {
+  margin-left: auto;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-top: 2px solid var(--black);
+}
+
+table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 18px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  vertical-align: top;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover,
+tbody tr:focus-visible {
+  background: rgba(0, 0, 0, .05);
+  outline: none;
+}
+
+.status-pill {
+  display: inline-block;
+  min-width: 78px;
+  padding: 5px 8px;
+  border: 1px solid var(--black);
+  text-align: center;
+}
+
+.inquiry-dialog {
+  width: min(760px, calc(100% - 40px));
+  max-height: calc(100vh - 40px);
+  padding: 40px;
+  border: 2px solid var(--black);
+  background: var(--cream);
+  color: var(--black);
+}
+
+.inquiry-dialog::backdrop {
+  background: rgba(0, 0, 0, .72);
+}
+
+.dialog-close {
+  float: right;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+}
+
+.inquiry-dialog dl {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  margin: 0;
+  border-top: 2px solid var(--black);
+}
+
+.inquiry-dialog dt,
+.inquiry-dialog dd {
+  margin: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.inquiry-dialog dt {
+  color: var(--grey);
+  font-size: 11px;
+}
+
+.status-editor {
+  display: grid;
+  grid-template-columns: 120px 1fr 180px;
+  align-items: end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.status-editor button {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .cms-shell {
+    width: calc(100% - 40px);
+  }
+
+  .dashboard-heading,
+  .dashboard-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-heading {
+    margin-bottom: 28px;
+  }
+
+  .inquiry-dialog {
+    padding: 24px 20px;
+  }
+
+  .inquiry-dialog dl,
+  .status-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .inquiry-dialog dt {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}

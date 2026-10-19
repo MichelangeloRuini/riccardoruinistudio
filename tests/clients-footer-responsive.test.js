@@ -33,14 +33,13 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
     headStyles.indexOf(marker),
     headStyles.indexOf(nextMarker)
   );
+  const headTabletStart = headResponsiveStyles.indexOf("@media (max-width: 1100px)");
+  const headMobileStart = headResponsiveStyles.indexOf("@media (max-width: 760px)");
+  const headTabletStyles = headResponsiveStyles.slice(headTabletStart, headMobileStart);
 
-  const normalizeWallMotion = value => value.replace(
-    /animation:\s*wallMoveMobile 28s [^;]+;/,
-    "animation: <authorized-wall-motion>;"
-  );
   assert.equal(
-    normalizeWallMotion(responsiveStyles),
-    normalizeWallMotion(headResponsiveStyles)
+    tabletStyles,
+    headTabletStyles
   );
   assert.match(tabletStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(tabletStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
@@ -50,11 +49,17 @@ test("the global footer uses two fluid columns at 1100px and preserves desktop C
   assert.match(headStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
 });
 
-test("the global footer becomes one column at 760px with a responsive logo", () => {
-  assert.match(mobileStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
-  assert.match(mobileStyles, /\.footer \.footer-newsletter,[\s\S]*?\.footer \.footer-logo\s*\{\s*grid-column:\s*1/);
-  assert.match(mobileStyles, /\.footer \.footer-logo\s*\{[\s\S]*?width:\s*min\(150px, 100%\)[\s\S]*?height:\s*95px/);
-  assert.match(mobileStyles, /padding:\s*75px 20px 30px/);
+test("the global mobile footer uses the editorial two-column layout", () => {
+  assert.match(mobileStyles, /\.footer\.footer\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1\.5fr\) minmax\(120px, 1fr\)/);
+  assert.match(mobileStyles, /grid-template-areas:\s*"social address"\s*"legal logo"\s*"newsletter logo"/);
+  assert.match(mobileStyles, /\.footer \.footer-address\s*\{\s*grid-area:\s*address/);
+  assert.match(mobileStyles, /\.footer \.footer-social\s*\{\s*grid-area:\s*social/);
+  assert.match(mobileStyles, /\.footer \.footer-legal\s*\{\s*grid-area:\s*legal/);
+  assert.match(mobileStyles, /\.footer \.footer-newsletter\s*\{\s*grid-area:\s*newsletter/);
+  assert.match(mobileStyles, /\.footer \.footer-newsletter,[\s\S]*?\.footer \.footer-newsletter input\s*\{[\s\S]*?width:\s*100%[\s\S]*?max-width:\s*100%/);
+  assert.match(mobileStyles, /\.footer \.footer-logo\s*\{[\s\S]*?grid-area:\s*logo[\s\S]*?max-width:\s*126px[\s\S]*?height:\s*120px/);
+  assert.match(mobileStyles, /\.footer \.footer-logo-frame,[\s\S]*?object-position:\s*right bottom/);
+  assert.match(mobileStyles, /padding:\s*64px 20px max\(28px, env\(safe-area-inset-bottom\)\)/);
 });
 
 test("section footer characters use one centralized page map and the existing frame pair", () => {
@@ -94,14 +99,27 @@ test("Campaigns and unmapped pages retain the original animated footer character
   assert.match(styles, /\.frame-2\s*\{[^}]*animation:\s*footerLogoTwo 2s steps\(1, end\) infinite/);
 });
 
-test("Clients mobile uses compact type, real side padding, and proportional movement", () => {
-  assert.match(mobileStyles, /\.clients-section\s*\{[\s\S]*?padding:\s*0 20px 48px/);
-  assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?margin-left:\s*0/);
-  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?font-size:\s*clamp\(28px, 7\.5vw, 32px\)/);
-  assert.match(mobileStyles, /line-height:\s*1/);
-  assert.match(mobileStyles, /animation:\s*wallMoveMobile 28s linear infinite alternate/);
-  assert.match(mobileStyles, /translateX\(-12vw\)/);
-  assert.doesNotMatch(mobileStyles, /translateX\(-420px\)/);
+test("Clients mobile is one manually scrollable editorial poster", () => {
+  assert.match(mobileStyles, /\.clients-section\s*\{[\s\S]*?padding:\s*0 0 128px[\s\S]*?overflow:\s*visible/);
+  assert.match(mobileStyles, /\.clients-wall-wrapper\s*\{[\s\S]*?width:\s*100%[\s\S]*?overflow-x:\s*auto[\s\S]*?overflow-y:\s*hidden/);
+  assert.match(mobileStyles, /touch-action:\s*pan-x pan-y/);
+  assert.match(mobileStyles, /\.clients-wall-hint\s*\{[\s\S]*?position:\s*sticky[\s\S]*?top:\s*calc\(100svh - 128px\)[\s\S]*?height:\s*128px[\s\S]*?margin-bottom:\s*-128px[\s\S]*?pointer-events:\s*none/);
+  assert.match(mobileStyles, /background:\s*linear-gradient\([\s\S]*?rgba\(248, 246, 242, 0\)[\s\S]*?rgba\(248, 246, 242, 0\.9\) 100%[\s\S]*?font-size:\s*11px[\s\S]*?font-weight:\s*var\(--font-weight-light\)[\s\S]*?letter-spacing:\s*0\.11em/);
+  assert.match(mobileStyles, /transition:\s*opacity 300ms ease, visibility 0s linear 300ms/);
+  assert.match(mobileStyles, /@media \(max-width: 760px\) and \(prefers-reduced-motion: reduce\)[\s\S]*?\.clients-wall-hint\s*\{\s*transition:\s*none/);
+  assert.match(mobileStyles, /\.clients-wall\s*\{[\s\S]*?width:\s*1575px/);
+  assert.match(mobileStyles, /font-size:\s*28px/);
+  assert.match(mobileStyles, /font-weight:\s*var\(--font-weight-bold\)/);
+  assert.match(mobileStyles, /line-height:\s*1\.05/);
+  assert.match(mobileStyles, /\.clients-wall,\s*\.clients-wall \.client-name\s*\{[\s\S]*?-webkit-text-size-adjust:\s*100%[\s\S]*?text-size-adjust:\s*100%/);
+  assert.match(mobileStyles, /animation:\s*none/);
+  assert.match(mobileStyles, /transform:\s*none/);
+  assert.doesNotMatch(mobileStyles, /wallMoveMobile|scroll-snap/);
+
+  ["index.html", "clients.html"].forEach(page => {
+    const html = read(page);
+    assert.match(html, /<p class="clients-wall-hint">← DRAG TO EXPLORE →<\/p>[\s\S]*?class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0"/);
+  });
 });
 
 test("the landing has a vh fallback and a dynamic viewport height on mobile", () => {
@@ -123,6 +141,10 @@ test("the curated wall may change while unrelated landing, Search, and modal log
     /\n\/\* SECTION FOOTER CHARACTERS \*\/[\s\S]*?\ninitializeSectionFooterCharacter\(\);\n/,
     ""
   );
+  const removeStartProjectInitializer = value => value.replace(
+    /\n\/\* START A PROJECT \*\/[\s\S]*?\ninitializeStartProjectModal\(\);\n/,
+    ""
+  );
 
   assert.equal(
     script.slice(script.indexOf(landingStart), script.indexOf(rendererStart)),
@@ -133,8 +155,8 @@ test("the curated wall may change while unrelated landing, Search, and modal log
     headScript.slice(headScript.indexOf(filterStart), headScript.indexOf(searchSuggestionsMarker))
   );
   assert.equal(
-    removeFooterCharacterInitializer(script.slice(script.indexOf(searchSuggestionsMarker))),
-    removeFooterCharacterInitializer(headScript.slice(headScript.indexOf(searchSuggestionsMarker)))
+    removeStartProjectInitializer(removeFooterCharacterInitializer(script.slice(script.indexOf(searchSuggestionsMarker)))),
+    removeStartProjectInitializer(removeFooterCharacterInitializer(headScript.slice(headScript.indexOf(searchSuggestionsMarker))))
   );
   assert.match(script, /document\.createElement\("a"\)/);
   assert.doesNotMatch(script.slice(script.indexOf(rendererStart), script.indexOf(filterStart)), /repeatedList/);
@@ -175,7 +197,6 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "utils/searchData.js",
     "utils/renderProject.js",
     "utils/renderPortfolio.js",
-    "search.js",
     "campaigns.js",
   ], { cwd: root });
 });

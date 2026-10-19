@@ -60,9 +60,32 @@ function expectedPublicNavigation(relativePath) {
       '<!-- Events temporarily hidden from public navigation. -->'
     );
 
-  return expectedEventsState.replace(
+  const expectedNavigation = expectedEventsState.replace(
     '>Clients</a>',
     '>Clients &amp; Talents</a>'
+  );
+
+  if (relativePath === "campaigns.html") {
+    return expectedNavigation.replace(
+      '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>',
+      '<script src="campaigns-mobile-detail.js"></script>'
+    );
+  }
+
+  if (relativePath === "search.html") {
+    return expectedNavigation.replace(
+      '<script src="campaigns-mobile-galleries.js"></script>',
+      '<script src="campaigns-mobile-detail.js"></script>'
+    );
+  }
+
+  if (!["index.html", "clients.html"].includes(relativePath)) {
+    return expectedNavigation;
+  }
+
+  return expectedNavigation.replace(
+    '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>',
+    '<section class="clients-section">\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>'
   );
 }
 
@@ -217,13 +240,13 @@ test("public menus preserve their order while Events stays available only on its
   );
 });
 
-test("public page internals differ from HEAD only by approved navigation labels", () => {
+test("public page internals differ from HEAD only by approved navigation and wall accessibility", () => {
   menuPages.forEach(relativePath => {
     assert.equal(read(relativePath), expectedPublicNavigation(relativePath));
   });
 
   assert.match(read("campaigns.html"), /id="campaignsPage"/);
-  assert.match(read("campaigns.html"), /<script src="campaigns\.js"><\/script>/);
+  assert.match(read("campaigns.html"), /<script src="campaigns-mobile-detail\.js"><\/script>/);
   assert.match(read("brand-identity.html"), /id="brandIdentityGrid"/);
   assert.match(read("brand-identity.html"), /<script src="brand-identity\.js"><\/script>/);
 });
