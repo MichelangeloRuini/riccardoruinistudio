@@ -4,6 +4,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const startProject = require("../api/start-project");
+const startProjectStatus = require("../api/start-project-status");
 const login = require("../api/admin/login");
 const logout = require("../api/admin/logout");
 const session = require("../api/admin/session");
@@ -110,6 +111,36 @@ test("server validation normalizes inquiry data and rejects unknown options", ()
     () => startProject._test.validateInquiry({ ...valid, service: "Unexpected", website: "" }),
     error => error.status === 400 && error.code === "invalid_service"
   );
+});
+
+test("public availability exposes only the fail-closed feature state", () => {
+  const previous = process.env.PROJECT_INQUIRIES_ENABLED;
+
+  try {
+    delete process.env.PROJECT_INQUIRIES_ENABLED;
+    const missing = responseFixture();
+    startProjectStatus(requestFixture({ method: "GET", headers: {}, body: undefined }), missing);
+    assert.equal(missing.statusCode, 200);
+    assert.deepEqual(missing.json(), { enabled: false });
+
+    process.env.PROJECT_INQUIRIES_ENABLED = "false";
+    const disabled = responseFixture();
+    startProjectStatus(requestFixture({ method: "GET", headers: {}, body: undefined }), disabled);
+    assert.deepEqual(disabled.json(), { enabled: false });
+
+    process.env.PROJECT_INQUIRIES_ENABLED = "true";
+    const enabled = responseFixture();
+    startProjectStatus(requestFixture({ method: "GET", headers: {}, body: undefined }), enabled);
+    assert.deepEqual(enabled.json(), { enabled: true });
+    assert.deepEqual(Object.keys(enabled.json()), ["enabled"]);
+
+    const invalidMethod = responseFixture();
+    startProjectStatus(requestFixture({ method: "POST" }), invalidMethod);
+    assert.equal(invalidMethod.statusCode, 405);
+  } finally {
+    if (previous === undefined) delete process.env.PROJECT_INQUIRIES_ENABLED;
+    else process.env.PROJECT_INQUIRIES_ENABLED = previous;
+  }
 });
 
 test("legacy JWT API keys retain their bearer header during migration", async () => {

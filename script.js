@@ -887,6 +887,7 @@ function initializeStartProjectModal() {
   let activeTrigger = null;
   let previouslyFocusedElement = null;
   let modalIsOpen = false;
+  let inquiriesEnabled = false;
 
   function createField(labelText, control, modifier = "") {
     const field = document.createElement("div");
@@ -933,7 +934,7 @@ function initializeStartProjectModal() {
   title.className = "start-project-modal__title";
   title.textContent = "LET’S WORK TOGETHER";
   intro.className = "start-project-modal__intro";
-  intro.textContent = "TELL US ABOUT YOUR PROJECT AND WE’LL GET BACK TO YOU AS SOON AS POSSIBLE.";
+  intro.textContent = "PROJECT INQUIRIES ARE TEMPORARILY AVAILABLE BY EMAIL.";
 
   form.className = "start-project-modal__form";
   form.setAttribute("aria-describedby", "startProjectFormMessage");
@@ -1021,18 +1022,19 @@ function initializeStartProjectModal() {
   );
 
   directContact.className = "start-project-modal__direct";
+  directContact.classList.add("start-project-modal__direct--temporary");
   separator.className = "start-project-modal__separator";
   separator.setAttribute("aria-hidden", "true");
   directLine.className = "start-project-modal__direct-line";
   directLabel.className = "start-project-modal__direct-label";
-  directLabel.textContent = "OR WRITE DIRECTLY TO ";
+  directLabel.textContent = "WRITE TO ";
   email.className = "start-project-modal__email";
   email.href = "mailto:info@riccardoruinistudio.com";
   email.textContent = "INFO@RICCARDORUINISTUDIO.COM";
   directLine.append(directLabel, email);
   directContact.append(separator, directLine);
 
-  content.append(kicker, title, intro, form, directContact);
+  content.append(kicker, title, intro, directContact);
   dialog.append(exitButton, content);
   modal.append(backdrop, dialog);
   document.body.appendChild(modal);
@@ -1079,6 +1081,7 @@ function initializeStartProjectModal() {
   backdrop.addEventListener("click", closeModal);
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    if (!inquiriesEnabled || !form.parentNode) return;
     if (submitButton.disabled) return;
     if (typeof form.reportValidity === "function" && !form.reportValidity()) return;
 
@@ -1146,17 +1149,19 @@ function initializeStartProjectModal() {
 
     if (event.key !== "Tab") return;
 
-    const focusableElements = [
-      exitButton,
-      nameInput,
-      emailInput,
-      companyInput,
-      serviceSelect,
-      descriptionInput,
-      budgetSelect,
-      submitButton,
-      email
-    ];
+    const focusableElements = inquiriesEnabled
+      ? [
+        exitButton,
+        nameInput,
+        emailInput,
+        companyInput,
+        serviceSelect,
+        descriptionInput,
+        budgetSelect,
+        submitButton,
+        email
+      ]
+      : [exitButton, email];
     const currentIndex = focusableElements.indexOf(document.activeElement);
     let nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
 
@@ -1167,6 +1172,24 @@ function initializeStartProjectModal() {
     event.preventDefault();
     focusableElements[nextIndex].focus();
   }, true);
+
+  fetch("/api/start-project-status", {
+    method: "GET",
+    credentials: "same-origin",
+    cache: "no-store"
+  })
+    .then(response => response.ok ? response.json() : null)
+    .then(status => {
+      if (!status || status.enabled !== true) return;
+      inquiriesEnabled = true;
+      intro.textContent = "TELL US ABOUT YOUR PROJECT AND WE’LL GET BACK TO YOU AS SOON AS POSSIBLE.";
+      directLabel.textContent = "OR WRITE DIRECTLY TO ";
+      directContact.classList.remove("start-project-modal__direct--temporary");
+      content.insertBefore(form, directContact);
+    })
+    .catch(() => {
+      // Fail closed: keep the email-only version when availability is unknown.
+    });
 }
 
 initializeStartProjectModal();
