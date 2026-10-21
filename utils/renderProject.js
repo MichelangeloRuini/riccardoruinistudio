@@ -23,6 +23,7 @@ function createCredits(campaign) {
 
 function createMediaElement(campaign, file) {
   const isVideo = file.toLowerCase().endsWith(".mp4");
+  const assetUrl = `${campaign.path}${file}`;
 
   if (isVideo) {
     return `
@@ -35,22 +36,25 @@ function createMediaElement(campaign, file) {
         controls
         preload="metadata"
       >
-        <source src="${campaign.path}${file}" type="video/mp4">
+        <source src="${RRSMedia.resolve(assetUrl)}" data-media-src="${assetUrl}" type="video/mp4">
       </video>
     `;
   }
 
   const webp = file.replace(/\.(jpg|jpeg)$/i, ".webp");
+  const webpAssetUrl = `${campaign.path}${webp}`;
 
   return `
     <picture>
       <source
-        srcset="${campaign.path}${webp}"
+        srcset="${RRSMedia.resolveSrcset(webpAssetUrl)}"
+        data-media-srcset="${webpAssetUrl}"
         type="image/webp">
 
       <img
         class="campaign-media-item ${campaign.border ? "has-border" : ""}"
-        src="${campaign.path}${file}"
+        src="${RRSMedia.resolve(assetUrl)}"
+        data-media-src="${assetUrl}"
         alt="${campaign.client} ${campaign.title}"
         loading="lazy"
         decoding="async">

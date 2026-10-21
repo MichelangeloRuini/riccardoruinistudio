@@ -12,7 +12,7 @@ function createPortfolioSearchMedia(project, filename) {
     video.controls = true;
     video.playsInline = true;
     video.preload = "metadata";
-    video.src = source;
+    RRSMedia.setVideo(video, source);
     video.setAttribute("aria-label", label);
     return video;
   }
@@ -20,7 +20,7 @@ function createPortfolioSearchMedia(project, filename) {
   if (mediaType === "image") {
     const image = document.createElement("img");
     image.className = "campaign-media-item";
-    image.src = source;
+    RRSMedia.setImage(image, source);
     image.alt = label;
     image.loading = "lazy";
     image.decoding = "async";

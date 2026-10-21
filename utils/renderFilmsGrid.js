@@ -36,7 +36,7 @@
     card.setAttribute("aria-label", `Open ${record.campaign.client} — ${record.campaign.title}`);
 
     video.className = "films-card-video";
-    video.src = record.source;
+    RRSMedia.setVideo(video, record.assetUrl);
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
@@ -64,10 +64,12 @@
 
     campaignRecords.forEach(campaign => {
       getCampaignFilms(campaign).forEach(file => {
+        const assetUrl = `${campaign.path}${file}`;
         const record = {
           campaign,
           file,
-          source: `${campaign.path}${file}`
+          assetUrl,
+          source: RRSMedia.resolve(assetUrl)
         };
 
         records.push(record);

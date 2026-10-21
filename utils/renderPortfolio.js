@@ -40,7 +40,7 @@ function createPortfolioProjectCard(project) {
   link.setAttribute("aria-label", `View ${label || "project"}`);
 
   visual.className = "portfolio-card-visual";
-  image.src = `${project.path}${project.cover}`;
+  RRSMedia.setImage(image, `${project.path}${project.cover}`);
   image.alt = label || "Portfolio project";
   image.loading = "lazy";
   image.decoding = "async";
@@ -109,7 +109,7 @@ function createPortfolioDetailMedia(project, filename) {
     video.controls = true;
     video.playsInline = true;
     video.preload = "metadata";
-    video.src = `${project.path}${filename}`;
+    RRSMedia.setVideo(video, `${project.path}${filename}`);
     video.setAttribute("aria-label", label || "Project video");
     item.appendChild(video);
     return item;
@@ -119,7 +119,7 @@ function createPortfolioDetailMedia(project, filename) {
     const image = document.createElement("img");
     const fallback = document.createElement("div");
 
-    image.src = `${project.path}${filename}`;
+    RRSMedia.setImage(image, `${project.path}${filename}`);
     image.alt = label || "Portfolio project image";
     image.loading = "lazy";
     image.decoding = "async";

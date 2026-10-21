@@ -10,13 +10,18 @@
 
     if (webpFile !== file) {
       const source = document.createElement("source");
-      source.srcset = `${campaign.path}${webpFile}`;
       source.type = "image/webp";
       picture.appendChild(source);
+
+      RRSMedia.setPicture(picture, image, `${campaign.path}${file}`, [{
+        element: source,
+        srcset: `${campaign.path}${webpFile}`
+      }]);
+    } else {
+      RRSMedia.setImage(image, `${campaign.path}${file}`);
     }
 
     image.className = className;
-    image.src = `${campaign.path}${file}`;
     image.alt = `${campaign.client} ${campaign.title}`;
     image.loading = "lazy";
     image.decoding = "async";
@@ -43,8 +48,8 @@
     video.preload = "metadata";
     video.tabIndex = -1;
     video.setAttribute("aria-hidden", "true");
-    if (poster) video.poster = `${campaign.path}${poster}`;
-    video.src = `${campaign.path}${coverFile}#t=0.001`;
+    if (poster) RRSMedia.setPoster(video, `${campaign.path}${poster}`);
+    RRSMedia.setVideo(video, `${campaign.path}${coverFile}#t=0.001`);
     return video;
   }
 
@@ -132,9 +137,9 @@
       video.playsInline = true;
       video.preload = "metadata";
       video.setAttribute("aria-label", `${campaign.client} ${campaign.title}`);
-      source.src = `${campaign.path}${file}`;
       source.type = "video/mp4";
       video.appendChild(source);
+      RRSMedia.setVideoSource(video, source, `${campaign.path}${file}`);
       return video;
     }
 
@@ -221,6 +226,7 @@
     function clearDetailMedia() {
       detailMedia.querySelectorAll("video").forEach(video => {
         video.pause();
+        RRSMedia.clear(video);
         video.querySelectorAll("source").forEach(source => source.removeAttribute("src"));
         video.load();
       });
@@ -381,6 +387,7 @@
         campaignsPage.innerHTML = campaignRecords
           .map((campaign, index) => renderProject(campaign, index, campaign.media))
           .join("");
+        RRSMedia.hydrate(campaignsPage);
         RRSViewportVideoPlayback.observe(campaignsPage);
       }
 

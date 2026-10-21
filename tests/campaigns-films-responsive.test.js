@@ -101,7 +101,8 @@ test("video-only campaigns receive a non-autoplay video cover fallback", () => {
   assert.equal(videoOnly.length, 3);
   assert.match(campaignsController, /const coverFile = imageFile \|\| mediaFiles\.find\(file => file\.toLowerCase\(\)\.endsWith\("\.mp4"\)\)/);
   assert.match(campaignsController, /video\.preload = "metadata"/);
-  assert.match(campaignsController, /if \(poster\) video\.poster/);
+  assert.match(campaignsController, /if \(poster\) RRSMedia\.setPoster\(video/);
+  assert.match(campaignsController, /RRSMedia\.setVideo\(video, [`]?[\s\S]*?#t=0\.001/);
   assert.match(campaignsController, /#t=0\.001/);
 });
 
@@ -157,7 +158,6 @@ test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are 
     "campaigns.js",
     "campaigns-mobile-galleries.js",
     "brand-identity.js",
-    "magazines-books.js",
     "data",
     "cms",
     "admin.html",

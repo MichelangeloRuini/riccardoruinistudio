@@ -76,7 +76,8 @@ test("section footer characters use one centralized page map and the existing fr
   });
 
   assert.match(script, /document\.querySelectorAll\("\.footer-logo-frame"\)\.forEach/);
-  assert.match(script, /frame\.src = character/);
+  assert.match(script, /frame\.dataset\.mediaSrc = character/);
+  assert.match(script, /RRSMedia\.setImage\(frame, character\)/);
   assert.match(script, /frame\.classList\.add\("is-section-character"\)/);
   assert.match(styles, /\.footer-logo-frame\.is-section-character\s*\{[^}]*width:\s*100%[^}]*height:\s*100%[^}]*object-fit:\s*contain[^}]*object-position:\s*right top/);
 
@@ -195,8 +196,6 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     ":(exclude)assets/ui/diavoletto-films.png",
     ":(exclude)assets/ui/diavoletto-magazines-books.png",
     "utils/searchData.js",
-    "utils/renderProject.js",
-    "utils/renderPortfolio.js",
     "campaigns.js",
   ], { cwd: root });
 });

@@ -67,7 +67,7 @@ test("Events keeps its editorial paragraphs and unchanged 16:9 playback", () => 
   assert.match(mobileStyles, /\.events-page \.events-media,[\s\S]*?\.events-page \.events-video\s*\{\s*width:\s*100%/);
   assert.equal((eventsHtml.match(/<section class="events-introduction"[\s\S]*?<\/section>/) || [""])[0].match(/<p>/g).length, 2);
   assert.match(eventsHtml, /<video class="events-video" autoplay muted loop playsinline preload="metadata">/);
-  assert.match(eventsHtml, /<source src="assets\/events\/cattleya-ruini-events\.mp4" type="video\/mp4">/);
+  assert.match(eventsHtml, /<source data-media-src="assets\/events\/cattleya-ruini-events\.mp4" type="video\/mp4">/);
 });
 
 test("Visual Identity remains a two-column grid on tablet and a one-column grid on mobile", () => {

@@ -1211,7 +1211,8 @@ function initializeSectionFooterCharacter() {
   if (!character) return;
 
   document.querySelectorAll(".footer-logo-frame").forEach(frame => {
-    frame.src = character;
+    frame.dataset.mediaSrc = character;
+    RRSMedia.setImage(frame, character);
     frame.classList.add("is-section-character");
   });
 }
