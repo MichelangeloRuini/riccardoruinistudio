@@ -188,17 +188,82 @@ test("hybrid video fallback reloads once and preserves active playback intent", 
   assert.equal(video.playCalls, 1);
 });
 
-test("hybrid source-element fallback reloads its owning video only once", () => {
+test("video source changes reload exactly once and identical URLs stay idempotent", () => {
+  const media = resolver("r2");
+  const video = new FakeElement();
+  const source = new FakeElement();
+
+  media.setVideoSource(video, source, "assets/example.mp4");
+  assert.equal(source.src, `${R2_BASE}/assets/example.mp4`);
+  assert.equal(video.loadCalls, 1);
+  assert.equal(video.playCalls, 0);
+
+  media.setVideoSource(video, source, "assets/example.mp4");
+  assert.equal(video.loadCalls, 1);
+
+  media.setVideoSource(video, source, "assets/different.mp4");
+  assert.equal(source.src, `${R2_BASE}/assets/different.mp4`);
+  assert.equal(video.loadCalls, 2);
+  assert.equal(video.playCalls, 0);
+});
+
+test("Vercel source binding preserves original URLs and reloads only on change", () => {
+  const media = resolver("vercel");
+  const video = new FakeElement();
+  const source = new FakeElement();
+
+  media.setVideoSource(video, source, "assets/example.mp4");
+  media.setVideoSource(video, source, "assets/example.mp4");
+
+  assert.equal(source.src, "assets/example.mp4");
+  assert.equal(video.loadCalls, 1);
+  assert.equal(video.playCalls, 0);
+});
+
+test("hydrating multiple sources configures all of them before one video reload", () => {
+  const media = resolver("r2");
+  const video = new FakeElement();
+  const sources = ["small.mp4", "large.mp4"].map(filename => {
+    const source = new FakeElement();
+    source.dataset = { mediaSrc: `assets/${filename}` };
+    source.closest = () => video;
+    return source;
+  });
+  video.dataset = {};
+
+  const root = {
+    querySelectorAll(selector) {
+      return selector === "video source[data-media-src], video source[src]" ? sources : [];
+    }
+  };
+
+  media.hydrate(root);
+
+  assert.deepEqual(
+    sources.map(source => source.src),
+    [`${R2_BASE}/assets/small.mp4`, `${R2_BASE}/assets/large.mp4`]
+  );
+  assert.equal(video.loadCalls, 1);
+
+  media.hydrate(root);
+  assert.equal(video.loadCalls, 1);
+});
+
+test("hybrid source-element fallback reloads once per URL and never loops", () => {
   const media = resolver("hybrid");
   const video = new FakeElement();
   const source = new FakeElement();
 
   media.setVideoSource(video, source, "assets/example.mp4");
+  assert.equal(source.src, `${R2_BASE}/assets/example.mp4`);
+  assert.equal(video.loadCalls, 1);
+
   video.dispatchEvent(new Event("error"));
   video.dispatchEvent(new Event("error"));
 
   assert.equal(source.src, "assets/example.mp4");
-  assert.equal(video.loadCalls, 1);
+  assert.equal(video.loadCalls, 2);
+  assert.equal(video.playCalls, 0);
 });
 
 test("hybrid poster fallback uses one image probe and never loops", () => {

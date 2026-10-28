@@ -161,7 +161,10 @@
         ? element.getAttribute(property)
         : element[property];
 
-      if (currentValue !== value) element[property] = value;
+      if (currentValue === value) return false;
+
+      element[property] = value;
+      return true;
     }
 
     function setImage(image, assetUrl) {
@@ -216,10 +219,10 @@
       return video;
     }
 
-    function setVideoSource(video, source, assetUrl) {
+    function setVideoSource(video, source, assetUrl, pendingVideoLoads = null) {
       if (!source) return video;
 
-      setMediaProperty(source, "src", resolve(assetUrl));
+      const sourceChanged = setMediaProperty(source, "src", resolve(assetUrl));
       bindFallback(video || source, "video-source", () => {
         const shouldResume = video && video.paused === false;
         setMediaProperty(source, "src", resolveVercel(assetUrl));
@@ -232,6 +235,10 @@
           }
         }
       });
+      if (sourceChanged && video && typeof video.load === "function") {
+        if (pendingVideoLoads) pendingVideoLoads.add(video);
+        else video.load();
+      }
       return video || source;
     }
 
@@ -266,6 +273,7 @@
       if (!root || typeof root.querySelectorAll !== "function") return root;
 
       const processedImages = new Set();
+      const pendingVideoLoads = new Set();
 
       root.querySelectorAll("picture").forEach(picture => {
         const image = picture.querySelector("img[data-media-src], img[src]");
@@ -305,8 +313,11 @@
         const video = source.closest("video");
         const assetUrl = source.dataset.mediaSrc || source.getAttribute("src");
         if (!video || video.dataset.mediaSrc) return;
-        if (isAssetUrl(assetUrl)) setVideoSource(video, source, assetUrl);
+        if (isAssetUrl(assetUrl)) {
+          setVideoSource(video, source, assetUrl, pendingVideoLoads);
+        }
       });
+      pendingVideoLoads.forEach(video => video.load());
 
       return root;
     }
