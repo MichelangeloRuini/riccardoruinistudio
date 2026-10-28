@@ -1199,7 +1199,7 @@ initializeStartProjectModal();
 function initializeSectionFooterCharacter() {
   const characterByPage = {
     "about.html": "assets/ui/diavoletto-about.png",
-    "clients.html": "assets/ui/diavoletto-clients-talents.png",
+    "clients.html": "assets/ui/diavoletto-clients-talents-v2.png",
     "brand-identity.html": "assets/ui/diavoletto-visual-identity.png",
     "films.html": "assets/ui/diavoletto-films.png",
     "magazines-books.html": "assets/ui/diavoletto-magazines-books.png"
