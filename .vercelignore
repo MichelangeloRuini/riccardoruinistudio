@@ -12,3 +12,16 @@ supabase/
 temp-upload/
 trash/
 *.log
+assets/books/
+assets/branding/
+assets/campaigns/
+assets/events/
+assets/films/
+assets/identities/
+assets/ui/
+assets/hero.mp4
+assets/hero-desktop.mp4
+assets/hero-mobile.mp4
+assets/hero-poster.webp
+assets/logo-icon.svg
+assets/.DS_Store

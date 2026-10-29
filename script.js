@@ -141,9 +141,19 @@ function normalize(text) {
   return RRSUnifiedSearch.normalize(text);
 }
 
+function loadDeferredFooterFrames() {
+  document.querySelectorAll(".footer-logo-frame[data-media-deferred-src]").forEach(frame => {
+    const assetUrl = frame.dataset.mediaDeferredSrc;
+
+    RRSMedia.setImage(frame, assetUrl);
+    frame.removeAttribute("data-media-deferred-src");
+  });
+}
+
 function enterSite() {
   if (!landing) return;
 
+  loadDeferredFooterFrames();
   landing.classList.add("is-leaving");
 
   setTimeout(() => {
@@ -157,6 +167,7 @@ if (landing) {
   const skipLanding = new URLSearchParams(window.location.search).get("skipLanding");
 
   if (skipLanding === "true") {
+    loadDeferredFooterFrames();
     document.body.classList.remove("landing-active");
     document.body.classList.add("entered");
   } else {

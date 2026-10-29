@@ -6,7 +6,7 @@ const test = require("node:test");
 const mediaConfig = require("../config/media.js");
 const { createMediaUrlResolver } = require("../utils/mediaUrl.js");
 
-const R2_BASE = "https://pub-822b6246510a4290a7df6d3bd005eef6.r2.dev";
+const R2_BASE = "https://rrs-media.michelangelo-723.workers.dev";
 const projectRoot = path.resolve(__dirname, "..");
 const read = relativePath => fs.readFileSync(path.join(projectRoot, relativePath), "utf8");
 
@@ -49,13 +49,42 @@ function resolver(mode, extra = {}, dependencies) {
   }, dependencies);
 }
 
-test("the checked-in media configuration keeps Vercel active", () => {
+test("the checked-in media configuration uses R2 exclusively", () => {
   assert.deepEqual(mediaConfig, {
-    mode: "vercel",
+    mode: "r2",
     r2BaseUrl: R2_BASE,
     vercelBaseUrl: ""
   });
   assert.equal(Object.isFrozen(mediaConfig), true);
+});
+
+test("Vercel excludes synchronized media while retaining the Online CMS logo", () => {
+  const vercelIgnore = read(".vercelignore");
+  const onlineCms = read("online-cms/index.html");
+  const excludedPaths = [
+    "assets/books/",
+    "assets/branding/",
+    "assets/campaigns/",
+    "assets/events/",
+    "assets/films/",
+    "assets/identities/",
+    "assets/ui/",
+    "assets/hero.mp4",
+    "assets/hero-desktop.mp4",
+    "assets/hero-mobile.mp4",
+    "assets/hero-poster.webp",
+    "assets/logo-icon.svg",
+    "assets/.DS_Store"
+  ];
+
+  excludedPaths.forEach(assetPath => {
+    assert.ok(
+      vercelIgnore.split(/\r?\n/).includes(assetPath),
+      `${assetPath} must be excluded from Vercel`
+    );
+  });
+  assert.doesNotMatch(vercelIgnore, /^assets\/$/m);
+  assert.match(onlineCms, /src="\.\.\/assets\/logo-main\.svg"/);
 });
 
 test("Vercel mode preserves current asset URLs byte for byte", () => {

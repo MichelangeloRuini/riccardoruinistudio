@@ -2,8 +2,8 @@
   "use strict";
 
   const config = Object.freeze({
-    mode: "vercel",
-    r2BaseUrl: "https://pub-822b6246510a4290a7df6d3bd005eef6.r2.dev",
+    mode: "r2",
+    r2BaseUrl: "https://rrs-media.michelangelo-723.workers.dev",
     vercelBaseUrl: ""
   });
 
