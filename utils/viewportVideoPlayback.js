@@ -2,17 +2,42 @@
   const VIDEO_SELECTOR = "video[data-viewport-playback]";
   const observedVideos = new Set();
   const visibleVideos = new Set();
+  const loadedVideos = new WeakSet();
+
+  function loadVideoMedia(video) {
+    if (loadedVideos.has(video)) return;
+
+    const videoAssetUrl = video.dataset.viewportMediaSrc;
+    const source = video.querySelector("source[data-viewport-media-src]");
+    const sourceAssetUrl = source?.dataset.viewportMediaSrc;
+
+    if (videoAssetUrl) {
+      video.preload = "metadata";
+      RRSMedia.setVideo(video, videoAssetUrl);
+      video.load();
+      loadedVideos.add(video);
+    } else if (source && sourceAssetUrl) {
+      video.preload = "metadata";
+      RRSMedia.setVideoSource(video, source, sourceAssetUrl);
+      loadedVideos.add(video);
+    }
+  }
 
   const observer = typeof IntersectionObserver === "function"
     ? new IntersectionObserver(entries => {
       entries.forEach(entry => {
         const video = entry.target;
-        const shouldPlay = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+        const supportsPlayback = video.hasAttribute("data-viewport-playback");
+        const shouldPlay = supportsPlayback
+          && entry.isIntersecting
+          && entry.intersectionRatio >= 0.5;
 
         if (!video.isConnected) {
           unobserveVideo(video);
           return;
         }
+
+        if (entry.isIntersecting) loadVideoMedia(video);
 
         if (!shouldPlay) {
           visibleVideos.delete(video);
@@ -40,12 +65,24 @@
   function collectVideos(root) {
     const videos = [];
 
-    if (root instanceof Element && root.matches(VIDEO_SELECTOR)) {
+    if (root instanceof Element && (
+      root.matches(VIDEO_SELECTOR)
+      || root.matches("video[data-viewport-media-src]")
+      || (root.matches("video") && root.querySelector("source[data-viewport-media-src]"))
+    )) {
       videos.push(root);
     }
 
     if (root && typeof root.querySelectorAll === "function") {
-      videos.push(...root.querySelectorAll(VIDEO_SELECTOR));
+      root.querySelectorAll("video").forEach(video => {
+        if (
+          video.matches(VIDEO_SELECTOR)
+          || video.dataset.viewportMediaSrc
+          || video.querySelector("source[data-viewport-media-src]")
+        ) {
+          videos.push(video);
+        }
+      });
     }
 
     return videos;
@@ -56,10 +93,12 @@
 
     video.autoplay = false;
     video.removeAttribute("autoplay");
+    if (!video.src && !video.querySelector("source[src]")) video.preload = "none";
     video.pause();
     observedVideos.add(video);
 
     if (observer) observer.observe(video);
+    else loadVideoMedia(video);
   }
 
   function unobserveVideo(video) {

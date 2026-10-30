@@ -45,11 +45,11 @@
     video.className = "campaign-mobile-card__media";
     video.muted = true;
     video.playsInline = true;
-    video.preload = "metadata";
+    video.preload = "none";
     video.tabIndex = -1;
     video.setAttribute("aria-hidden", "true");
     if (poster) RRSMedia.setPoster(video, `${campaign.path}${poster}`);
-    RRSMedia.setVideo(video, `${campaign.path}${coverFile}#t=0.001`);
+    video.dataset.viewportMediaSrc = `${campaign.path}${coverFile}#t=0.001`;
     return video;
   }
 
@@ -388,9 +388,9 @@
           .map((campaign, index) => renderProject(campaign, index, campaign.media))
           .join("");
         RRSMedia.hydrate(campaignsPage);
-        RRSViewportVideoPlayback.observe(campaignsPage);
       }
 
+      RRSViewportVideoPlayback.observe(campaignsPage);
       controller.refresh();
     }
 

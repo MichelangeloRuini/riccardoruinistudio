@@ -34,9 +34,9 @@ function createMediaElement(campaign, file) {
         loop
         playsinline
         controls
-        preload="metadata"
+        preload="none"
       >
-        <source src="${RRSMedia.resolve(assetUrl)}" data-media-src="${assetUrl}" type="video/mp4">
+        <source data-viewport-media-src="${assetUrl}" type="video/mp4">
       </video>
     `;
   }

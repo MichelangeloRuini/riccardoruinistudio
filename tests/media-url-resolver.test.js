@@ -370,7 +370,8 @@ test("every public page loads media configuration before the resolver and site r
 test("all dynamic public media renderers delegate asset binding to RRSMedia", () => {
   const expectedCalls = {
     "utils/renderProject.js": ["RRSMedia.resolve(", "RRSMedia.resolveSrcset("],
-    "campaigns-mobile-detail.js": ["RRSMedia.setPicture(", "RRSMedia.setVideo(", "RRSMedia.setPoster("],
+    "campaigns-mobile-detail.js": ["RRSMedia.setPicture(", "RRSMedia.setPoster("],
+    "utils/viewportVideoPlayback.js": ["RRSMedia.setVideo(", "RRSMedia.setVideoSource("],
     "utils/renderFilmsGrid.js": ["RRSMedia.setVideo("],
     "films.js": ["RRSMedia.setVideo(", "RRSMedia.clear("],
     "utils/renderPortfolio.js": ["RRSMedia.setImage(", "RRSMedia.setVideo("],
