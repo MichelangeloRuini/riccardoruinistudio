@@ -1214,39 +1214,39 @@ copyButton.addEventListener("click", () => {
   document.execCommand("copy");
 });
 publishButton.addEventListener("click", async () => {
+  const message = "Portfolio update";
+  publishButton.disabled = true;
+  output.value = "Synchronizing media with Cloudflare R2, then publishing...";
 
-let message = "Portfolio update";
+  try {
+    const response = await fetch("/api/publish", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+    const result = await response.json();
 
-  if (message === null) return;
+    if (result.nothingToPublish) {
+      output.value = "Nothing to publish.";
+      return;
+    }
+    if (!response.ok || !result.success) {
+      output.value = "PUBLISH ERROR\n\n" + (result.error || "Unknown publish error.");
+      return;
+    }
 
-  output.value = "Publishing...";
-
-  const response = await fetch("/api/publish", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message
-    })
-  });
-
-  const result = await response.json();
-
-if (result.nothingToPublish) {
-  output.value = "Nothing to publish.";
-  return;
-}
-  if (!result.success) {
+    const media = result.media || {};
     output.value =
-      "PUBLISH ERROR\n\n" +
-      result.error;
-    return;
+      "✅ Published successfully.\n\n" +
+      `R2 media: ${media.uploaded || 0} uploaded, ${media.verified || 0} already verified.\n\n` +
+      (result.output || "");
+  } catch (error) {
+    output.value = "PUBLISH ERROR\n\n" + error.message;
+  } finally {
+    publishButton.disabled = false;
   }
-
-  output.value =
-    "✅ Published successfully.\n\n" +
-    result.output;
 
 });
 loadCampaigns();

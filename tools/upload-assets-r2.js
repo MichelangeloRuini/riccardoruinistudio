@@ -234,12 +234,23 @@ async function collectAssetFiles(assetsRoot = DEFAULT_ASSETS_ROOT) {
   return { files, excluded };
 }
 
-function selectAssetFiles(inventory, requestedKey = null) {
-  if (requestedKey === null) return inventory;
+function selectAssetFiles(inventory, requestedKeys = null) {
+  if (requestedKeys === null) return inventory;
 
-  const files = inventory.files.filter(file => file.key === requestedKey);
-  if (files.length !== 1) {
-    throw new Error(`--file did not match exactly one publishable asset: ${requestedKey}`);
+  const keys = Array.isArray(requestedKeys) ? requestedKeys : [requestedKeys];
+  const uniqueKeys = new Set(keys);
+  if (keys.length === 0 || uniqueKeys.size !== keys.length) {
+    throw new Error("Requested asset keys must be a non-empty unique list");
+  }
+
+  const files = inventory.files.filter(file => uniqueKeys.has(file.key));
+  if (files.length !== keys.length) {
+    const matched = new Set(files.map(file => file.key));
+    const missing = keys.filter(key => !matched.has(key));
+    if (!Array.isArray(requestedKeys)) {
+      throw new Error(`--file did not match exactly one publishable asset: ${missing[0]}`);
+    }
+    throw new Error(`Requested asset did not match a publishable file: ${missing.join(", ")}`);
   }
   return { files, excluded: [] };
 }
@@ -380,7 +391,8 @@ async function processFile({
   partSize,
   multipartConcurrency = DEFAULT_MULTIPART_CONCURRENCY,
   uploadFactory = defaultUploadFactory,
-  retryOptions
+  retryOptions,
+  overwriteExisting = false
 }) {
   const sha256 = await hashFile(file.absolutePath);
   const baseResult = {
@@ -399,12 +411,16 @@ async function processFile({
     throw withPhase(error, "initial-head");
   }
 
+  let replacingExisting = false;
   if (existing) {
     const comparison = compareRemote(existing, file, sha256);
     if (comparison.matches) {
       return { ...baseResult, status: "verified", checks: comparison.checks };
     }
-    return { ...baseResult, status: "conflict", checks: comparison.checks };
+    if (!overwriteExisting) {
+      return { ...baseResult, status: "conflict", checks: comparison.checks };
+    }
+    replacingExisting = true;
   }
 
   if (dryRun) return { ...baseResult, status: "pending" };
@@ -415,7 +431,7 @@ async function processFile({
     Key: file.key,
     ContentLength: file.size,
     ContentType: file.contentType,
-    IfNoneMatch: "*",
+    ...(!replacingExisting && { IfNoneMatch: "*" }),
     Metadata: {
       sha256,
       "source-size": String(file.size)
@@ -465,7 +481,8 @@ async function processFile({
     ...baseResult,
     status: "uploaded",
     checks: comparison.checks,
-    multipart
+    multipart,
+    replaced: replacingExisting
   };
 }
 
@@ -517,10 +534,16 @@ async function runMigration({
   uploadFactory,
   retryOptions,
   fileKey = null,
+  fileKeys = null,
+  overwriteExisting = false,
   now = () => new Date()
 }) {
+  if (fileKey !== null && fileKeys !== null) {
+    throw new Error("Choose only one of fileKey or fileKeys");
+  }
   const inventory = await collectAssetFiles(assetsRoot);
-  const { files, excluded } = selectAssetFiles(inventory, fileKey);
+  const requestedKeys = fileKeys === null ? fileKey : fileKeys;
+  const { files, excluded } = selectAssetFiles(inventory, requestedKeys);
   const secrets = [config.accountId, config.accessKeyId, config.secretAccessKey];
   const startedAt = now().toISOString();
 
@@ -534,7 +557,8 @@ async function runMigration({
         partSize,
         multipartConcurrency,
         uploadFactory,
-        retryOptions
+        retryOptions,
+        overwriteExisting
       });
     } catch (error) {
       return {
@@ -553,6 +577,7 @@ async function runMigration({
     mode: dryRun ? "dry-run" : "apply",
     bucket: config.bucket,
     selectedFile: fileKey,
+    selectedFiles: fileKeys,
     startedAt,
     finishedAt: now().toISOString(),
     multipartThresholdBytes: partSize,

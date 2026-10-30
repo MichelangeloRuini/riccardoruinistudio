@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const { exec } = require("child_process");
 const { registerPortfolioProjectRoutes } = require("./cms/portfolio-projects");
 const { registerMagazinesBooksRoutes } = require("./cms/magazines-books");
+const { createPublishService } = require("./cms/publish");
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 const upload = multer({ dest: "temp-upload/" });
+const publishService = createPublishService({ projectRoot: __dirname });
+let publishInProgress = false;
 
 const campaignsFile = path.join(__dirname, "data", "campaigns.js");
 const campaignsRoot = path.resolve(__dirname, "assets", "campaigns");
@@ -1528,40 +1531,27 @@ app.post("/api/delete-campaign", (req, res) => {
 
   }
 });
-app.post("/api/publish", (req, res) => {
-  const message = req.body.message || "CMS publish update";
+app.post("/api/publish", async (req, res) => {
+  if (publishInProgress) {
+    res.status(409).json({
+      success: false,
+      error: "A publish operation is already in progress."
+    });
+    return;
+  }
 
-  const safeMessage = message.replace(/"/g, "'");
-
-const command = `
-git diff --quiet &&
-echo "__NOTHING_TO_PUBLISH__" ||
-(git add . && git commit -m "${safeMessage}" && git push)
-`;
-
-  exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
-    if (error) {
-      res.status(500).json({
-        success: false,
-        error: stderr || error.message,
-        output: stdout
-      });
-      return;
-    }
-
-    if (stdout.includes("__NOTHING_TO_PUBLISH__")) {
-  res.json({
-    success: true,
-    nothingToPublish: true
-  });
-  return;
-}
-
-res.json({
-  success: true,
-  output: stdout
-});
-  });
+  publishInProgress = true;
+  try {
+    const result = await publishService.publish({ message: req.body.message });
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  } finally {
+    publishInProgress = false;
+  }
 });
 registerPortfolioProjectRoutes(app);
 const magazinesBooksService = registerMagazinesBooksRoutes(app);

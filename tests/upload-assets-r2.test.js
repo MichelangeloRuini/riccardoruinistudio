@@ -212,6 +212,26 @@ test("single-file selection matches exactly one publishable asset", () => {
   );
 });
 
+test("multi-file selection returns only the requested incremental asset set", () => {
+  const first = { key: "assets/campaigns/example/01.jpg" };
+  const second = { key: "assets/campaigns/example/video.mp4" };
+  const unrelated = { key: "assets/books/book-01/video.mp4" };
+  const inventory = { files: [first, second, unrelated], excluded: [] };
+
+  assert.deepEqual(
+    selectAssetFiles(inventory, [first.key, second.key]),
+    { files: [first, second], excluded: [] }
+  );
+  assert.throws(
+    () => selectAssetFiles(inventory, [first.key, "assets/books/missing.mp4"]),
+    /missing\.mp4/
+  );
+  assert.throws(
+    () => selectAssetFiles(inventory, [first.key, first.key]),
+    /unique list/
+  );
+});
+
 test("content types cover all required media formats", () => {
   assert.equal(contentTypeFor("photo.jpg"), "image/jpeg");
   assert.equal(contentTypeFor("photo.JPEG"), "image/jpeg");
@@ -358,6 +378,50 @@ test("a mismatching object is reported as a conflict and never overwritten", asy
 
   assert.equal(result.status, "conflict");
   assert.equal(uploadCalls, 0);
+});
+
+test("CMS overwrite mode replaces only an explicitly selected changed object and verifies it", async t => {
+  const assets = await tempAssets(t);
+  const filePath = path.join(assets, "campaigns", "example", "01.jpg");
+  await fs.writeFile(filePath, "content");
+  const sha256 = "ed7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73";
+  const client = headClient([
+    {
+      ContentLength: 99,
+      ContentType: "image/jpeg",
+      Metadata: { sha256: "different" }
+    },
+    {
+      ContentLength: 7,
+      ContentType: "image/jpeg",
+      Metadata: { sha256, "source-size": "7" }
+    }
+  ]);
+  let capturedParams;
+
+  const result = await processFile({
+    client,
+    config: TEST_CONFIG,
+    file: {
+      absolutePath: filePath,
+      key: "assets/campaigns/example/01.jpg",
+      size: 7,
+      contentType: "image/jpeg"
+    },
+    dryRun: false,
+    partSize: DEFAULT_PART_SIZE,
+    overwriteExisting: true,
+    uploadFactory({ params }) {
+      capturedParams = params;
+      return { done: async () => ({}) };
+    }
+  });
+
+  assert.equal(result.status, "uploaded");
+  assert.equal(result.replaced, true);
+  assert.equal(capturedParams.Key, "assets/campaigns/example/01.jpg");
+  assert.equal(capturedParams.IfNoneMatch, undefined);
+  assert.equal(capturedParams.Metadata.sha256, sha256);
 });
 
 test("apply uploads a missing object with SHA-256 metadata then verifies it", async t => {
