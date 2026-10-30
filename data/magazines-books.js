@@ -63,5 +63,13 @@ const magazinesBooks = [
       "2013"
     ],
     "video": "assets/books/book-08/video.mp4"
+  },
+  {
+    "id": "book-09",
+    "title": "A JOURNEY INTO STYLE AND MUSIC OF MY ICONS",
+    "credits": [
+      "BY: FRIDA GIANNINI"
+    ],
+    "video": "assets/books/book-09/video.mp4"
   }
 ];
