@@ -164,7 +164,7 @@ body.entered .custom-cursor {
   width: 230px;
   padding-bottom: 7px;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   background: transparent;
   outline: none;
   font: inherit;
@@ -314,7 +314,7 @@ body.entered .custom-cursor {
   width: 230px;
   padding-bottom: 7px;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   background: transparent;
   outline: none;
   font: inherit;
@@ -2984,6 +2984,7 @@ body.is-mobile-menu-open {
   .landing-logo img {
     width: clamp(145px, 45vw, var(--landing-logo-width));
     max-width: 100%;
+    margin-inline: auto;
   }
 
   .clients-section {

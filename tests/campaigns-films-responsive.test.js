@@ -100,8 +100,9 @@ test("video-only campaigns receive a non-autoplay video cover fallback", () => {
 
   assert.equal(videoOnly.length, 3);
   assert.match(campaignsController, /const coverFile = imageFile \|\| mediaFiles\.find\(file => file\.toLowerCase\(\)\.endsWith\("\.mp4"\)\)/);
-  assert.match(campaignsController, /video\.preload = "metadata"/);
-  assert.match(campaignsController, /if \(poster\) video\.poster/);
+  assert.match(campaignsController, /video\.preload = "none"/);
+  assert.match(campaignsController, /video\.dataset\.viewportMediaSrc/);
+  assert.match(campaignsController, /if \(poster\) RRSMedia\.setPoster\(video/);
   assert.match(campaignsController, /#t=0\.001/);
 });
 
@@ -140,24 +141,37 @@ test("Campaigns preserves DOM order while Films uses a dedicated grid", () => {
   assert.match(renderer, /class="campaign-media-item \$\{campaign\.border \? "has-border" : ""\}"/);
 });
 
-test("Campaigns video controls and viewport-aware playback remain unchanged", () => {
+test("Campaigns video controls remain intact and media loading is viewport-aware", () => {
   assert.match(renderer, /data-viewport-playback/);
-  assert.match(renderer, /muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?controls[\s\S]*?preload="metadata"/);
+  assert.match(renderer, /muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?controls[\s\S]*?preload="none"/);
+  assert.match(renderer, /data-viewport-media-src/);
+  assert.match(read("utils/viewportVideoPlayback.js"), /loadedVideos\.has\(video\)/);
+  assert.match(read("utils/viewportVideoPlayback.js"), /if \(entry\.isIntersecting\) loadVideoMedia\(video\)/);
   assert.match(campaignsPage, /<script src="utils\/viewportVideoPlayback\.js"><\/script>/);
   assert.match(filmsPage, /<script src="utils\/viewportVideoPlayback\.js"><\/script>/);
 });
 
-test("renderers, Search, data, CMS, APIs, assets, and prior responsive work are unchanged", () => {
+test("Campaigns data does not generate duplicate media URLs", () => {
+  const context = {};
+  vm.createContext(context);
+  vm.runInContext(`${read("data/campaigns.js")}\n;globalThis.records = campaigns;`, context);
+  const mediaUrls = context.records.flatMap(campaign => (
+    campaign.media.map(file => `${campaign.path}${file}`)
+  ));
+
+  assert.equal(mediaUrls.length, 731);
+  assert.equal(new Set(mediaUrls).size, mediaUrls.length);
+});
+
+test("unrelated renderers, Search, data, CMS, APIs, assets, and prior responsive work are unchanged", () => {
   execFileSync("git", [
     "diff",
     "--quiet",
     "HEAD",
     "--",
-    "utils/viewportVideoPlayback.js",
     "campaigns.js",
     "campaigns-mobile-galleries.js",
     "brand-identity.js",
-    "magazines-books.js",
     "data",
     "cms",
     "admin.html",

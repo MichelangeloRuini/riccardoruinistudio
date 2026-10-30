@@ -124,7 +124,7 @@
     renderModalTitle(record.campaign);
     renderModalCredits(record.campaign);
     modalVideo.muted = true;
-    modalVideo.src = record.source;
+    RRSMedia.setVideo(modalVideo, record.assetUrl);
     modalVideo.load();
     modal.hidden = false;
     document.body.classList.add("is-films-modal-open");
@@ -144,6 +144,7 @@
       // Seeking can fail before video metadata is available.
     }
 
+    RRSMedia.clear(modalVideo);
     modalVideo.removeAttribute("src");
     modalVideo.load();
     modal.hidden = true;

@@ -65,27 +65,37 @@ function expectedPublicNavigation(relativePath) {
     '>Clients &amp; Talents</a>'
   );
 
+  let expectedPage = expectedNavigation;
+
   if (relativePath === "campaigns.html") {
-    return expectedNavigation.replace(
+    expectedPage = expectedPage.replace(
       '<script src="campaigns.js"></script>\n<script src="campaigns-mobile-galleries.js"></script>',
       '<script src="campaigns-mobile-detail.js"></script>'
     );
   }
 
   if (relativePath === "search.html") {
-    return expectedNavigation.replace(
+    expectedPage = expectedPage.replace(
       '<script src="campaigns-mobile-galleries.js"></script>',
       '<script src="campaigns-mobile-detail.js"></script>'
     );
   }
 
-  if (!["index.html", "clients.html"].includes(relativePath)) {
-    return expectedNavigation;
+  if (["index.html", "clients.html"].includes(relativePath)) {
+    expectedPage = expectedPage.replace(
+      '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>',
+      '<section class="clients-section">\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>'
+    );
   }
 
-  return expectedNavigation.replace(
-    '<section class="clients-section">\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>',
-    '<section class="clients-section">\n      <p class="clients-wall-hint">← DRAG TO EXPLORE →</p>\n      <div class="clients-wall-wrapper" role="region" aria-label="Clients and talents — horizontal scroll" tabindex="0">\n        <div class="clients-wall" id="clientsWall"></div>\n      </div>'
+  expectedPage = expectedPage.replace(
+    /(<(?:img|source)\b[^>]*?)\ssrc="(assets\/[^"]+)"/g,
+    '$1 data-media-src="$2"'
+  );
+
+  return expectedPage.replace(
+    '  <link rel="stylesheet" href="style.css" />',
+    '  <link rel="stylesheet" href="style.css" />\n  <script src="config/media.js"></script>\n  <script src="utils/mediaUrl.js"></script>'
   );
 }
 

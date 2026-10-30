@@ -22,8 +22,10 @@ test("Films has dedicated markup and rendering without changing Campaigns", () =
 
   execFileSync("git", [
     "diff", "--quiet", "HEAD", "--",
-    "campaigns.js", "utils/renderProject.js", "utils/viewportVideoPlayback.js"
+    "campaigns.js", "utils/viewportVideoPlayback.js"
   ], { cwd: root });
+  assert.match(page, /config\/media\.js[\s\S]*?utils\/mediaUrl\.js[\s\S]*?utils\/renderFilmsGrid\.js/);
+  assert.match(renderer, /RRSMedia\.setVideo\(video, record\.assetUrl\)/);
 });
 
 test("the existing Films filter produces 74 tiles from real campaign video records", () => {
@@ -77,7 +79,7 @@ test("modal is accessible, uses the selected source, and renders ordered real cr
   assert.match(page, /aria-labelledby="filmsModalTitle"/);
   assert.match(page, /<button class="films-modal__close" type="button" data-films-close>EXIT<\/button>/);
   assert.match(page, /class="films-modal__video"[\s\S]*?muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?controls/);
-  assert.match(controller, /modalVideo\.src = record\.source/);
+  assert.match(controller, /RRSMedia\.setVideo\(modalVideo, record\.assetUrl\)/);
   assert.match(controller, /campaign\.credits\.forEach/);
   assert.match(controller, /term\.textContent = label/);
   assert.match(controller, /cleanValues\.forEach\(value =>/);
@@ -156,6 +158,6 @@ test("dataset, Search, CMS, APIs, assets, and unrelated sections remain unchange
     ":(exclude)assets/ui/diavoletto-visual-identity.png",
     ":(exclude)assets/ui/diavoletto-films.png",
     ":(exclude)assets/ui/diavoletto-magazines-books.png",
-    "magazines-books.js", "brand-identity.js", "events.js"
+    "brand-identity.js", "events.js"
   ], { cwd: root });
 });

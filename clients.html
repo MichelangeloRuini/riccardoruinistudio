@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Riccardo Ruini Studio</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="config/media.js"></script>
+  <script src="utils/mediaUrl.js"></script>
 </head>
 
 <body class="landing-active">
@@ -13,11 +15,11 @@
 
   <section class="landing" id="landing">
     <video autoplay muted loop playsinline class="landing-video">
-      <source src="assets/hero.mp4" type="video/mp4" />
+      <source data-media-src="assets/hero.mp4" type="video/mp4" />
     </video>
 
     <div class="landing-logo">
-      <img src="assets/logo-main.svg" alt="Riccardo Ruini Studio" />
+      <img data-media-src="assets/logo-main.svg" alt="Riccardo Ruini Studio" />
     </div>
   </section>
 
@@ -25,7 +27,7 @@
 
     <header class="site-header site-header--editorial">
       <div class="site-header-left">
-        <img src="assets/logo-main.svg" alt="Riccardo Ruini Studio" class="site-logo" />
+        <img data-media-src="assets/logo-main.svg" alt="Riccardo Ruini Studio" class="site-logo" />
         <input class="search" id="searchInput" type="text" placeholder="SEARCH" />
       </div>
 
@@ -72,8 +74,8 @@
       </div>
 
       <div class="footer-logo">
-    <img src="assets/ui/logo-footer-01.png" class="footer-logo-frame frame-1">
-    <img src="assets/ui/logo-footer-02.png" class="footer-logo-frame frame-2">
+    <img data-media-src="assets/ui/logo-footer-01.webp" class="footer-logo-frame frame-1">
+    <img data-media-src="assets/ui/logo-footer-02.webp" class="footer-logo-frame frame-2">
 </div>
     </footer>
 

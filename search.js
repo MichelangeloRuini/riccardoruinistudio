@@ -61,7 +61,7 @@ function renderMagazinesBooksSearchResult(record, index) {
   video.controls = true;
   video.playsInline = true;
   video.preload = "metadata";
-  video.src = record.video;
+  RRSMedia.setVideo(video, record.video);
   video.setAttribute("aria-label", record.title.trim());
 
   title.appendChild(detailLink);
@@ -176,6 +176,7 @@ function renderSearch() {
   });
 
   searchResults.replaceChildren(fragment);
+  RRSMedia.hydrate(searchResults);
   searchCampaignDetail.refresh();
   RRSViewportVideoPlayback.observe(searchResults);
 }

@@ -17,7 +17,7 @@ const tabletStyles = responsiveStyles.slice(tabletStart, mobileStart);
 const mobileStyles = responsiveStyles.slice(mobileStart);
 const footerCharacterAssets = [
   "assets/ui/diavoletto-about.png",
-  "assets/ui/diavoletto-clients-talents.png",
+  "assets/ui/diavoletto-clients-talents-v2.png",
   "assets/ui/diavoletto-visual-identity.png",
   "assets/ui/diavoletto-films.png",
   "assets/ui/diavoletto-magazines-books.png"
@@ -65,7 +65,7 @@ test("the global mobile footer uses the editorial two-column layout", () => {
 test("section footer characters use one centralized page map and the existing frame pair", () => {
   const expectedMappings = {
     "about.html": "assets/ui/diavoletto-about.png",
-    "clients.html": "assets/ui/diavoletto-clients-talents.png",
+    "clients.html": "assets/ui/diavoletto-clients-talents-v2.png",
     "brand-identity.html": "assets/ui/diavoletto-visual-identity.png",
     "films.html": "assets/ui/diavoletto-films.png",
     "magazines-books.html": "assets/ui/diavoletto-magazines-books.png"
@@ -76,7 +76,8 @@ test("section footer characters use one centralized page map and the existing fr
   });
 
   assert.match(script, /document\.querySelectorAll\("\.footer-logo-frame"\)\.forEach/);
-  assert.match(script, /frame\.src = character/);
+  assert.match(script, /frame\.dataset\.mediaSrc = character/);
+  assert.match(script, /RRSMedia\.setImage\(frame, character\)/);
   assert.match(script, /frame\.classList\.add\("is-section-character"\)/);
   assert.match(styles, /\.footer-logo-frame\.is-section-character\s*\{[^}]*width:\s*100%[^}]*height:\s*100%[^}]*object-fit:\s*contain[^}]*object-position:\s*right top/);
 
@@ -190,13 +191,11 @@ test("HTML, datasets, CMS, APIs, assets, Search, and renderers remain untouched"
     "admin-portfolio.js",
     "assets",
     ":(exclude)assets/ui/diavoletto-about.png",
-    ":(exclude)assets/ui/diavoletto-clients-talents.png",
+    ":(exclude)assets/ui/diavoletto-clients-talents-v2.png",
     ":(exclude)assets/ui/diavoletto-visual-identity.png",
     ":(exclude)assets/ui/diavoletto-films.png",
     ":(exclude)assets/ui/diavoletto-magazines-books.png",
     "utils/searchData.js",
-    "utils/renderProject.js",
-    "utils/renderPortfolio.js",
     "campaigns.js",
   ], { cwd: root });
 });

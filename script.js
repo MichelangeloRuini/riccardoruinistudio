@@ -141,9 +141,19 @@ function normalize(text) {
   return RRSUnifiedSearch.normalize(text);
 }
 
+function loadDeferredFooterFrames() {
+  document.querySelectorAll(".footer-logo-frame[data-media-deferred-src]").forEach(frame => {
+    const assetUrl = frame.dataset.mediaDeferredSrc;
+
+    RRSMedia.setImage(frame, assetUrl);
+    frame.removeAttribute("data-media-deferred-src");
+  });
+}
+
 function enterSite() {
   if (!landing) return;
 
+  loadDeferredFooterFrames();
   landing.classList.add("is-leaving");
 
   setTimeout(() => {
@@ -157,6 +167,7 @@ if (landing) {
   const skipLanding = new URLSearchParams(window.location.search).get("skipLanding");
 
   if (skipLanding === "true") {
+    loadDeferredFooterFrames();
     document.body.classList.remove("landing-active");
     document.body.classList.add("entered");
   } else {
@@ -1199,7 +1210,7 @@ initializeStartProjectModal();
 function initializeSectionFooterCharacter() {
   const characterByPage = {
     "about.html": "assets/ui/diavoletto-about.png",
-    "clients.html": "assets/ui/diavoletto-clients-talents.png",
+    "clients.html": "assets/ui/diavoletto-clients-talents-v2.png",
     "brand-identity.html": "assets/ui/diavoletto-visual-identity.png",
     "films.html": "assets/ui/diavoletto-films.png",
     "magazines-books.html": "assets/ui/diavoletto-magazines-books.png"
@@ -1211,7 +1222,8 @@ function initializeSectionFooterCharacter() {
   if (!character) return;
 
   document.querySelectorAll(".footer-logo-frame").forEach(frame => {
-    frame.src = character;
+    frame.dataset.mediaSrc = character;
+    RRSMedia.setImage(frame, character);
     frame.classList.add("is-section-character");
   });
 }

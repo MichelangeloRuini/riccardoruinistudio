@@ -155,7 +155,7 @@
     modalTitle.textContent = record.title.trim();
     renderCredits(record);
     modalVideo.muted = true;
-    modalVideo.src = record.video.trim();
+    RRSMedia.setVideo(modalVideo, record.video.trim());
     modalVideo.load();
     modal.hidden = false;
     document.body.classList.add("is-modal-open");
@@ -175,6 +175,7 @@
       // Some browsers reject seeks before metadata is available.
     }
 
+    RRSMedia.clear(modalVideo);
     modalVideo.removeAttribute("src");
     modalVideo.load();
     modal.hidden = true;
@@ -203,7 +204,7 @@
     video.loop = true;
     video.playsInline = true;
     video.preload = "metadata";
-    video.src = record.video.trim();
+    RRSMedia.setVideo(video, record.video.trim());
     video.setAttribute("aria-hidden", "true");
     video.tabIndex = -1;
 

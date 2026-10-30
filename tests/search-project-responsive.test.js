@@ -68,7 +68,7 @@ test("Campaign results reuse the shared mobile Campaigns card and detail control
   assert.match(searchRenderer, /if \(searchCampaignDetail\.matches\(\)\)[\s\S]*?RRSMobileCampaignDetail\.createCard\(safeCampaign\)/);
   assert.match(searchRenderer, /renderProject\(safeCampaign, index, safeCampaign\.media\)/);
   assert.match(searchRenderer, /result\.classList\.add\("search-campaign-result"\)/);
-  assert.match(searchRenderer, /searchCampaignDetail\.prepareForRender\(\)[\s\S]*?searchResults\.replaceChildren\(fragment\);\s*searchCampaignDetail\.refresh\(\)/);
+  assert.match(searchRenderer, /searchCampaignDetail\.prepareForRender\(\)[\s\S]*?searchResults\.replaceChildren\(fragment\);\s*RRSMedia\.hydrate\(searchResults\);\s*searchCampaignDetail\.refresh\(\)/);
   assert.match(mobileCampaignDetail, /global\.RRSMobileCampaignDetail = \{\s*create: createController,\s*createCard/);
   assert.match(mobileCampaignDetail, /const imageFile = mediaFiles\.find\(file => !file\.toLowerCase\(\)\.endsWith\("\.mp4"\)\)/);
   assert.match(mobileCampaignDetail, /card\.append\(client, coverButton, title\)/);
@@ -119,11 +119,8 @@ test("Search engine, renderers, data, prior pages, CMS, APIs, and assets remain 
     "--",
     "project.js",
     "utils/searchData.js",
-    "utils/renderPortfolio.js",
-    "utils/renderPortfolioSearch.js",
     "campaigns.js",
     "brand-identity.js",
-    "magazines-books.js",
     "data",
     "cms",
     "admin.html",

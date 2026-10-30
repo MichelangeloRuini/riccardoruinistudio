@@ -16,9 +16,9 @@ const portfolioProjects = [
     "client": "Bulgari Hotel & Residences London",
     "title": "",
     "path": "assets/identities/bulgari-hotel-residences-london/",
-    "cover": "01.webp",
+    "cover": "02.webp",
     "media": [
-      "01.jpg"
+      "02.jpg"
     ]
   },
   {

@@ -355,8 +355,6 @@ test("public HTML, Search engine, datasets, CMS, APIs, assets, and renderers are
     ":(exclude)assets/ui/diavoletto-films.png",
     ":(exclude)assets/ui/diavoletto-magazines-books.png",
     "utils/searchData.js",
-    "utils/renderProject.js",
-    "utils/renderPortfolio.js",
     "campaigns.js",
   ], { cwd: root });
 });
