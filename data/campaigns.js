@@ -1,5 +1,5 @@
 const campaigns = [
-{
+  {
     id: "feudi-di-san-gregorio-2026-copy-copy-copy",
     client: "Feudi di San Gregorio",
     title: "40th Anniversary 2026",
@@ -3456,1914 +3456,1650 @@ const campaigns = [
       "04.jpg"
     ]
   },
-
-{
-  id: "bulgari-octo-2012",
-  client: "Bulgari",
-  title: "Octo 2012",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-octo-2012/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mitch Feinberg"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2011",
-  client: "Gucci",
-  title: "FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: "Abbey Lee"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-pre-fall-2011",
-  client: "Gucci",
-  title: "Pre Fall 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-pre-fall-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2011",
-  client: "Valentino",
-  title: "Women FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-main-fw-2011",
-  client: "Liu Jo",
-  title: "Main FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-main-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-fw-2011",
-  client: "Liu Jo",
-  title: "Jeans FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-bottom-up-fw-2011",
-  client: "Liu Jo",
-  title: "Bottom Up FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-bottom-up-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "patrizia-pepe-fw-2011",
-  client: "Patrizia Pepe",
-  title: "FW 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/patrizia-pepe-fw-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Edita Vilkeviciute"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2011",
-  client: "Valentino",
-  title: "Women SS 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2011",
-  client: "Gucci",
-  title: "SS 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Karmen Pedaru",
-        "Joan Smalls"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "vilebrequin-ss-2011",
-  client: "Vilebrequin",
-  title: "SS 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/vilebrequin-ss-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "John Balsom"
-    },
-    {
-      label: "Model",
-      value: "Oriol El Cacho"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-cruise-2011",
-  client: "Gucci",
-  title: "Cruise 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-cruise-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Karmen Pedaru"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-forever-now-2011",
-  client: "Gucci",
-  title: "Forever Now 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-forever-now-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Peter Lindbergh"
-    },
-    {
-      label: "Talent",
-      value: "Charlotte Casiraghi"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-flora-by-gucci-2011",
-  client: "Gucci",
-  title: "Flora By Gucci 2011",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-flora-by-gucci-2011/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Sølve Sundsbø"
-    },
-    {
-      label: "Still Life Photographer",
-      value: "Guido Mocafico"
-    },
-    {
-      label: "Model",
-      value: "Abbey Lee"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "06.jpg",
-    "07.jpg",
-    "08.jpg",
-    "09.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2010",
-  client: "Gucci",
-  title: "FW 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Raquel Zimmermann"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-fw-2010",
-  client: "Valentino",
-  title: "Women FW 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-fw-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "David Sims"
-    },
-    {
-      label: "Models",
-      value: [
-        "Freja Beha Erichsen",
-        "Jac Jagaciak",
-        "Tati Cotliar"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "06.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2010",
-  client: "Gucci",
-  title: "SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Natasha Poly"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "gucci-kids-ss-2010",
-  client: "Gucci",
-  title: "Kids SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-kids-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Jennifer Lopez"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-main-ss-2010",
-  client: "Liu Jo",
-  title: "Main SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-main-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-bottom-up-ss-2010",
-  client: "Liu Jo",
-  title: "Bottom Up SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-bottom-up-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "liu-jo-jeans-ss-2010",
-  client: "Liu Jo",
-  title: "Jeans SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/liu-jo-jeans-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "vilebrequin-ss-2010",
-  client: "Vilebrequin",
-  title: "SS 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/vilebrequin-ss-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Robert Wyatt"
-    },
-    {
-      label: "Model",
-      value: "Jean Francois Poirier"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-guilty-2010",
-  client: "Gucci",
-  title: "Guilty 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-guilty-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Still Life Photographer",
-      value: "Guido Mocafico"
-    },
-    {
-      label: "Director",
-      value: "Frank Miller"
-    },
-    {
-      label: "Talents",
-      value: [
-        "Evan Rachel Wood",
-        "Chris Evans"
-      ]
-    },
-    {
-      label: "Awards",
-      value: [
-        "42° Key Award",
-        "Key Award 2010"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "video-01.mp4",
-    "video-02.mp4",
-    "video-03.mp4"
-  ]
-},
-
-{
-  id: "bulgari-man-2010",
-  client: "Bulgari",
-  title: "Man 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-man-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Talent",
-      value: "Clive Owen"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-sunglasses-2010",
-  client: "Gucci",
-  title: "Sunglasses 2010",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-sunglasses-2010/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Daniel Jackson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2009",
-  client: "Gucci",
-  title: "FW 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-fw-09",
-  client: "Valentino",
-  title: "FW 09",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-fw-09/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Iris Strubegger"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2009",
-  client: "Gucci",
-  title: "SS 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Models",
-      value: [
-        "Natasha Poly",
-        "Abbey Lee",
-        "Lily Donaldson"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "valentino-women-ss-2009",
-  client: "Valentino",
-  title: "Women SS 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-women-ss-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Stephanie Seymour"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-cruise-2009",
-  client: "Gucci",
-  title: "Cruise 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-cruise-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Natasha Poly"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "vilebrequin-ss-2009",
-  client: "Vilebrequin",
-  title: "SS 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/vilebrequin-ss-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Robert Wyatt"
-    },
-    {
-      label: "Model",
-      value: "Jean Francois Poirier"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-gucci-by-gucci-sport-2009",
-  client: "Gucci",
-  title: "Gucci by Gucci Sport 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-gucci-by-gucci-sport-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Director",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "James Franco"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "bulgari-blv-2009",
-  client: "Bulgari",
-  title: "Blv 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-blv-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Laetitia Casta"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "valentino-watches-2009",
-  client: "Valentino",
-  title: "Watches 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/valentino-watches-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Guido Mocafico"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-jewellery-2009",
-  client: "Bulgari",
-  title: "Jewellery 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-jewellery-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Talent",
-      value: "Julianne Moore"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "bulgari-2009",
-  client: "Bulgari",
-  title: "2009",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Jessica Stam"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-safilo-young-2009",
-  client: "Gucci",
-  title: "Safilo Young 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-safilo-young-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Daniel Jackson"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-eyewear-2009",
-  client: "Bulgari",
-  title: "Eyewear 2009",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-eyewear-2009/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Models",
-      value: [
-        "Oriol Elcacho",
-        "Bianca Balti"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2008",
-  client: "Gucci",
-  title: "FW 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Models",
-      value: [
-        "Eniko Mihalik",
-        "Abbey Lee",
-        "Lily Donaldson"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "gucci-ss-2008",
-  client: "Gucci",
-  title: "SS 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-ss-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Model",
-      value: "Natasha Poly"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "gucci-flora-by-gucci-2008",
-  client: "Gucci",
-  title: "Flora by Gucci 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-flora-by-gucci-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Director",
-      value: "Chris Cunningham"
-    },
-    {
-      label: "Model",
-      value: "Abbey Lee"
-    },
-    {
-      label: "Awards",
-      value: [
-        "Cannes Lion Best Use of Music Gold prize",
-        "Cannes Lion Best Cosmetics Bronze award",
-        "41° Key Award Eurobest Silver prize"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-jasmin-noir-2008",
-  client: "Gucci",
-  title: "Jasmin Noir 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-jasmin-noir-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Still Life Photographer",
-      value: "Guido Mocafico"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-gucci-by-gucci-man-2008",
-  client: "Gucci",
-  title: "Gucci by Gucci Man 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-gucci-by-gucci-man-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Director",
-      value: "Jan Wentz"
-    },
-    {
-      label: "Talent",
-      value: "James Franco"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "bulgari-green-jade-2008",
-  client: "Bulgari",
-  title: "Green Jade 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-green-jade-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    },
-    {
-      label: "Model",
-      value: "Karlie Kloss"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-jewellery-2008",
-  client: "Gucci",
-  title: "Jewellery 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-jewellery-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "Clare Danes"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-elisia-2008",
-  client: "Bulgari",
-  title: "Elisia 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-elisia-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Jessica Stam"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-tattoo-heart-collection-2008",
-  client: "Gucci",
-  title: "Tattoo Heart Collection 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-tattoo-heart-collection-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "Rihanna"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "gucci-stores-opening-2008",
-  client: "Gucci",
-  title: "Stores Opening 2008",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-stores-opening-2008/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Guido Mocafico"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-fw-2007",
-  client: "Gucci",
-  title: "FW 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-fw-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Craig McDean"
-    },
-    {
-      label: "Model",
-      value: "Natasha Poly"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "missoni-fw-2007",
-  client: "Missoni",
-  title: "FW 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/missoni-fw-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Tom Betterton & Jenny Gage"
-    },
-    {
-      label: "Model",
-      value: "Behati Prinsloo"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-cruise-2007",
-  client: "Gucci",
-  title: "Cruise 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-cruise-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Model",
-      value: "Natasha Poly"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "missoni-ss-2007",
-  client: "Missoni",
-  title: "SS 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/missoni-ss-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Tom Betterton & Jenny Gage"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "gucci-gucci-by-gucci-2007",
-  client: "Gucci",
-  title: "Gucci by Gucci 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-gucci-by-gucci-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Director",
-      value: "David Lynch"
-    },
-    {
-      label: "Models",
-      value: [
-        "Natasha Poly",
-        "Raquel Zimmerman",
-        "Freja Beha"
-      ]
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "gucci-jewellery-2007",
-  client: "Gucci",
-  title: "Jewellery 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/gucci-jewellery-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Inez and Vinoodh"
-    },
-    {
-      label: "Talent",
-      value: "Drew Barrymore"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-jewellery-2007",
-  client: "Bulgari",
-  title: "Jewellery 2007",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-jewellery-2007/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Guido Mocafico"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-pour-femme-2006",
-  client: "Bulgari",
-  title: "Pour Femme 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-pour-femme-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Directors",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Still Life Photographer",
-      value: "Guido Mocafico"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "bulgari-pour-homme-soir-2006",
-  client: "Bulgari",
-  title: "Pour Homme Soir 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-pour-homme-soir-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Willy Vanderperre"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-amethyste-2006",
-  client: "Bulgari",
-  title: "Amethyste 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-amethyste-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-the-2006",
-  client: "Bulgari",
-  title: "Thè 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-the-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Coppi & Barbieri"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "bulgari-watches-2006",
-  client: "Bulgari",
-  title: "Watches 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-watches-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mitch Feinberg"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-jewellery-2006",
-  client: "Bulgari",
-  title: "Jewellery 2006",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-jewellery-2006/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Jessica Stam"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-crystalline-2005",
-  client: "Bulgari",
-  title: "Crystalline 2005",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-crystalline-2005/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Mario Sorrenti"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "bulgari-aqua-2004",
-  client: "Bulgari",
-  title: "Aqua 2004",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-aqua-2004/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Director",
-      value: "Jason Harrington"
-    },
-    {
-      label: "Model",
-      value: "Oriol Elcacho"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "video-01.mp4"
-  ]
-},
-
-{
-  id: "bulgari-flora-2005",
-  client: "Bulgari",
-  title: "Flora 2005",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-flora-2005/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Jessica Stam"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-jewellery-2005",
-  client: "Bulgari",
-  title: "Jewellery 2005",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-jewellery-2005/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg"
-  ]
-},
-
-{
-  id: "bulgari-high-jewellery-2005",
-  client: "Bulgari",
-  title: "High Jewellery 2005",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-high-jewellery-2005/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Guido Mocafico"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "bulgari-marry-me-2005",
-  client: "Bulgari",
-  title: "Marry Me 2005",
-  category: "Campaigns",
-  path: "assets/campaigns/bulgari-marry-me-2005/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    }
-  ],
-
-  media: [
-    "01.jpg"
-  ]
-},
-
-{
-  id: "fendi-ss-2003",
-  client: "Fendi",
-  title: "SS 2003",
-  category: "Campaigns",
-  path: "assets/campaigns/fendi-ss-2003/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Jessica Miller"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "fendi-fw-2002",
-  client: "Fendi",
-  title: "FW 2002",
-  category: "Campaigns",
-  path: "assets/campaigns/fendi-fw-2002/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Rie Rasmussen"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-},
-
-{
-  id: "fendi-ss-2002",
-  client: "Fendi",
-  title: "SS 2002",
-  category: "Campaigns",
-  path: "assets/campaigns/fendi-ss-2002/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographers",
-      value: "Mert Alas and Marcus Piggott"
-    },
-    {
-      label: "Model",
-      value: "Kate Moss"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg"
-  ]
-},
-
-{
-  id: "fendi-fw-2001",
-  client: "Fendi",
-  title: "FW 2001",
-  category: "Campaigns",
-  path: "assets/campaigns/fendi-fw-2001/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Philip Lorca Di Corcia"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg",
-    "04.jpg",
-    "05.jpg",
-    "06.jpg",
-    "07.jpg",
-    "08.jpg",
-    "09.jpg"
-  ]
-},
-
-{
-  id: "fendi-prefall-2001",
-  client: "Fendi",
-  title: "Prefall 2001",
-  category: "Campaigns",
-  path: "assets/campaigns/fendi-prefall-2001/",
-
-  border: false,
-
-  credits: [
-    {
-      label: "Photographer",
-      value: "Jerome Esch"
-    }
-  ],
-
-  media: [
-    "01.jpg",
-    "02.jpg",
-    "03.jpg"
-  ]
-}
+  {
+    id: "bulgari-octo-2012",
+    client: "Bulgari",
+    title: "Octo 2012",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-octo-2012/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mitch Feinberg"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2011",
+    client: "Gucci",
+    title: "FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: "Abbey Lee"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-pre-fall-2011",
+    client: "Gucci",
+    title: "Pre Fall 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-pre-fall-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2011",
+    client: "Valentino",
+    title: "Women FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-main-fw-2011",
+    client: "Liu Jo",
+    title: "Main FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-main-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-fw-2011",
+    client: "Liu Jo",
+    title: "Jeans FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-bottom-up-fw-2011",
+    client: "Liu Jo",
+    title: "Bottom Up FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-bottom-up-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "patrizia-pepe-fw-2011",
+    client: "Patrizia Pepe",
+    title: "FW 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/patrizia-pepe-fw-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Edita Vilkeviciute"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2011",
+    client: "Valentino",
+    title: "Women SS 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2011",
+    client: "Gucci",
+    title: "SS 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Karmen Pedaru",
+          "Joan Smalls"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "vilebrequin-ss-2011",
+    client: "Vilebrequin",
+    title: "SS 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/vilebrequin-ss-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "John Balsom"
+      },
+      {
+        label: "Model",
+        value: "Oriol El Cacho"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-cruise-2011",
+    client: "Gucci",
+    title: "Cruise 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-cruise-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Karmen Pedaru"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-forever-now-2011",
+    client: "Gucci",
+    title: "Forever Now 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-forever-now-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Peter Lindbergh"
+      },
+      {
+        label: "Talent",
+        value: "Charlotte Casiraghi"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-flora-by-gucci-2011",
+    client: "Gucci",
+    title: "Flora By Gucci 2011",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-flora-by-gucci-2011/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Sølve Sundsbø"
+      },
+      {
+        label: "Still Life Photographer",
+        value: "Guido Mocafico"
+      },
+      {
+        label: "Model",
+        value: "Abbey Lee"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2010",
+    client: "Gucci",
+    title: "FW 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Raquel Zimmermann"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-fw-2010",
+    client: "Valentino",
+    title: "Women FW 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-fw-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "David Sims"
+      },
+      {
+        label: "Models",
+        value: [
+          "Freja Beha Erichsen",
+          "Jac Jagaciak",
+          "Tati Cotliar"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg"
+    ]
+  },
+  {
+    id: "malo-fw-2010",
+    client: "Malo",
+    title: "FW 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/malo-fw-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Angelo Pennetta"
+      },
+      {
+        label: "Model",
+        value: "Shannan Click"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2010",
+    client: "Gucci",
+    title: "SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Natasha Poly"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "gucci-kids-ss-2010",
+    client: "Gucci",
+    title: "Kids SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-kids-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Jennifer Lopez"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-main-ss-2010",
+    client: "Liu Jo",
+    title: "Main SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-main-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-bottom-up-ss-2010",
+    client: "Liu Jo",
+    title: "Bottom Up SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-bottom-up-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "liu-jo-jeans-ss-2010",
+    client: "Liu Jo",
+    title: "Jeans SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/liu-jo-jeans-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "vilebrequin-ss-2010",
+    client: "Vilebrequin",
+    title: "SS 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/vilebrequin-ss-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Robert Wyatt"
+      },
+      {
+        label: "Model",
+        value: "Jean Francois Poirier"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-guilty-2010",
+    client: "Gucci",
+    title: "Guilty 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-guilty-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Still Life Photographer",
+        value: "Guido Mocafico"
+      },
+      {
+        label: "Director",
+        value: "Frank Miller"
+      },
+      {
+        label: "Talents",
+        value: [
+          "Evan Rachel Wood",
+          "Chris Evans"
+        ]
+      },
+      {
+        label: "Awards",
+        value: [
+          "42° Key Award",
+          "Key Award 2010"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "video-01.mp4",
+      "video-02.mp4",
+      "video-03.mp4"
+    ]
+  },
+  {
+    id: "bulgari-man-2010",
+    client: "Bulgari",
+    title: "Man 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-man-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Talent",
+        value: "Clive Owen"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-sunglasses-2010",
+    client: "Gucci",
+    title: "Sunglasses 2010",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-sunglasses-2010/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Daniel Jackson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2009",
+    client: "Gucci",
+    title: "FW 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-fw-09",
+    client: "Valentino",
+    title: "FW 09",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-fw-09/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Iris Strubegger"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2009",
+    client: "Gucci",
+    title: "SS 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Models",
+        value: [
+          "Natasha Poly",
+          "Abbey Lee",
+          "Lily Donaldson"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "valentino-women-ss-2009",
+    client: "Valentino",
+    title: "Women SS 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-women-ss-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Stephanie Seymour"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-cruise-2009",
+    client: "Gucci",
+    title: "Cruise 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-cruise-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Natasha Poly"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "vilebrequin-ss-2009",
+    client: "Vilebrequin",
+    title: "SS 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/vilebrequin-ss-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Robert Wyatt"
+      },
+      {
+        label: "Model",
+        value: "Jean Francois Poirier"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-gucci-by-gucci-sport-2009",
+    client: "Gucci",
+    title: "Gucci by Gucci Sport 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-gucci-by-gucci-sport-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Director",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "James Franco"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "bulgari-blv-2009",
+    client: "Bulgari",
+    title: "Blv 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-blv-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Laetitia Casta"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "valentino-watches-2009",
+    client: "Valentino",
+    title: "Watches 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/valentino-watches-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Guido Mocafico"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-jewellery-2009",
+    client: "Bulgari",
+    title: "Jewellery 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-jewellery-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Talent",
+        value: "Julianne Moore"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "bulgari-2009",
+    client: "Bulgari",
+    title: "2009",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Jessica Stam"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-safilo-young-2009",
+    client: "Gucci",
+    title: "Safilo Young 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-safilo-young-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Daniel Jackson"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-eyewear-2009",
+    client: "Bulgari",
+    title: "Eyewear 2009",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-eyewear-2009/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Models",
+        value: [
+          "Oriol Elcacho",
+          "Bianca Balti"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2008",
+    client: "Gucci",
+    title: "FW 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Models",
+        value: [
+          "Eniko Mihalik",
+          "Abbey Lee",
+          "Lily Donaldson"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "gucci-ss-2008",
+    client: "Gucci",
+    title: "SS 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-ss-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Model",
+        value: "Natasha Poly"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "gucci-flora-by-gucci-2008",
+    client: "Gucci",
+    title: "Flora by Gucci 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-flora-by-gucci-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Director",
+        value: "Chris Cunningham"
+      },
+      {
+        label: "Model",
+        value: "Abbey Lee"
+      },
+      {
+        label: "Awards",
+        value: [
+          "Cannes Lion Best Use of Music Gold prize",
+          "Cannes Lion Best Cosmetics Bronze award",
+          "41° Key Award Eurobest Silver prize"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-jasmin-noir-2008",
+    client: "Gucci",
+    title: "Jasmin Noir 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-jasmin-noir-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Still Life Photographer",
+        value: "Guido Mocafico"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-gucci-by-gucci-man-2008",
+    client: "Gucci",
+    title: "Gucci by Gucci Man 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-gucci-by-gucci-man-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Director",
+        value: "Jan Wentz"
+      },
+      {
+        label: "Talent",
+        value: "James Franco"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "bulgari-green-jade-2008",
+    client: "Bulgari",
+    title: "Green Jade 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-green-jade-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      },
+      {
+        label: "Model",
+        value: "Karlie Kloss"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-jewellery-2008",
+    client: "Gucci",
+    title: "Jewellery 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-jewellery-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "Clare Danes"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-elisia-2008",
+    client: "Bulgari",
+    title: "Elisia 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-elisia-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Jessica Stam"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-tattoo-heart-collection-2008",
+    client: "Gucci",
+    title: "Tattoo Heart Collection 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-tattoo-heart-collection-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "Rihanna"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "gucci-stores-opening-2008",
+    client: "Gucci",
+    title: "Stores Opening 2008",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-stores-opening-2008/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Guido Mocafico"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-fw-2007",
+    client: "Gucci",
+    title: "FW 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-fw-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Craig McDean"
+      },
+      {
+        label: "Model",
+        value: "Natasha Poly"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "missoni-fw-2007",
+    client: "Missoni",
+    title: "FW 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/missoni-fw-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Tom Betterton & Jenny Gage"
+      },
+      {
+        label: "Model",
+        value: "Behati Prinsloo"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-cruise-2007",
+    client: "Gucci",
+    title: "Cruise 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-cruise-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Model",
+        value: "Natasha Poly"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "missoni-ss-2007",
+    client: "Missoni",
+    title: "SS 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/missoni-ss-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Tom Betterton & Jenny Gage"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "gucci-gucci-by-gucci-2007",
+    client: "Gucci",
+    title: "Gucci by Gucci 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-gucci-by-gucci-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Director",
+        value: "David Lynch"
+      },
+      {
+        label: "Models",
+        value: [
+          "Natasha Poly",
+          "Raquel Zimmerman",
+          "Freja Beha"
+        ]
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "gucci-jewellery-2007",
+    client: "Gucci",
+    title: "Jewellery 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/gucci-jewellery-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Inez and Vinoodh"
+      },
+      {
+        label: "Talent",
+        value: "Drew Barrymore"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-jewellery-2007",
+    client: "Bulgari",
+    title: "Jewellery 2007",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-jewellery-2007/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Guido Mocafico"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-pour-femme-2006",
+    client: "Bulgari",
+    title: "Pour Femme 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-pour-femme-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Directors",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Still Life Photographer",
+        value: "Guido Mocafico"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "bulgari-pour-homme-soir-2006",
+    client: "Bulgari",
+    title: "Pour Homme Soir 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-pour-homme-soir-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Willy Vanderperre"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-amethyste-2006",
+    client: "Bulgari",
+    title: "Amethyste 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-amethyste-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-the-2006",
+    client: "Bulgari",
+    title: "Thè 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-the-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Coppi & Barbieri"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "bulgari-watches-2006",
+    client: "Bulgari",
+    title: "Watches 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-watches-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mitch Feinberg"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-jewellery-2006",
+    client: "Bulgari",
+    title: "Jewellery 2006",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-jewellery-2006/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Jessica Stam"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-crystalline-2005",
+    client: "Bulgari",
+    title: "Crystalline 2005",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-crystalline-2005/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Mario Sorrenti"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "bulgari-aqua-2004",
+    client: "Bulgari",
+    title: "Aqua 2004",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-aqua-2004/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Director",
+        value: "Jason Harrington"
+      },
+      {
+        label: "Model",
+        value: "Oriol Elcacho"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "video-01.mp4"
+    ]
+  },
+  {
+    id: "bulgari-flora-2005",
+    client: "Bulgari",
+    title: "Flora 2005",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-flora-2005/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Jessica Stam"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-jewellery-2005",
+    client: "Bulgari",
+    title: "Jewellery 2005",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-jewellery-2005/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg"
+    ]
+  },
+  {
+    id: "bulgari-high-jewellery-2005",
+    client: "Bulgari",
+    title: "High Jewellery 2005",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-high-jewellery-2005/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Guido Mocafico"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "bulgari-marry-me-2005",
+    client: "Bulgari",
+    title: "Marry Me 2005",
+    category: "Campaigns",
+    path: "assets/campaigns/bulgari-marry-me-2005/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      }
+    ],
+    media: [
+      "01.jpg"
+    ]
+  },
+  {
+    id: "fendi-ss-2003",
+    client: "Fendi",
+    title: "SS 2003",
+    category: "Campaigns",
+    path: "assets/campaigns/fendi-ss-2003/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Jessica Miller"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "fendi-fw-2002",
+    client: "Fendi",
+    title: "FW 2002",
+    category: "Campaigns",
+    path: "assets/campaigns/fendi-fw-2002/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Rie Rasmussen"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  },
+  {
+    id: "fendi-ss-2002",
+    client: "Fendi",
+    title: "SS 2002",
+    category: "Campaigns",
+    path: "assets/campaigns/fendi-ss-2002/",
+    border: false,
+    credits: [
+      {
+        label: "Photographers",
+        value: "Mert Alas and Marcus Piggott"
+      },
+      {
+        label: "Model",
+        value: "Kate Moss"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg"
+    ]
+  },
+  {
+    id: "fendi-fw-2001",
+    client: "Fendi",
+    title: "FW 2001",
+    category: "Campaigns",
+    path: "assets/campaigns/fendi-fw-2001/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Philip Lorca Di Corcia"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg"
+    ]
+  },
+  {
+    id: "fendi-prefall-2001",
+    client: "Fendi",
+    title: "Prefall 2001",
+    category: "Campaigns",
+    path: "assets/campaigns/fendi-prefall-2001/",
+    border: false,
+    credits: [
+      {
+        label: "Photographer",
+        value: "Jerome Esch"
+      }
+    ],
+    media: [
+      "01.jpg",
+      "02.jpg",
+      "03.jpg"
+    ]
+  }
 ];
